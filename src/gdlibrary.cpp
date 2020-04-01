@@ -2,8 +2,6 @@
 
 #include "hello.hpp"
 
-#define REGISTER_GODOT_CLASS(class_name) \
-    godot::register_class<class_name>();
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
 {
@@ -18,5 +16,6 @@ extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_opt
 extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) 
 {
     godot::Godot::nativescript_init(handle);
-    REGISTER_GODOT_CLASS(Hello);
+
+    godot::register_class<Hello>();
 }
