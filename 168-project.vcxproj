@@ -164,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hello.hpp" />
+    <ClInclude Include="src\Utils\Defs.hpp" />
+    <ClInclude Include="src\Utils\Mathf.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
