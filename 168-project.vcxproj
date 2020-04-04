@@ -71,28 +71,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;$(IncludePath)</IncludePath>
+    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;src/;$(IncludePath)</IncludePath>
     <LibraryPath>godot-cpp/bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;$(IncludePath)</IncludePath>
+    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;src/;$(IncludePath)</IncludePath>
     <LibraryPath>godot-cpp/bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;$(IncludePath)</IncludePath>
+    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;src/;$(IncludePath)</IncludePath>
     <LibraryPath>godot-cpp/bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;$(IncludePath)</IncludePath>
+    <IncludePath>godot-cpp/include;godot-cpp/godot_headers/;godot-cpp/include/core/;godot-cpp/include/gen/;src/;$(IncludePath)</IncludePath>
     <LibraryPath>godot-cpp/bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</IntDir>
@@ -161,19 +161,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\GDLibrary.cpp" />
-
     <ClCompile Include="src\Hello.cpp" />
-
     <ClCompile Include="src\Utils\Mathf.cpp" />
-
     <ClCompile Include="src\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hello.hpp" />
-
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
-
     <ClInclude Include="src\Player\Player.hpp" />
   </ItemGroup>
   <ItemGroup>

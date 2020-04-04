@@ -39,7 +39,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Player\Player.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
