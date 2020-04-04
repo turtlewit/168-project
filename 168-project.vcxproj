@@ -160,13 +160,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\gdlibrary.cpp" />
+    <ClCompile Include="src\GDLibrary.cpp" />
 
     <ClCompile Include="src\Hello.cpp" />
 
     <ClCompile Include="src\Utils\Mathf.cpp" />
 
-    <ClInclude Include="src\Player\Player.cpp" />
+    <ClCompile Include="src\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hello.hpp" />
