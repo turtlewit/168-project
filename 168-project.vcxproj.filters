@@ -24,6 +24,9 @@
     <ClCompile Include="src\Utils\Mathf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hello.hpp">
@@ -35,6 +38,9 @@
     <ClInclude Include="src\Utils\Mathf.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClCompile Include="src\Player\Player.hpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

@@ -161,13 +161,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\gdlibrary.cpp" />
+
     <ClCompile Include="src\hello.cpp" />
+
     <ClCompile Include="src\Utils\Mathf.cpp" />
+
+    <ClInclude Include="src\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hello.hpp" />
+
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
+
+    <ClInclude Include="src\Player\Player.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

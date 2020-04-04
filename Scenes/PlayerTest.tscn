@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 4, 0.5, 4 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -2, 0.25, 2, 2, 0.25, -2, 2, 0.25, 2, -2, 0.25, -2, -2, -0.25, 2, 2, -0.25, -2, 2, -0.25, 2, -2, -0.25, -2, 2, 0.25, 2, -2, 0.25, -2, 2, 0.25, -2, -2, 0.25, 2, 2, -0.25, 2, -2, -0.25, -2, 2, -0.25, -2, -2, -0.25, 2, 2, 0.25, 2, -2, -0.25, 2, -2, 0.25, 2, 2, -0.25, 2, 2, 0.25, -2, -2, -0.25, -2, -2, 0.25, -2, 2, -0.25, -2 )
+
+[node name="Scene" type="Spatial"]
+
+[node name="Floor" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.875186, -0.326206, 0.357266, 0, 0.738479, 0.674277, -0.483787, -0.590118, 0.646306, 0, 1.26427, 2.88338 )
+visible = false
+light_energy = 0.66
+shadow_enabled = true
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.893128, 0.449802, 0, -0.449802, 0.893128, 0, 1.4898, 2.99234 )
+shadow_enabled = true
+spot_range = 19.1
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.845788, 0 )
