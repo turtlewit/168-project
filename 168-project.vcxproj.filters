@@ -40,7 +40,7 @@
     </ClInclude>
     <ClInclude Include="src\Player\Player.hpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
