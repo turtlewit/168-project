@@ -1,6 +1,6 @@
 ﻿#include <Godot.hpp>
 
-#include "hello.hpp"
+#include "Hello.hpp"
 #include "Player/Player.hpp"
 
 

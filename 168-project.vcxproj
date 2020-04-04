@@ -162,14 +162,14 @@
   <ItemGroup>
     <ClCompile Include="src\gdlibrary.cpp" />
 
-    <ClCompile Include="src\hello.cpp" />
+    <ClCompile Include="src\Hello.cpp" />
 
     <ClCompile Include="src\Utils\Mathf.cpp" />
 
     <ClInclude Include="src\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\hello.hpp" />
+    <ClInclude Include="src\Hello.hpp" />
 
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
