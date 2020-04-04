@@ -2,6 +2,7 @@
 #include "Player.hpp"
 
 #include "Utils/Defs.hpp"
+#include "Utils/Mathf.hpp"
 
 #include <Input.hpp>
 #include <InputEventMouseMotion.hpp>
@@ -47,44 +48,42 @@ void Player::_input(InputEvent* event)
 {
 	auto* ev_mouse = cast_to<InputEventMouseMotion>(event);
 	if (ev_mouse) {
-		Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
+		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
 		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - mouse_sensitivity * ev_mouse->get_relative().x, camera_rotation.z});
 	}
 
 	auto* ev_joystick = cast_to<InputEventJoypadMotion>(event);
-	if (ev_joystick && ev_joystick->get_axis() == 2) {
-		Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
-		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - mouse_sensitivity * ev_joystick->get_axis_value(), camera_rotation.z});
-	}
+	if (ev_joystick && ev_joystick->get_axis() == 2)
+		camera_joy_value = ev_joystick->get_axis_value();
 }
 
 
 void Player::_process(float delta)
 {
-	direction = Vector3{0, 0, 0};
-	const Transform camera_xform = camera->get_global_transform();
-
-	if (inp->is_action_pressed("move_forward"))
-		direction += -camera_xform.basis.z;
-	if (inp->is_action_pressed("move_back"))
-		direction += camera_xform.basis.z;
-	if (inp->is_action_pressed("move_left"))
-		direction += -camera_xform.basis.x;
-	if (inp->is_action_pressed("move_right"))
-		direction += camera_xform.basis.x;
-
-	direction.normalize();
-
-	if (inp->is_action_just_pressed("move_jump") && can_jump) {
-		y_velocity = jump_force;
-		can_jump = false;
-		on_floor = false;
+	if (Mathf::abs(camera_joy_value) > 0.1) {
+		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
+		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
 	}
 
-	if (!on_floor)
+	move_direction = Vector3{0, 0, 0};
+	const Transform camera_xform = camera->get_global_transform();
+
+	move_direction += -camera_xform.basis.z * inp->get_action_strength("move_forward");
+	move_direction += camera_xform.basis.z * inp->get_action_strength("move_back");
+	move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left");
+	move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
+
+	if (inp->is_action_just_pressed("move_jump")) {
+		if (on_ground || jumps < 2)
+		y_velocity = jump_force;
+		jumps++;
+		on_ground = false;
+	}
+
+	if (!on_ground)
 		y_velocity -= gravity * delta;
 
-	direction.y = y_velocity;
+	move_direction.y = y_velocity;
 	
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
@@ -93,7 +92,7 @@ void Player::_process(float delta)
 
 void Player::_physics_process(float delta)
 {
-	move_and_slide(direction * speed, Vector3{0, 1, 0});
+	move_and_slide(move_direction * speed, Vector3{0, 1, 0});
 }
 
 
@@ -101,8 +100,8 @@ void Player::_on_HitboxGround_body_entered(Node* body)
 {
 	if (body->is_in_group("Ground")) {
 		y_velocity = 0;
-		can_jump = true;
-		on_floor = true;
+		jumps = 0;
+		on_ground = true;
 	}
 }
 
@@ -110,7 +109,7 @@ void Player::_on_HitboxGround_body_entered(Node* body)
 void Player::_on_HitboxGround_body_exited(Node* body)
 {
 	if (body->is_in_group("Ground")) {
-		can_jump = false;
-		on_floor = false;
+		jumps = 1;
+		on_ground = false;
 	}
 }

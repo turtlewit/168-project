@@ -1,5 +1,4 @@
 // Mathf.cpp
-
 #include "Mathf.hpp"
 
 std::random_device Mathf::device{};

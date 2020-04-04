@@ -19,10 +19,12 @@ namespace godot {
 		float jump_force = 1.5f;
 		float mouse_sensitivity = 0.25f;
 
-		Vector3 direction;
+		Vector3 move_direction;
 		float y_velocity = 0;
-		bool on_floor = false;
-		bool can_jump = false;
+		bool on_ground = false;
+		int jumps = 0;
+
+		float camera_joy_value = 0;
 
 		// Children
 		Camera* camera;
