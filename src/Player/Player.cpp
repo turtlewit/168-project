@@ -84,6 +84,14 @@ void Player::_process(float delta)
 		y_velocity -= gravity * delta;
 
 	move_direction.y = y_velocity;
+
+	if (is_moving()) {
+		float angle = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(90);
+
+		Vector3 rot = model->get_rotation();
+		rot.y = angle;
+		model->set_rotation(rot);
+	}
 	
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
@@ -93,6 +101,12 @@ void Player::_process(float delta)
 void Player::_physics_process(float delta)
 {
 	move_and_slide(move_direction * speed, Vector3{0, 1, 0});
+}
+
+
+inline bool Player::is_moving()
+{
+	return move_direction.x != 0 || move_direction.z != 0;
 }
 
 

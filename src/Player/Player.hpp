@@ -46,6 +46,8 @@ namespace godot {
 		void _physics_process(float delta);
 
 	private:
+		inline bool is_moving();
+
 		void _on_HitboxGround_body_entered(Node* body);
 		void _on_HitboxGround_body_exited(Node* body);
 	};
