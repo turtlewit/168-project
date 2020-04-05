@@ -93,9 +93,9 @@ void Player::_physics_process(float delta)
 	move_direction.y = y_velocity;
 
 	if (is_moving()) {
-		target_rotation = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(90);
-
+		target_rotation = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180);
 		Vector3 rot = model->get_rotation();
+		//Godot::print(Variant{ Mathf::rad2deg(target_rotation) });
 		rot.y = Mathf::lerp_delta(rot.y, target_rotation, 0.0005f, delta);
 		model->set_rotation(rot);
 	}
