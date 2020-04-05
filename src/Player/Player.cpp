@@ -60,11 +60,6 @@ void Player::_input(InputEvent* event)
 
 void Player::_process(float delta)
 {
-	if (Mathf::abs(camera_joy_value) > 0.1) {
-		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
-		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
-	}
-
 	move_direction = Vector3{0, 0, 0};
 	const Transform camera_xform = camera->get_global_transform();
 
@@ -79,19 +74,6 @@ void Player::_process(float delta)
 		jumps++;
 		on_ground = false;
 	}
-
-	if (!on_ground)
-		y_velocity -= gravity * delta;
-
-	move_direction.y = y_velocity;
-
-	if (is_moving()) {
-		float angle = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(90);
-
-		Vector3 rot = model->get_rotation();
-		rot.y = angle;
-		model->set_rotation(rot);
-	}
 	
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
@@ -100,6 +82,24 @@ void Player::_process(float delta)
 
 void Player::_physics_process(float delta)
 {
+	if (Mathf::abs(camera_joy_value) > 0.1) {
+		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
+		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
+	}
+
+	if (!on_ground)
+		y_velocity -= gravity * delta;
+
+	move_direction.y = y_velocity;
+
+	if (is_moving()) {
+		target_rotation = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(90);
+
+		Vector3 rot = model->get_rotation();
+		rot.y = Mathf::lerp_delta(rot.y, target_rotation, 0.0005f, delta);
+		model->set_rotation(rot);
+	}
+
 	move_and_slide(move_direction * speed, Vector3{0, 1, 0});
 }
 

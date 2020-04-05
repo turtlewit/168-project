@@ -24,6 +24,7 @@ namespace godot {
 		bool on_ground = false;
 		int jumps = 0;
 
+		float target_rotation = 0;
 		float camera_joy_value = 0;
 
 		// Children
