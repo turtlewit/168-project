@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Models/Teo_Models/PineTree.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Models/Teo_Models/RegularTree/RegularTree.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 4, 0.5, 4 )
@@ -72,9 +73,12 @@ light_energy = 0.66
 shadow_enabled = true
 
 [node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 0.828452, -0.153199, -0.538701, 0.560061, 0.226614, 0.796855, 0, -0.961861, 0.27354, -4.64535, 6.58256, 1.29475 )
+transform = Transform( 1, 0, 0, 0, 0.893128, 0.449802, 0, -0.449802, 0.893128, 0, 1.4898, 2.99234 )
 shadow_enabled = true
 spot_range = 19.1
 
 [node name="PineTree" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.55989, 0.305644, -0.626037 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.50429, 0.308933, 0 )
+
+[node name="RegularTree" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.942663, 0.0695534, 1.17438 )

@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/PineTree.glb-b1d073b2d9adf313fd6ddf579319fdd1.scn"
+path="res://.import/PineTree.dae-3939c62cfd4f8398556d9980faf334f0.scn"
 
 [deps]
 
-source_file="res://Models/Teo_Models/PineTree.glb"
-dest_files=[ "res://.import/PineTree.glb-b1d073b2d9adf313fd6ddf579319fdd1.scn" ]
+source_file="res://Models/Teo_Models/PineTree/PineTree.dae"
+dest_files=[ "res://.import/PineTree.dae-3939c62cfd4f8398556d9980faf334f0.scn" ]
 
 [params]
 
