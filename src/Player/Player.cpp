@@ -109,8 +109,8 @@ inline bool Player::is_moving()
 }
 
 inline float Player::get_closest_angle(float current, float target, bool flip) {
-	Godot::print(Variant{ flip });
-	float result = (flip == true ? 360 + target : target) - current;
+	current = (flip == true ? (2 * Mathf::Pi) - current : current);
+	float result = target - current;
 	if (result > Mathf::Pi)
 		result -= (2 * Mathf::Pi);
 	else if (result < -Mathf::Pi)
