@@ -96,7 +96,7 @@ void Player::_physics_process(float delta)
 		target_rotation = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180);
 		Vector3 rot = model->get_rotation();
 		//Godot::print(Variant{ Mathf::rad2deg(target_rotation) });
-		rot.y = Mathf::lerp_delta(rot.y, target_rotation, 0.0005f, delta);
+		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(abs(rot.y), 2 * Mathf::Pi), target_rotation), 0.0005f, delta);
 		model->set_rotation(rot);
 	}
 
@@ -109,6 +109,16 @@ inline bool Player::is_moving()
 	return move_direction.x != 0 || move_direction.z != 0;
 }
 
+inline float Player::get_closest_angle(float current, float target) {
+	float result = target - current;
+	if (result > Mathf::Pi)
+		result -= (2 * Mathf::Pi);
+	else if (result < -Mathf::Pi)
+		result += (2 * Mathf::Pi);
+	if (result == (2 * Mathf::Pi))
+		result = 0;
+	return result;
+}
 
 void Player::_on_HitboxGround_body_entered(Node* body)
 {

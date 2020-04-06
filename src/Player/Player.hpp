@@ -48,6 +48,7 @@ namespace godot {
 
 	private:
 		inline bool is_moving();
+		inline float get_closest_angle(float current, float target);
 
 		void _on_HitboxGround_body_entered(Node* body);
 		void _on_HitboxGround_body_exited(Node* body);
