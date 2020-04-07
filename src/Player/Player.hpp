@@ -7,6 +7,7 @@
 #include <Position3D.hpp>
 #include <MeshInstance.hpp>
 #include <InputEvent.hpp>
+#include <Timer.hpp>
 
 namespace godot {
 
@@ -27,10 +28,14 @@ namespace godot {
 		float target_rotation = 0;
 		float camera_joy_value = 0;
 
+		bool ground_check = true;
+		bool jump_timer = false;
+
 		// Children
 		Camera* camera;
 		Position3D* camera_pivot;
 		MeshInstance* model;
+		Timer* timer_ground_check;
 
 	public:
 		static void _register_methods();
@@ -49,9 +54,13 @@ namespace godot {
 	private:
 		inline bool is_moving();
 		inline float get_closest_angle(float current, float target, bool flip);
+		void land();
 
 		void _on_HitboxGround_body_entered(Node* body);
 		void _on_HitboxGround_body_exited(Node* body);
+		void _on_HitboxCeiling_body_entered(Node* body);
+
+		void _on_TimerGroundCheck_timeout();
 	};
 
 }

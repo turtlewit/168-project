@@ -23,6 +23,8 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _input);
 	REGISTER_METHOD(Player, _on_HitboxGround_body_entered);
 	REGISTER_METHOD(Player, _on_HitboxGround_body_exited);
+	REGISTER_METHOD(Player, _on_HitboxCeiling_body_entered);
+	REGISTER_METHOD(Player, _on_TimerGroundCheck_timeout);
 
 	register_property<Player, float>("speed", &Player::speed, 4.0f);
 	register_property<Player, float>("gravity", &Player::gravity, 3.0f);
@@ -41,6 +43,7 @@ void Player::_ready()
 	camera = GET_NODE(Camera, "CameraPivot/Camera");
 	camera_pivot = GET_NODE(Position3D, "CameraPivot");
 	model = GET_NODE(MeshInstance, "MeshInstance");
+	timer_ground_check = GET_NODE(Timer, "TimerGroundCheck");
 }
 
 
@@ -69,10 +72,14 @@ void Player::_process(float delta)
 	move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
 
 	if (inp->is_action_just_pressed("move_jump")) {
-		if (on_ground || jumps < 2)
-		y_velocity = jump_force;
-		jumps++;
-		on_ground = false;
+		if (on_ground || jumps < 2) {
+			y_velocity = jump_force;
+			jumps++;
+			on_ground = false;
+			ground_check = false;
+			jump_timer = true;
+			timer_ground_check->start();
+		}
 	}
 	
 	if (inp->is_action_just_pressed("sys_quit"))
@@ -108,6 +115,7 @@ inline bool Player::is_moving()
 	return move_direction.x != 0 || move_direction.z != 0;
 }
 
+
 inline float Player::get_closest_angle(float current, float target, bool flip) {
 	current = (flip == true ? (2 * Mathf::Pi) - current : current);
 	float result = target - current;
@@ -120,12 +128,22 @@ inline float Player::get_closest_angle(float current, float target, bool flip) {
 	return result;
 }
 
+
+void Player::land()
+{
+	y_velocity = 0;
+	jumps = 0;
+	on_ground = true;
+}
+
+
 void Player::_on_HitboxGround_body_entered(Node* body)
 {
 	if (body->is_in_group("Ground")) {
-		y_velocity = 0;
-		jumps = 0;
-		on_ground = true;
+		if (!jump_timer)
+			land();
+		else
+			ground_check = true;
 	}
 }
 
@@ -136,4 +154,21 @@ void Player::_on_HitboxGround_body_exited(Node* body)
 		jumps = 1;
 		on_ground = false;
 	}
+}
+
+
+void Player::_on_HitboxCeiling_body_entered(Node* body)
+{
+	if (body->is_in_group("Ground") && y_velocity > 0) {
+		y_velocity = 0;
+		on_ground = false;
+	}
+}
+
+
+void Player::_on_TimerGroundCheck_timeout()
+{
+	jump_timer = false;
+	if (ground_check)
+		land();
 }
