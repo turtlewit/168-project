@@ -46,7 +46,8 @@ void Player::_ready()
 	camera = GET_NODE(Camera, "CameraPivot/Camera");
 	camera_pivot = GET_NODE(Position3D, "CameraPivot");
 	model = GET_NODE(MeshInstance, "Model");
-	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // TODO: Change to an AnimationTree when we get that system in place
+	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
+	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
 }
 
 
@@ -66,7 +67,7 @@ void Player::_input(InputEvent* event)
 
 void Player::_process(float delta)
 {
-	if (state != State::Attack) {
+	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
 
@@ -76,9 +77,9 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
 	}
 	
-	if (inp->is_action_just_pressed("move_jump"))
+	if (inp->is_action_just_pressed("move_jump")) {
 		jump_buffer = 0;
-	if (jump_buffer < 10 && (state == State::Ground || state == State::Air)) {
+	if (jump_buffer < JumpBufferLimit && (state == State::Ground || state == State::Air))
 		jump_buffer++;
 		if (jumps < 2)
 			jump();
@@ -92,13 +93,19 @@ void Player::_process(float delta)
 
 	if (inp->is_action_just_pressed("attack_pounce") && state == State::Ground) {
 		stop();
-		state = State::Attack;
+		state = State::Pounce;
 
 		float rot = model->get_rotation().y;
-		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * 2.0f; //Horizontal
-		y_velocity = jump_force / 3.0f; //Vertical
+		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * PounceStrength; //Horizontal
+		y_velocity = jump_force / PounceHeightDivide; //Vertical
 
-		//anim_player->play("Pounce");
+		attack_box->set_disabled(false);
+	}
+
+	if (state == State::Pounce) {
+		const Transform camera_xform = camera->get_global_transform();
+		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left") / PounceTurnPenalty;
+		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right") / PounceTurnPenalty;
 	}
 	
 	if (inp->is_action_just_pressed("sys_quit"))
@@ -118,9 +125,9 @@ void Player::_physics_process(float delta)
 
 	move_direction.y = y_velocity;
 
-	if (is_moving() || state == State::Attack) {
+	if (is_moving()) {
 		Vector3 rot = model->get_rotation();
-		target_rotation = (state != State::Attack? std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180) : Mathf::deg2rad(fmod(camera_pivot->get_rotation_degrees().y , 360)));
+		target_rotation = (std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180));
 		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(Mathf::abs(rot.y), 2 * Mathf::Pi), target_rotation, rot.y < 0), 0.0005f, delta);
 		model->set_rotation(rot);
 	}
@@ -162,6 +169,10 @@ void Player::land()
 	y_velocity = 0;
 	jumps = 0;
 	on_ground = true;
+	if (state == State::Pounce) {
+		attack_box->set_disabled(true);
+	}
+
 	state = State::Ground;
 }
 
@@ -191,7 +202,7 @@ void Player::_on_HitboxGround_body_exited(Node* body)
 	if (body->is_in_group("Ground")) {
 		jumps = 1;
 		on_ground = false;
-		if (state != State::Attack)
+		if (state != State::Attack && state != State::Pounce)
 			state = State::Air;
 	}
 }

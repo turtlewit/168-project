@@ -8,6 +8,7 @@
 #include <MeshInstance.hpp>
 #include <InputEvent.hpp>
 #include <AnimationPlayer.hpp>
+#include <CollisionShape.hpp>
 
 namespace godot {
 
@@ -18,14 +19,20 @@ namespace godot {
 		enum class State {
 			Ground,
 			Air,
-			Attack
+			Attack,
+			Pounce
 		};
 
 	private:
+		static constexpr float PounceStrength = 2.0f;
+		static constexpr float PounceHeightDivide = 3.0f;
+		static constexpr float PounceTurnPenalty = 20.0f;
+		static constexpr unsigned int JumpBufferLimit = 10;
+
 		float speed = 4.0f;
 		float gravity = 3.0f;
 		float jump_force = 1.5f;
-		int jump_buffer = 10;
+		unsigned int jump_buffer = JumpBufferLimit;
 		float mouse_sensitivity = 0.25f;
 
 		Vector3 move_direction;
@@ -41,7 +48,8 @@ namespace godot {
 		Camera* camera;
 		Position3D* camera_pivot;
 		MeshInstance* model;
-		AnimationPlayer* anim_player; // TODO: Change to an AnimationTree when we get that system in place
+		CollisionShape* attack_box;
+		AnimationPlayer* anim_player; // @TODO: Change to an AnimationTree when we get that system in place
 
 	public:
 		static void _register_methods();
