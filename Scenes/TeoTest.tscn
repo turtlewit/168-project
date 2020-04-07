@@ -25,6 +25,7 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.84
 [node name="Floor" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -40,7 +41,7 @@ shape = SubResource( 2 )
 [node name="Block" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02581, 0.541295, 1.18764 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53727, 0.541295, 1.18764 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -70,7 +71,7 @@ shape = SubResource( 4 )
 [node name="Block2" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08525, 0.541295, -0.977951 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.47095, 0.541295, -0.977951 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -88,10 +89,10 @@ light_energy = 0.66
 shadow_enabled = true
 
 [node name="PineTree" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.50429, 0.308933, 0 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.39347, 0.308933, -3.08765 )
 
 [node name="RegularTree" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.942663, 0.0695534, 1.17438 )
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 0.0695534, 2.0797 )
 
 [node name="Tinyman" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 1.08354, 0.777678, -0.966491 )
+transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 0.777678, -0.966491 )

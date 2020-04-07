@@ -92,10 +92,10 @@ void Player::_process(float delta)
 		state = State::Attack;
 
 		float rot = model->get_rotation().y;
-		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * 2.0f;
-		y_velocity = jump_force / 3.0f;
+		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * 2.0f; //Horizontal
+		y_velocity = jump_force / 3.0f; //Vertical
 
-		anim_player->play("Pounce");
+		//anim_player->play("Pounce");
 	}
 	
 	if (inp->is_action_just_pressed("sys_quit"))
@@ -115,9 +115,9 @@ void Player::_physics_process(float delta)
 
 	move_direction.y = y_velocity;
 
-	if (is_moving()) {
-		target_rotation = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180);
+	if (is_moving() || state == State::Attack) {
 		Vector3 rot = model->get_rotation();
+		target_rotation = (state != State::Attack? std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180) : Mathf::deg2rad(fmod(camera_pivot->get_rotation_degrees().y , 360)));
 		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(Mathf::abs(rot.y), 2 * Mathf::Pi), target_rotation, rot.y < 0), 0.0005f, delta);
 		model->set_rotation(rot);
 	}
