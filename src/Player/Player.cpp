@@ -24,7 +24,6 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_HitboxGround_body_entered);
 	REGISTER_METHOD(Player, _on_HitboxGround_body_exited);
 	REGISTER_METHOD(Player, _on_HitboxCeiling_body_entered);
-	REGISTER_METHOD(Player, _on_TimerGroundCheck_timeout);
 
 	register_property<Player, float>("speed", &Player::speed, 4.0f);
 	register_property<Player, float>("gravity", &Player::gravity, 3.0f);
@@ -43,7 +42,6 @@ void Player::_ready()
 	camera = GET_NODE(Camera, "CameraPivot/Camera");
 	camera_pivot = GET_NODE(Position3D, "CameraPivot");
 	model = GET_NODE(MeshInstance, "MeshInstance");
-	timer_ground_check = GET_NODE(Timer, "TimerGroundCheck");
 }
 
 
@@ -76,9 +74,6 @@ void Player::_process(float delta)
 			y_velocity = jump_force;
 			jumps++;
 			on_ground = false;
-			ground_check = false;
-			jump_timer = true;
-			timer_ground_check->start();
 		}
 	}
 	
@@ -139,11 +134,8 @@ void Player::land()
 
 void Player::_on_HitboxGround_body_entered(Node* body)
 {
-	if (body->is_in_group("Ground")) {
-		if (!jump_timer)
+	if (body->is_in_group("Ground") && move_direction.y < 0) {
 			land();
-		else
-			ground_check = true;
 	}
 }
 
@@ -163,12 +155,4 @@ void Player::_on_HitboxCeiling_body_entered(Node* body)
 		y_velocity = 0;
 		on_ground = false;
 	}
-}
-
-
-void Player::_on_TimerGroundCheck_timeout()
-{
-	jump_timer = false;
-	if (ground_check)
-		land();
 }

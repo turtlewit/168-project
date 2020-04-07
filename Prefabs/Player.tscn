@@ -42,11 +42,6 @@ shape = SubResource( 3 )
 [node name="Camera" type="Camera" parent="CameraPivot"]
 transform = Transform( -1.62921e-07, -0.422618, 0.906308, 0, 0.906308, 0.422618, -1, 6.88533e-08, -1.47657e-07, 1.6, 0.85, 0 )
 current = true
-
-[node name="TimerGroundCheck" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
 [connection signal="body_entered" from="HitboxGround" to="." method="_on_HitboxGround_body_entered"]
 [connection signal="body_exited" from="HitboxGround" to="." method="_on_HitboxGround_body_exited"]
 [connection signal="body_entered" from="HitboxCeiling" to="." method="_on_HitboxCeiling_body_entered"]
-[connection signal="timeout" from="TimerGroundCheck" to="." method="_on_TimerGroundCheck_timeout"]
