@@ -6,7 +6,7 @@ uniform bool useColorBlend;
 uniform vec4 colorBlend : hint_color;
 uniform float rim_amount : hint_range(0f, 1f);
 
-uniform sampler2D emissionMap : hint_black;
+uniform sampler2D emissionMap : hint_white;
 uniform vec4 emissionColor : hint_color;
 
 void fragment() {

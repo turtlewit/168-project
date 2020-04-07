@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Shaders/CelGD.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/useColorBlend = true
+shader_param/colorBlend = Color( 0.592157, 0.654902, 0.568627, 1 )
+shader_param/rim_amount = null
+shader_param/emissionColor = null
