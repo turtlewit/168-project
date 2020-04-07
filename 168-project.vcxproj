@@ -164,11 +164,17 @@
   <ItemGroup>
     <ClCompile Include="src\GDLibrary.cpp" />
     <ClCompile Include="src\Hello.cpp" />
+    <ClCompile Include="src\Net\NetworkManager.cpp" />
+    <ClCompile Include="src\Net\NetworkStarter.cpp" />
+    <ClCompile Include="src\Net\NetworkSync.cpp" />
     <ClCompile Include="src\Utils\Mathf.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hello.hpp" />
+    <ClInclude Include="src\Net\NetworkManager.hpp" />
+    <ClInclude Include="src\Net\NetworkStarter.hpp" />
+    <ClInclude Include="src\Net\NetworkSync.hpp" />
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
     <ClInclude Include="src\Player\Player.hpp" />
