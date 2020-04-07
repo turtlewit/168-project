@@ -2,6 +2,9 @@
 
 #include "Hello.hpp"
 #include "Player/Player.hpp"
+#include "Net/NetworkManager.hpp"
+#include "Net/NetworkStarter.hpp"
+#include "Net/NetworkSync.hpp"
 
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
@@ -20,4 +23,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 
     godot::register_class<Hello>();
     godot::register_class<godot::Player>();
+    godot::register_class<NetworkManager>();
+    godot::register_class<NetworkStarter>();
+    godot::register_class<NetworkSync>();
 }

@@ -34,6 +34,7 @@ namespace godot {
 		float jump_force = 1.5f;
 		unsigned int jump_buffer = JumpBufferLimit;
 		float mouse_sensitivity = 0.25f;
+		bool test = true;
 
 		Vector3 move_direction;
 		float y_velocity = 0;

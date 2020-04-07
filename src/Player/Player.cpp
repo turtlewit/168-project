@@ -29,10 +29,10 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_HitboxGround_body_exited);
 	REGISTER_METHOD(Player, _on_HitboxCeiling_body_entered);
 
-	register_property<Player, float>("speed", &Player::speed, 4.0f);
-	register_property<Player, float>("gravity", &Player::gravity, 3.0f);
-	register_property<Player, float>("jump_force", &Player::jump_force, 1.5f);
-	register_property<Player, float>("mouse_sensitivity", &Player::mouse_sensitivity, 0.25f);
+	register_property("speed", &Player::speed, 4.0f);
+	register_property("gravity", &Player::gravity, 3.0f);
+	register_property("jump_force", &Player::jump_force, 1.5f);
+	register_property("mouse_sensitivity", &Player::mouse_sensitivity, 0.25f);
 }
 
 CLASS_INITS(Player)
@@ -79,10 +79,11 @@ void Player::_process(float delta)
 	
 	if (inp->is_action_just_pressed("move_jump")) {
 		jump_buffer = 0;
-	if (jump_buffer < JumpBufferLimit && (state == State::Ground || state == State::Air))
-		jump_buffer++;
-		if (jumps < 2)
-			jump();
+		if (jump_buffer < JumpBufferLimit && (state == State::Ground || state == State::Air)) {
+			jump_buffer++;
+			if (jumps < 2)
+				jump();
+		}
 	}
 
 	if (inp->is_action_just_pressed("attack_claw") && state == State::Ground) {
