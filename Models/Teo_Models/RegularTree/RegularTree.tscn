@@ -6,10 +6,10 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
-shader_param/useColorBlend = null
-shader_param/colorBlend = null
-shader_param/rim_amount = null
-shader_param/emissionColor = null
+shader_param/useColorBlend = false
+shader_param/colorBlend = Color( 0, 0, 0, 1 )
+shader_param/rim_amount = 0.0
+shader_param/emissionColor = Color( 0, 0, 0, 1 )
 shader_param/baseTexture = ExtResource( 2 )
 
 [node name="RegularTree" instance=ExtResource( 1 )]

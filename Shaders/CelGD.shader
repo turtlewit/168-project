@@ -11,7 +11,7 @@ uniform vec4 emissionColor : hint_color;
 
 void fragment() {
 	METALLIC = 0f;
-	ROUGHNESS = 0f;
+	ROUGHNESS = 1f;
 	SPECULAR = 0f;
 	RIM = rim_amount;
 	
