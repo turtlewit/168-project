@@ -7,11 +7,19 @@
 #include <Position3D.hpp>
 #include <MeshInstance.hpp>
 #include <InputEvent.hpp>
+#include <AnimationPlayer.hpp>
 
 namespace godot {
 
 	class Player : public KinematicBody {
 		GODOT_CLASS(Player, KinematicBody)
+
+	public:
+		enum class State {
+			Ground,
+			Air,
+			Attack
+		};
 
 	private:
 		float speed = 4.0f;
@@ -27,10 +35,12 @@ namespace godot {
 		float target_rotation = 0;
 		float camera_joy_value = 0;
 
-		// Children
+		State state = State::Ground;
+
 		Camera* camera;
 		Position3D* camera_pivot;
 		MeshInstance* model;
+		AnimationPlayer* anim_player; // TODO: Change to an AnimationTree when we get that system in place
 
 	public:
 		static void _register_methods();
@@ -48,10 +58,16 @@ namespace godot {
 
 	private:
 		inline bool is_moving();
-		inline float get_closest_angle(float current, float target);
+		inline float get_closest_angle(float current, float target, bool flip);
+		void jump();
+		void land();
+		void stop();
+
+		void set_state(int value);
 
 		void _on_HitboxGround_body_entered(Node* body);
 		void _on_HitboxGround_body_exited(Node* body);
+		void _on_HitboxCeiling_body_entered(Node* body);
 	};
 
 }
