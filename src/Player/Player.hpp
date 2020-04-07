@@ -25,6 +25,7 @@ namespace godot {
 		float speed = 4.0f;
 		float gravity = 3.0f;
 		float jump_force = 1.5f;
+		int jump_buffer = 10;
 		float mouse_sensitivity = 0.25f;
 
 		Vector3 move_direction;
