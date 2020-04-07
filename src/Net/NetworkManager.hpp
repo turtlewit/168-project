@@ -15,6 +15,7 @@ class NetworkManager : public godot::Node {
 
 public:
     static NetworkManager* get_singleton() { return singleton; }
+    static void _register_methods();
     static const int64_t SERVER_ID = 1;
 
     godot::String get_address() { return address; }
@@ -26,12 +27,14 @@ public:
     int64_t get_max_clients() { return max_clients; }
     void set_max_clients(int64_t max_clients) { this->max_clients = max_clients; }
 
+    bool is_host() { return host; }
+
     void start_host();
     void start_server();
     void start_client();
 
-    void _register_methods();
     void _init();
+    void _enter_tree();
 
     NetworkManager();
     ~NetworkManager();
@@ -46,4 +49,5 @@ private:
     godot::String address;
     int64_t port;
     int64_t max_clients;
+    bool host;
 };
