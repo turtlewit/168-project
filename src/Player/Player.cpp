@@ -93,6 +93,7 @@ void Player::_process(float delta)
 
 		float rot = model->get_rotation().y;
 		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * 2.0f;
+		y_velocity = jump_force / 3.0f;
 
 		anim_player->play("Pounce");
 	}
@@ -117,7 +118,7 @@ void Player::_physics_process(float delta)
 	if (is_moving()) {
 		target_rotation = std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180);
 		Vector3 rot = model->get_rotation();
-		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(abs(rot.y), 2 * Mathf::Pi), target_rotation, rot.y < 0), 0.0005f, delta);
+		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(Mathf::abs(rot.y), 2 * Mathf::Pi), target_rotation, rot.y < 0), 0.0005f, delta);
 		model->set_rotation(rot);
 	}
 
@@ -187,7 +188,8 @@ void Player::_on_HitboxGround_body_exited(Node* body)
 	if (body->is_in_group("Ground")) {
 		jumps = 1;
 		on_ground = false;
-		state = State::Air;
+		if (state != State::Attack)
+			state = State::Air;
 	}
 }
 

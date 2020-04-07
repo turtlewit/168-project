@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Models/Teo_Models/RegularTree/RegularTree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Models/Duncan_Models/Test/Tinyman.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 4, 0.5, 4 )
@@ -91,3 +92,6 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.50429, 0.308933, 0 )
 
 [node name="RegularTree" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.942663, 0.0695534, 1.17438 )
+
+[node name="Tinyman" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 1.08354, 0.777678, -0.966491 )
