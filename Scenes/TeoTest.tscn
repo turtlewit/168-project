@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Models/Teo_Models/RegularTree/RegularTree.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Models/Duncan_Models/Test/Tinyman.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Objects/Crystal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Models/Johnny_Models/Log/log.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 4, 0.5, 4 )
@@ -85,7 +87,7 @@ shape = SubResource( 4 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.875186, -0.326206, 0.357266, 0, 0.738479, 0.674277, -0.483787, -0.590118, 0.646306, 0, 1.26427, 2.88338 )
-light_energy = 0.66
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="PineTree" parent="." instance=ExtResource( 2 )]
@@ -96,3 +98,9 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 0.0695534, 2.07
 
 [node name="Tinyman" parent="." instance=ExtResource( 4 )]
 transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 0.777678, -0.966491 )
+
+[node name="Crystal" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81802, 0.676543, 0.738359 )
+
+[node name="log" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.291904, 0, 0, 0, 0.291904, 0, 0, 0, 0.291904, 3.37545, 0.230882, -0.827219 )
