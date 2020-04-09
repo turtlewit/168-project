@@ -34,7 +34,7 @@ mesh = SubResource( 1 )
 material/0 = null
 script = SubResource( 2 )
 
-[node name="Node" type="Node" parent="MeshInstance"]
+[node name="NetworkTransform" type="Node" parent="MeshInstance"]
 script = ExtResource( 1 )
 children_to_sync = [ NodePath("../MeshInstance2") ]
 sync_position = false
@@ -46,5 +46,5 @@ mesh = SubResource( 1 )
 material/0 = null
 script = SubResource( 2 )
 
-[node name="Node" type="Node" parent="."]
+[node name="NetworkStarter" type="Node" parent="."]
 script = ExtResource( 3 )
