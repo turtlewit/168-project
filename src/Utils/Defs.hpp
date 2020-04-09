@@ -21,3 +21,4 @@
 		group_prefix);
 
 #define GODOT_HINT_STRING_ARRAY_OF_STRINGS godot::String("4:")
+#define GODOT_HINT_STRING_ARRAY_OF_NODE_PATHS godot::String("15:")

@@ -22,6 +22,7 @@ script/source = "extends Node
 # var b = \"text\"
 
 export(Array, String) var strs
+export(Array, NodePath) var delete_on_non_local
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,10 +39,14 @@ script = SubResource( 1 )
 
 [node name="Node" type="Node" parent="."]
 script = SubResource( 2 )
+start_mode = null
+autostart = null
 
 [node name="Node" type="Node" parent="Node"]
 script = ExtResource( 2 )
-sync_properties = [ "" ]
+sync_properties = null
+sync_interval = null
+delete_on_not_authority = null
 
 [node name="Node2" type="Node" parent="."]
 script = SubResource( 3 )

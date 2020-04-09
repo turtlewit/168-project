@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Net/NetworkSync.gdns" type="Script" id=2]
+[ext_resource path="res://Scripts/Net/NetworkStarter.gdns" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+
+# Declare member variables here. Examples:
+# var a: int = 2
+# var b: String = \"text\"
+
+var initial_pos: float = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	initial_pos = position.x
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	position.x = initial_pos + (sin(OS.get_ticks_usec() / 1000000.0) * 400);
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 536, 249 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="NetworkSync" type="Node" parent="Sprite"]
+script = ExtResource( 2 )
+sync_properties = [ "position" ]
+sync_interval = 0.033
+
+[node name="NetworkStarter" type="Node" parent="."]
+script = ExtResource( 3 )

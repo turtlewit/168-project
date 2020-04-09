@@ -21,7 +21,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "NetworkManager": "",
-"NetworkSync": ""
+"NetworkSync": "res://Textures/Tools/NetworkIcon.png"
 }
 
 [application]

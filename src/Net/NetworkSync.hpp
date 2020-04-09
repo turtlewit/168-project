@@ -4,21 +4,28 @@
 #include <Node.hpp>
 #include <Array.hpp>
 
-class NetworkSync : public godot::Node {
+#include "Net/NetworkNode.hpp"
+
+class NetworkSync : public NetworkNode<godot::Node, NetworkSync> {
 	GODOT_CLASS(NetworkSync, godot::Node)
 
 public:
 	static void _register_methods();
 
+	void master_initial_sync();
+	void sync();
+
 	void _init();
-	void _ready();
-	void _on_network_start();
-	void _process();
+	void _on_network_start() override;
+	void _process(float delta);
 
 	NetworkSync();
 
 private:
+	void set_property_sync_mode(godot_method_rpc_mode mode);
+
 	godot::Array sync_properties;
 	float sync_interval;
 	godot::Array delete_on_not_authority;
+	float current_time;
 };

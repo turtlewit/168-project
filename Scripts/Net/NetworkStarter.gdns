@@ -3,8 +3,6 @@
 [ext_resource path="res://Library/gdnativelibrary.tres" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "NetworkSync"
-class_name = "NetworkSync"
+resource_name = "NetworkStarter"
+class_name = "NetworkStarter"
 library = ExtResource( 1 )
-script_class_name = "NetworkSync"
-script_class_icon_path = "res://Textures/Tools/NetworkIcon.png"

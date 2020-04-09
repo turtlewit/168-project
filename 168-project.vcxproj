@@ -178,6 +178,7 @@
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
     <ClInclude Include="src\Player\Player.hpp" />
+    <ClInclude Include="src\Net\NetworkNode.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
