@@ -11,10 +11,10 @@
 #define CLASS_INITS(Class) Class::Class() {} Class::~Class() {} void Class::_init() {}
 #define PRINT_ERROR(message, function) godot::Godot::print_error(message, function, __FILE__, __LINE__)
 #define ADD_INSPECTOR_GROUP(class_name, group_name, group_prefix) \
-	register_property<class_name, Variant>(                       \
+	godot::register_property<class_name, godot::Variant>(         \
 		group_name,                                               \
 		nullptr,                                                  \
-		Variant::NIL,                                             \
+		godot::Variant::NIL,                                      \
 		GODOT_METHOD_RPC_MODE_DISABLED,                           \
 		GODOT_PROPERTY_USAGE_GROUP,                               \
 		GODOT_PROPERTY_HINT_NONE,                                 \

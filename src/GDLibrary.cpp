@@ -5,6 +5,7 @@
 #include "Net/NetworkManager.hpp"
 #include "Net/NetworkStarter.hpp"
 #include "Net/NetworkSync.hpp"
+#include "Net/NetworkTransform.hpp"
 
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
@@ -26,4 +27,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
     godot::register_class<NetworkManager>();
     godot::register_class<NetworkStarter>();
     godot::register_class<NetworkSync>();
+    godot::register_class<NetworkTransform>();
 }
