@@ -23,7 +23,7 @@ points = PoolVector3Array( -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.2
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 5 )
-shader_param/amount = 0.0
+shader_param/amount = -0.35
 shader_param/color = Color( 1, 0, 0, 1 )
 shader_param/dissolveTexture = ExtResource( 6 )
 
@@ -108,6 +108,6 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 0.0695534, 2.07
 transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 0.777678, -0.966491 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.375539, 0, 0, 0, 0.355234, 0, 0, 0, 0.34541, -2.26891, 0.675238, -1.71552 )
+transform = Transform( 0.375539, 0, 0, 0, 0.355234, 0, 0, 0, 0.34541, -2.2637, 0.673091, -1.71201 )
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )

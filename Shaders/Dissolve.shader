@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode depth_draw_alpha_prepass, cull_disabled;
 
 uniform sampler2D dissolveTexture;
-uniform float amount : hint_range(-0.3, 0.3);
+uniform float amount : hint_range(-0.35, 0.35);
 uniform vec4 color : hint_color;
 
 void fragment() {
