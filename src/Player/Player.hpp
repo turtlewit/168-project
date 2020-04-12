@@ -38,7 +38,7 @@ namespace godot {
 
 		Vector3 move_direction;
 		float y_velocity = 0;
-		bool on_ground = false;
+		unsigned int colliding_with = 0;
 		int jumps = 0;
 
 		float target_rotation = 0;

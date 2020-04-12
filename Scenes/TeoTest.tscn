@@ -36,6 +36,8 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.84
 "Ground",
 ]]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
+collision_layer = 513
+collision_mask = 513
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -52,6 +54,8 @@ shape = SubResource( 2 )
 "Ground",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53727, 0.541295, 1.18764 )
+collision_layer = 513
+collision_mask = 513
 __meta__ = {
 "_edit_group_": true
 }
@@ -67,6 +71,8 @@ shape = SubResource( 4 )
 "Ground",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.286817, 1.12229, 0.747223 )
+collision_layer = 513
+collision_mask = 513
 __meta__ = {
 "_edit_group_": true
 }
@@ -82,6 +88,8 @@ shape = SubResource( 4 )
 "Ground",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.47095, 0.541295, -0.977951 )
+collision_layer = 513
+collision_mask = 513
 __meta__ = {
 "_edit_group_": true
 }

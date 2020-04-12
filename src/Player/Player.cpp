@@ -111,6 +111,8 @@ void Player::_process(float delta)
 	
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
+
+	Godot::print(Variant{ colliding_with });
 }
 
 
@@ -121,7 +123,7 @@ void Player::_physics_process(float delta)
 		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
 	}
 
-	if (!on_ground)
+	if (colliding_with == 0)
 		y_velocity -= gravity * delta;
 
 	move_direction.y = y_velocity;
@@ -160,7 +162,6 @@ void Player::jump()
 {
 	y_velocity = jump_force;
 	jumps++;
-	on_ground = false;
 	state = State::Air;
 }
 
@@ -169,7 +170,7 @@ void Player::land()
 {
 	y_velocity = 0;
 	jumps = 0;
-	on_ground = true;
+	colliding_with++;
 	if (state == State::Pounce) {
 		attack_box->set_disabled(true);
 	}
@@ -192,28 +193,25 @@ void Player::set_state(int value)
 
 void Player::_on_HitboxGround_body_entered(Node* body)
 {
-	if (body->is_in_group("Ground") && move_direction.y < 0) {
-			land();
+	if (move_direction.y < 0) {
+		land();
 	}
 }
 
 
 void Player::_on_HitboxGround_body_exited(Node* body)
 {
-	if (body->is_in_group("Ground")) {
-		jumps = 1;
-		on_ground = false;
-		if (state != State::Attack && state != State::Pounce)
-			state = State::Air;
-	}
+	jumps = 1;
+	colliding_with--;
+	if (state != State::Attack && state != State::Pounce)
+		state = State::Air;
 }
 
 
 void Player::_on_HitboxCeiling_body_entered(Node* body)
 {
-	if (body->is_in_group("Ground") && y_velocity > 0) {
+	if (y_velocity > 0) {
 		y_velocity = 0;
-		on_ground = false;
 		state = State::Air;
 	}
 }

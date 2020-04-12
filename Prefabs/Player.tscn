@@ -110,12 +110,16 @@ disabled = true
 shape = SubResource( 4 )
 
 [node name="HitboxGround" type="Area" parent="."]
+collision_layer = 512
+collision_mask = 512
 
 [node name="CollisionShape" type="CollisionShape" parent="HitboxGround"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0 )
 shape = SubResource( 4 )
 
 [node name="HitboxCeiling" type="Area" parent="."]
+collision_layer = 512
+collision_mask = 512
 
 [node name="CollisionShape" type="CollisionShape" parent="HitboxCeiling"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0 )
