@@ -3,6 +3,7 @@
 #include <Godot.hpp>
 #include <Node.hpp>
 #include <String.hpp>
+#include <PackedScene.hpp>
 
 // NetworkManager
 //
@@ -33,6 +34,8 @@ public:
     void start_server();
     void start_client();
 
+    void spawn_player_with_master(int64_t master_id);
+
     void _init();
     void _enter_tree();
 
@@ -50,4 +53,6 @@ private:
     int64_t port;
     int64_t max_clients;
     bool host;
+
+    godot::Ref<godot::PackedScene> player_prefab;
 };

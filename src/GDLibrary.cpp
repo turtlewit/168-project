@@ -7,6 +7,7 @@
 #include "Net/NetworkSync.hpp"
 #include "Net/NetworkTransform.hpp"
 #include "Objects/Crystal.hpp"
+#include "Net/NetworkIdentity.hpp"
 
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
@@ -30,4 +31,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
     godot::register_class<NetworkSync>();
     godot::register_class<NetworkTransform>();
     godot::register_class<godot::Crystal>();
+    godot::register_class<NetworkIdentity>();
 }

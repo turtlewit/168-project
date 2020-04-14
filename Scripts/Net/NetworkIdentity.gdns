@@ -3,8 +3,8 @@
 [ext_resource path="res://Library/gdnativelibrary.tres" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "NetworkTransform"
-class_name = "NetworkTransform"
+resource_name = "NetworkIdentity"
+class_name = "NetworkIdentity"
 library = ExtResource( 1 )
-script_class_name = "NetworkTransform"
+script_class_name = "NetworkIdentity"
 script_class_icon_path = "res://Textures/Tools/NetworkIcon.png"

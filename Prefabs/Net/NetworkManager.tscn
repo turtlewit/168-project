@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Net/NetworkManager.gdns" type="Script" id=1]
+[ext_resource path="res://Prefabs/PlayerNetTest.tscn" type="PackedScene" id=2]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
 port = 42067
 max_clients = 4
+player_prefab = ExtResource( 2 )

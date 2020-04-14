@@ -62,24 +62,26 @@ void NetworkSync::_init()
 
 void NetworkSync::_on_network_start()
 {
-	get_parent()->set_network_master(NetworkManager::SERVER_ID);
-	if (!is_server()) {
+	set_property_sync_mode(GODOT_METHOD_RPC_MODE_PUPPET);
+
+	Godot::print("Starting...");
+
+	if (!is_master()) {
 		Node* parent = get_parent();
 		parent->set_process(false);
 		parent->set_physics_process(false);
 		set_process(false);
 
 		for (int i = 0; i < sync_properties.size(); ++i) {
+			Godot::print("Deleting...");
 			Node* node = get_node(sync_properties[i]);
 			node->queue_free();
 		}
 
-		rpc_id(NetworkManager::SERVER_ID, "master_initial_sync");
+		rpc_id(get_network_master(), "master_initial_sync");
 	} else {
 		set_process(true);
 	}
-
-	set_property_sync_mode(GODOT_METHOD_RPC_MODE_PUPPET);
 }
 
 void NetworkSync::_process(float delta)

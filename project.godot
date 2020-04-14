@@ -9,19 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "NetworkIdentity",
+"language": "NativeScript",
+"path": "res://Scripts/Net/NetworkIdentity.gdns"
+}, {
 "base": "",
 "class": "NetworkManager",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkManager.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkSync",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSync.gdns"
+}, {
+"base": "Node",
+"class": "NetworkTransform",
+"language": "NativeScript",
+"path": "res://Scripts/Net/NetworkTransform.gdns"
 } ]
 _global_script_class_icons={
+"NetworkIdentity": "res://Textures/Tools/NetworkIcon.png",
 "NetworkManager": "",
-"NetworkSync": "res://Textures/Tools/NetworkIcon.png"
+"NetworkSync": "res://Textures/Tools/NetworkIcon.png",
+"NetworkTransform": "res://Textures/Tools/NetworkIcon.png"
 }
 
 [application]
@@ -33,6 +45,10 @@ config/icon="res://icon.png"
 [autoload]
 
 NetworkManager="*res://Prefabs/Net/NetworkManager.tscn"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "CustomTypes" )
 
 [input]
 

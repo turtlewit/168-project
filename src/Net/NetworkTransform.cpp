@@ -69,8 +69,13 @@ void NetworkTransform::sync()
 
 void NetworkTransform::_on_network_start()
 {
-	get_parent()->set_network_master(NetworkManager::SERVER_ID);
-	if (!is_server()) {
+	get_parent()->rset_config("global_transform", GODOT_METHOD_RPC_MODE_PUPPET);
+	for (int i = 0; i < children_to_sync.size(); ++i) {
+		Node* child = get_node(children_to_sync[i]);
+		child->rset_config("global_transform", GODOT_METHOD_RPC_MODE_PUPPET);
+	}
+
+	if (!is_master()) {
 		Node* parent = get_parent();
 		parent->set_process(false);
 		parent->set_physics_process(false);
@@ -80,16 +85,11 @@ void NetworkTransform::_on_network_start()
 			child->set_physics_process(false);
 		}
 
-		rpc_id(NetworkManager::SERVER_ID, "master_initial_sync");
+		rpc_id(get_network_master(), "master_initial_sync");
 	} else {
 		set_process(true);
 	}
 
-	get_parent()->rset_config("global_transform", GODOT_METHOD_RPC_MODE_PUPPET);
-	for (int i = 0; i < children_to_sync.size(); ++i) {
-		Node* child = get_node(children_to_sync[i]);
-		child->rset_config("global_transform", GODOT_METHOD_RPC_MODE_PUPPET);
-	}
 }
 
 void NetworkTransform::_init()

@@ -5,6 +5,8 @@
 #include <SceneTree.hpp>
 
 #include <Net/NetworkManager.hpp>
+#include <Net/NetworkIdentity.hpp>
+#include <Utils/Defs.hpp>
 
 template <typename T, typename C>
 class NetworkNode : public T {
@@ -23,13 +25,13 @@ public:
     virtual ~NetworkNode() {}
 
 protected:
-    void __on_network_start();
+    void _on_network_node_start();
 };
 
 template <typename T, typename C>
 void NetworkNode<T, C>::_register_methods()
 {
-    godot::register_method<void (C::*)()>("__on_network_start", &NetworkNode::__on_network_start);
+    godot::register_method<void (C::*)()>("_on_network_node_start", &NetworkNode::_on_network_node_start);
     godot::register_method<void (C::*)()>("_ready", &NetworkNode::_ready);
 }
 
@@ -39,7 +41,7 @@ void NetworkNode<T, C>::_on_network_start()
 }
 
 template <typename T, typename C>
-void NetworkNode<T, C>::__on_network_start()
+void NetworkNode<T, C>::_on_network_node_start()
 {
     _on_network_start();
 }
@@ -47,14 +49,31 @@ void NetworkNode<T, C>::__on_network_start()
 template <typename T, typename C>
 void NetworkNode<T, C>::_ready()
 {
-    if (is_network_connected()) {
-        _on_network_start();
+    T::set_process(false);
+
+    godot::Node* identity_node = nullptr;
+    NetworkIdentity* identity = nullptr;
+
+    identity_node = T::get_node(godot::NodePath("../NetworkIdentity"));
+
+    if (identity_node == nullptr) {
+        godot::Array children = T::get_parent()->get_children();
+        for (int i = 0; i < children.size(); ++i) {
+            identity = this->template cast_to<NetworkIdentity>(children[i]);
+
+            if (identity != nullptr)
+                break;
+        }
+    } else {
+        identity = this->template cast_to<NetworkIdentity>(identity_node);
+    }
+
+    if (identity == nullptr) {
+        PRINT_ERROR("NetworkIdentity node not found!", "NetworkNode::_ready()");
         return;
     }
 
-    T::set_process(false);
-
-    NetworkManager::get_singleton()->connect("network_connected", this, "__on_network_start", godot::Array(), T::CONNECT_REFERENCE_COUNTED);
+    identity->connect("network_node_start", this, "_on_network_node_start", godot::Array(), T::CONNECT_REFERENCE_COUNTED);
 }
 
 template <typename T, typename C>
@@ -66,7 +85,7 @@ bool NetworkNode<T, C>::is_network_connected()
 template <typename T, typename C>
 bool NetworkNode<T, C>::is_master()
 {
-    return (T::get_network_master() == 0 || T::get_network_master() == T::get_tree()->get_network_unique_id());
+    return (T::get_network_master() == 0 || T::is_network_master());
 }
 
 template <typename T, typename C>
@@ -84,6 +103,6 @@ bool NetworkNode<T, C>::is_server()
 template <typename T, typename C>
 bool NetworkNode<T, C>::is_client()
 {
-    return (NetworkManager::is_host() && is_server()) || !is_server();
+    return (NetworkManager::get_singleton()->is_host() && is_server()) || !is_server();
 }
 

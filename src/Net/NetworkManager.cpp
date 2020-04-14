@@ -17,14 +17,19 @@ void NetworkManager::_register_methods()
     register_property<NetworkManager, int64_t>("port", &NetworkManager::set_port, &NetworkManager::get_port, 0);
     register_property<NetworkManager, int64_t>("max_clients", &NetworkManager::set_max_clients, &NetworkManager::get_max_clients, 0);
 
+	register_property("player_prefab", &NetworkManager::player_prefab, Ref<PackedScene>());
+
     register_method("_enter_tree", &NetworkManager::_enter_tree);
     register_method("_on_network_peer_connected", &NetworkManager::_on_network_peer_connected);
+
+    register_method("spawn_player_with_master", &NetworkManager::spawn_player_with_master, GODOT_METHOD_RPC_MODE_REMOTE);
 }
 
 void NetworkManager::start_host()
 {
     host = true;
     start_server();
+    call_deferred("spawn_player_with_master", SERVER_ID);
 }
 
 void NetworkManager::start_server()
@@ -48,11 +53,27 @@ void NetworkManager::start_client()
 
     Ref<NetworkedMultiplayerENet> server_peer = Ref(NetworkedMultiplayerENet::_new());
     if (server_peer->create_client(address, port) != Error::OK) {
-        PRINT_ERROR(String("Could not connect to server! Address: \"{0}\" Port: {1}").format(address, port), "NetworkManager::start_client");
+        PRINT_ERROR(String("Could not connect to server! Address: \"{0}\" Port: {1}").format(Array::make(address, port)), "NetworkManager::start_client");
         return;
     }
 
     get_tree()->set_network_peer(server_peer);
+}
+
+void NetworkManager::spawn_player_with_master(int64_t master_id)
+{
+    if (player_prefab == Ref<PackedScene>())
+        return;
+
+    godot::Node* player = player_prefab->instance();
+
+    // Append the master ID to the player's name.
+    // This is because Godot knows two nodes are the same across the network
+    // based on their node path and name. 
+    player->set_name(String("{0}{1}").format(Array::make(player->get_name(), master_id)));
+
+    get_tree()->get_current_scene()->add_child(player);
+    player->set_network_master(master_id);
 }
 
 void NetworkManager::_init()
@@ -61,7 +82,7 @@ void NetworkManager::_init()
 
 void NetworkManager::_enter_tree()
 {
-    get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected");
+    get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected", Array(), CONNECT_REFERENCE_COUNTED);
 }
 
 NetworkManager::NetworkManager()
@@ -100,6 +121,10 @@ void NetworkManager::_on_network_peer_connected(int64_t master_id)
     if (master_id == SERVER_ID) {
         set_network_master(master_id);
         emit_signal("network_connected");
+        int64_t my_id = get_tree()->get_network_unique_id();
+
+        spawn_player_with_master(my_id);
+        rpc("spawn_player_with_master", my_id);
     }
 
     Godot::print("Connected to peer {0}", master_id);
