@@ -112,7 +112,7 @@ void Player::_process(float delta)
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
 
-	Godot::print(Variant{ colliding_with });
+	//Godot::print(Variant{ colliding_with });
 }
 
 

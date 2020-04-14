@@ -88,7 +88,9 @@ tracks/2/keys = {
 } ]
 }
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" groups=[
+"Player",
+]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

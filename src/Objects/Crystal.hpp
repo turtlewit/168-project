@@ -1,0 +1,42 @@
+// Crystal.hpp
+#pragma once
+
+#include <Godot.hpp>
+#include <KinematicBody.hpp>
+#include <AnimationPlayer.hpp>
+
+namespace godot {
+
+	class Crystal : public KinematicBody {
+		GODOT_CLASS(Crystal, KinematicBody)
+
+	public:
+		enum class Powerup {
+			Speed,
+			Jump,
+			Attack
+		};
+
+	private:
+		int powerup_type;
+		Powerup powerup_type_internal;
+
+		bool collected = false;
+
+		AnimationPlayer* anim_player_dissolve;
+
+	public:
+		static void _register_methods();
+
+		Crystal();
+		~Crystal();
+		void _init();
+
+		void _ready();
+
+	private:
+		void _on_AreaPickUp_body_entered(Node* body);
+		void _on_AnimationPlayerDissolve_animation_finished(const String& anim_name);
+	};
+
+}

@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Models/Teo_Models/RegularTree/RegularTree.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Models/Duncan_Models/Test/Tinyman.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Shaders/Dissolve.shader" type="Shader" id=5]
-[ext_resource path="res://Shaders/noisetexture.tres" type="Texture" id=6]
+[ext_resource path="res://Prefabs/Objects/Crystal.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 4, 0.5, 4 )
@@ -18,14 +17,6 @@ size = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25 )
-
-[sub_resource type="SphereMesh" id=5]
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 5 )
-shader_param/amount = -0.35
-shader_param/color = Color( 1, 0, 0, 1 )
-shader_param/dissolveTexture = ExtResource( 6 )
 
 [node name="Scene" type="Spatial"]
 
@@ -115,7 +106,5 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 0.0695534, 2.07
 [node name="Tinyman" parent="." instance=ExtResource( 4 )]
 transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 0.777678, -0.966491 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.375539, 0, 0, 0, 0.355234, 0, 0, 0, 0.34541, -2.2637, 0.673091, -1.71201 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+[node name="Crystal" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.624636, -2.25332 )
