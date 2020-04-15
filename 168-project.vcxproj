@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="src\GDLibrary.cpp" />
     <ClCompile Include="src\Hello.cpp" />
+    <ClCompile Include="src\Net\NetworkAnimator.cpp" />
     <ClCompile Include="src\Net\NetworkIdentity.cpp" />
     <ClCompile Include="src\Net\NetworkManager.cpp" />
     <ClCompile Include="src\Net\NetworkStarter.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hello.hpp" />
+    <ClInclude Include="src\Net\NetworkAnimator.hpp" />
     <ClInclude Include="src\Net\NetworkIdentity.hpp" />
     <ClInclude Include="src\Net\NetworkManager.hpp" />
     <ClInclude Include="src\Net\NetworkStarter.hpp" />

@@ -1,0 +1,10 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://Library/gdnativelibrary.tres" type="GDNativeLibrary" id=1]
+
+[resource]
+resource_name = "NetworkAnimator"
+class_name = "NetworkAnimator"
+library = ExtResource( 1 )
+script_class_name = "NetworkAnimator"
+script_class_icon_path = "res://Textures/Tools/NetworkIcon.png"

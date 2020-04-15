@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Net/NetworkSync.gdns" type="Script" id=2]
 [ext_resource path="res://Scripts/Net/NetworkTransform.gdns" type="Script" id=3]
 [ext_resource path="res://Scripts/Net/NetworkIdentity.gdns" type="Script" id=4]
+[ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=5]
 
 [sub_resource type="PrismMesh" id=1]
 size = Vector3( 0.3, 0.3, 0.3 )
@@ -148,6 +149,10 @@ script = ExtResource( 3 )
 [node name="NetworkIdentity" type="Node" parent="."]
 script = ExtResource( 4 )
 is_player = true
+
+[node name="NetworkAnimator" type="Node" parent="."]
+script = ExtResource( 5 )
+animator_path = NodePath("../AnimationPlayer")
 [connection signal="body_entered" from="HitboxGround" to="." method="_on_HitboxGround_body_entered"]
 [connection signal="body_exited" from="HitboxGround" to="." method="_on_HitboxGround_body_exited"]
 [connection signal="body_entered" from="HitboxCeiling" to="." method="_on_HitboxCeiling_body_entered"]

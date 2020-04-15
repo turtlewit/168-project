@@ -31,8 +31,8 @@ protected:
 template <typename T, typename C>
 void NetworkNode<T, C>::_register_methods()
 {
-    godot::register_method<void (C::*)()>("_on_network_node_start", &NetworkNode::_on_network_node_start);
-    godot::register_method<void (C::*)()>("_ready", &NetworkNode::_ready);
+    godot::register_method<void (C::*)()>("_on_network_node_start", reinterpret_cast<void (C::*)()>(&NetworkNode::_on_network_node_start));
+    godot::register_method<void (C::*)()>("_ready", &C::_ready);
 }
 
 template <typename T, typename C>

@@ -43,6 +43,16 @@ void NetworkIdentity::_on_network_start()
     if (!is_player) {
         get_parent()->set_network_master(NetworkManager::SERVER_ID);
     }
+    
+    if (get_network_master() != 0 && !is_network_master()) {
+        Node* parent = get_parent();
+        parent->set_process(false);
+        parent->set_physics_process(false);
+        parent->set_process_input(false);
+        parent->set_process_unhandled_input(false);
+        parent->set_process_unhandled_key_input(false);
+        set_process(false);
+    }
 
     emit_signal("network_node_start");
 }

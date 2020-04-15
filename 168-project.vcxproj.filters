@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Net">
+      <UniqueIdentifier>{4d3b38f5-fc98-4ba5-87f2-e16d778d1cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{cccd261a-78ef-41eb-8464-397d026cca08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Net">
+      <UniqueIdentifier>{fe97e773-251c-4d1a-965a-87f785f60bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{875db211-9666-4841-98b0-abeee1acc0ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GDLibrary.cpp">
@@ -21,64 +33,70 @@
     <ClCompile Include="src\hello.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils\Mathf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Player\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Net\NetworkIdentity.cpp">
+      <Filter>Source Files\Net</Filter>
+    </ClCompile>
     <ClCompile Include="src\Net\NetworkManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Net</Filter>
     </ClCompile>
     <ClCompile Include="src\Net\NetworkStarter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Net</Filter>
     </ClCompile>
     <ClCompile Include="src\Net\NetworkSync.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Net</Filter>
     </ClCompile>
     <ClCompile Include="src\Net\NetworkTransform.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Net</Filter>
     </ClCompile>
     <ClCompile Include="src\Objects\Crystal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Net\NetworkIdentity.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Utils\Mathf.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Net\NetworkAnimator.cpp">
+      <Filter>Source Files\Net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hello.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utils\Defs.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Utils\Mathf.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Player\Player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Net\NetworkAnimator.hpp">
+      <Filter>Header Files\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Net\NetworkIdentity.hpp">
+      <Filter>Header Files\Net</Filter>
+    </ClInclude>
     <ClInclude Include="src\Net\NetworkManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Net\NetworkStarter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Net\NetworkSync.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Net</Filter>
     </ClInclude>
     <ClInclude Include="src\Net\NetworkNode.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Net\NetworkStarter.hpp">
+      <Filter>Header Files\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Net\NetworkSync.hpp">
+      <Filter>Header Files\Net</Filter>
     </ClInclude>
     <ClInclude Include="src\Net\NetworkTransform.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Net</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\Crystal.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Net\NetworkIdentity.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Utils\Defs.hpp">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\Mathf.hpp">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

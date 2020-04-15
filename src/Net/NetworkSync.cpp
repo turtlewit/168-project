@@ -64,17 +64,11 @@ void NetworkSync::_on_network_start()
 {
 	set_property_sync_mode(GODOT_METHOD_RPC_MODE_PUPPET);
 
-	Godot::print("Starting...");
-
 	if (!is_master()) {
-		Node* parent = get_parent();
-		parent->set_process(false);
-		parent->set_physics_process(false);
-		set_process(false);
 
-		for (int i = 0; i < sync_properties.size(); ++i) {
+		for (int i = 0; i < delete_on_not_authority.size(); ++i) {
 			Godot::print("Deleting...");
-			Node* node = get_node(sync_properties[i]);
+			Node* node = get_node(delete_on_not_authority[i]);
 			node->queue_free();
 		}
 
