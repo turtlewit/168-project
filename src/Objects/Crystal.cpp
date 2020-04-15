@@ -8,7 +8,7 @@ using namespace godot;
 void Crystal::_register_methods()
 {
 	REGISTER_METHOD(Crystal, _ready);
-	REGISTER_METHOD(Crystal, _on_AreaPickUp_body_entered);
+	REGISTER_METHOD(Crystal, _on_Crystal_body_entered);
 	REGISTER_METHOD(Crystal, _on_AnimationPlayerDissolve_animation_finished);
 
 	REGISTER_PROPERTY_HINT(Crystal, int, powerup_type, 0, GODOT_PROPERTY_HINT_ENUM, "Speed,Jump,Attack");
@@ -27,7 +27,7 @@ void Crystal::_ready()
 }
 
 
-void Crystal::_on_AreaPickUp_body_entered(Node* body)
+void Crystal::_on_Crystal_body_entered(Node* body)
 {
 	if (!collected && body->is_in_group("Player")) {
 		anim_player_dissolve->play("Dissolve");

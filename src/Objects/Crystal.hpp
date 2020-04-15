@@ -2,13 +2,13 @@
 #pragma once
 
 #include <Godot.hpp>
-#include <KinematicBody.hpp>
+#include <Area.hpp>
 #include <AnimationPlayer.hpp>
 
 namespace godot {
 
-	class Crystal : public KinematicBody {
-		GODOT_CLASS(Crystal, KinematicBody)
+	class Crystal : public Area {
+		GODOT_CLASS(Crystal, Area)
 
 	public:
 		enum class Powerup {
@@ -35,7 +35,7 @@ namespace godot {
 		void _ready();
 
 	private:
-		void _on_AreaPickUp_body_entered(Node* body);
+		void _on_Crystal_body_entered(Node* body);
 		void _on_AnimationPlayerDissolve_animation_finished(const String& anim_name);
 	};
 

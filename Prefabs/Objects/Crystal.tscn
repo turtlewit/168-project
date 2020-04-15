@@ -72,9 +72,7 @@ tracks/1/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[node name="Crystal" type="KinematicBody"]
-collision_layer = 0
-collision_mask = 0
+[node name="Crystal" type="Area"]
 script = ExtResource( 4 )
 
 [node name="Model" parent="." instance=ExtResource( 1 )]
@@ -89,9 +87,7 @@ light_color = Color( 1, 0, 0.796078, 1 )
 omni_range = 0.6
 omni_attenuation = 0.2
 
-[node name="AreaPickUp" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="AreaPickUp"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -100,7 +96,7 @@ anims/Idle = SubResource( 3 )
 
 [node name="AnimationPlayerDissolve" type="AnimationPlayer" parent="."]
 anims/Dissolve = SubResource( 4 )
-[connection signal="body_entered" from="AreaPickUp" to="." method="_on_AreaPickUp_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Crystal_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayerDissolve" to="." method="_on_AnimationPlayerDissolve_animation_finished"]
 
 [editable path="Model"]
