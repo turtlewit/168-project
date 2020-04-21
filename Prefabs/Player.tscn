@@ -91,6 +91,8 @@ tracks/2/keys = {
 [node name="Player" type="KinematicBody" groups=[
 "Player",
 ]]
+collision_layer = 17
+collision_mask = 17
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -103,6 +105,8 @@ material/0 = SubResource( 2 )
 
 [node name="AttackBox" type="Area" parent="Model"]
 transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 5.86008e-08, 0.359689, 0 )
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="Model/AttackBox"]
 shape = SubResource( 3 )
@@ -127,6 +131,13 @@ collision_mask = 512
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0 )
 shape = SubResource( 4 )
 
+[node name="Hurtbox" type="Area" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape" parent="Hurtbox"]
+shape = SubResource( 4 )
+
 [node name="CameraPivot" type="Position3D" parent="."]
 
 [node name="Camera" type="Camera" parent="CameraPivot"]
@@ -139,3 +150,4 @@ anims/Pounce = SubResource( 6 )
 [connection signal="body_entered" from="HitboxGround" to="." method="_on_HitboxGround_body_entered"]
 [connection signal="body_exited" from="HitboxGround" to="." method="_on_HitboxGround_body_exited"]
 [connection signal="body_entered" from="HitboxCeiling" to="." method="_on_HitboxCeiling_body_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
