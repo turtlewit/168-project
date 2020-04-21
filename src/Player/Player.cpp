@@ -215,3 +215,18 @@ void Player::_on_HitboxCeiling_body_entered(Node* body)
 		state = State::Air;
 	}
 }
+
+
+void Player::_on_Hurtbox_area_entered(Area* area)
+{
+	Player* other = cast_to<Player>(area->get_parent());
+
+	switch (other->state) {
+		case State::Attack:
+			health -= other->attack_power + 1;
+			break;
+		case State::Pounce:
+			health -= other->attack_power;
+			break;
+	}
+}

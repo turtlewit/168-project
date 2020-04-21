@@ -8,6 +8,7 @@
 #include <MeshInstance.hpp>
 #include <InputEvent.hpp>
 #include <AnimationPlayer.hpp>
+#include <Area.hpp>
 #include <CollisionShape.hpp>
 
 namespace godot {
@@ -29,9 +30,14 @@ namespace godot {
 		static constexpr float PounceTurnPenalty = 20.0f;
 		static constexpr unsigned int JumpBufferLimit = 10;
 
+		// Growable stats
+		unsigned int max_health = 3;
+		int health = max_health;
+		unsigned int attack_power = 1;
 		float speed = 4.0f;
-		float gravity = 3.0f;
 		float jump_force = 1.5f;
+
+		float gravity = 3.0f;
 		unsigned int jump_buffer = JumpBufferLimit;
 		float mouse_sensitivity = 0.25f;
 		bool test = true;
@@ -78,6 +84,8 @@ namespace godot {
 		void _on_HitboxGround_body_entered(Node* body);
 		void _on_HitboxGround_body_exited(Node* body);
 		void _on_HitboxCeiling_body_entered(Node* body);
+
+		void _on_Hurtbox_area_entered(Area* area);
 	};
 
 }

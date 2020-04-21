@@ -37,7 +37,7 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 }
 
 
-void Crystal::_on_AnimationPlayerDissolve_animation_finished(const String& anim_name)
+void Crystal::_on_AnimationPlayerDissolve_animation_finished(String anim_name)
 {
 	if (anim_name == "Dissolve")
 		queue_free();

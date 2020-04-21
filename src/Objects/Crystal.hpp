@@ -36,7 +36,7 @@ namespace godot {
 
 	private:
 		void _on_Crystal_body_entered(Node* body);
-		void _on_AnimationPlayerDissolve_animation_finished(const String& anim_name);
+		void _on_AnimationPlayerDissolve_animation_finished(String anim_name);
 	};
 
 }
