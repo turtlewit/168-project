@@ -14,7 +14,9 @@ namespace godot {
 		enum class Powerup {
 			Speed,
 			Jump,
-			Attack
+			PounceRange,
+			SwipeDamage,
+			PounceDamage
 		};
 
 	private:

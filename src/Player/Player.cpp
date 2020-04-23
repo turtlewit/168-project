@@ -97,7 +97,7 @@ void Player::_process(float delta)
 		state = State::Pounce;
 
 		float rot = model->get_rotation().y;
-		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * PounceStrength; //Horizontal
+		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * pounce_strength; //Horizontal
 		y_velocity = jump_force / PounceHeightDivide; //Vertical
 
 		attack_box->set_disabled(false);
@@ -191,6 +191,36 @@ void Player::set_state(int value)
 }
 
 
+void Player::increase_speed(float amount)
+{
+	speed += amount;
+}
+
+
+void Player::increase_jump(float amount)
+{
+	jump_force += amount;
+}
+
+
+void Player::increase_pounce(float amount)
+{
+	pounce_strength += amount;
+}
+
+
+void Player::increase_swipe_damage(int amount)
+{
+	swipe_damage += amount;
+}
+
+
+void Player::increase_pounce_damage(int amount)
+{
+	pounce_damage += amount;
+}
+
+
 void Player::_on_HitboxGround_body_entered(Node* body)
 {
 	if (move_direction.y < 0) {
@@ -223,10 +253,12 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 
 	switch (other->state) {
 		case State::Attack:
-			health -= other->attack_power + 1;
+			health -= other->swipe_damage;
 			break;
 		case State::Pounce:
-			health -= other->attack_power;
+			health -= other->pounce_damage;
+			break;
+		default:
 			break;
 	}
 }

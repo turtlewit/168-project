@@ -25,7 +25,6 @@ namespace godot {
 		};
 
 	private:
-		static constexpr float PounceStrength = 2.0f;
 		static constexpr float PounceHeightDivide = 3.0f;
 		static constexpr float PounceTurnPenalty = 20.0f;
 		static constexpr unsigned int JumpBufferLimit = 10;
@@ -33,14 +32,17 @@ namespace godot {
 		// Growable stats
 		unsigned int max_health = 3;
 		int health = max_health;
-		unsigned int attack_power = 1;
+		////////////////////////////
 		float speed = 4.0f;
 		float jump_force = 1.5f;
+		////////////////////////////
+		float pounce_strength = 2.0f;
+		int swipe_damage = 2;
+		int pounce_damage = 1;
 
 		float gravity = 3.0f;
 		unsigned int jump_buffer = JumpBufferLimit;
 		float mouse_sensitivity = 0.25f;
-		bool test = true;
 
 		Vector3 move_direction;
 		float y_velocity = 0;
@@ -71,6 +73,12 @@ namespace godot {
 
 		void _process(float delta);
 		void _physics_process(float delta);
+
+		void increase_speed(float amount);
+		void increase_jump(float amount);
+		void increase_pounce(float amount);
+		void increase_swipe_damage(int amount);
+		void increase_pounce_damage(int amount);
 
 	private:
 		inline bool is_moving();
