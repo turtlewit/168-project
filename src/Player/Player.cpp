@@ -118,6 +118,8 @@ void Player::_process(float delta)
 
 void Player::_physics_process(float delta)
 {
+	//Godot::print(Variant{ state == State::Ground });
+
 	if (Mathf::abs(camera_joy_value) > 0.1) {
 		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
 		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
@@ -135,7 +137,7 @@ void Player::_physics_process(float delta)
 		model->set_rotation(rot);
 	}
 
-	move_and_slide(move_direction * speed, Vector3{0, 1, 0});
+	move_and_slide(move_direction * speed, Vector3{0, 1, 0}, true);
 }
 
 
