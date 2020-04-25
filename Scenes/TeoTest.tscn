@@ -92,6 +92,23 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="Block2"]
 shape = SubResource( 4 )
 
+[node name="Block4" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 2.90813, 3.16856, 0, -3.16856, 2.90813, 0, 0, 0, 3.4576, 1.40068, 0.16985, -2.98119 )
+collision_layer = 513
+collision_mask = 513
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block4"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block4"]
+shape = SubResource( 4 )
+
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.875186, -0.326206, 0.357266, 0, 0.738479, 0.674277, -0.483787, -0.590118, 0.646306, 0, 1.26427, 2.88338 )
 light_energy = 0.66
@@ -107,4 +124,4 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 0.0695534, 2.07
 transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 0.777678, -0.966491 )
 
 [node name="Crystal" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.624636, -2.25332 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.52398, 0.624636, -0.818662 )
