@@ -240,7 +240,8 @@ void Player::enter_ground()
 
 void Player::exit_ground()
 {
-	jumps = 1;
+	if (jumps == 0)
+		jumps = 1;
 	if (state != State::Attack && state != State::Pounce)
 		state = State::Air;
 }
