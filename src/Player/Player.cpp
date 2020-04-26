@@ -25,8 +25,6 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, set_state);
 	REGISTER_METHOD(Player, stop);
 
-	REGISTER_METHOD(Player, _on_HitboxGround_body_entered);
-	REGISTER_METHOD(Player, _on_HitboxGround_body_exited);
 	REGISTER_METHOD(Player, _on_HitboxCeiling_body_entered);
 
 	register_property("speed", &Player::speed, 4.0f);
@@ -67,7 +65,10 @@ void Player::_input(InputEvent* event)
 
 void Player::_process(float delta)
 {
+	//Godot::print(Variant{ grounded });
 	//Godot::print(Variant{ is_on_floor() });
+	Godot::print(Variant{ state == State::Ground });
+	//Godot::print(Variant{ colliding_with });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -116,20 +117,18 @@ void Player::_process(float delta)
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
 
-	//Godot::print(Variant{ colliding_with });
 }
 
 
 void Player::_physics_process(float delta)
 {
-	//Godot::print(Variant{ state == State::Ground });
 
 	if (Mathf::abs(camera_joy_value) > 0.1) {
 		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
 		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
 	}
 
-	if (colliding_with == 0)
+	if (state != State::Ground)
 		y_velocity -= gravity * delta; //Apply constant gravity on player
 
 	move_direction = move_direction.normalized() * speed;
@@ -142,7 +141,11 @@ void Player::_physics_process(float delta)
 		model->set_rotation(rot);
 	}
 
-	move_and_slide(move_direction, Vector3{0, 1, 0});
+	move_and_slide(move_direction, Vector3{0, 1, 0}, true);
+	if (is_on_floor())
+		enter_ground();
+	else exit_ground();
+
 }
 
 
@@ -175,9 +178,8 @@ void Player::jump()
 
 void Player::land()
 {
-	y_velocity = 0;
+	y_velocity = -0.01; //Is_on_floor requires you to have a small force pushing down
 	jumps = 0;
-	colliding_with++;
 	if (state == State::Pounce) {
 		attack_box->set_disabled(true);
 	}
@@ -228,7 +230,7 @@ void Player::increase_pounce_damage(int amount)
 }
 
 
-void Player::_on_HitboxGround_body_entered(Node* body)
+void Player::enter_ground()
 {
 	if (move_direction.y < 0) {
 		land();
@@ -236,10 +238,9 @@ void Player::_on_HitboxGround_body_entered(Node* body)
 }
 
 
-void Player::_on_HitboxGround_body_exited(Node* body)
+void Player::exit_ground()
 {
 	jumps = 1;
-	colliding_with--;
 	if (state != State::Attack && state != State::Pounce)
 		state = State::Air;
 }

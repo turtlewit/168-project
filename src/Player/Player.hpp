@@ -52,7 +52,8 @@ namespace godot {
 		float target_rotation = 0;
 		float camera_joy_value = 0;
 
-		State state = State::Ground;
+		State state = State::Air;
+		bool grounded = true;
 
 		Camera* camera;
 		Position3D* camera_pivot;
@@ -89,8 +90,8 @@ namespace godot {
 
 		void set_state(int value);
 
-		void _on_HitboxGround_body_entered(Node* body);
-		void _on_HitboxGround_body_exited(Node* body);
+		void enter_ground();
+		void exit_ground();
 		void _on_HitboxCeiling_body_entered(Node* body);
 
 		void _on_Hurtbox_area_entered(Area* area);
