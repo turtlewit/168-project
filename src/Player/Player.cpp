@@ -67,7 +67,7 @@ void Player::_process(float delta)
 {
 	//Godot::print(Variant{ grounded });
 	//Godot::print(Variant{ is_on_floor() });
-	Godot::print(Variant{ state == State::Ground });
+	//Godot::print(Variant{ state == State::Ground });
 	//Godot::print(Variant{ colliding_with });
 
 	if (state != State::Attack && state != State::Pounce) {
