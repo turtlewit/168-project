@@ -178,7 +178,7 @@ void Player::jump()
 
 void Player::land()
 {
-	y_velocity = -0.01; //Is_on_floor requires you to have a small force pushing down
+	y_velocity = -1; //Is_on_floor requires you to have a small force pushing down
 	jumps = 0;
 	if (state == State::Pounce) {
 		attack_box->set_disabled(true);
