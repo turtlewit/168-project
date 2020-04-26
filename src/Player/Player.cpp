@@ -79,13 +79,15 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
 	}
 	
-	if (inp->is_action_just_pressed("move_jump")) {
+	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
 		jump_buffer = 0;
-		if (jump_buffer < JumpBufferLimit && (state == State::Ground || state == State::Air)) {
-			jump_buffer++;
-			if (jumps < 2)
-				jump();
-		}
+		if (jumps < 2)
+			jump();
+	}
+	if (jump_buffer < JumpBufferLimit) {
+		jump_buffer++;
+		if (state == State::Ground && jumps == 0)
+			jump();
 	}
 
 	if (inp->is_action_just_pressed("attack_claw") && state == State::Ground) {
