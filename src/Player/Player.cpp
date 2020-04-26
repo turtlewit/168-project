@@ -30,8 +30,8 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_HitboxCeiling_body_entered);
 
 	register_property("speed", &Player::speed, 4.0f);
-	register_property("gravity", &Player::gravity, 3.0f);
-	register_property("jump_force", &Player::jump_force, 1.5f);
+	register_property("gravity", &Player::gravity, 9.8f);
+	register_property("jump_force", &Player::jump_force, 4.0f);
 	register_property("mouse_sensitivity", &Player::mouse_sensitivity, 0.25f);
 }
 
@@ -67,6 +67,8 @@ void Player::_input(InputEvent* event)
 
 void Player::_process(float delta)
 {
+	//Godot::print(Variant{ is_on_floor() });
+
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
@@ -77,13 +79,15 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
 	}
 	
-	if (inp->is_action_just_pressed("move_jump")) {
+	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
 		jump_buffer = 0;
-		if (jump_buffer < JumpBufferLimit && (state == State::Ground || state == State::Air)) {
-			jump_buffer++;
-			if (jumps < 2)
-				jump();
-		}
+		if (jumps < 2)
+			jump();
+	}
+	if (jump_buffer < JumpBufferLimit) {
+		jump_buffer++;
+		if (state == State::Ground && jumps == 0)
+			jump();
 	}
 
 	if (inp->is_action_just_pressed("attack_claw") && state == State::Ground) {
@@ -126,18 +130,19 @@ void Player::_physics_process(float delta)
 	}
 
 	if (colliding_with == 0)
-		y_velocity -= gravity * delta;
+		y_velocity -= gravity * delta; //Apply constant gravity on player
 
-	move_direction.y = y_velocity;
+	move_direction = move_direction.normalized() * speed;
+	move_direction.y = y_velocity; 
 
-	if (is_moving()) {
+	if (is_moving()) { //If you are moving, rotate direction of player model
 		Vector3 rot = model->get_rotation();
 		target_rotation = (std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180));
 		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(Mathf::abs(rot.y), 2 * Mathf::Pi), target_rotation, rot.y < 0), 0.0005f, delta);
 		model->set_rotation(rot);
 	}
 
-	move_and_slide(move_direction * speed, Vector3{0, 1, 0}, true);
+	move_and_slide(move_direction, Vector3{0, 1, 0});
 }
 
 

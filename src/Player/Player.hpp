@@ -27,20 +27,20 @@ namespace godot {
 	private:
 		static constexpr float PounceHeightDivide = 3.0f;
 		static constexpr float PounceTurnPenalty = 20.0f;
-		static constexpr unsigned int JumpBufferLimit = 10;
+		static constexpr unsigned int JumpBufferLimit = 7;
 
 		// Growable stats
 		unsigned int max_health = 3;
 		int health = max_health;
 		////////////////////////////
 		float speed = 4.0f;
-		float jump_force = 1.5f;
+		float jump_force = 4.0f;
 		////////////////////////////
 		float pounce_strength = 2.0f;
 		int swipe_damage = 2;
 		int pounce_damage = 1;
 
-		float gravity = 3.0f;
+		float gravity = 9.8f;
 		unsigned int jump_buffer = JumpBufferLimit;
 		float mouse_sensitivity = 0.25f;
 
