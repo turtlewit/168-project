@@ -11,6 +11,7 @@
 #include <Area.hpp>
 #include <CollisionShape.hpp>
 
+
 namespace godot {
 
 	class Player : public KinematicBody {
@@ -47,8 +48,10 @@ namespace godot {
 
 		Vector3 move_direction;
 		float snap_length = 0;
+		float velocity = 0;
 		float y_velocity = 0;
 		int jumps = 0;
+		Vector3 prev_pos;
 
 		float target_rotation = 0;
 		float camera_joy_value = 0;
@@ -93,7 +96,6 @@ namespace godot {
 		void enter_ground();
 		void exit_ground();
 		void _on_HitboxCeiling_body_entered(Node* body);
-
 		void _on_Hurtbox_area_entered(Area* area);
 	};
 

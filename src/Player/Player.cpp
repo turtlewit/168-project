@@ -68,6 +68,7 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ is_on_floor() });
 	//Godot::print(Variant{ state == State::Ground });
 	//Godot::print(Variant{ y_velocity });
+	//Godot::print(Variant{ velocity });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -78,7 +79,7 @@ void Player::_process(float delta)
 		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left");
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
 	}
-	
+
 	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
 		jump_buffer = 0;
 		snap_length = 0;
@@ -90,7 +91,7 @@ void Player::_process(float delta)
 		if (state == State::Ground && jumps == 0)
 			jump();
 	}
-
+	
 	if (inp->is_action_just_pressed("attack_claw") && state == State::Ground) {
 		stop();
 		state = State::Attack;
@@ -103,6 +104,7 @@ void Player::_process(float delta)
 
 		float rot = model->get_rotation().y;
 		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * pounce_strength; //Horizontal
+		snap_length = 0;
 		y_velocity = jump_force / PounceHeightDivide; //Vertical
 
 		attack_box->set_disabled(false);
@@ -131,7 +133,11 @@ void Player::_physics_process(float delta)
 	if (state != State::Ground)
 		y_velocity -= gravity * delta; //Apply constant gravity on player
 
+	velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed; 
 	move_direction = move_direction.normalized() * speed;
+
+	//If on slope, adjust player speed here using velocity
+
 	move_direction.y = y_velocity; 
 
 	if (is_moving()) { //If you are moving, rotate direction of player model
@@ -141,8 +147,9 @@ void Player::_physics_process(float delta)
 		model->set_rotation(rot);
 	}
 
+	prev_pos = get_global_transform().origin;
 	move_and_slide_with_snap(move_direction, Vector3{ 0, -1, 0 } * snap_length, Vector3{ 0, 1, 0 }, true);
-	if (is_on_floor())
+	if (is_on_floor() && state != State::Attack)
 		enter_ground();
 	else exit_ground();
 
