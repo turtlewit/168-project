@@ -66,7 +66,8 @@ void Player::_input(InputEvent* event)
 void Player::_process(float delta)
 {
 	//Godot::print(Variant{ is_on_floor() });
-	Godot::print(Variant{ state == State::Ground });
+	//Godot::print(Variant{ state == State::Ground });
+	//Godot::print(Variant{ y_velocity });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -219,13 +220,15 @@ void Player::increase_pounce_damage(int amount)
 
 void Player::enter_ground()
 {
-	y_velocity = -1; //Is_on_floor requires you to have a small force pushing down
-	jumps = 0;
-	if (state == State::Pounce) {
-		attack_box->set_disabled(true);
+	if (y_velocity < 0) {
+		y_velocity = -1; //Is_on_floor requires you to have a small force pushing down
+		jumps = 0;
+		if (state == State::Pounce) {
+			attack_box->set_disabled(true);
+		}
+		state = State::Ground;
+		snap_length = SnapLength;
 	}
-	state = State::Ground;
-	snap_length = SnapLength;
 }
 
 
