@@ -65,10 +65,8 @@ void Player::_input(InputEvent* event)
 
 void Player::_process(float delta)
 {
-	//Godot::print(Variant{ grounded });
 	//Godot::print(Variant{ is_on_floor() });
-	//Godot::print(Variant{ state == State::Ground });
-	//Godot::print(Variant{ colliding_with });
+	Godot::print(Variant{ state == State::Ground });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -82,6 +80,7 @@ void Player::_process(float delta)
 	
 	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
 		jump_buffer = 0;
+		snap_length = 0;
 		if (jumps < 2)
 			jump();
 	}
@@ -141,7 +140,7 @@ void Player::_physics_process(float delta)
 		model->set_rotation(rot);
 	}
 
-	move_and_slide(move_direction, Vector3{0, 1, 0}, true);
+	move_and_slide_with_snap(move_direction, Vector3{ 0, -1, 0 } * snap_length, Vector3{ 0, 1, 0 }, true);
 	if (is_on_floor())
 		enter_ground();
 	else exit_ground();
@@ -173,18 +172,6 @@ void Player::jump()
 	y_velocity = jump_force;
 	jumps++;
 	state = State::Air;
-}
-
-
-void Player::land()
-{
-	y_velocity = -1; //Is_on_floor requires you to have a small force pushing down
-	jumps = 0;
-	if (state == State::Pounce) {
-		attack_box->set_disabled(true);
-	}
-
-	state = State::Ground;
 }
 
 
@@ -232,9 +219,13 @@ void Player::increase_pounce_damage(int amount)
 
 void Player::enter_ground()
 {
-	if (move_direction.y < 0) {
-		land();
+	y_velocity = -1; //Is_on_floor requires you to have a small force pushing down
+	jumps = 0;
+	if (state == State::Pounce) {
+		attack_box->set_disabled(true);
 	}
+	state = State::Ground;
+	snap_length = SnapLength;
 }
 
 

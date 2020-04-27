@@ -27,6 +27,7 @@ namespace godot {
 	private:
 		static constexpr float PounceHeightDivide = 3.0f;
 		static constexpr float PounceTurnPenalty = 20.0f;
+		static constexpr float SnapLength = 0.1f;
 		static constexpr unsigned int JumpBufferLimit = 7;
 
 		// Growable stats
@@ -45,15 +46,14 @@ namespace godot {
 		float mouse_sensitivity = 0.25f;
 
 		Vector3 move_direction;
+		float snap_length = 0;
 		float y_velocity = 0;
-		unsigned int colliding_with = 0;
 		int jumps = 0;
 
 		float target_rotation = 0;
 		float camera_joy_value = 0;
 
 		State state = State::Air;
-		bool grounded = true;
 
 		Camera* camera;
 		Position3D* camera_pivot;
