@@ -147,9 +147,10 @@ void Player::_physics_process(float delta)
 	for (int64_t i = 0; i < get_slide_count(); ++i) {
 		current_collision = get_slide_collision(i);
 		Vector3 normal = current_collision->get_normal();
-		//Godot::print(Variant{ normal.y });
-		if (normal.y > 0.71 && normal.y < 1) {
-			move_direction += move_direction * (1.5 - velocity);
+		float angle = acos(normal.dot(Vector3(0, 1, 0))); //in Radians, returns angle of slope
+		if (angle > 0 && angle < Mathf::Pi / 4) { // If you are on a ground thats ~0-45degrees
+			//move_direction += move_direction * (1.5 - velocity);
+			//move_direction += normal.inverse().normalized();
 		}
 	}
 

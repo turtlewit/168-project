@@ -129,7 +129,7 @@ shape = SubResource( 4 )
 [node name="Block4" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 2, 3.4641, 0, -3.4641, 2, 0, 0, 0, 4, 1.05873, -0.149666, -2.98555 )
+transform = Transform( 2.57115, 9.19253, 0, -3.06418, 7.71345, 0, 0, 0, 4, 1.05873, -0.149666, -2.98555 )
 collision_layer = 513
 collision_mask = 513
 __meta__ = {
