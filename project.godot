@@ -19,17 +19,17 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkIdentity.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkManager",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkManager.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkSync",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSync.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkTransform",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkTransform.gdns"
@@ -51,6 +51,7 @@ config/icon="res://icon.png"
 [autoload]
 
 NetworkManager="*res://Prefabs/Net/NetworkManager.tscn"
+SignalManagerPlayer="*res://Prefabs/SignalManagers/SignalManagerPlayer.tscn"
 
 [editor_plugins]
 

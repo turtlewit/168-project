@@ -171,6 +171,8 @@
     <ClCompile Include="src\Net\NetworkSync.cpp" />
     <ClCompile Include="src\Net\NetworkTransform.cpp" />
     <ClCompile Include="src\Objects\Crystal.cpp" />
+    <ClCompile Include="src\System\GameUI.cpp" />
+    <ClCompile Include="src\System\SignalManagerPlayer.cpp" />
     <ClCompile Include="src\Utils\Mathf.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
   </ItemGroup>
@@ -183,6 +185,8 @@
     <ClInclude Include="src\Net\NetworkSync.hpp" />
     <ClInclude Include="src\Net\NetworkTransform.hpp" />
     <ClInclude Include="src\Objects\Crystal.hpp" />
+    <ClInclude Include="src\System\GameUI.cpp" />
+    <ClInclude Include="src\System\SignalManagerPlayer.cpp" />
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
     <ClInclude Include="src\Player\Player.hpp" />

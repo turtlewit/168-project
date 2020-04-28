@@ -54,6 +54,12 @@
     <ClCompile Include="src\Objects\Crystal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\System\GameUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\SignalManagerPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Utils\Mathf.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -90,6 +96,12 @@
       <Filter>Header Files\Net</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\Crystal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\GameUI.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\System\SignalManagerPlayer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Utils\Defs.hpp">
