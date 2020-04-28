@@ -25,8 +25,6 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, set_state);
 	REGISTER_METHOD(Player, stop);
 
-	REGISTER_METHOD(Player, _on_HitboxGround_body_entered);
-	REGISTER_METHOD(Player, _on_HitboxGround_body_exited);
 	REGISTER_METHOD(Player, _on_HitboxCeiling_body_entered);
 
 	register_property("speed", &Player::speed, 4.0f);
@@ -68,6 +66,10 @@ void Player::_input(InputEvent* event)
 void Player::_process(float delta)
 {
 	//Godot::print(Variant{ is_on_floor() });
+	//Godot::print(Variant{ state == State::Ground });
+	//Godot::print(Variant{ y_velocity });
+	//Godot::print(Variant{ velocity });
+	//Godot::print(Variant{ get_slide_count() });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -78,9 +80,10 @@ void Player::_process(float delta)
 		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left");
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
 	}
-	
+
 	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
 		jump_buffer = 0;
+		snap_length = 0;
 		if (jumps < 2)
 			jump();
 	}
@@ -89,7 +92,7 @@ void Player::_process(float delta)
 		if (state == State::Ground && jumps == 0)
 			jump();
 	}
-
+	
 	if (inp->is_action_just_pressed("attack_claw") && state == State::Ground) {
 		stop();
 		state = State::Attack;
@@ -102,6 +105,7 @@ void Player::_process(float delta)
 
 		float rot = model->get_rotation().y;
 		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * pounce_strength; //Horizontal
+		snap_length = 0;
 		y_velocity = jump_force / PounceHeightDivide; //Vertical
 
 		attack_box->set_disabled(false);
@@ -116,24 +120,22 @@ void Player::_process(float delta)
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
 
-	//Godot::print(Variant{ colliding_with });
 }
 
 
 void Player::_physics_process(float delta)
 {
-	//Godot::print(Variant{ state == State::Ground });
 
 	if (Mathf::abs(camera_joy_value) > 0.1) {
 		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
 		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
 	}
 
-	if (colliding_with == 0)
+	if (state != State::Ground)
 		y_velocity -= gravity * delta; //Apply constant gravity on player
 
+	velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed; 
 	move_direction = move_direction.normalized() * speed;
-	move_direction.y = y_velocity; 
 
 	if (is_moving()) { //If you are moving, rotate direction of player model
 		Vector3 rot = model->get_rotation();
@@ -142,7 +144,24 @@ void Player::_physics_process(float delta)
 		model->set_rotation(rot);
 	}
 
-	move_and_slide(move_direction, Vector3{0, 1, 0});
+	for (int64_t i = 0; i < get_slide_count(); ++i) {
+		current_collision = get_slide_collision(i);
+		Vector3 normal = current_collision->get_normal();
+		float angle = acos(normal.dot(Vector3(0, 1, 0))); //in Radians, returns angle of slope
+		if (angle > 0 && angle < Mathf::Pi / 4) { // If you are on a ground thats ~0-45degrees
+			//move_direction += move_direction * (1.5 - velocity);
+			//move_direction += normal.inverse().normalized();
+		}
+	}
+
+	move_direction.y = y_velocity;
+
+	prev_pos = get_global_transform().origin;
+	move_and_slide_with_snap(move_direction, Vector3{ 0, -1, 0 } * snap_length, Vector3{ 0, 1, 0 }, true);
+	if (is_on_floor() && state != State::Attack)
+		enter_ground();
+	else exit_ground();
+
 }
 
 
@@ -170,19 +189,6 @@ void Player::jump()
 	y_velocity = jump_force;
 	jumps++;
 	state = State::Air;
-}
-
-
-void Player::land()
-{
-	y_velocity = 0;
-	jumps = 0;
-	colliding_with++;
-	if (state == State::Pounce) {
-		attack_box->set_disabled(true);
-	}
-
-	state = State::Ground;
 }
 
 
@@ -228,18 +234,24 @@ void Player::increase_pounce_damage(int amount)
 }
 
 
-void Player::_on_HitboxGround_body_entered(Node* body)
+void Player::enter_ground()
 {
-	if (move_direction.y < 0) {
-		land();
+	if (y_velocity < 0) {
+		y_velocity = -1; //Is_on_floor requires you to have a small force pushing down
+		jumps = 0;
+		if (state == State::Pounce) {
+			attack_box->set_disabled(true);
+		}
+		state = State::Ground;
+		snap_length = SnapLength;
 	}
 }
 
 
-void Player::_on_HitboxGround_body_exited(Node* body)
+void Player::exit_ground()
 {
-	jumps = 1;
-	colliding_with--;
+	if (jumps == 0)
+		jumps = 1;
 	if (state != State::Attack && state != State::Pounce)
 		state = State::Air;
 }

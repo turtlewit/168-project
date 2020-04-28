@@ -10,6 +10,8 @@
 #include <AnimationPlayer.hpp>
 #include <Area.hpp>
 #include <CollisionShape.hpp>
+#include <KinematicCollision.hpp>
+
 
 namespace godot {
 
@@ -27,6 +29,7 @@ namespace godot {
 	private:
 		static constexpr float PounceHeightDivide = 3.0f;
 		static constexpr float PounceTurnPenalty = 20.0f;
+		static constexpr float SnapLength = 0.1f;
 		static constexpr unsigned int JumpBufferLimit = 7;
 
 		// Growable stats
@@ -45,14 +48,17 @@ namespace godot {
 		float mouse_sensitivity = 0.25f;
 
 		Vector3 move_direction;
+		float snap_length = 0;
+		float velocity = 0;
 		float y_velocity = 0;
-		unsigned int colliding_with = 0;
 		int jumps = 0;
+		Vector3 prev_pos;
+		Ref<KinematicCollision> current_collision;
 
 		float target_rotation = 0;
 		float camera_joy_value = 0;
 
-		State state = State::Ground;
+		State state = State::Air;
 
 		Camera* camera;
 		Position3D* camera_pivot;
@@ -89,10 +95,9 @@ namespace godot {
 
 		void set_state(int value);
 
-		void _on_HitboxGround_body_entered(Node* body);
-		void _on_HitboxGround_body_exited(Node* body);
+		void enter_ground();
+		void exit_ground();
 		void _on_HitboxCeiling_body_entered(Node* body);
-
 		void _on_Hurtbox_area_entered(Area* area);
 	};
 

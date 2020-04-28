@@ -59,6 +59,40 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="Block"]
 shape = SubResource( 4 )
 
+[node name="Block5" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2024, 0.541295, 1.50495 )
+collision_layer = 513
+collision_mask = 513
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block5"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block5"]
+shape = SubResource( 4 )
+
+[node name="Block6" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85332, 0.541295, 1.50495 )
+collision_layer = 513
+collision_mask = 513
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block6"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block6"]
+shape = SubResource( 4 )
+
 [node name="Block3" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
@@ -96,7 +130,7 @@ shape = SubResource( 4 )
 [node name="Block4" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1.65258, 3.97064, 0, -3.97064, 1.65258, 0, 0, 0, 3.4576, 1.41016, -0.348761, -2.98555 )
+transform = Transform( 2.57115, 9.19253, 0, -3.06418, 7.71345, 0, 0, 0, 4, 1.05873, -0.149666, -2.98555 )
 collision_layer = 513
 collision_mask = 513
 __meta__ = {
