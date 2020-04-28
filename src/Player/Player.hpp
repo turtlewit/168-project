@@ -10,6 +10,7 @@
 #include <AnimationPlayer.hpp>
 #include <Area.hpp>
 #include <CollisionShape.hpp>
+#include <KinematicCollision.hpp>
 
 
 namespace godot {
@@ -52,6 +53,7 @@ namespace godot {
 		float y_velocity = 0;
 		int jumps = 0;
 		Vector3 prev_pos;
+		Ref<KinematicCollision> current_collision;
 
 		float target_rotation = 0;
 		float camera_joy_value = 0;

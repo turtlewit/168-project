@@ -69,6 +69,7 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ state == State::Ground });
 	//Godot::print(Variant{ y_velocity });
 	//Godot::print(Variant{ velocity });
+	//Godot::print(Variant{ get_slide_count() });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -143,8 +144,14 @@ void Player::_physics_process(float delta)
 		model->set_rotation(rot);
 	}
 
-	//Add code here to check if on slope
-	//then do move_direction += move_direction * (1.5 - velocity);
+	for (int64_t i = 0; i < get_slide_count(); ++i) {
+		current_collision = get_slide_collision(i);
+		Vector3 normal = current_collision->get_normal();
+		//Godot::print(Variant{ normal.y });
+		if (normal.y > 0.71 && normal.y < 1) {
+			move_direction += move_direction * (1.5 - velocity);
+		}
+	}
 
 	move_direction.y = y_velocity;
 
