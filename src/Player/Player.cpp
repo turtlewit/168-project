@@ -136,16 +136,17 @@ void Player::_physics_process(float delta)
 	velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed; 
 	move_direction = move_direction.normalized() * speed;
 
-	//If on slope, adjust player speed here using velocity
-
-	move_direction.y = y_velocity; 
-
 	if (is_moving()) { //If you are moving, rotate direction of player model
 		Vector3 rot = model->get_rotation();
 		target_rotation = (std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180));
 		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(Mathf::abs(rot.y), 2 * Mathf::Pi), target_rotation, rot.y < 0), 0.0005f, delta);
 		model->set_rotation(rot);
 	}
+
+	//Add code here to check if on slope
+	//then do move_direction += move_direction * (1.5 - velocity);
+
+	move_direction.y = y_velocity;
 
 	prev_pos = get_global_transform().origin;
 	move_and_slide_with_snap(move_direction, Vector3{ 0, -1, 0 } * snap_length, Vector3{ 0, 1, 0 }, true);
