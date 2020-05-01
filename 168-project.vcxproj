@@ -185,8 +185,8 @@
     <ClInclude Include="src\Net\NetworkSync.hpp" />
     <ClInclude Include="src\Net\NetworkTransform.hpp" />
     <ClInclude Include="src\Objects\Crystal.hpp" />
-    <ClInclude Include="src\System\GameUI.cpp" />
-    <ClInclude Include="src\System\SignalManagerPlayer.cpp" />
+    <ClInclude Include="src\System\GameUI.hpp" />
+    <ClInclude Include="src\System\SignalManagerPlayer.hpp" />
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
     <ClInclude Include="src\Player\Player.hpp" />
