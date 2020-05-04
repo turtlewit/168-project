@@ -152,7 +152,7 @@ void Player::_physics_process(float delta)
 	if (is_on_ceiling() && state != State::Ground) {
 		enter_ceiling();
 	}
-	if (is_on_floor() && state != State::Attack)
+	if (is_on_floor())
 		enter_ground();
 	else exit_ground();
 }
@@ -235,8 +235,9 @@ void Player::enter_ground()
 		if (state == State::Pounce) {
 			attack_box->set_disabled(true);
 		}
-		state = State::Ground;
 		snap_length = SnapLength;
+		if (state != State::Attack)
+			state = State::Ground;
 	}
 }
 
