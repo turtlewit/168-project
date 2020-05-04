@@ -130,7 +130,7 @@ void Player::_physics_process(float delta)
 		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
 	}
 
-	if (state != State::Ground)
+	if (state != State::Ground && state != State::Attack)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
 	//velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed;
