@@ -48,11 +48,13 @@ namespace godot {
 		float mouse_sensitivity = 0.25f;
 
 		Vector3 move_direction;
-		float snap_length = 0;
-		float velocity = 0;
-		float y_velocity = 0;
-		int jumps = 0;
+		Vector3 move_output;
+		Vector3 gravity_velocity;
+		Vector3 ground_normal;
 		Vector3 prev_pos;
+		float velocity;
+		float snap_length = 0;
+		int jumps = 0;
 		Ref<KinematicCollision> current_collision;
 
 		float target_rotation = 0;
@@ -97,6 +99,7 @@ namespace godot {
 
 		void enter_ground();
 		void exit_ground();
+		void check_ground();
 		void enter_ceiling();
 		void _on_Hurtbox_area_entered(Area* area);
 	};

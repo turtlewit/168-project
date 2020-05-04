@@ -105,7 +105,7 @@ void Player::_process(float delta)
 		float rot = model->get_rotation().y;
 		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * pounce_strength; //Horizontal
 		snap_length = 0;
-		y_velocity = jump_force / PounceHeightDivide; //Vertical
+		gravity_velocity = Vector3{ 0, jump_force / PounceHeightDivide, 0 }; //Vertical
 
 		attack_box->set_disabled(false);
 	}
@@ -131,9 +131,9 @@ void Player::_physics_process(float delta)
 	}
 
 	if (state != State::Ground)
-		y_velocity -= gravity * delta; //Apply constant gravity on player
+		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
-	velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed; 
+	//velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed;
 	move_direction = move_direction.normalized() * speed;
 
 	if (is_moving()) { //If you are moving, rotate direction of player model
@@ -143,27 +143,18 @@ void Player::_physics_process(float delta)
 		model->set_rotation(rot);
 	}
 
-	for (int64_t i = 0; i < get_slide_count(); ++i) {
-		current_collision = get_slide_collision(i);
-		Vector3 normal = current_collision->get_normal();
-		float angle = acos(normal.dot(Vector3(0, 1, 0))); //in Radians, returns angle of slope
-		if (angle > 0 && angle < Mathf::Pi / 4) { // If you are on a ground thats ~0-45degrees
-			//move_direction += move_direction * (1.5 - velocity);
-			//move_direction += normal.inverse().normalized();
-		}
-	}
+	check_ground(); //Checks if you are on non-flat ground and adjusts gravity towards it
+	move_output = Vector3(move_direction.x + gravity_velocity.x, gravity_velocity.y, move_direction.z + gravity_velocity.z);
+	//prev_pos = get_global_transform().origin;
 
-	move_direction.y = y_velocity;
+	move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
 
-	prev_pos = get_global_transform().origin;
-	move_and_slide_with_snap(move_direction, Vector3{ 0, -1, 0 } * snap_length, Vector3{ 0, 1, 0 }, true);
 	if (is_on_ceiling() && state != State::Ground) {
 		enter_ceiling();
 	}
 	if (is_on_floor() && state != State::Attack)
 		enter_ground();
 	else exit_ground();
-
 }
 
 
@@ -188,7 +179,7 @@ inline float Player::get_closest_angle(float current, float target, bool flip) {
 
 void Player::jump()
 {
-	y_velocity = jump_force;
+	gravity_velocity = Vector3{ 0, jump_force, 0 };
 	jumps++;
 	state = State::Air;
 }
@@ -238,8 +229,8 @@ void Player::increase_pounce_damage(int amount)
 
 void Player::enter_ground()
 {
-	if (y_velocity < 0) {
-		y_velocity = -1; //Is_on_floor requires you to have a small force pushing down
+	if (gravity_velocity.y < 0) {
+		gravity_velocity = -ground_normal; //Is_on_floor requires you to have a small force pushing down
 		jumps = 0;
 		if (state == State::Pounce) {
 			attack_box->set_disabled(true);
@@ -251,8 +242,8 @@ void Player::enter_ground()
 
 void Player::enter_ceiling() 
 {
-	if (y_velocity > 0) 
-		y_velocity = 0;
+	if (gravity_velocity.y > 0)
+		gravity_velocity.y = 0;
 }
 
 
@@ -262,6 +253,22 @@ void Player::exit_ground()
 		jumps = 1;
 	if (state != State::Attack && state != State::Pounce)
 		state = State::Air;
+}
+
+void Player::check_ground() 
+{
+	for (int64_t i = 0; i < get_slide_count(); ++i) {
+		current_collision = get_slide_collision(i);
+		Vector3 normal = current_collision->get_normal();
+		float angle = acos(normal.dot(Vector3(0, 1, 0))); //in Radians, returns angle of slope
+		if (angle > 0 && angle < Mathf::Pi / 4) { // If you are on a ground thats ~0-45degrees
+			ground_normal = normal;
+			break;
+		}
+		else {
+			ground_normal = Vector3{ 0, 1, 0 };
+		}
+	}
 }
 
 void Player::_on_Hurtbox_area_entered(Area* area)
