@@ -97,7 +97,7 @@ namespace godot {
 
 		void enter_ground();
 		void exit_ground();
-		void _on_HitboxCeiling_body_entered(Node* body);
+		void enter_ceiling();
 		void _on_Hurtbox_area_entered(Area* area);
 	};
 

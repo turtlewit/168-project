@@ -25,8 +25,6 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, set_state);
 	REGISTER_METHOD(Player, stop);
 
-	REGISTER_METHOD(Player, _on_HitboxCeiling_body_entered);
-
 	register_property("speed", &Player::speed, 4.0f);
 	register_property("gravity", &Player::gravity, 9.8f);
 	register_property("jump_force", &Player::jump_force, 4.0f);
@@ -70,6 +68,7 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ y_velocity });
 	//Godot::print(Variant{ velocity });
 	//Godot::print(Variant{ get_slide_count() });
+	//Godot::print(Variant{  is_on_ceiling() });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -158,6 +157,9 @@ void Player::_physics_process(float delta)
 
 	prev_pos = get_global_transform().origin;
 	move_and_slide_with_snap(move_direction, Vector3{ 0, -1, 0 } * snap_length, Vector3{ 0, 1, 0 }, true);
+	if (is_on_ceiling() && state != State::Ground) {
+		enter_ceiling();
+	}
 	if (is_on_floor() && state != State::Attack)
 		enter_ground();
 	else exit_ground();
@@ -247,6 +249,12 @@ void Player::enter_ground()
 	}
 }
 
+void Player::enter_ceiling() 
+{
+	if (y_velocity > 0) 
+		y_velocity = 0;
+}
+
 
 void Player::exit_ground()
 {
@@ -255,16 +263,6 @@ void Player::exit_ground()
 	if (state != State::Attack && state != State::Pounce)
 		state = State::Air;
 }
-
-
-void Player::_on_HitboxCeiling_body_entered(Node* body)
-{
-	if (y_velocity > 0) {
-		y_velocity = 0;
-		state = State::Air;
-	}
-}
-
 
 void Player::_on_Hurtbox_area_entered(Area* area)
 {
