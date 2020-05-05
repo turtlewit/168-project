@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="168-project"
-run/main_scene="res://Scenes/MainWorld.tscn"
+run/main_scene="res://Scenes/TeoTest.tscn"
 config/icon="res://icon.png"
 
 [autoload]

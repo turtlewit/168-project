@@ -11,7 +11,8 @@ namespace godot {
 		GODOT_CLASS(Portal, Area)
 
         private:
-            Transform teleport_location;
+            Vector3 translation;
+            Vector3 rotation;
         public:
             static void _register_methods();
 

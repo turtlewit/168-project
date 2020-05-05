@@ -1,5 +1,8 @@
-[gd_resource type="NativeScript" format=2]
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://Library/gdnativelibrary.tres" type="GDNativeLibrary" id=1]
 
 [resource]
 resource_name = "Portal"
 class_name = "Portal"
+library = ExtResource( 1 )
