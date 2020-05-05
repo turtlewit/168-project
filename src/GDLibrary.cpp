@@ -9,7 +9,7 @@
 #include "Objects/Crystal.hpp"
 #include "Net/NetworkIdentity.hpp"
 #include "Net/NetworkAnimator.hpp"
-
+#include "Objects/Portal.hpp"
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
 {
@@ -34,4 +34,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
     godot::register_class<godot::Crystal>();
     godot::register_class<NetworkIdentity>();
     godot::register_class<NetworkAnimator>();
+    godot::register_class<godot::Portal>();
 }

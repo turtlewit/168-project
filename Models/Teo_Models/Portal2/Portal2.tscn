@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Shaders/CelGD.shader" type="Shader" id=1]
 [ext_resource path="res://Models/Teo_Models/Portal2/Portal.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Objects/Portal.gdns" type="Script" id=3]
 [ext_resource path="res://Models/Teo_Models/Portal2/Portal.dae" type="PackedScene" id=4]
 
 [sub_resource type="CylinderMesh" id=1]
@@ -74,6 +75,7 @@ shader_param/emissionColor = Color( 0.117647, 0.866667, 0.901961, 1 )
 material = SubResource( 10 )
 
 [node name="Portal" instance=ExtResource( 4 )]
+script = ExtResource( 3 )
 
 [node name="Particles" parent="." index="0"]
 use_in_baked_light = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Shaders/Dissolve.shader" type="Shader" id=5]
 [ext_resource path="res://Shaders/noisetexture.tres" type="Texture" id=6]
 [ext_resource path="res://Models/Johnny_Models/Ground/ground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/Objects/Crystal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Models/Teo_Models/Portal2/Portal2.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.5, 0.5, 0.5 )
@@ -57,6 +59,81 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="Block3"]
 shape = SubResource( 2 )
 
+[node name="Block4" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337467, 0.873793, -7.23971 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block4"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block4"]
+shape = SubResource( 2 )
+
+[node name="Block5" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49739, 1.49996, -6.17612 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block5"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block5"]
+shape = SubResource( 2 )
+
+[node name="Block6" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88625, 2.14155, -7.58111 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block6"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block6"]
+shape = SubResource( 2 )
+
+[node name="Block7" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75855, 2.89683, -8.98663 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block7"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block7"]
+shape = SubResource( 2 )
+
+[node name="Block8" type="StaticBody" parent="." groups=[
+"Ground",
+]]
+transform = Transform( 1.56268, 0, 0, 0, 10.3195, 0, 0, 0, 1.74142, 1.41509, 1.51854, -7.27057 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block8"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block8"]
+shape = SubResource( 2 )
+
 [node name="Block2" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
@@ -92,3 +169,12 @@ mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
+
+[node name="Portal" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.089488, 0, -0.0446307, 0, 0.1, 0, 0.0446307, 0, 0.089488, 6.21254, 0.092176, -5.76861 )
+
+[node name="Portal2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.089488, 0, -0.0446307, 0, 0.1, 0, 0.0446307, 0, 0.089488, 0.247658, 0.542327, 4.09333 )
+
+[node name="Crystal" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45777, 4.40062, -7.22366 )
