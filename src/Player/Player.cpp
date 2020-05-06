@@ -25,6 +25,8 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, set_state);
 	REGISTER_METHOD(Player, stop);
 
+	REGISTER_METHOD(Player, _on_Hurtbox_area_entered);
+
 	register_property("speed", &Player::speed, 4.0f);
 	register_property("gravity", &Player::gravity, 9.8f);
 	register_property("jump_force", &Player::jump_force, 4.0f);
@@ -259,6 +261,7 @@ void Player::exit_ground()
 		state = State::Air;
 }
 
+
 void Player::check_ground() 
 {
 	for (int64_t i = 0; i < get_slide_count(); ++i) {
@@ -275,9 +278,10 @@ void Player::check_ground()
 	}
 }
 
+
 void Player::_on_Hurtbox_area_entered(Area* area)
 {
-	Player* other = cast_to<Player>(area->get_parent());
+	Player* other = cast_to<Player>(area->get_parent()->get_parent());
 
 	switch (other->state) {
 		case State::Attack:
