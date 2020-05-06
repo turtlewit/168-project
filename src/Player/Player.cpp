@@ -86,10 +86,13 @@ void Player::_process(float delta)
 		if (jumps < 2)
 			jump();
 	}
+
 	if (jump_buffer < JumpBufferLimit) {
 		jump_buffer++;
-		if (state == State::Ground && jumps == 0)
+		if (state == State::Ground && jumps == 0) {
+			snap_length = 0;
 			jump();
+		}
 	}
 	
 	if (inp->is_action_just_pressed("attack_claw") && state == State::Ground) {
