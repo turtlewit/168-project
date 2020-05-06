@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Models/Teo_Models/RegularTree/RegularTree.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Models/Duncan_Models/Test/Tinyman.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Models/Teo_Models/Portal2/Portal2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/Objects/Portal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Objects/Crystal.tscn" type="PackedScene" id=7]
 
@@ -24,6 +23,10 @@ points = PoolVector3Array( -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.2
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.845788, 0 )
+speed = 4.0
+gravity = 9.8
+jump_force = 4.0
+mouse_sensitivity = 0.25
 
 [node name="Floor" type="StaticBody" parent="." groups=[
 "Ground",
@@ -161,10 +164,14 @@ transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2
 
 [node name="Crystal" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.52398, 0.624636, -0.818662 )
+powerup_type = 0
 
 [node name="Portal2" parent="." instance=ExtResource( 6 )]
 transform = Transform( -0.00307374, 0, 0.0827991, 0, 0.0828562, 0, -0.0827991, 0, -0.00307374, 0.16759, 0.444728, -1.42135 )
-"teleport location" = Vector3( 0, 5, 0 )
+"teleport location" = Vector3( -3, 1, 3 )
+"teleport rotation" = Vector3( 0, 0, 0 )
 
-[node name="Portal" parent="." instance=ExtResource( 5 )]
-transform = Transform( -0.00307374, 0, 0.0827991, 0, 0.0828562, 0, -0.0827991, 0, -0.00307374, 2.5272, 0.480008, 0.818565 )
+[node name="Portal" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.76958, 0.505269, 3.2284 )
+"teleport location" = Vector3( 0.5, 0.445, -1.4 )
+"teleport rotation" = Vector3( 0, 0, 0 )

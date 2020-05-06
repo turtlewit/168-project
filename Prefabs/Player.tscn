@@ -97,6 +97,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+speed = null
+gravity = null
+jump_force = null
+mouse_sensitivity = null
 
 [node name="Model" type="MeshInstance" parent="."]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )

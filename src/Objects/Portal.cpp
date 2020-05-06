@@ -1,7 +1,7 @@
 #include "Portal.hpp"
 #include "Utils/Defs.hpp"
 #include "Player/Player.hpp"
-
+#include "Utils/Mathf.hpp"
 
 using namespace godot;
 
@@ -23,12 +23,13 @@ void Portal::_ready()
 }
 
 void Portal::_on_Portal_body_entered(Node* body) {
-	Player* other;
 	if (body->is_in_group("Player"))
 	{
-		other = cast_to<Player>(body->get_parent());
 		Godot::print("PLAYER TOOK PORTAL!!!");
-		/*other->set_translation(translation);
-		other->set_rotation(rotation);*/
+		Player* p = cast_to<Player>(body);
+		Godot::print(p->get_name());
+		Transform t;
+		t.translate(translation);
+		p->set_global_transform(t);
 	}
 }

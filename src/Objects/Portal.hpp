@@ -1,10 +1,8 @@
 #pragma once
 // Portal.hpp
-#pragma once
 
 #include <Area.hpp>
 #include <Godot.hpp>
-
 namespace godot {
 	
 	class Portal : public Area {
