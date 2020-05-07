@@ -8,10 +8,22 @@ using namespace godot;
 
 void GameUI::_register_methods()
 {
-
+	REGISTER_METHOD(GameUI, _ready);
+	REGISTER_METHOD(GameUI, _enter_tree);
+	REGISTER_METHOD(GameUI, _exit_tree);
+	REGISTER_METHOD(GameUI, update_crystal_amount);
 }
 
 CLASS_INITS(GameUI)
+
+
+void GameUI::_ready()
+{
+	for (int i = 0; i < 5; i++) {
+		crystal_labels[i] = cast_to<Label>(get_node("CrystalCounts")->get_child(i));
+		update_crystal_amount(i, 0);
+	}
+}
 
 
 void GameUI::_enter_tree()
@@ -25,7 +37,8 @@ void GameUI::_exit_tree()
 }
 
 
-void GameUI::update_crystal_amount(int amount, int index)
+void GameUI::update_crystal_amount(int index, int amount)
 {
-
+	crystal_amounts[index] += amount;
+	crystal_labels[index]->set_text(String::num_int64(crystal_amounts[index]));
 }

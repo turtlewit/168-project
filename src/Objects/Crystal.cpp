@@ -3,6 +3,7 @@
 
 #include "Utils/Defs.hpp"
 #include "Player/Player.hpp"
+#include "System/SignalManagerPlayer.hpp"
 
 using namespace godot;
 
@@ -52,6 +53,8 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 				player->increase_pounce_damage(1);
 				break;
 		}
+
+		SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", static_cast<int>(powerup_type_internal), 1);
 	}
 }
 

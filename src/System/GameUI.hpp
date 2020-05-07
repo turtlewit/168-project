@@ -11,7 +11,8 @@ namespace godot {
 		GODOT_CLASS(GameUI, Control)
 
 	private:
-		unsigned int crystal_amounts[4] = {0};
+		unsigned int crystal_amounts[5] = {0};
+		Label* crystal_labels[5];
 
 	public:
 		static void _register_methods();
@@ -20,6 +21,7 @@ namespace godot {
 		~GameUI();
 		void _init();
 
+		void _ready();
 		void _enter_tree();
 		void _exit_tree();
 
