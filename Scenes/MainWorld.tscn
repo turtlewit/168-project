@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Shaders/noisetexture.tres" type="Texture" id=6]
 [ext_resource path="res://Models/Johnny_Models/Ground/ground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Objects/Crystal.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Models/Teo_Models/Portal2/Portal2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Objects/Portal.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CubeMesh" id=1]
@@ -29,10 +28,10 @@ shader_param/dissolveTexture = ExtResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.845788, 0 )
-speed = null
-gravity = null
-jump_force = null
-mouse_sensitivity = null
+speed = 4.0
+gravity = 9.8
+jump_force = 4.0
+mouse_sensitivity = 0.25
 
 [node name="Block" type="StaticBody" parent="." groups=[
 "Ground",
@@ -64,70 +63,10 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="Block3"]
 shape = SubResource( 2 )
 
-[node name="Block4" type="StaticBody" parent="." groups=[
-"Ground",
-]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337467, 0.873793, -7.23971 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="MeshInstance" type="MeshInstance" parent="Block4"]
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="Block4"]
-shape = SubResource( 2 )
-
-[node name="Block5" type="StaticBody" parent="." groups=[
-"Ground",
-]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49739, 1.49996, -6.17612 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="MeshInstance" type="MeshInstance" parent="Block5"]
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="Block5"]
-shape = SubResource( 2 )
-
-[node name="Block6" type="StaticBody" parent="." groups=[
-"Ground",
-]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88625, 2.14155, -7.58111 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="MeshInstance" type="MeshInstance" parent="Block6"]
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="Block6"]
-shape = SubResource( 2 )
-
-[node name="Block7" type="StaticBody" parent="." groups=[
-"Ground",
-]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75855, 2.89683, -8.98663 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="MeshInstance" type="MeshInstance" parent="Block7"]
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="Block7"]
-shape = SubResource( 2 )
-
 [node name="Block8" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1.56268, 0, 0, 0, 10.3195, 0, 0, 0, 1.74142, 1.41509, 1.51854, -7.27057 )
+transform = Transform( 1.56268, 0, 0, 0, 10.3195, 0, 0, 0, 1.74142, 1.80674, 1.51854, -7.27057 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -138,6 +77,70 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Block8"]
 shape = SubResource( 2 )
+
+[node name="Block7" type="StaticBody" parent="Block8" groups=[
+"Ground",
+]]
+transform = Transform( 0.639926, 0, 0, 0, 0.0969039, 0, 0, 0, 0.574244, 0.219789, 0.133562, -0.985437 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block8/Block7"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block8/Block7"]
+shape = SubResource( 2 )
+
+[node name="Block6" type="StaticBody" parent="Block8" groups=[
+"Ground",
+]]
+transform = Transform( 0.639926, 0, 0, 0, 0.0969039, 0, 0, 0, 0.574244, 0.941434, 0.0603721, -0.178326 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block8/Block6"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block8/Block6"]
+shape = SubResource( 2 )
+
+[node name="Block5" type="StaticBody" parent="Block8" groups=[
+"Ground",
+]]
+transform = Transform( 0.639926, 0, 0, 0, 0.0969039, 0, 0, 0, 0.574244, 0.0526659, -0.00180048, 0.628481 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block8/Block5"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block8/Block5"]
+shape = SubResource( 2 )
+
+[node name="Block4" type="StaticBody" parent="Block8" groups=[
+"Ground",
+]]
+transform = Transform( 0.639926, 0, 0, 0, 0.0969039, 0, 0, 0, 0.574244, -0.883958, -0.0624785, 0.0177212 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Block8/Block4"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Block8/Block4"]
+shape = SubResource( 2 )
+
+[node name="Crystal" parent="Block8" instance=ExtResource( 8 )]
+transform = Transform( 0.639926, 0, 0, 0, 0.0969039, 0, 0, 0, 0.574244, 0.0321966, 0.279285, 0.0269375 )
+powerup_type = 0
 
 [node name="Block2" type="StaticBody" parent="." groups=[
 "Ground",
@@ -174,15 +177,6 @@ mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
-
-[node name="Portal" parent="." instance=ExtResource( 9 )]
-transform = Transform( 0.089488, 0, -0.0446307, 0, 0.1, 0, 0.0446307, 0, 0.089488, 6.21254, 0.092176, -5.76861 )
-
-[node name="Portal2" parent="." instance=ExtResource( 9 )]
-transform = Transform( 0.089488, 0, -0.0446307, 0, 0.1, 0, 0.0446307, 0, 0.089488, 0.247658, 0.542327, 4.09333 )
-
-[node name="Crystal" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45777, 4.40062, -7.22366 )
 
 [node name="Portal3" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.222393, 0, 0.201349, 0, 0.3, 0, -0.201349, 0, 0.222393, -4.69944, 0.34087, -9.24002 )
