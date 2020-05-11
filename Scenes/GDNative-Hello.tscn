@@ -39,14 +39,9 @@ script = SubResource( 1 )
 
 [node name="Node" type="Node" parent="."]
 script = SubResource( 2 )
-start_mode = null
-autostart = null
 
 [node name="Node" type="Node" parent="Node"]
 script = ExtResource( 2 )
-sync_properties = null
-sync_interval = null
-delete_on_not_authority = null
 
 [node name="Node2" type="Node" parent="."]
 script = SubResource( 3 )
