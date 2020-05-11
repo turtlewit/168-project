@@ -180,4 +180,4 @@ transform = Transform( 0.222393, 0, 0.201349, 0, 0.3, 0, -0.201349, 0, 0.222393,
 [node name="ground" parent="." instance=ExtResource( 7 )]
 
 [node name="Spatial" parent="ground" instance=ExtResource( 9 )]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, -1, 0 )
