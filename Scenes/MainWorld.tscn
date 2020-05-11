@@ -27,16 +27,13 @@ shader_param/dissolveTexture = ExtResource( 6 )
 [node name="Scene" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0.845788, 0 )
-speed = 4.0
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 3.41332, -4.39038 )
 gravity = 9.8
-jump_force = 4.0
-mouse_sensitivity = 0.25
 
 [node name="Block" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53727, 0.314934, 1.18764 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53727, 1.8432, 1.18764 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -51,7 +48,7 @@ shape = SubResource( 2 )
 [node name="Block3" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.286817, 0.833796, 0.747223 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.286817, 1.72762, 0.747223 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -66,7 +63,7 @@ shape = SubResource( 2 )
 [node name="Block8" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1.56268, 0, 0, 0, 10.3195, 0, 0, 0, 1.74142, 1.80674, 1.51854, -7.27057 )
+transform = Transform( 1.56268, 0, 0, 0, 10.3195, 0, 0, 0, 1.74142, 1.80674, 4.13503, -7.27057 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -145,7 +142,7 @@ powerup_type = 0
 [node name="Block2" type="StaticBody" parent="." groups=[
 "Ground",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.47095, 0.153109, -0.977951 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.47095, 2.19146, -0.977951 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -163,20 +160,20 @@ light_energy = 0.2
 shadow_enabled = true
 
 [node name="PineTree" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.38116, -0.260182, -3.20345 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.38116, 1.9467, -3.20345 )
 
 [node name="RegularTree" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 0.0784117, 2.0797 )
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 1.45882, 2.0797 )
 
 [node name="Tinyman" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 0.389491, -0.966491 )
+transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 2.41216, -0.966491 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.375539, 0, 0, 0, 0.355234, 0, 0, 0, 0.34541, -2.2637, 0.673091, -1.71201 )
+transform = Transform( 0.375539, 0, 0, 0, 0.355234, 0, 0, 0, 0.34541, -2.2637, 3.40208, -1.71201 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
-[node name="ground" parent="." instance=ExtResource( 7 )]
-
 [node name="Portal3" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.222393, 0, 0.201349, 0, 0.3, 0, -0.201349, 0, 0.222393, -4.69944, 0.34087, -9.24002 )
+transform = Transform( 0.222393, 0, 0.201349, 0, 0.3, 0, -0.201349, 0, 0.222393, -4.69944, 2.55314, -9.24002 )
+
+[node name="ground" parent="." instance=ExtResource( 7 )]
