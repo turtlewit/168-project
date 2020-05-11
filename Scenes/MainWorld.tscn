@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Shaders/noisetexture.tres" type="Texture" id=6]
 [ext_resource path="res://Models/Johnny_Models/Ground/ground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Objects/Crystal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Prefabs/Environment/Water.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Objects/Portal.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CubeMesh" id=1]
@@ -177,3 +178,6 @@ material/0 = SubResource( 4 )
 transform = Transform( 0.222393, 0, 0.201349, 0, 0.3, 0, -0.201349, 0, 0.222393, -4.69944, 2.55314, -9.24002 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
+
+[node name="Spatial" parent="ground" instance=ExtResource( 9 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
