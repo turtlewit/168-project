@@ -10,7 +10,6 @@ namespace godot {
 
         private:
             Vector3 translation;
-            Vector3 rotation;
         public:
             static void _register_methods();
 

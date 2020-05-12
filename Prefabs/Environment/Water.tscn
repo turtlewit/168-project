@@ -1,58 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type spatial;
+[ext_resource path="res://Shaders/Water.shader" type="Shader" id=1]
 
-uniform vec4 out_color : hint_color = vec4(0.0, 0.2, 1.0, 1.0);
-uniform float amount : hint_range(0.2, 1.5) = 0.8;
-uniform float beer_factor = 0.2;
-float generateOffset(float x, float z, float val1, float val2, float time)
-{
-	float speed = 1.0;
-	
-	float radiansX = ((mod(x + z * x * val1, amount)/amount) + (time * speed) * mod(x * 0.8 + z, 1.5)) * 2.0 * 3.14;
-	float radiansZ = ((mod(val2 * (z * x + x * z), amount)/amount) + (time * speed) * 2.0 * mod(x, 2.0)) * 2.0 * 3.14;
-	
-	return amount + 0.5 * (sin(radiansZ) + cos(radiansX));
-}
-vec3 applyDistortion(vec3 vertex, float time)
-{
-	float xd = generateOffset(vertex.x, vertex.z, 0.2, 0.1, time);
-	float yd = generateOffset(vertex.x, vertex.z, 0.1, 0.3, time);
-	float zd = generateOffset(vertex.x, vertex.z, 0.15, 0.2, time);
-	return vertex + vec3(xd,yd,zd);
-}
-void vertex()
-{
-	VERTEX = applyDistortion(VERTEX, TIME * 0.1);
-}
-
-void fragment()
-{
-	NORMAL = normalize(cross(dFdx(VERTEX), dFdy(VERTEX)));
-	METALLIC = 0.6;
-	SPECULAR = 0.5;
-	ROUGHNESS = 0.2;
-	ALBEDO = out_color.xyz;
-	
-	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
-	
-	depth = depth * 2.0 - 1.0;
-	depth = PROJECTION_MATRIX[3][2] / (depth + PROJECTION_MATRIX[2][2]);
-	depth = depth + VERTEX.z;
-	
-	depth = exp(-depth * beer_factor);
-	ALPHA = clamp(1.0 - depth, 0.0, 1.0);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
 shader_param/out_color = Color( 0.290196, 0.815686, 1, 1 )
-shader_param/amount = 1.5
-shader_param/beer_factor = 1.62
+shader_param/amount = 0.804
+shader_param/beer_factor = 6.058
+shader_param/speed = 0.647
 
-[sub_resource type="PlaneMesh" id=3]
-material = SubResource( 2 )
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
 size = Vector2( 100, 100 )
 subdivide_width = 40
 subdivide_depth = 40
@@ -60,5 +18,5 @@ subdivide_depth = 40
 [node name="Spatial" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 3 )
+mesh = SubResource( 2 )
 material/0 = null

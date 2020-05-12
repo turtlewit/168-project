@@ -174,13 +174,18 @@ transform = Transform( 0.375539, 0, 0, 0, 0.355234, 0, 0, 0, 0.34541, -2.2637, 3
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
-[node name="Portal3" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.222393, 0, 0.201349, 0, 0.3, 0, -0.201349, 0, 0.222393, -4.69944, 2.55314, -9.24002 )
+[node name="Portal" parent="." instance=ExtResource( 10 )]
+transform = Transform( -0.0968188, 0, -0.0250226, 0, 0.1, 0, 0.0250226, 0, -0.0968188, -25.811, 1.587, -18.7544 )
+"teleport location" = Vector3( -4.699, 13.913, 40 )
+
+[node name="Portal2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.099323, 0, 0.0116166, 0, 0.1, 0, -0.0116166, 0, 0.099323, -4.699, 13.8826, 39.9488 )
+"teleport location" = Vector3( -25.811, 1.587, -19.5 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 
 [node name="Spatial" parent="." instance=ExtResource( 9 )]
-transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, -0.993023, 0 )
+transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, -0.918049, 0 )
 
 [node name="MeshInstance" parent="Spatial" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71144, 0 )
