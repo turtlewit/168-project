@@ -29,7 +29,6 @@ shader_param/dissolveTexture = ExtResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 3.41332, -4.39038 )
-gravity = 9.8
 
 [node name="Block" type="StaticBody" parent="." groups=[
 "Ground",
@@ -176,11 +175,10 @@ material/0 = SubResource( 4 )
 
 [node name="Portal" parent="." instance=ExtResource( 10 )]
 transform = Transform( -0.0968188, 0, -0.0250226, 0, 0.1, 0, 0.0250226, 0, -0.0968188, -25.811, 1.587, -18.7544 )
-"teleport location" = Vector3( -4.699, 13.913, 40 )
+"teleport location" = Vector3( 0, 5, 0 )
 
 [node name="Portal2" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.099323, 0, 0.0116166, 0, 0.1, 0, -0.0116166, 0, 0.099323, -4.699, 13.8826, 39.9488 )
-"teleport location" = Vector3( -25.811, 1.587, -19.5 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 

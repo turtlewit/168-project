@@ -25,8 +25,6 @@ void Portal::_on_Portal_body_entered(Node* body) {
 	if (body->is_in_group("Player"))
 	{
 		Player* p = cast_to<Player>(body);
-		Transform t;
-		t.translate(translation);
-		p->set_global_transform(t);
+		p->set_translation(translation);
 	}
 }
