@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Prefabs/Objects/Crystal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Prefabs/Environment/Water.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Objects/Portal.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Prefabs/UI/GameUI.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.5, 0.5, 0.5 )
@@ -156,8 +155,8 @@ material/0 = null
 shape = SubResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.875186, -0.326206, 0.357266, 0, 0.738479, 0.674277, -0.483787, -0.590118, 0.646306, 0, 1.26427, 2.88338 )
-light_energy = 0.2
+transform = Transform( 0.875186, -0.326206, 0.357266, -0.0450997, 0.680251, 0.731591, -0.48168, -0.65639, 0.580634, 0, 1.26427, 2.88338 )
+light_energy = 0.47
 shadow_enabled = true
 
 [node name="PineTree" parent="." instance=ExtResource( 2 )]
@@ -180,14 +179,12 @@ transform = Transform( -0.0968188, 0, -0.0250226, 0, 0.1, 0, 0.0250226, 0, -0.09
 [node name="Portal2" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.099323, 0, 0.0116166, 0, 0.1, 0, -0.0116166, 0, 0.099323, -4.699, 14.0772, 40.3998 )
 
-[node name="Spatial" parent="." instance=ExtResource( 9 )]
-transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, -0.918049, 0 )
+[node name="Water" parent="." instance=ExtResource( 9 )]
+transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, -0.783661, 0 )
 
-[node name="MeshInstance" parent="Spatial" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71144, 0 )
+[node name="MeshInstance" parent="Water" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267393, 1.98998, -0.363965 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 
-[node name="GameUI" parent="." instance=ExtResource( 11 )]
-
-[editable path="Spatial"]
+[editable path="Water"]

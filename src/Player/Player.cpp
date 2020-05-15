@@ -30,7 +30,8 @@ void Player::_register_methods()
 	register_property("speed", &Player::speed, 4.0f);
 	register_property("gravity", &Player::gravity, 9.8f);
 	register_property("jump_force", &Player::jump_force, 4.0f);
-	register_property("mouse_sensitivity", &Player::mouse_sensitivity, 0.25f);
+	register_property("mouse_sensitivity_x", &Player::mouse_sensitivity_x, 0.25f);
+	register_property("mouse_sensitivity_y", &Player::mouse_sensitivity_y, 0.25f);
 }
 
 CLASS_INITS(Player)
@@ -54,12 +55,18 @@ void Player::_input(InputEvent* event)
 	auto* ev_mouse = cast_to<InputEventMouseMotion>(event);
 	if (ev_mouse) {
 		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
-		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - mouse_sensitivity * ev_mouse->get_relative().x, camera_rotation.z});
+		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, 
+			camera_rotation.y - mouse_sensitivity_x * ev_mouse->get_relative().x, camera_rotation.z + mouse_sensitivity_y * ev_mouse->get_relative().y });
 	}
 
 	auto* ev_joystick = cast_to<InputEventJoypadMotion>(event);
 	if (ev_joystick && ev_joystick->get_axis() == 2)
 		camera_joy_value = ev_joystick->get_axis_value();
+
+	if (Mathf::abs(camera_joy_value) > 0.1) {
+		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
+		camera_pivot->set_rotation_degrees(Vector3{ camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z });
+	}
 }
 
 
@@ -129,12 +136,6 @@ void Player::_process(float delta)
 
 void Player::_physics_process(float delta)
 {
-
-	if (Mathf::abs(camera_joy_value) > 0.1) {
-		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
-		camera_pivot->set_rotation_degrees(Vector3{camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z});
-	}
-
 	if (state != State::Ground && state != State::Attack)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
