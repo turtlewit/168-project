@@ -45,8 +45,8 @@ namespace godot {
 
 		float gravity = 9.8f;
 		unsigned int jump_buffer = JumpBufferLimit;
-		float mouse_sensitivity = 0.25f;
-
+		float mouse_sensitivity_x = 0.25f;
+		float mouse_sensitivity_y = 0.15f;
 		Vector3 move_direction;
 		Vector3 move_output;
 		Vector3 gravity_velocity;
