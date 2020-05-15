@@ -19,7 +19,7 @@ CLASS_INITS(GameUI)
 
 void GameUI::_ready()
 {
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 4; i++) {
 		crystal_labels[i] = cast_to<Label>(get_node("CrystalCounts")->get_child(i));
 		update_crystal_amount(i, 0);
 	}

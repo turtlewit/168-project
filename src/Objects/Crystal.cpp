@@ -13,7 +13,7 @@ void Crystal::_register_methods()
 	REGISTER_METHOD(Crystal, _on_Crystal_body_entered);
 	REGISTER_METHOD(Crystal, _on_AnimationPlayerDissolve_animation_finished);
 
-	REGISTER_PROPERTY_HINT(Crystal, int, powerup_type, 0, GODOT_PROPERTY_HINT_ENUM, "Speed,Jump,Pounce Range,Swipe Damage,Pounce Damage");
+	REGISTER_PROPERTY_HINT(Crystal, int, powerup_type, 0, GODOT_PROPERTY_HINT_ENUM, "Speed,Jump,Pounce Range,Damage");
 
 	register_signal<Crystal>("picked_up", Dictionary{});
 }
@@ -46,12 +46,10 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 			case Powerup::PounceRange:
 				player->increase_pounce(0.5f);
 				break;
-			case Powerup::SwipeDamage:
+			case Powerup::Damage: {
 				player->increase_swipe_damage(1);
-				break;
-			case Powerup::PounceDamage:
 				player->increase_pounce_damage(1);
-				break;
+			} break;
 		}
 
 		SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", static_cast<int>(powerup_type_internal), 1);

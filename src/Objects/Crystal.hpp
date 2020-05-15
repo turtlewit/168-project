@@ -15,8 +15,7 @@ namespace godot {
 			Speed,
 			Jump,
 			PounceRange,
-			SwipeDamage,
-			PounceDamage
+			Damage
 		};
 
 	private:
