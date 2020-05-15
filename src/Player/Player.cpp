@@ -81,7 +81,7 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ y_velocity });
 	//Godot::print(Variant{ velocity });
 	//Godot::print(Variant{ get_slide_count() });
-	//Godot::print(Variant{  is_on_ceiling() });
+	//Godot::print(Variant{ is_on_ceiling() });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -137,13 +137,13 @@ void Player::_process(float delta)
 
 }
 
-
 void Player::_physics_process(float delta)
 {
 	if (state != State::Ground && state != State::Attack)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
 	//velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed;
+	move_direction.y = 0; //Apparently cameraxform.basis accounts for y, so we need to not include it when normalizing
 	move_direction = move_direction.normalized() * speed;
 
 	if (is_moving()) { //If you are moving, rotate direction of player model
