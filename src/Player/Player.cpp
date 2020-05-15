@@ -91,6 +91,7 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.z * inp->get_action_strength("move_back");
 		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left");
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
+		move_direction.y = 0;
 	}
 
 	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
@@ -143,7 +144,6 @@ void Player::_physics_process(float delta)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
 	//velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed;
-	move_direction.y = 0; //Apparently cameraxform.basis accounts for y, so we need to not include it when normalizing
 	move_direction = move_direction.normalized() * speed;
 
 	if (is_moving()) { //If you are moving, rotate direction of player model
