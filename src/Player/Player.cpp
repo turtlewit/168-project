@@ -60,12 +60,16 @@ void Player::_input(InputEvent* event)
 	}
 
 	auto* ev_joystick = cast_to<InputEventJoypadMotion>(event);
-	if (ev_joystick && ev_joystick->get_axis() == 2)
-		camera_joy_value = ev_joystick->get_axis_value();
+	if (ev_joystick) {
+		if (ev_joystick->get_axis() == 2)
+			camera_joy_value_x = ev_joystick->get_axis_value();
+		if (ev_joystick->get_axis() == 1)
+			camera_joy_value_y = ev_joystick->get_axis_value();
+	}
 
-	if (Mathf::abs(camera_joy_value) > 0.1) {
+	if (Mathf::abs(camera_joy_value_x) > 0.1 || Mathf::abs(camera_joy_value_y) > 0.1) {
 		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
-		camera_pivot->set_rotation_degrees(Vector3{ camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z });
+		camera_pivot->set_rotation_degrees(Vector3{ camera_rotation.x, camera_rotation.y - camera_joy_value_x, camera_rotation.z + camera_joy_value_y });
 	}
 }
 

@@ -58,7 +58,8 @@ namespace godot {
 		Ref<KinematicCollision> current_collision;
 
 		float target_rotation = 0;
-		float camera_joy_value = 0;
+		float camera_joy_value_x = 0;
+		float camera_joy_value_y = 0;
 
 		State state = State::Air;
 
