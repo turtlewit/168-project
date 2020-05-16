@@ -55,10 +55,13 @@ namespace godot {
 		//Camera Collision
 		float camera_distance;
 		float camera_newdistance;
+		float distance_multiplier;
+		float camera_curdistance;
 		Array camera_exclusions;
 		Vector3 pivot_location;
 		Vector3 camera_location;
 		Vector3 camera_direction;
+		Transform camera_newposition;
 		Dictionary camera_result;
 
 		//Movement/Control
@@ -118,7 +121,7 @@ namespace godot {
 		void enter_ceiling();
 		void _on_Hurtbox_area_entered(Area* area);
 		void check_camera();
-		void adjust_camera(Vector3 from, Vector3 to, Vector3 dir, float len);
+		void adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento);
 	};
 
 }

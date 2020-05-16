@@ -145,8 +145,6 @@ void Player::_process(float delta)
 
 void Player::_physics_process(float delta)
 {
-	check_camera();
-
 	if (state != State::Ground && state != State::Attack)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
@@ -163,6 +161,8 @@ void Player::_physics_process(float delta)
 	move_output = Vector3(move_direction.x + gravity_velocity.x, gravity_velocity.y, move_direction.z + gravity_velocity.z);
 
 	move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
+
+	check_camera();
 
 	if (is_on_ceiling() && state != State::Ground) {
 		enter_ceiling();
@@ -309,23 +309,26 @@ void Player::check_camera() //Handles camera collision
 {
 	pivot_location = camera_pivot->get_global_transform().origin;
 	camera_location = camera->get_global_transform().origin;
-
 	camera_direction = (camera_location - pivot_location).normalized();
-	camera_raycast = camera_pivot->get_world()->get_direct_space_state();
+	camera_curdistance = pivot_location.distance_to(camera_location);
 
-	camera_result = camera_raycast->intersect_ray(pivot_location, camera_location, camera_exclusions);
+	camera_raycast = camera_pivot->get_world()->get_direct_space_state();
+	camera_result = camera_raycast->intersect_ray(pivot_location, pivot_location + camera_direction * camera_distance, camera_exclusions);
 
 	if (camera_result.size() != 0) { //If raycast detects something, reduce camera distance accordingly
-		camera_newdistance = pivot_location.distance_to(camera_result["position"]) * .9;
-		adjust_camera(pivot_location, camera_location, camera_direction, camera_newdistance);
+		camera_newdistance = pivot_location.distance_to(camera_result["position"]) * .8;
+		adjust_camera(pivot_location, camera_location, camera_curdistance, camera_newdistance);
 	}
 	else {
-		adjust_camera(pivot_location, camera_location, camera_direction, camera_distance);
+		adjust_camera(pivot_location, camera_location, camera_curdistance, camera_distance);
 	}
 }
 
-void Player::adjust_camera(Vector3 from, Vector3 to, Vector3 dir, float len) //Adjust camera distance
+void Player::adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento) //Adjust camera distance
 {
-
+	distance_multiplier = lento / lenfrom;
+	camera_newposition.set_basis(camera->get_global_transform().basis);
+	camera_newposition.set_origin(Vector3(from.x + ((to.x - from.x) * distance_multiplier),
+		from.y + ((to.y - from.y) * distance_multiplier), from.z + ((to.z - from.z) * distance_multiplier)));
+	camera->set_global_transform(camera_newposition);
 }
-
