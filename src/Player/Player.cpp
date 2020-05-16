@@ -82,11 +82,14 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ velocity });
 	//Godot::print(Variant{ get_slide_count() });
 	//Godot::print(Variant{ is_on_ceiling() });
+	//Godot::print(Variant{ fmod(Mathf::abs(camera_pivot->get_rotation_degrees().z), 360) });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
-		move_check = camera_pivot->get_rotation_degrees().z >= 65;
+		move_check_rotation = fmod(Mathf::abs(camera_pivot->get_rotation_degrees().z), 360);
+		move_check = camera_pivot->get_rotation_degrees().z > 0 ? 
+			(move_check_rotation >= 65 && move_check_rotation < 155) : (move_check_rotation >= 205 && move_check_rotation < 295);
 		move_direction += -camera_xform.basis.z * (move_check == true ? inp->get_action_strength("move_back") : inp->get_action_strength("move_forward"));
 		move_direction += camera_xform.basis.z * (move_check == true ? inp->get_action_strength("move_forward") : inp->get_action_strength("move_back"));
 		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left");
@@ -305,5 +308,5 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 
 void Player::check_camera()
 {
-	camera_pivot->get_world()
+	
 }
