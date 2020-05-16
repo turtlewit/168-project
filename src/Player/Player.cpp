@@ -86,11 +86,12 @@ void Player::_process(float delta)
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
-
-		move_direction += -camera_xform.basis.z * inp->get_action_strength("move_forward");
-		move_direction += camera_xform.basis.z * inp->get_action_strength("move_back");
+		move_check = camera_pivot->get_rotation_degrees().z >= 65;
+		move_direction += -camera_xform.basis.z * (move_check == true ? inp->get_action_strength("move_back") : inp->get_action_strength("move_forward"));
+		move_direction += camera_xform.basis.z * (move_check == true ? inp->get_action_strength("move_forward") : inp->get_action_strength("move_back"));
 		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left");
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
+
 		move_direction.y = 0;
 	}
 
@@ -140,6 +141,8 @@ void Player::_process(float delta)
 
 void Player::_physics_process(float delta)
 {
+	check_camera();
+
 	if (state != State::Ground && state != State::Attack)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
@@ -298,4 +301,9 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 		default:
 			break;
 	}
+}
+
+void Player::check_camera()
+{
+	camera_pivot->get_world()
 }

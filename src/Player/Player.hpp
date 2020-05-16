@@ -47,6 +47,7 @@ namespace godot {
 		unsigned int jump_buffer = JumpBufferLimit;
 		float mouse_sensitivity_x = 0.25f;
 		float mouse_sensitivity_y = 0.15f;
+		bool move_check;
 		Vector3 move_direction;
 		Vector3 move_output;
 		Vector3 gravity_velocity;
@@ -103,6 +104,7 @@ namespace godot {
 		void check_ground();
 		void enter_ceiling();
 		void _on_Hurtbox_area_entered(Area* area);
+		void check_camera();
 	};
 
 }
