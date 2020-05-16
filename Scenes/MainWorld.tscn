@@ -190,4 +190,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267393, 1.98998, -0.363965 
 
 [node name="GameUI" parent="." instance=ExtResource( 11 )]
 
+[editable path="Player"]
+
 [editable path="Water"]
