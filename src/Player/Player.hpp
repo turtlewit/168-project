@@ -61,7 +61,7 @@ namespace godot {
 		Vector3 pivot_location;
 		Vector3 camera_location;
 		Vector3 camera_direction;
-		Transform camera_newposition;
+		Vector3 camera_newposition;
 		Dictionary camera_result;
 
 		//Movement/Control

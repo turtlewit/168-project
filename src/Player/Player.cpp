@@ -327,8 +327,10 @@ void Player::check_camera() //Handles camera collision
 void Player::adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento) //Adjust camera distance
 {
 	distance_multiplier = lento / lenfrom;
-	camera_newposition.set_basis(camera->get_global_transform().basis);
-	camera_newposition.set_origin(Vector3(from.x + ((to.x - from.x) * distance_multiplier),
-		from.y + ((to.y - from.y) * distance_multiplier), from.z + ((to.z - from.z) * distance_multiplier)));
-	camera->set_global_transform(camera_newposition);
+	camera_newposition = Vector3(from.x + ((to.x - from.x) * distance_multiplier),
+		from.y + ((to.y - from.y) * distance_multiplier), from.z + ((to.z - from.z) * distance_multiplier));
+	if (lenfrom < lento)
+		camera->set_global_transform(Transform(camera->get_global_transform().basis, camera->get_global_transform().origin.linear_interpolate(camera_newposition, 0.08f)));
+	else
+		camera->set_global_transform(Transform(camera->get_global_transform().basis, camera_newposition));
 }
