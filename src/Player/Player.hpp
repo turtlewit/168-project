@@ -34,7 +34,7 @@ namespace godot {
 		static constexpr float SnapLength = 0.1f;
 		static constexpr unsigned int JumpBufferLimit = 7;
 
-		// Growable stats
+		// Growable Stats
 		unsigned int max_health = 3;
 		int health = max_health;
 		////////////////////////////
@@ -44,27 +44,35 @@ namespace godot {
 		float pounce_strength = 2.0f;
 		int swipe_damage = 2;
 		int pounce_damage = 1;
+		int jumps = 0;
 
-		float gravity = 9.8f;
-		unsigned int jump_buffer = JumpBufferLimit;
+		//Control Parameters
 		float mouse_sensitivity_x = 0.25f;
 		float mouse_sensitivity_y = 0.15f;
+		float camera_joy_value_x;
+		float camera_joy_value_y;
+
+		//Camera Collision
+		float camera_distance;
+		float camera_newdistance;
+		Array camera_exclusions;
+		Vector3 pivot_location;
+		Vector3 camera_location;
+		Vector3 camera_direction;
+		Dictionary camera_result;
+
+		//Movement/Control
+		unsigned int jump_buffer = JumpBufferLimit;
+		float gravity = 9.8f;
+		float snap_length = 0;
+		float target_rotation = 0;
 		float move_check_rotation;
 		bool move_check;
 		Vector3 move_direction;
 		Vector3 move_output;
 		Vector3 gravity_velocity;
 		Vector3 ground_normal;
-		Vector3 prev_pos;
-		float velocity;
-		float snap_length = 0;
-		int jumps = 0;
 		Ref<KinematicCollision> current_collision;
-		float target_rotation = 0;
-		float camera_joy_value_x = 0;
-		float camera_joy_value_y = 0;
-		Dictionary camera_result;
-		Array camera_exclusions;
 
 		State state = State::Air;
 
@@ -110,6 +118,7 @@ namespace godot {
 		void enter_ceiling();
 		void _on_Hurtbox_area_entered(Area* area);
 		void check_camera();
+		void adjust_camera(Vector3 from, Vector3 to, Vector3 dir, float len);
 	};
 
 }

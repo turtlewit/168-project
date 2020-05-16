@@ -48,6 +48,7 @@ void Player::_ready()
 	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
 
+	camera_distance = camera_pivot->get_global_transform().origin.distance_to(camera->get_global_transform().origin);
 	camera_exclusions.append(this);
 }
 
@@ -81,10 +82,8 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ is_on_floor() });
 	//Godot::print(Variant{ state == State::Ground });
 	//Godot::print(Variant{ y_velocity });
-	//Godot::print(Variant{ velocity });
 	//Godot::print(Variant{ get_slide_count() });
 	//Godot::print(Variant{ is_on_ceiling() });
-	//Godot::print(Variant{ fmod(Mathf::abs(camera_pivot->get_rotation_degrees().z), 360) });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -151,7 +150,6 @@ void Player::_physics_process(float delta)
 	if (state != State::Ground && state != State::Attack)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
-	//velocity = (prev_pos - get_global_transform().origin).length() * (1 / delta) / speed;
 	move_direction = move_direction.normalized() * speed;
 
 	if (is_moving()) { //If you are moving, rotate direction of player model
@@ -163,7 +161,6 @@ void Player::_physics_process(float delta)
 
 	check_ground(); //Checks if you are on non-flat ground and adjusts gravity towards it
 	move_output = Vector3(move_direction.x + gravity_velocity.x, gravity_velocity.y, move_direction.z + gravity_velocity.z);
-	//prev_pos = get_global_transform().origin;
 
 	move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
 
@@ -310,9 +307,25 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 
 void Player::check_camera() //Handles camera collision
 {
-	camera_raycast = camera_pivot->get_world()->get_direct_space_state();
-	camera_result = camera_raycast->intersect_ray(get_global_transform().origin, camera->get_global_transform().origin, camera_exclusions);
+	pivot_location = camera_pivot->get_global_transform().origin;
+	camera_location = camera->get_global_transform().origin;
 
-	Godot::print(Variant{ camera_result["collider"] });
-	//Godot::print(Variant{ camera_exclusions.size() });
+	camera_direction = (camera_location - pivot_location).normalized();
+	camera_raycast = camera_pivot->get_world()->get_direct_space_state();
+
+	camera_result = camera_raycast->intersect_ray(pivot_location, camera_location, camera_exclusions);
+
+	if (camera_result.size() != 0) { //If raycast detects something, reduce camera distance accordingly
+		camera_newdistance = pivot_location.distance_to(camera_result["position"]) * .9;
+		adjust_camera(pivot_location, camera_location, camera_direction, camera_newdistance);
+	}
+	else {
+		adjust_camera(pivot_location, camera_location, camera_direction, camera_distance);
+	}
 }
+
+void Player::adjust_camera(Vector3 from, Vector3 to, Vector3 dir, float len) //Adjust camera distance
+{
+
+}
+
