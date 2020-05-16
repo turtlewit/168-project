@@ -47,6 +47,8 @@ void Player::_ready()
 	model = GET_NODE(MeshInstance, "Model");
 	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
+
+	camera_exclusions.append(this);
 }
 
 
@@ -60,12 +62,16 @@ void Player::_input(InputEvent* event)
 	}
 
 	auto* ev_joystick = cast_to<InputEventJoypadMotion>(event);
-	if (ev_joystick && ev_joystick->get_axis() == 2)
-		camera_joy_value = ev_joystick->get_axis_value();
+	if (ev_joystick) {
+		if (ev_joystick->get_axis() == 2)
+			camera_joy_value_x = ev_joystick->get_axis_value();
+		if (ev_joystick->get_axis() == 1)
+			camera_joy_value_y = ev_joystick->get_axis_value();
+	}
 
-	if (Mathf::abs(camera_joy_value) > 0.1) {
+	if (Mathf::abs(camera_joy_value_x) > 0.1 || Mathf::abs(camera_joy_value_y) > 0.1) {
 		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
-		camera_pivot->set_rotation_degrees(Vector3{ camera_rotation.x, camera_rotation.y - camera_joy_value, camera_rotation.z });
+		camera_pivot->set_rotation_degrees(Vector3{ camera_rotation.x, camera_rotation.y - camera_joy_value_x, camera_rotation.z + camera_joy_value_y });
 	}
 }
 
@@ -77,16 +83,21 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ y_velocity });
 	//Godot::print(Variant{ velocity });
 	//Godot::print(Variant{ get_slide_count() });
-	//Godot::print(Variant{  is_on_ceiling() });
+	//Godot::print(Variant{ is_on_ceiling() });
+	//Godot::print(Variant{ fmod(Mathf::abs(camera_pivot->get_rotation_degrees().z), 360) });
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
-
-		move_direction += -camera_xform.basis.z * inp->get_action_strength("move_forward");
-		move_direction += camera_xform.basis.z * inp->get_action_strength("move_back");
+		move_check_rotation = fmod(Mathf::abs(camera_pivot->get_rotation_degrees().z), 360);
+		move_check = camera_pivot->get_rotation_degrees().z > 0 ? 
+			(move_check_rotation >= 65 && move_check_rotation < 155) : (move_check_rotation >= 205 && move_check_rotation < 295);
+		move_direction += -camera_xform.basis.z * (move_check == true ? inp->get_action_strength("move_back") : inp->get_action_strength("move_forward"));
+		move_direction += camera_xform.basis.z * (move_check == true ? inp->get_action_strength("move_forward") : inp->get_action_strength("move_back"));
 		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left");
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right");
+
+		move_direction.y = 0;
 	}
 
 	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
@@ -133,9 +144,10 @@ void Player::_process(float delta)
 
 }
 
-
 void Player::_physics_process(float delta)
 {
+	check_camera();
+
 	if (state != State::Ground && state != State::Attack)
 		gravity_velocity -= Vector3{ 0, gravity * delta, 0 }; //Apply constant gravity on player
 
@@ -294,4 +306,13 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 		default:
 			break;
 	}
+}
+
+void Player::check_camera() //Handles camera collision
+{
+	camera_raycast = camera_pivot->get_world()->get_direct_space_state();
+	camera_result = camera_raycast->intersect_ray(get_global_transform().origin, camera->get_global_transform().origin, camera_exclusions);
+
+	Godot::print(Variant{ camera_result["collider"] });
+	//Godot::print(Variant{ camera_exclusions.size() });
 }

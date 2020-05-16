@@ -4,6 +4,8 @@
 #include <Godot.hpp>
 #include <KinematicBody.hpp>
 #include <Camera.hpp>
+#include <World.hpp>
+#include <PhysicsDirectSpaceState.hpp>
 #include <Position3D.hpp>
 #include <MeshInstance.hpp>
 #include <InputEvent.hpp>
@@ -47,6 +49,8 @@ namespace godot {
 		unsigned int jump_buffer = JumpBufferLimit;
 		float mouse_sensitivity_x = 0.25f;
 		float mouse_sensitivity_y = 0.15f;
+		float move_check_rotation;
+		bool move_check;
 		Vector3 move_direction;
 		Vector3 move_output;
 		Vector3 gravity_velocity;
@@ -56,14 +60,17 @@ namespace godot {
 		float snap_length = 0;
 		int jumps = 0;
 		Ref<KinematicCollision> current_collision;
-
 		float target_rotation = 0;
-		float camera_joy_value = 0;
+		float camera_joy_value_x = 0;
+		float camera_joy_value_y = 0;
+		Dictionary camera_result;
+		Array camera_exclusions;
 
 		State state = State::Air;
 
 		Camera* camera;
 		Position3D* camera_pivot;
+		PhysicsDirectSpaceState* camera_raycast;
 		MeshInstance* model;
 		CollisionShape* attack_box;
 		AnimationPlayer* anim_player; // @TODO: Change to an AnimationTree when we get that system in place
@@ -102,6 +109,7 @@ namespace godot {
 		void check_ground();
 		void enter_ceiling();
 		void _on_Hurtbox_area_entered(Area* area);
+		void check_camera();
 	};
 
 }
