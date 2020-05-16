@@ -47,6 +47,8 @@ void Player::_ready()
 	model = GET_NODE(MeshInstance, "Model");
 	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
+
+	camera_exclusions.append(this);
 }
 
 
@@ -306,7 +308,11 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 	}
 }
 
-void Player::check_camera()
+void Player::check_camera() //Handles camera collision
 {
-	
+	camera_raycast = camera_pivot->get_world()->get_direct_space_state();
+	camera_result = camera_raycast->intersect_ray(get_global_transform().origin, camera->get_global_transform().origin, camera_exclusions);
+
+	Godot::print(Variant{ camera_result["collider"] });
+	//Godot::print(Variant{ camera_exclusions.size() });
 }

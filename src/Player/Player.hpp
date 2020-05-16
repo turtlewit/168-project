@@ -4,6 +4,8 @@
 #include <Godot.hpp>
 #include <KinematicBody.hpp>
 #include <Camera.hpp>
+#include <World.hpp>
+#include <PhysicsDirectSpaceState.hpp>
 #include <Position3D.hpp>
 #include <MeshInstance.hpp>
 #include <InputEvent.hpp>
@@ -58,15 +60,17 @@ namespace godot {
 		float snap_length = 0;
 		int jumps = 0;
 		Ref<KinematicCollision> current_collision;
-
 		float target_rotation = 0;
 		float camera_joy_value_x = 0;
 		float camera_joy_value_y = 0;
+		Dictionary camera_result;
+		Array camera_exclusions;
 
 		State state = State::Air;
 
 		Camera* camera;
 		Position3D* camera_pivot;
+		PhysicsDirectSpaceState* camera_raycast;
 		MeshInstance* model;
 		CollisionShape* attack_box;
 		AnimationPlayer* anim_player; // @TODO: Change to an AnimationTree when we get that system in place
