@@ -63,7 +63,7 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 			} break;
 		}
 		Timer* t = cast_to<Timer>(get_node("Timer"));
-		t->start((real_t)10);
+		t->start(respawn_time);
 		SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", static_cast<int>(powerup_type_internal), 1);
 	}
 }
