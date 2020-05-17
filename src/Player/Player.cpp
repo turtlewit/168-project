@@ -313,6 +313,6 @@ void Player::check_camera() //Handles camera collision
 	camera_raycast = camera_pivot->get_world()->get_direct_space_state();
 	camera_result = camera_raycast->intersect_ray(get_global_transform().origin, camera->get_global_transform().origin, camera_exclusions);
 
-	Godot::print(Variant{ camera_result["collider"] });
+	//Godot::print(Variant{ camera_result["collider"] });
 	//Godot::print(Variant{ camera_exclusions.size() });
 }

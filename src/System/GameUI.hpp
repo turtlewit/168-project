@@ -13,7 +13,6 @@ namespace godot {
 	private:
 		unsigned int crystal_amounts[4] = {0};
 		Label* crystal_labels[4];
-
 	public:
 		static void _register_methods();
 

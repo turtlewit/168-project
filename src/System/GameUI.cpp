@@ -23,6 +23,9 @@ void GameUI::_ready()
 		crystal_labels[i] = cast_to<Label>(get_node("CrystalCounts")->get_child(i));
 		update_crystal_amount(i, 0);
 	}
+	/*cast_to<CanvasItem>(get_node("UnderWater"))->hide();
+	cast_to<CanvasItem>(get_node("UnderWaterFog"))->hide();*/
+	
 }
 
 

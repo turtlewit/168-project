@@ -1,4 +1,6 @@
 shader_type spatial;
+render_mode cull_disabled;
+
 
 uniform vec4 out_color : hint_color = vec4(0.0, 0.2, 1.0, 1.0);
 uniform float amount : hint_range(0.2, 1.5) = 0.8;
@@ -45,4 +47,5 @@ void fragment()
 	METALLIC = 0.6;
 	ROUGHNESS = 0.2;
 	SPECULAR = 0.5;
+	
 }
