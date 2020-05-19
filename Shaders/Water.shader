@@ -1,7 +1,6 @@
 shader_type spatial;
 render_mode cull_disabled;
 
-
 uniform vec4 out_color : hint_color = vec4(0.0, 0.2, 1.0, 1.0);
 uniform float amount : hint_range(0.2, 1.5) = 0.8;
 uniform float beer_factor = 0.2;
@@ -46,9 +45,4 @@ void fragment()
 	METALLIC = 0.6;
 	ROUGHNESS = 0.2;
 	SPECULAR = 0.5;
-	
-}
-
-float get_waveheight(float x, float z) {
-	return generateOffset(x, z, 0.1, 0.3, deltaTime);
 }
