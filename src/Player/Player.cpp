@@ -8,7 +8,7 @@
 #include <InputEventMouseMotion.hpp>
 #include <InputEventJoypadMotion.hpp>
 #include <SceneTree.hpp>
-
+#include <CanvasItem.hpp>
 using namespace godot;
 
 namespace {
@@ -88,10 +88,16 @@ void Player::_process(float delta)
 
 	water_shader->set_shader_param("deltaTime", shader_time);
 	shader_time += delta;
-	if((int)delta%3 == 0)
-		printf("%.3f\n",get_waveheight(camera_location.x, camera_location.z, shader_time));
 	if (camera_location.y < get_waveheight(camera_location.x, camera_location.z, shader_time))
-		Godot::print("OK");
+	{
+		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWater"))->show();
+		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWaterFog"))->show();
+	}
+	else
+	{
+		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWater"))->hide();
+		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWaterFog"))->hide();
+	}
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
