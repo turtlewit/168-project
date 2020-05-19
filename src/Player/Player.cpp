@@ -88,7 +88,10 @@ void Player::_process(float delta)
 
 	water_shader->set_shader_param("deltaTime", shader_time);
 	shader_time += delta;
-
+	if((int)delta%3 == 0)
+		printf("%.3f\n",get_waveheight(camera_location.x, camera_location.z, shader_time));
+	if (camera_location.y < get_waveheight(camera_location.x, camera_location.z, shader_time))
+		Godot::print("OK");
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
@@ -339,4 +342,19 @@ void Player::adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento)
 		camera->set_global_transform(Transform(camera->get_global_transform().basis, camera->get_global_transform().origin.linear_interpolate(camera_newposition, 0.08f)));
 	else
 		camera->set_global_transform(Transform(camera->get_global_transform().basis, camera_newposition));
+}
+
+float Player::generateOffset(float x, float z, float val1, float val2, float time)
+{
+	float amount = water_shader->get_shader_param("amount");
+	float spd = water_shader->get_shader_param("speed");
+	float radiansX = ((fmod(x + z * x * val1, amount)/amount) + (time * spd) * fmod(x * 0.8 + z, 1.5)) * 2.0 * 3.14;
+	float radiansZ = ((fmod(val2 * (z * x + x * z), amount)/amount) + (time * spd) * 2.0 * fmod(x, 2.0)) * 2.0 * 3.14;
+	
+	return amount + 0.5 * (sin(radiansZ) + cos(radiansX));
+}
+
+float Player::get_waveheight(float x, float z, float deltaTime) 
+{
+	return generateOffset(x, z, 0.1, 0.3, deltaTime);
 }
