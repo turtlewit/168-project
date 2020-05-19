@@ -10,7 +10,7 @@ shader = ExtResource( 2 )
 shader_param/amount = -0.3
 shader_param/dissolveColor = Color( 0.835294, 0.654902, 0.870588, 1 )
 shader_param/useColorBlend = true
-shader_param/colorBlend = Color( 0.662745, 0, 0.698039, 1 )
+shader_param/colorBlend = Color( 0.752941, 0, 1, 1 )
 shader_param/rim_amount = null
 shader_param/dissolveTexture = ExtResource( 3 )
 

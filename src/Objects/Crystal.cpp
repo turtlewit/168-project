@@ -70,6 +70,7 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 
 void Crystal::respawn()
 {
+	//{ "BLUE": #00c0ff 8ce3ff, "YELLOW" : #fffc00 8adf00,  "ORANGE" : #ff6c00 ffaf74, "PURPLE" : #c000ff d5a7de}
 	Godot::print("Respawn");
 	collected = false;
 	switch (rand() % 4)

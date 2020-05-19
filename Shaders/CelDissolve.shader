@@ -9,7 +9,6 @@ uniform sampler2D baseTexture : hint_black_albedo;
 uniform bool useColorBlend;
 uniform vec4 colorBlend : hint_color;
 uniform float rim_amount : hint_range(0f, 1f);
-
 //uniform sampler2D emissionMap : hint_white;
 //uniform vec4 emissionColor : hint_color;
 
@@ -52,7 +51,6 @@ void fragment() {
 // Output:0
 	ALPHA = n_out10p0;
 	EMISSION = n_out14p0;
-	
 	METALLIC = 0f;
 	ROUGHNESS = 1f;
 	SPECULAR = 0f;
