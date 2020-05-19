@@ -6,9 +6,9 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/useColorBlend = true
-shader_param/colorBlend = Color( 0.568627, 0.0941176, 1, 1 )
+shader_param/colorBlend = Color( 1, 1, 1, 1 )
 shader_param/rim_amount = null
-shader_param/emissionColor = Color( 0.713726, 0.0941176, 0.0941176, 1 )
+shader_param/emissionColor = Color( 1, 1, 1, 1 )
 
 [node name="Crystal" instance=ExtResource( 1 )]
 

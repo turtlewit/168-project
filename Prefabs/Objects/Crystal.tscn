@@ -8,9 +8,9 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/amount = -0.3
-shader_param/dissolveColor = Color( 0.835294, 0.654902, 0.870588, 1 )
+shader_param/dissolveColor = Color( 1, 1, 1, 1 )
 shader_param/useColorBlend = true
-shader_param/colorBlend = Color( 0.752941, 0, 1, 1 )
+shader_param/colorBlend = Color( 1, 1, 1, 1 )
 shader_param/rim_amount = null
 shader_param/dissolveTexture = ExtResource( 3 )
 
@@ -158,6 +158,6 @@ anims/Respawn = SubResource( 6 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_Crystal_body_entered"]
-[connection signal="animation_finished" from="AnimationPlayerDissolve" to="." method="_on_AnimationPlayerDissolve_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="respawn"]
 
 [editable path="Model"]

@@ -41,72 +41,79 @@ __meta__ = {
 }
 
 [node name="Crystal1" type="TextureRect" parent="Crystals"]
-modulate = Color( 0, 0.752941, 1, 1 )
+self_modulate = Color( 0, 0.752941, 1, 1 )
 margin_right = 35.0
 margin_bottom = 50.0
 texture = ExtResource( 3 )
 
+[node name="Count1" type="Label" parent="Crystals/Crystal1"]
+margin_left = -2.0
+margin_top = 57.0
+margin_right = 36.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Crystal2" type="TextureRect" parent="Crystals"]
-modulate = Color( 1, 0.988235, 0, 1 )
+self_modulate = Color( 0.752941, 0, 1, 1 )
 margin_left = 97.0
 margin_right = 132.0
 margin_bottom = 50.0
 texture = ExtResource( 3 )
 
+[node name="Count2" type="Label" parent="Crystals/Crystal2"]
+margin_left = -2.0
+margin_top = 57.0
+margin_right = 36.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Crystal3" type="TextureRect" parent="Crystals"]
-modulate = Color( 1, 0.423529, 0, 1 )
+self_modulate = Color( 1, 0.988235, 0, 1 )
 margin_left = 194.0
 margin_right = 229.0
 margin_bottom = 50.0
 texture = ExtResource( 3 )
 
+[node name="Count3" type="Label" parent="Crystals/Crystal3"]
+margin_left = -3.0
+margin_top = 57.0
+margin_right = 35.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Crystal4" type="TextureRect" parent="Crystals"]
-modulate = Color( 0.752941, 0, 1, 1 )
+self_modulate = Color( 1, 0.423529, 0, 1 )
 margin_left = 291.0
 margin_right = 326.0
 margin_bottom = 50.0
 texture = ExtResource( 3 )
 
-[node name="CrystalCounts" type="HBoxContainer" parent="."]
-margin_left = 31.0
-margin_top = 73.0
-margin_right = 357.0
-margin_bottom = 132.0
-custom_constants/separation = 59
+[node name="Count4" type="Label" parent="Crystals/Crystal4"]
+margin_left = -4.0
+margin_top = 57.0
+margin_right = 34.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Count1" type="Label" parent="CrystalCounts"]
-margin_right = 28.0
-margin_bottom = 59.0
-custom_fonts/font = SubResource( 1 )
-text = "1"
-align = 1
-
-[node name="Count2" type="Label" parent="CrystalCounts"]
-margin_left = 87.0
-margin_right = 125.0
-margin_bottom = 59.0
-custom_fonts/font = SubResource( 1 )
-text = "0"
-align = 1
-
-[node name="Count3" type="Label" parent="CrystalCounts"]
-margin_left = 184.0
-margin_right = 222.0
-margin_bottom = 59.0
-custom_fonts/font = SubResource( 1 )
-text = "0"
-align = 1
-
-[node name="Count4" type="Label" parent="CrystalCounts"]
-margin_left = 281.0
-margin_right = 319.0
-margin_bottom = 59.0
-custom_fonts/font = SubResource( 1 )
-text = "0"
-align = 1
 
 [node name="UnderWater" type="Sprite" parent="."]
 material = SubResource( 2 )
