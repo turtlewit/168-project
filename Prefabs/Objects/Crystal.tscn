@@ -7,7 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/amount = -0.35
+shader_param/amount = -0.3
 shader_param/dissolveColor = Color( 0.835294, 0.654902, 0.870588, 1 )
 shader_param/useColorBlend = true
 shader_param/colorBlend = Color( 0.662745, 0, 0.698039, 1 )
@@ -138,7 +138,6 @@ material/0 = SubResource( 1 )
 [node name="OmniLight" type="OmniLight" parent="Model"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
 light_color = Color( 1, 0, 0.796078, 1 )
-light_energy = 0.0
 omni_range = 0.6
 omni_attenuation = 0.2
 
