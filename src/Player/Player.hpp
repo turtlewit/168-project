@@ -126,9 +126,8 @@ namespace godot {
 		void _on_Hurtbox_area_entered(Area* area);
 		void check_camera();
 		void adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento);
-
-		float generateOffset(float x, float z, float val1, float val2, float time);
-		float get_waveheight(float x, float z, float deltaTime);
+		void check_water();
+		float get_waveheight(float x, float z);
 	};
 
 }
