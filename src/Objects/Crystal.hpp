@@ -23,9 +23,10 @@ namespace godot {
 		Powerup powerup_type_internal;
 
 		bool collected = false;
-		real_t respawn_time;
+		float respawn_time = 10.0f;
 		AnimationPlayer* anim_player_dissolve;
 		AnimationPlayer* anim_player_respawn;
+
 	public:
 		static void _register_methods();
 
@@ -34,11 +35,11 @@ namespace godot {
 		void _init();
 
 		void _ready();
-		void _process(float delta);
+
 	private:
 		void respawn();
+		void set_color();
 		void _on_Crystal_body_entered(Node* body);
-		void _on_AnimationPlayerDissolve_animation_finished(String anim_name);
 	};
 
 }

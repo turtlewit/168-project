@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Models/Teo_Models/RegularTree/RegularTree.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Models/Duncan_Models/Test/Tinyman.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/Dissolve.shader" type="Shader" id=5]
 [ext_resource path="res://Shaders/noisetexture.tres" type="Texture" id=6]
 [ext_resource path="res://Models/Johnny_Models/Ground/ground.tscn" type="PackedScene" id=7]
@@ -123,6 +122,7 @@ shape = SubResource( 2 )
 
 [node name="Crystal" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85705, 7.01711, -7.22366 )
+powerup_type = 2
 
 [node name="Block8" type="StaticBody" parent="." groups=[
 "Ground",
@@ -165,9 +165,6 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.38116, 1.9467, -3.203
 [node name="RegularTree" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 1.89997, 2.0797 )
 
-[node name="Tinyman" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 2.46924, 2.41216, -0.966491 )
-
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.375539, 0, 0, 0, 0.355234, 0, 0, 0, 0.34541, -2.2637, 3.40208, -1.71201 )
 mesh = SubResource( 3 )
@@ -188,6 +185,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267393, 1.98998, -0.363965 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 
 [node name="GameUI" parent="." instance=ExtResource( 11 )]
+
+[node name="Crystal2" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58971, 0 )
+
+[node name="Crystal3" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.485539, 2.58971, 0 )
+powerup_type = 1
+
+[node name="Crystal4" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941469, 2.58971, 0 )
+powerup_type = 2
+
+[node name="Crystal5" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41787, 2.58971, 0 )
+powerup_type = 3
 
 [editable path="Player"]
 
