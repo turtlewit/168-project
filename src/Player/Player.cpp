@@ -47,6 +47,7 @@ void Player::_ready()
 	model = GET_NODE(MeshInstance, "Model");
 	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
+	water_shader = cast_to<MeshInstance>(get_parent()->get_node("Water/MeshInstance"))->get_surface_material(0);
 
 	camera_distance = camera_pivot->get_global_transform().origin.distance_to(camera->get_global_transform().origin);
 	camera_exclusions.append(this);
@@ -84,6 +85,9 @@ void Player::_process(float delta)
 	//Godot::print(Variant{ y_velocity });
 	//Godot::print(Variant{ get_slide_count() });
 	//Godot::print(Variant{ is_on_ceiling() });
+
+	water_shader->set_shader_param("deltaTime", shader_time);
+	shader_time += delta;
 
 	if (state != State::Attack && state != State::Pounce) {
 		move_direction = Vector3{ 0, 0, 0 };
@@ -305,7 +309,7 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 	}
 }
 
-void Player::check_camera() //Handles camera collision
+void Player::check_camera() //Handles camera interaction
 {
 	pivot_location = camera_pivot->get_global_transform().origin;
 	camera_location = camera->get_global_transform().origin;
@@ -322,6 +326,8 @@ void Player::check_camera() //Handles camera collision
 	else {
 		adjust_camera(pivot_location, camera_location, camera_curdistance, camera_distance);
 	}
+
+	//Insert wave calculation with camera here
 }
 
 void Player::adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento) //Adjust camera distance

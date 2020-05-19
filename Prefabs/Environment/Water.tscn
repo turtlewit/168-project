@@ -14,6 +14,8 @@ shader_param/amount = 0.8
 shader_param/beer_factor = 0.2
 shader_param/speed = 1.0
 shader_param/foam_level = 0.2
+shader_param/deltaTime = 0.0
+
 
 [node name="Water" type="Spatial" groups=[
 "Water",

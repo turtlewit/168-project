@@ -13,7 +13,7 @@
 #include <Area.hpp>
 #include <CollisionShape.hpp>
 #include <KinematicCollision.hpp>
-
+#include <ShaderMaterial.hpp>
 
 namespace godot {
 
@@ -85,6 +85,10 @@ namespace godot {
 		MeshInstance* model;
 		CollisionShape* attack_box;
 		AnimationPlayer* anim_player; // @TODO: Change to an AnimationTree when we get that system in place
+
+		//Sync Shader
+		Ref<ShaderMaterial> water_shader;
+		float shader_time = 0;
 
 	public:
 		static void _register_methods();

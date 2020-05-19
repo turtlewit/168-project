@@ -7,6 +7,7 @@ uniform float amount : hint_range(0.2, 1.5) = 0.8;
 uniform float beer_factor = 0.2;
 uniform float speed = 1.0;
 uniform float foam_level = 0.2f;
+uniform float deltaTime = 0;
 
 float generateOffset(float x, float z, float val1, float val2, float time)
 {
@@ -26,13 +27,11 @@ vec3 applyDistortion(vec3 vertex, float time)
 
 void vertex()
 {
-	VERTEX = applyDistortion(VERTEX, TIME * 0.1);
+	VERTEX = applyDistortion(VERTEX, deltaTime * 0.1);
 }
 
 void fragment()
 {
-	
-	
 	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r * 2.0 - 1.0;
 	
 	depth = PROJECTION_MATRIX[3][2] / (depth + PROJECTION_MATRIX[2][2]);
@@ -48,4 +47,8 @@ void fragment()
 	ROUGHNESS = 0.2;
 	SPECULAR = 0.5;
 	
+}
+
+float get_waveheight(float x, float z) {
+	return generateOffset(x, z, 0.1, 0.3, deltaTime);
 }
