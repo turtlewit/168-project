@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/UI/GameUI.gdns" type="Script" id=1]
 [ext_resource path="res://Fonts/Quenda-Medium.otf" type="DynamicFontData" id=2]
@@ -6,10 +6,6 @@
 [ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://Shaders/UnderWater.shader" type="Shader" id=5]
 [ext_resource path="res://Shaders/WaterFog.shader" type="Shader" id=6]
-
-[sub_resource type="DynamicFont" id=1]
-size = 64
-font_data = ExtResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 5 )
@@ -22,6 +18,27 @@ shader = ExtResource( 6 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 4
 
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 1, 0.486275, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_offset = Vector2( 3, 3 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 3
+shadow_offset = Vector2( 3, 3 )
+
 [node name="GameUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +46,18 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="UnderWater" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 638.745, 366.022 )
+scale = Vector2( 20.2884, 11.5095 )
+texture = ExtResource( 4 )
+
+[node name="UnderWaterFog" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( 638.745, 366.022 )
+scale = Vector2( 20.288, 11.509 )
+texture = ExtResource( 4 )
 
 [node name="Crystals" type="HBoxContainer" parent="."]
 margin_left = 32.0
@@ -115,14 +144,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UnderWater" type="Sprite" parent="."]
-material = SubResource( 2 )
-position = Vector2( 638.745, 366.022 )
-scale = Vector2( 20.2884, 11.5095 )
-texture = ExtResource( 4 )
+[node name="HealthBar" type="ProgressBar" parent="."]
+margin_left = 8.0
+margin_top = 144.0
+margin_right = 376.0
+margin_bottom = 184.0
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 4 )
+max_value = 5.0
+step = 0.01
+value = 5.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="UnderWaterFog" type="Sprite" parent="."]
-material = SubResource( 3 )
-position = Vector2( 638.745, 366.022 )
-scale = Vector2( 20.288, 11.509 )
-texture = ExtResource( 4 )
+[node name="Tween" type="Tween" parent="."]

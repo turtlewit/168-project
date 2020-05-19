@@ -3,6 +3,7 @@
 
 #include "Utils/Defs.hpp"
 #include "Utils/Mathf.hpp"
+#include "System/SignalManagerPlayer.hpp"
 
 #include <Input.hpp>
 #include <InputEventMouseMotion.hpp>
@@ -80,12 +81,6 @@ void Player::_input(InputEvent* event)
 
 void Player::_process(float delta)
 {
-	//Godot::print(Variant{ is_on_floor() });
-	//Godot::print(Variant{ state == State::Ground });
-	//Godot::print(Variant{ y_velocity });
-	//Godot::print(Variant{ get_slide_count() });
-	//Godot::print(Variant{ is_on_ceiling() });
-
 	water_shader->set_shader_param("deltaTime", shader_time);
 	shader_time += delta;
 
@@ -246,6 +241,13 @@ void Player::increase_pounce_damage(int amount)
 }
 
 
+void Player::damage(int amount)
+{
+	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount);
+	health -= amount;
+}
+
+
 void Player::enter_ground()
 {
 	if (gravity_velocity.y < 0) {
@@ -299,10 +301,10 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 
 	switch (other->state) {
 		case State::Attack:
-			health -= other->swipe_damage;
+			damage(other->swipe_damage);
 			break;
 		case State::Pounce:
-			health -= other->pounce_damage;
+			damage(other->pounce_damage);
 			break;
 		default:
 			break;
