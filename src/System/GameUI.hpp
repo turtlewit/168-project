@@ -17,7 +17,9 @@ namespace godot {
 		Label* crystal_labels[4];
 
 		ProgressBar* health_bar;
-		Tween* tween;
+		ProgressBar* pounce_bar;
+		Tween* tween_health;
+		Tween* tween_pounce;
 
 	public:
 		static void _register_methods();
@@ -32,6 +34,7 @@ namespace godot {
 
 		void update_crystal_amount(int index, int amount);
 		void update_health(int old_health, int amount);
+		void reset_pounce_bar();
 	};
 
 }

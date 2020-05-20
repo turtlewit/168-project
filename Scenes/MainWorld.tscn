@@ -123,7 +123,6 @@ shape = SubResource( 2 )
 
 [node name="Crystal" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85705, 7.01711, -7.22366 )
-powerup_type = 2
 
 [node name="Block8" type="StaticBody" parent="." groups=[
 "Ground",
@@ -190,15 +189,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58971, 0 )
 
 [node name="Crystal3" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.485539, 2.58971, 0 )
-powerup_type = 1
 
 [node name="Crystal4" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941469, 2.58971, 0 )
-powerup_type = 2
 
 [node name="Crystal5" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41787, 2.58971, 0 )
-powerup_type = 3
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 
