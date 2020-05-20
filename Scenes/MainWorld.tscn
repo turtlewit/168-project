@@ -182,8 +182,6 @@ transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, -0.783661, 0 )
 [node name="MeshInstance" parent="Water" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267393, 1.98998, -0.363965 )
 
-[node name="ground" parent="." instance=ExtResource( 7 )]
-
 [node name="GameUI" parent="." instance=ExtResource( 11 )]
 
 [node name="Crystal2" parent="." instance=ExtResource( 8 )]
@@ -200,6 +198,8 @@ powerup_type = 2
 [node name="Crystal5" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41787, 2.58971, 0 )
 powerup_type = 3
+
+[node name="ground" parent="." instance=ExtResource( 7 )]
 
 [editable path="Player"]
 
