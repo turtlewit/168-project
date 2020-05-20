@@ -35,7 +35,7 @@ namespace godot {
 		static constexpr unsigned int JumpBufferLimit = 7;
 
 		// Growable Stats
-		unsigned int max_health = 3;
+		unsigned int max_health = 5;
 		int health = max_health;
 		////////////////////////////
 		float speed = 4.0f;
@@ -118,6 +118,8 @@ namespace godot {
 		void stop();
 
 		void set_state(int value);
+
+		void damage(int amount);
 
 		void enter_ground();
 		void exit_ground();

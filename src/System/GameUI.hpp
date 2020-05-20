@@ -4,6 +4,8 @@
 #include <Godot.hpp>
 #include <Control.hpp>
 #include <Label.hpp>
+#include <ProgressBar.hpp>
+#include <Tween.hpp>
 
 namespace godot {
 
@@ -13,6 +15,10 @@ namespace godot {
 	private:
 		unsigned int crystal_amounts[4] = {0};
 		Label* crystal_labels[4];
+
+		ProgressBar* health_bar;
+		Tween* tween;
+
 	public:
 		static void _register_methods();
 
@@ -25,6 +31,7 @@ namespace godot {
 		void _exit_tree();
 
 		void update_crystal_amount(int index, int amount);
+		void update_health(int old_health, int amount);
 	};
 
 }
