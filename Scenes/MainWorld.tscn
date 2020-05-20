@@ -29,7 +29,7 @@ shader_param/dissolveTexture = ExtResource( 6 )
 [node name="Scene" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 28.0489, 3.41332, -75.8008 )
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 8.54606, 3.413, 0 )
 
 [node name="Block" type="StaticBody" parent="." groups=[
 "Ground",

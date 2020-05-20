@@ -158,8 +158,7 @@ void Player::_physics_process(float delta)
 
 	check_ground(); //Checks if you are on non-flat ground and adjusts gravity towards it
 	move_output = Vector3(move_direction.x + gravity_velocity.x, gravity_velocity.y, move_direction.z + gravity_velocity.z);
-
-	move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
+	move_output = move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
 
 	check_camera();
 
