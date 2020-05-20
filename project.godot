@@ -9,22 +9,22 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "",
 "class": "NetworkAnimator",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkAnimator.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkIdentity",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkIdentity.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkManager",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkManager.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkSync",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSync.gdns"
