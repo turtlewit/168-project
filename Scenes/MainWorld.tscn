@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Models/Teo_Models/RegularTree/RegularTree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Models/Johnny_Models/Ground2/ground2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/Dissolve.shader" type="Shader" id=5]
 [ext_resource path="res://Shaders/noisetexture.tres" type="Texture" id=6]
 [ext_resource path="res://Models/Johnny_Models/Ground/ground.tscn" type="PackedScene" id=7]
@@ -28,7 +29,7 @@ shader_param/dissolveTexture = ExtResource( 6 )
 [node name="Scene" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 3.41332, -4.39038 )
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 28.0489, 3.41332, -75.8008 )
 
 [node name="Block" type="StaticBody" parent="." groups=[
 "Ground",
@@ -196,6 +197,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941469, 2.58971, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41787, 2.58971, 0 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
+
+[node name="ground2" parent="." instance=ExtResource( 4 )]
 
 [editable path="Player"]
 
