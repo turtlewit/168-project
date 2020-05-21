@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/CelGD.shader" type="Shader" id=1]
+[ext_resource path="res://Models/Teo_Models/Grass/Grass2.glb" type="PackedScene" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/useColorBlend = true
+shader_param/colorBlend = Color( 0.380392, 0.47451, 0, 1 )
+shader_param/rim_amount = 0.0
+shader_param/emissionColor = Color( 0, 0.282353, 0.0980392, 1 )
+
+[node name="Grass2" instance=ExtResource( 2 )]
+
+[node name="Grass" parent="." index="0"]
+material/0 = SubResource( 1 )
+
+[node name="Grass001" parent="." index="1"]
+material/0 = SubResource( 1 )
+
+[node name="Grass002" parent="." index="2"]
+material/0 = SubResource( 1 )
