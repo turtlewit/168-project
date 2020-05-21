@@ -27,6 +27,8 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, stop);
 
 	REGISTER_METHOD(Player, _on_Hurtbox_area_entered);
+	REGISTER_METHOD(Player, _on_TimerSwipe_timeout);
+	REGISTER_METHOD(Player, _on_TimerPounce_timeout);
 
 	register_property("speed", &Player::speed, 4.0f);
 	register_property("gravity", &Player::gravity, 9.8f);
@@ -48,6 +50,9 @@ void Player::_ready()
 	model = GET_NODE(MeshInstance, "Model");
 	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
+	timer_swipe = GET_NODE(Timer, "TimerSwipe");
+	timer_pounce = GET_NODE(Timer, "TimerPounce");
+
 	water_shader = cast_to<MeshInstance>(get_parent()->get_node("Water/MeshInstance"))->get_surface_material(0);
 
 	camera_distance = camera_pivot->get_global_transform().origin.distance_to(camera->get_global_transform().origin);
@@ -113,13 +118,16 @@ void Player::_process(float delta)
 		}
 	}
 	
-	if (inp->is_action_just_pressed("attack_claw") && state == State::Ground) {
+	if (inp->is_action_just_pressed("attack_claw") && can_swipe && state == State::Ground) {
 		stop();
 		state = State::Attack;
 		anim_player->play("Attack");
+
+		can_swipe = false;
+		timer_swipe->start();
 	}
 
-	if (inp->is_action_just_pressed("attack_pounce") && state == State::Ground) {
+	if (inp->is_action_just_pressed("attack_pounce") && can_pounce && state == State::Ground) {
 		stop();
 		state = State::Pounce;
 
@@ -129,6 +137,10 @@ void Player::_process(float delta)
 		gravity_velocity = Vector3{ 0, jump_force / PounceHeightDivide, 0 }; //Vertical
 
 		attack_box->set_disabled(false);
+
+		can_pounce = false;
+		SignalManagerPlayer::get_singleton()->emit_signal("player_pounced");
+		timer_pounce->start();
 	}
 
 	if (state == State::Pounce) {
@@ -158,8 +170,7 @@ void Player::_physics_process(float delta)
 
 	check_ground(); //Checks if you are on non-flat ground and adjusts gravity towards it
 	move_output = Vector3(move_direction.x + gravity_velocity.x, gravity_velocity.y, move_direction.z + gravity_velocity.z);
-
-	move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
+	move_output = move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
 
 	check_camera();
 
@@ -365,4 +376,16 @@ float Player::get_waveheight(float x, float z)
 	float radiansZ = ((fmod(0.3 * (z * x + x * z), amount) / amount) + (time * 0.1 * spd) * 2.0 * fmod(x, 2.0)) * 2.0 * 3.14;
 
 	return amount + 0.5 * (sin(radiansZ) + cos(radiansX));
+}
+
+
+void Player::_on_TimerSwipe_timeout()
+{
+	can_swipe = true;
+}
+
+
+void Player::_on_TimerPounce_timeout()
+{
+	can_pounce = true;
 }

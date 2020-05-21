@@ -14,6 +14,7 @@
 #include <CollisionShape.hpp>
 #include <KinematicCollision.hpp>
 #include <ShaderMaterial.hpp>
+#include <Timer.hpp>
 
 namespace godot {
 
@@ -66,6 +67,8 @@ namespace godot {
 
 		//Movement/Control
 		unsigned int jump_buffer = JumpBufferLimit;
+		bool can_swipe = true;
+		bool can_pounce = true;
 		float gravity = 9.8f;
 		float snap_length = 0;
 		float target_rotation = 0;
@@ -76,6 +79,9 @@ namespace godot {
 		Vector3 gravity_velocity;
 		Vector3 ground_normal;
 		Ref<KinematicCollision> current_collision;
+
+		Timer* timer_swipe;
+		Timer* timer_pounce;
 
 		State state = State::Air;
 
@@ -130,6 +136,9 @@ namespace godot {
 		void adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento);
 		void check_water();
 		float get_waveheight(float x, float z);
+
+		void _on_TimerSwipe_timeout();
+		void _on_TimerPounce_timeout();
 	};
 
 }

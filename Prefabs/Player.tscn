@@ -104,7 +104,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="AttackBox" type="Area" parent="Model"]
-transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 6.34217e-08, 0.389279, 0 )
+transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 7.15233e-08, 0.439006, 0 )
 collision_layer = 16
 collision_mask = 16
 
@@ -131,4 +131,13 @@ current = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 5 )
 anims/Pounce = SubResource( 6 )
+
+[node name="TimerSwipe" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerPounce" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="timeout" from="TimerSwipe" to="." method="_on_TimerSwipe_timeout"]
+[connection signal="timeout" from="TimerPounce" to="." method="_on_TimerPounce_timeout"]
