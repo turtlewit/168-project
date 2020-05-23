@@ -176,6 +176,9 @@
     <ClCompile Include="src\System\SignalManagerPlayer.cpp" />
     <ClCompile Include="src\Utils\Mathf.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
+    <ClCompile Include="src\Menu\ConnectionDialogue.cpp" />
+    <ClCompile Include="src\GrassMultimesh.cpp" />
+    <ClCompile Include="src\Menu\HostDialogue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hello.hpp" />
@@ -193,6 +196,9 @@
     <ClInclude Include="src\Utils\Mathf.hpp" />
     <ClInclude Include="src\Player\Player.hpp" />
     <ClInclude Include="src\Net\NetworkNode.hpp" />
+    <ClInclude Include="src\Menu\ConnectionDialogue.hpp" />
+    <ClInclude Include="src\GrassMultimesh.hpp" />
+    <ClInclude Include="src\Menu\HostDialogue.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

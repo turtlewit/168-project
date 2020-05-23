@@ -1,0 +1,127 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Prefabs/Menu/ConnectionDialogue.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Menu/HostDialogue.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+# TODO: Make this (oneshot error popup) a static helper method in c++
+func _on_SinglePlayer_pressed() -> void:
+	var p: AcceptDialog = AcceptDialog.new()
+	get_tree().get_root().add_child(p)
+	p.popup_exclusive = true
+	p.dialog_text = \"Single Player is not implemented yet.\"
+	p.get_ok().connect(\"pressed\", p, \"queue_free\")
+	p.get_close_button().connect(\"pressed\", p, \"queue_free\")
+	p.popup_centered()
+"
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -46.5
+margin_right = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SinglePlayer" type="Button" parent="VBoxContainer"]
+margin_right = 93.0
+margin_bottom = 20.0
+text = "Single Player"
+script = SubResource( 1 )
+
+[node name="Multiplayer" type="Button" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 93.0
+margin_bottom = 44.0
+text = "Multiplayer"
+
+[node name="HostOrConnect" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="HostOrConnect"]
+margin_left = 633.0
+margin_top = 353.0
+margin_right = 647.0
+margin_bottom = 367.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HostOrConnect/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 201.0
+margin_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Host" type="Button" parent="HostOrConnect/PanelContainer/VBoxContainer2"]
+margin_right = 194.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Host my own game..."
+
+[node name="Connect" type="Button" parent="HostOrConnect/PanelContainer/VBoxContainer2"]
+margin_top = 24.0
+margin_right = 194.0
+margin_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Connect to a friend's game..."
+
+[node name="Connect" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectionDialogue" parent="Connect" instance=ExtResource( 1 )]
+margin_left = 633.0
+margin_top = 353.0
+margin_right = 647.0
+margin_bottom = 367.0
+
+[node name="Host" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostDialogue" parent="Host" instance=ExtResource( 2 )]
+margin_left = 633.0
+margin_top = 353.0
+margin_right = 647.0
+margin_bottom = 367.0
+[connection signal="pressed" from="VBoxContainer/SinglePlayer" to="VBoxContainer/SinglePlayer" method="_on_SinglePlayer_pressed"]
+[connection signal="pressed" from="VBoxContainer/Multiplayer" to="HostOrConnect" method="set_visible" binds= [ true ]]
+[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Host" to="Host" method="set_visible" binds= [ true ]]
+[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Host" to="HostOrConnect" method="set_visible" binds= [ false ]]
+[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Connect" to="Connect" method="set_visible" binds= [ true ]]
+[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Connect" to="HostOrConnect" method="set_visible" binds= [ false ]]

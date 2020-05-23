@@ -1,6 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
+[ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=2]
+[ext_resource path="res://Scripts/Net/NetworkIdentity.gdns" type="Script" id=3]
+[ext_resource path="res://Scripts/Net/NetworkTransform.gdns" type="Script" id=4]
+[ext_resource path="res://Scripts/Net/NetworkSync.gdns" type="Script" id=5]
 
 [sub_resource type="PrismMesh" id=1]
 size = Vector3( 0.3, 0.3, 0.3 )
@@ -138,6 +142,23 @@ one_shot = true
 [node name="TimerPounce" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="NetworkSync" type="Node" parent="."]
+script = ExtResource( 5 )
+delete_on_not_authority = [ NodePath("../CameraPivot"), NodePath("../CollisionShape"), NodePath("../Model/AttackBox") ]
+
+[node name="NetworkIdentity" type="Node" parent="."]
+script = ExtResource( 3 )
+is_player = true
+
+[node name="NetworkTransform" type="Node" parent="."]
+script = ExtResource( 4 )
+sync_rotation = false
+sync_scale = false
+
+[node name="NetworkAnimator" type="Node" parent="."]
+script = ExtResource( 2 )
+animator_path = NodePath("../AnimationPlayer")
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="TimerSwipe" to="." method="_on_TimerSwipe_timeout"]
 [connection signal="timeout" from="TimerPounce" to="." method="_on_TimerPounce_timeout"]

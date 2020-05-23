@@ -1,6 +1,7 @@
 #include <Array.hpp>
 #include <NetworkedMultiplayerENet.hpp>
 #include <SceneTree.hpp>
+#include <Spatial.hpp>
 
 #include "Utils/Defs.hpp"
 #include "Net/NetworkManager.hpp"
@@ -21,6 +22,10 @@ void NetworkManager::_register_methods()
 
     register_method("_enter_tree", &NetworkManager::_enter_tree);
     register_method("_on_network_peer_connected", &NetworkManager::_on_network_peer_connected);
+
+    register_method("start_host", &NetworkManager::start_host);
+    register_method("start_server", &NetworkManager::start_server);
+    register_method("start_client", &NetworkManager::start_client);
 
     register_method("spawn_player_with_master", &NetworkManager::spawn_player_with_master, GODOT_METHOD_RPC_MODE_REMOTE);
 }
@@ -66,6 +71,14 @@ void NetworkManager::spawn_player_with_master(int64_t master_id)
         return;
 
     godot::Node* player = player_prefab->instance();
+
+    Node* spawn_points = get_tree()->get_current_scene()->find_node(String("SpawnPoints"), true, false);
+    if (spawn_points) {
+        Spatial* spatial_player = cast_to<Spatial>(player);
+        Transform player_transform = spatial_player->get_global_transform();
+        player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[0])->get_global_transform().origin;
+        spatial_player->set_global_transform(player_transform);
+    }
 
     // Append the master ID to the player's name.
     // This is because Godot knows two nodes are the same across the network

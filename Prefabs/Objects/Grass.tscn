@@ -12,11 +12,5 @@ shader_param/emissionColor = Color( 0, 0.282353, 0.0980392, 1 )
 
 [node name="Grass2" instance=ExtResource( 2 )]
 
-[node name="Grass" parent="." index="0"]
-material/0 = SubResource( 1 )
-
-[node name="Grass001" parent="." index="1"]
-material/0 = SubResource( 1 )
-
-[node name="Grass002" parent="." index="2"]
+[node name="Grass001" parent="." index="0"]
 material/0 = SubResource( 1 )

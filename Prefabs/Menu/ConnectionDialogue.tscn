@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Menu/ConnectionDialogue.gdns" type="Script" id=1]
+
+[node name="ConnectionDialogue" type="PanelContainer"]
+margin_right = 179.0
+margin_bottom = 115.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 172.0
+margin_bottom = 119.0
+
+[node name="IP Input" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 165.0
+margin_bottom = 42.0
+
+[node name="Label" type="Label" parent="VBoxContainer/IP Input"]
+margin_right = 165.0
+margin_bottom = 14.0
+text = "IP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/IP Input"]
+margin_top = 18.0
+margin_right = 165.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 165, 24 )
+text = "localhost"
+placeholder_text = "Enter IP Address"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Port Input" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 46.0
+margin_right = 165.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/Port Input"]
+margin_right = 165.0
+margin_bottom = 14.0
+text = "Port"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Port Input"]
+margin_top = 18.0
+margin_right = 165.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 165, 24 )
+text = "42068"
+placeholder_text = "Enter Port"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectButton" type="Button" parent="VBoxContainer"]
+margin_top = 92.0
+margin_right = 165.0
+margin_bottom = 112.0
+text = "Connect!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="VBoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
