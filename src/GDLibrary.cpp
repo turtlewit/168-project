@@ -12,6 +12,9 @@
 #include "Objects/Portal.hpp"
 #include "System/GameUI.hpp"
 #include "System/SignalManagerPlayer.hpp"
+#include "Menu/ConnectionDialogue.hpp"
+#include "GrassMultimesh.hpp"
+#include "Menu/HostDialogue.hpp"
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
 {
     godot::Godot::gdnative_init(o);
@@ -38,4 +41,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
     godot::register_class<godot::Portal>();
     godot::register_class<godot::GameUI>();
     godot::register_class<godot::SignalManagerPlayer>();
+    godot::register_class<ConnectionDialogue>();
+    godot::register_class<GrassMultimesh>();
+    godot::register_class<HostDialogue>();
 }
