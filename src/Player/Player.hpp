@@ -80,8 +80,11 @@ namespace godot {
 		Vector3 ground_normal;
 		Ref<KinematicCollision> current_collision;
 
+		bool dead = false;
+
 		Timer* timer_swipe;
 		Timer* timer_pounce;
+		Timer* timer_respawn;
 
 		State state = State::Air;
 
@@ -126,6 +129,7 @@ namespace godot {
 		void set_state(int value);
 
 		void damage(int amount);
+		void respawn();
 
 		void enter_ground();
 		void exit_ground();
