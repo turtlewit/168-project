@@ -1,24 +1,19 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=2]
 [ext_resource path="res://Scripts/Net/NetworkIdentity.gdns" type="Script" id=3]
 [ext_resource path="res://Scripts/Net/NetworkTransform.gdns" type="Script" id=4]
 [ext_resource path="res://Scripts/Net/NetworkSync.gdns" type="Script" id=5]
+[ext_resource path="res://Models/Player/PlayerModel.tscn" type="PackedScene" id=6]
 
-[sub_resource type="PrismMesh" id=1]
-size = Vector3( 0.3, 0.3, 0.3 )
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.4, 1, 0.298039, 1 )
-
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=6]
 extents = Vector3( 0.15, 0.15, 0.15 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "Attack"
 length = 0.5
 tracks/0/type = "method"
@@ -36,7 +31,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Model/AttackBox/CollisionShape:disabled")
+tracks/1/path = NodePath("PlayerModel/AttackBox/CollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -48,7 +43,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "Pounce"
 length = 0.5
 tracks/0/type = "method"
@@ -66,7 +61,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Model/AttackBox/CollisionShape:disabled")
+tracks/1/path = NodePath("PlayerModel/AttackBox/CollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -102,29 +97,27 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Model" type="MeshInstance" parent="."]
-transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+[node name="PlayerModel" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.88762e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -4.88762e-08, 0, -0.127826, 0 )
 
-[node name="AttackBox" type="Area" parent="Model"]
-transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 7.15233e-08, 0.439006, 0 )
+[node name="AttackBox" type="Area" parent="PlayerModel"]
+transform = Transform( -5.43069e-07, 0, 3.33333, 0, 3.33333, 0, -3.33333, 0, -5.43069e-07, 2.3841e-07, 0.426087, 1.46335 )
 collision_layer = 16
 collision_mask = 16
 
-[node name="CollisionShape" type="CollisionShape" parent="Model/AttackBox"]
-shape = SubResource( 3 )
+[node name="CollisionShape" type="CollisionShape" parent="PlayerModel/AttackBox"]
+shape = SubResource( 5 )
 disabled = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="Hurtbox" type="Area" parent="."]
 collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="Hurtbox"]
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="CameraPivot" type="Position3D" parent="."]
 
@@ -133,8 +126,8 @@ transform = Transform( -1.62921e-07, -0.422618, 0.906308, 0, 0.906308, 0.422618,
 current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 5 )
-anims/Pounce = SubResource( 6 )
+anims/Attack = SubResource( 3 )
+anims/Pounce = SubResource( 4 )
 
 [node name="TimerSwipe" type="Timer" parent="."]
 one_shot = true

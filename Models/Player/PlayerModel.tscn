@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Models/Player/PlayerModel.glb" type="PackedScene" id=1]
+[ext_resource path="res://Models/Player/PlayerMaterial.tres" type="Material" id=2]
+
+[node name="PlayerModel" instance=ExtResource( 1 )]
+transform = Transform( -4.88762e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -4.88762e-08, 0, 0, 0 )
+
+[node name="Skeleton" parent="Armature" index="1"]
+bones/41/bound_children = [ NodePath("BoneAttachment") ]
+bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
+
+[node name="BoneAttachment" parent="Armature/Skeleton" index="0"]
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000574822, 0.702343, -0.572163 )
+
+[node name="BoneAttachment 2" parent="Armature/Skeleton" index="1"]
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.00685225, -0.06086, -1.98747 )
+
+[node name="Animal" parent="Armature/Skeleton" index="2"]
+material/0 = ExtResource( 2 )

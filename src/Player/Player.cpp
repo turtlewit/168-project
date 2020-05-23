@@ -48,8 +48,8 @@ void Player::_ready()
 
 	camera = GET_NODE(Camera, "CameraPivot/Camera");
 	camera_pivot = GET_NODE(Position3D, "CameraPivot");
-	model = GET_NODE(MeshInstance, "Model");
-	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
+	model = GET_NODE(MeshInstance, "PlayerModel/Armature/Skeleton/Animal");
+	attack_box = GET_NODE(CollisionShape, "PlayerModel/AttackBox/CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
