@@ -72,6 +72,13 @@ void NetworkManager::spawn_player_with_master(int64_t master_id)
 
     godot::Node* player = player_prefab->instance();
 
+    // Append the master ID to the player's name.
+    // This is because Godot knows two nodes are the same across the network
+    // based on their node path and name. 
+    player->set_name(String("{0}{1}").format(Array::make(player->get_name(), master_id)));
+
+    get_tree()->get_current_scene()->add_child(player);
+
     Node* spawn_points = get_tree()->get_current_scene()->find_node(String("SpawnPoints"), true, false);
     if (spawn_points) {
         Spatial* spatial_player = cast_to<Spatial>(player);
@@ -80,12 +87,6 @@ void NetworkManager::spawn_player_with_master(int64_t master_id)
         spatial_player->set_global_transform(player_transform);
     }
 
-    // Append the master ID to the player's name.
-    // This is because Godot knows two nodes are the same across the network
-    // based on their node path and name. 
-    player->set_name(String("{0}{1}").format(Array::make(player->get_name(), master_id)));
-
-    get_tree()->get_current_scene()->add_child(player);
     player->set_network_master(master_id);
 }
 

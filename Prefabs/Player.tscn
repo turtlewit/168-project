@@ -1,25 +1,35 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=2]
 [ext_resource path="res://Scripts/Net/NetworkIdentity.gdns" type="Script" id=3]
 [ext_resource path="res://Scripts/Net/NetworkTransform.gdns" type="Script" id=4]
 [ext_resource path="res://Scripts/Net/NetworkSync.gdns" type="Script" id=5]
+[ext_resource path="res://Textures/Player/Animal.png" type="Texture" id=6]
+[ext_resource path="res://Shaders/CelGD.shader" type="Shader" id=7]
+[ext_resource path="res://Models/Player/Animal.glb" type="PackedScene" id=8]
 
-[sub_resource type="PrismMesh" id=1]
-size = Vector3( 0.3, 0.3, 0.3 )
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.4, 1, 0.298039, 1 )
-
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 7 )
+shader_param/useColorBlend = false
+shader_param/colorBlend = null
+shader_param/rim_amount = 0.0
+shader_param/emissionColor = null
+shader_param/baseTexture = ExtResource( 6 )
+
+[sub_resource type="PrismMesh" id=3]
+size = Vector3( 0.3, 0.3, 0.3 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.4, 1, 0.298039, 1 )
+
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.15, 0.15, 0.15 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "Attack"
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -36,7 +46,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Model/AttackBox/CollisionShape:disabled")
+tracks/1/path = NodePath("PlayerModel/AttackBox/CollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -48,8 +58,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "Pounce"
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -66,7 +75,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Model/AttackBox/CollisionShape:disabled")
+tracks/1/path = NodePath("PlayerModel/AttackBox/CollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -102,29 +111,42 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Model" type="MeshInstance" parent="."]
-transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+[node name="PlayerModel" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.44381e-08, 0, -0.15, 0, 0.15, 0, 0.15, 0, -2.44381e-08, 0, -0.14, 0 )
 
-[node name="AttackBox" type="Area" parent="Model"]
-transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 7.15233e-08, 0.439006, 0 )
+[node name="AttackBox" type="Area" parent="PlayerModel"]
+transform = Transform( -1.08614e-06, 0, 6.66667, 0, 6.66667, 0, -6.66667, 0, -1.08614e-06, 4.76821e-07, 0.933333, 2.92671 )
 collision_layer = 16
 collision_mask = 16
 
-[node name="CollisionShape" type="CollisionShape" parent="Model/AttackBox"]
-shape = SubResource( 3 )
+[node name="CollisionShape" type="CollisionShape" parent="PlayerModel/AttackBox"]
+shape = SubResource( 1 )
 disabled = true
 
+[node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, -4.44089e-15, 0.786064, -0.611268 )
+
+[node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0, 0.675523, -1.822 )
+
+[node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
+material_override = SubResource( 2 )
+
+[node name="OldModel" type="MeshInstance" parent="."]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Hurtbox" type="Area" parent="."]
 collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="Hurtbox"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CameraPivot" type="Position3D" parent="."]
 
@@ -133,8 +155,8 @@ transform = Transform( -1.62921e-07, -0.422618, 0.906308, 0, 0.906308, 0.422618,
 current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 5 )
-anims/Pounce = SubResource( 6 )
+anims/Attack = SubResource( 6 )
+anims/Pounce = SubResource( 7 )
 
 [node name="TimerSwipe" type="Timer" parent="."]
 one_shot = true
@@ -142,6 +164,9 @@ one_shot = true
 [node name="TimerPounce" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="TimerRespawn" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="NetworkSync" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -162,3 +187,6 @@ animator_path = NodePath("../AnimationPlayer")
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="TimerSwipe" to="." method="_on_TimerSwipe_timeout"]
 [connection signal="timeout" from="TimerPounce" to="." method="_on_TimerPounce_timeout"]
+[connection signal="timeout" from="TimerRespawn" to="." method="_on_TimerPounce_timeout"]
+
+[editable path="PlayerModel"]

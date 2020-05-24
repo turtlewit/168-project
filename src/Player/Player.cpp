@@ -25,6 +25,7 @@ void Player::_register_methods()
 
 	REGISTER_METHOD(Player, set_state);
 	REGISTER_METHOD(Player, stop);
+	REGISTER_METHOD(Player, respawn);
 
 	REGISTER_METHOD(Player, _on_Hurtbox_area_entered);
 	REGISTER_METHOD(Player, _on_TimerSwipe_timeout);
@@ -47,11 +48,12 @@ void Player::_ready()
 
 	camera = GET_NODE(Camera, "CameraPivot/Camera");
 	camera_pivot = GET_NODE(Position3D, "CameraPivot");
-	model = GET_NODE(MeshInstance, "Model");
-	attack_box = GET_NODE(CollisionShape, "Model/AttackBox/CollisionShape");
+	model = GET_NODE(MeshInstance, "PlayerModel/Armature/Skeleton/Animal");
+	attack_box = GET_NODE(CollisionShape, "PlayerModel/AttackBox/CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
+	timer_respawn = GET_NODE(Timer, "TimerRespawn");
 
 	water_shader = cast_to<MeshInstance>(get_parent()->get_node("Water/MeshInstance"))->get_surface_material(0);
 
@@ -89,7 +91,7 @@ void Player::_process(float delta)
 	water_shader->set_shader_param("deltaTime", shader_time);
 	shader_time += delta;
 
-	if (state != State::Attack && state != State::Pounce) {
+	if (state != State::Attack && state != State::Pounce && !dead) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
 		move_check_rotation = fmod(Mathf::abs(camera_pivot->get_rotation_degrees().z), 360);
@@ -103,7 +105,7 @@ void Player::_process(float delta)
 		move_direction.y = 0;
 	}
 
-	if (inp->is_action_just_pressed("move_jump") && (state == State::Ground || state == State::Air)) {
+	if (inp->is_action_just_pressed("move_jump") && !dead && (state == State::Ground || state == State::Air)) {
 		jump_buffer = 0;
 		snap_length = 0;
 		if (jumps < 2)
@@ -118,7 +120,7 @@ void Player::_process(float delta)
 		}
 	}
 	
-	if (inp->is_action_just_pressed("attack_claw") && can_swipe && state == State::Ground) {
+	if (inp->is_action_just_pressed("attack_claw") && !dead && can_swipe && state == State::Ground) {
 		stop();
 		state = State::Attack;
 		anim_player->play("Attack");
@@ -127,7 +129,7 @@ void Player::_process(float delta)
 		timer_swipe->start();
 	}
 
-	if (inp->is_action_just_pressed("attack_pounce") && can_pounce && state == State::Ground) {
+	if (inp->is_action_just_pressed("attack_pounce") && !dead && can_pounce && state == State::Ground) {
 		stop();
 		state = State::Pounce;
 
@@ -256,6 +258,11 @@ void Player::damage(int amount)
 {
 	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount);
 	health -= amount;
+
+	if (health <= 0) {
+		dead = true;
+		timer_respawn->start();
+	}
 }
 
 
@@ -303,6 +310,12 @@ void Player::check_ground()
 			ground_normal = Vector3{ 0, 1, 0 };
 		}
 	}
+}
+
+
+void Player::respawn()
+{
+	dead = false;
 }
 
 
