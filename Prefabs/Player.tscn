@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=2]
@@ -105,20 +105,29 @@ tracks/2/keys = {
 animation = "Walk-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Swipe"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Idle-loop"
 
-[sub_resource type="AnimationNodeBlend2" id=10]
+[sub_resource type="AnimationNodeOneShot" id=11]
 
-[sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( -429, 73 )
-nodes/Animation/node = SubResource( 9 )
-nodes/Animation/position = Vector2( 100, 40 )
+[sub_resource type="AnimationNodeBlend2" id=12]
+
+[sub_resource type="AnimationNodeBlendTree" id=13]
+graph_offset = Vector2( -299, -24 )
+nodes/Animation/node = SubResource( 10 )
+nodes/Animation/position = Vector2( 40, -40 )
 "nodes/Animation 2/node" = SubResource( 8 )
 "nodes/Animation 2/position" = Vector2( 160, 260 )
+"nodes/Animation 3/node" = SubResource( 9 )
+"nodes/Animation 3/position" = Vector2( -60, 120 )
 nodes/output/position = Vector2( 740, 200 )
-nodes/walk_blend/node = SubResource( 10 )
+nodes/swipe/node = SubResource( 11 )
+nodes/swipe/position = Vector2( 320, 0 )
+nodes/walk_blend/node = SubResource( 12 )
 nodes/walk_blend/position = Vector2( 518, 141.75 )
-node_connections = [ "output", 0, "walk_blend", "walk_blend", 0, "Animation", "walk_blend", 1, "Animation 2" ]
+node_connections = [ "output", 0, "walk_blend", "walk_blend", 0, "swipe", "walk_blend", 1, "Animation 2", "swipe", 0, "Animation", "swipe", 1, "Animation 3" ]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -138,10 +147,10 @@ bones/41/bound_children = [ NodePath("BoneAttachment") ]
 bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
 
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000350142, 0.735067, -0.587448 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000549308, 0.706059, -0.573899 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.17461, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.728982, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -184,9 +193,10 @@ anims/Attack = SubResource( 6 )
 anims/Pounce = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 11 )
+tree_root = SubResource( 13 )
 anim_player = NodePath("../PlayerModel/AnimationPlayer")
 active = true
+parameters/swipe/active = false
 parameters/walk_blend/blend_amount = 0.0
 
 [node name="TimerSwipe" type="Timer" parent="."]

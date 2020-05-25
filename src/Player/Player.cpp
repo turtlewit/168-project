@@ -125,6 +125,7 @@ void Player::_process(float delta)
 		stop();
 		state = State::Attack;
 		anim_player->play("Attack");
+		anim_tree->set("parameters/swipe/active", true);
 
 		can_swipe = false;
 		timer_swipe->start();
@@ -397,6 +398,7 @@ float Player::get_waveheight(float x, float z)
 
 void Player::_on_TimerSwipe_timeout()
 {
+	anim_tree->set("parameters/swipe/active", false);
 	can_swipe = true;
 }
 
