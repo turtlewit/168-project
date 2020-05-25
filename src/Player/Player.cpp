@@ -50,7 +50,8 @@ void Player::_ready()
 	camera_pivot = GET_NODE(Position3D, "CameraPivot");
 	model = GET_NODE(MeshInstance, "PlayerModel/Armature/Skeleton/Animal");
 	attack_box = GET_NODE(CollisionShape, "PlayerModel/AttackBox/CollisionShape");
-	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer"); // @TODO: Change to an AnimationTree when we get that system in place
+	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer");
+	anim_tree = GET_NODE(AnimationTree, "AnimationTree");
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
 	timer_respawn = GET_NODE(Timer, "TimerRespawn");
@@ -150,6 +151,8 @@ void Player::_process(float delta)
 		move_direction += -camera_xform.basis.x * inp->get_action_strength("move_left") / PounceTurnPenalty;
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right") / PounceTurnPenalty;
 	}
+
+	anim_tree->set("parameters/walk_blend/blend_amount", move_direction.length());
 	
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();

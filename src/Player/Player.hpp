@@ -10,6 +10,7 @@
 #include <MeshInstance.hpp>
 #include <InputEvent.hpp>
 #include <AnimationPlayer.hpp>
+#include <AnimationTree.hpp>
 #include <Area.hpp>
 #include <CollisionShape.hpp>
 #include <KinematicCollision.hpp>
@@ -93,7 +94,8 @@ namespace godot {
 		PhysicsDirectSpaceState* camera_raycast;
 		MeshInstance* model;
 		CollisionShape* attack_box;
-		AnimationPlayer* anim_player; // @TODO: Change to an AnimationTree when we get that system in place
+		AnimationPlayer* anim_player;
+		AnimationTree* anim_tree;
 
 		//Sync Shader
 		Ref<ShaderMaterial> water_shader;
