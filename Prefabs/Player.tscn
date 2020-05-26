@@ -127,11 +127,12 @@ nodes/swipe/node = SubResource( 11 )
 nodes/swipe/position = Vector2( 320, 0 )
 nodes/walk_blend/node = SubResource( 12 )
 nodes/walk_blend/position = Vector2( 518, 141.75 )
-node_connections = [ "output", 0, "walk_blend", "walk_blend", 0, "swipe", "walk_blend", 1, "Animation 2", "swipe", 0, "Animation", "swipe", 1, "Animation 3" ]
+node_connections = [ "output", 0, "walk_blend", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "swipe", "walk_blend", 1, "Animation 2" ]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
 ]]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
 collision_layer = 17
 collision_mask = 17
 script = ExtResource( 1 )
@@ -142,15 +143,11 @@ __meta__ = {
 [node name="PlayerModel" parent="." instance=ExtResource( 8 )]
 transform = Transform( -4.88762e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -4.88762e-08, 0, -0.14, 0 )
 
-[node name="Skeleton" parent="PlayerModel/Armature" index="1"]
-bones/41/bound_children = [ NodePath("BoneAttachment") ]
-bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
-
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000549308, 0.706059, -0.573899 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000178912, 0.760006, -0.599097 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.728982, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.302004, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -219,7 +216,7 @@ is_player = true
 
 [node name="NetworkTransform" type="Node" parent="."]
 script = ExtResource( 4 )
-sync_rotation = false
+children_to_sync = [ NodePath("../PlayerModel") ]
 sync_scale = false
 
 [node name="NetworkAnimator" type="Node" parent="."]
