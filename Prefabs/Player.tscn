@@ -146,11 +146,15 @@ __meta__ = {
 [node name="PlayerModel" parent="." instance=ExtResource( 8 )]
 transform = Transform( -4.88762e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -4.88762e-08, 0, -0.14, 0 )
 
+[node name="Skeleton" parent="PlayerModel/Armature" index="1"]
+bones/41/bound_children = [ NodePath("BoneAttachment") ]
+bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
+
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000168979, 0.761452, -0.599772 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000248544, 0.749864, -0.59436 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.329653, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.108186, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -211,7 +215,7 @@ wait_time = 3.0
 
 [node name="NetworkSync" type="Node" parent="."]
 script = ExtResource( 5 )
-delete_on_not_authority = [ NodePath("../CameraPivot"), NodePath("../CollisionShape"), NodePath("../Model/AttackBox") ]
+delete_on_not_authority = [ NodePath("../CameraPivot"), NodePath("../CollisionShape"), NodePath("../PlayerModel/AttackBox") ]
 
 [node name="NetworkIdentity" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -225,6 +229,10 @@ sync_scale = false
 [node name="NetworkAnimator" type="Node" parent="."]
 script = ExtResource( 2 )
 animator_path = NodePath("../AnimationPlayer")
+
+[node name="NetworkAnimator2" type="Node" parent="."]
+script = ExtResource( 2 )
+animator_path = NodePath("../PlayerModel/AnimationPlayer")
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="TimerSwipe" to="." method="_on_TimerSwipe_timeout"]
 [connection signal="timeout" from="TimerPounce" to="." method="_on_TimerPounce_timeout"]
