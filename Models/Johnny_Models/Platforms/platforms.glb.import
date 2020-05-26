@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/groundplatform.glb-b5d6164d8a243bf796214cfc9da5fafa.scn"
+path="res://.import/platforms.glb-23397052867125db95c5eae381ade13c.scn"
 
 [deps]
 
-source_file="res://Models/Johnny_Models/Platforms/groundplatform.glb"
-dest_files=[ "res://.import/groundplatform.glb-b5d6164d8a243bf796214cfc9da5fafa.scn" ]
+source_file="res://Models/Johnny_Models/Platforms/platforms.glb"
+dest_files=[ "res://.import/platforms.glb-23397052867125db95c5eae381ade13c.scn" ]
 
 [params]
 
