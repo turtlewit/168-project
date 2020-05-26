@@ -13,6 +13,9 @@ shader_param/useColorBlend = null
 shader_param/colorBlend = null
 shader_param/rim_amount = null
 shader_param/emissionColor = null
+shader_param/metallic = 0.0
+shader_param/roughness = 0.0
+shader_param/specular = 0.0
 shader_param/baseTexture = ExtResource( 2 )
 
 [node name="PineTree" instance=ExtResource( 1 )]

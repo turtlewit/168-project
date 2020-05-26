@@ -9,10 +9,14 @@ uniform float rim_amount : hint_range(0f, 1f);
 uniform sampler2D emissionMap : hint_white;
 uniform vec4 emissionColor : hint_color;
 
+uniform float metallic : hint_range(0f, 1f) = 0f;
+uniform float roughness : hint_range(0f, 1f) = 0f;
+uniform float specular : hint_range(0f, 1f) = 0f;
+
 void fragment() {
-	METALLIC = 0f;
-	ROUGHNESS = 1f;
-	SPECULAR = 0f;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
 	RIM = rim_amount;
 	
 	vec4 emissionTex = texture(emissionMap, UV);

@@ -10,6 +10,9 @@ shader_param/useColorBlend = false
 shader_param/colorBlend = Color( 0, 0, 0, 1 )
 shader_param/rim_amount = 0.0
 shader_param/emissionColor = Color( 0, 0, 0, 1 )
+shader_param/metallic = 0.0
+shader_param/roughness = 0.0
+shader_param/specular = 0.0
 shader_param/baseTexture = ExtResource( 2 )
 
 [node name="RegularTree" instance=ExtResource( 1 )]

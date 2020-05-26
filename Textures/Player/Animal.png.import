@@ -17,7 +17,7 @@ dest_files=[ "res://.import/Animal.png-6f537fea1e67f2ee69d9f7012435dd02.s3tc.ste
 [params]
 
 compress/mode=2
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

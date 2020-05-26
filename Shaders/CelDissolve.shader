@@ -52,8 +52,8 @@ void fragment() {
 	ALPHA = n_out10p0;
 	EMISSION = n_out14p0;
 	METALLIC = 0f;
-	ROUGHNESS = 1f;
-	SPECULAR = 0f;
+	ROUGHNESS = 0f;
+	SPECULAR = .5f;
 	RIM = rim_amount;
 	
 	vec4 tex = texture(baseTexture, UV);
