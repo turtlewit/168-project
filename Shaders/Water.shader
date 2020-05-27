@@ -13,7 +13,7 @@ float generateOffset(float x, float z, float val1, float val2, float time)
 	float radiansX = ((mod(x + z * x * val1, amount)/amount) + (time * speed) * mod(x * 0.8 + z, 1.5)) * 2.0 * 3.14;
 	float radiansZ = ((mod(val2 * (z * x + x * z), amount)/amount) + (time * speed) * 2.0 * mod(x, 2.0)) * 2.0 * 3.14;
 	
-	return amount + 0.5 * (sin(radiansZ) + cos(radiansX));
+	return amount + 0.1 * (sin(radiansZ) + cos(radiansX));
 }
 
 vec3 applyDistortion(vec3 vertex, float time)

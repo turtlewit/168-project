@@ -366,7 +366,7 @@ void Player::adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento)
 }
 
 void Player::check_water() {
-	if (camera_location.y < get_waveheight(camera_location.x, camera_location.z))
+	if (camera_location.y < 0.6)
 	{
 		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWater"))->show();
 		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWaterFog"))->show();
@@ -377,18 +377,6 @@ void Player::check_water() {
 		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWaterFog"))->hide();
 	}
 }
-
-float Player::get_waveheight(float x, float z)
-{
-	float time = water_shader->get_shader_param("deltaTime");
-	float amount = water_shader->get_shader_param("amount");
-	float spd = water_shader->get_shader_param("speed");
-	float radiansX = ((fmod(x + z * x * 0.1, amount) / amount) + (time * 0.1 * spd) * fmod(x * 0.8 + z, 1.5)) * 2.0 * 3.14;
-	float radiansZ = ((fmod(0.3 * (z * x + x * z), amount) / amount) + (time * 0.1 * spd) * 2.0 * fmod(x, 2.0)) * 2.0 * 3.14;
-
-	return amount + 0.5 * (sin(radiansZ) + cos(radiansX));
-}
-
 
 void Player::_on_TimerSwipe_timeout()
 {

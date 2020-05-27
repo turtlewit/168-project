@@ -141,7 +141,6 @@ namespace godot {
 		void check_camera();
 		void adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento);
 		void check_water();
-		float get_waveheight(float x, float z);
 
 		void _on_TimerSwipe_timeout();
 		void _on_TimerPounce_timeout();
