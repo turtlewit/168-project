@@ -153,7 +153,7 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right") / PounceTurnPenalty;
 	}
 
-	anim_tree->set("parameters/walk_blend/blend_amount", move_direction.length());
+	anim_tree->set("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
 	
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
@@ -213,6 +213,7 @@ void Player::jump()
 	gravity_velocity = Vector3{ 0, jump_force, 0 };
 	jumps++;
 	state = State::Air;
+	anim_player->play("Jump");
 }
 
 
@@ -273,8 +274,12 @@ void Player::enter_ground()
 			attack_box->set_disabled(true);
 		}
 		snap_length = SnapLength;
-		if (state != State::Attack)
+		if (state != State::Attack && state != State::Ground) {
 			state = State::Ground;
+			anim_tree->set("parameters/jump_start/blend_amount", 0.0f);
+			anim_tree->set("parameters/jump_end/active", true);
+		}
+			
 	}
 }
 
