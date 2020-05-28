@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/UI/GameUI.gdns" type="Script" id=1]
 [ext_resource path="res://Fonts/Quenda-Medium.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://Textures/diamond.png" type="Texture" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://Shaders/UnderWater.shader" type="Shader" id=5]
 [ext_resource path="res://Shaders/WaterFog.shader" type="Shader" id=6]
 
@@ -18,11 +17,11 @@ shader = ExtResource( 6 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 4
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=3]
 size = 54
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -31,7 +30,7 @@ corner_radius_bottom_left = 8
 shadow_size = 3
 shadow_offset = Vector2( 3, 3 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 1, 0.486275, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -39,7 +38,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 shadow_offset = Vector2( 3, 3 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 0.478431, 0, 1 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 4
@@ -48,7 +47,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_offset = Vector2( 3, 3 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 4
@@ -66,17 +65,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UnderWater" type="Sprite" parent="."]
+[node name="UnderWater" type="ColorRect" parent="."]
 material = SubResource( 1 )
-position = Vector2( 638.745, 366.022 )
-scale = Vector2( 20.2884, 11.5095 )
-texture = ExtResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="UnderWaterFog" type="Sprite" parent="."]
+[node name="UnderWaterFog" type="ColorRect" parent="."]
 material = SubResource( 2 )
-position = Vector2( 638.745, 366.022 )
-scale = Vector2( 20.288, 11.509 )
-texture = ExtResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Crystals" type="HBoxContainer" parent="."]
 margin_left = 32.0
@@ -99,7 +102,7 @@ margin_left = -2.0
 margin_top = 57.0
 margin_right = 36.0
 margin_bottom = 116.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 __meta__ = {
@@ -118,7 +121,7 @@ margin_left = -2.0
 margin_top = 57.0
 margin_right = 36.0
 margin_bottom = 116.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 __meta__ = {
@@ -137,7 +140,7 @@ margin_left = -3.0
 margin_top = 57.0
 margin_right = 35.0
 margin_bottom = 116.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 __meta__ = {
@@ -156,7 +159,7 @@ margin_left = -4.0
 margin_top = 57.0
 margin_right = 34.0
 margin_bottom = 116.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 __meta__ = {
@@ -168,8 +171,8 @@ margin_left = 8.0
 margin_top = 144.0
 margin_right = 376.0
 margin_bottom = 184.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
 max_value = 5.0
 percent_visible = false
 __meta__ = {
@@ -181,8 +184,8 @@ margin_left = 8.0
 margin_top = 200.0
 margin_right = 229.0
 margin_bottom = 224.0
-custom_styles/fg = SubResource( 5 )
-custom_styles/bg = SubResource( 6 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
 max_value = 3.0
 value = 3.0
 percent_visible = false
