@@ -23,14 +23,14 @@ shader_param/baseTexture = ExtResource( 6 )
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.234337, 0.259701, 0.15 )
+
 [sub_resource type="PrismMesh" id=3]
 size = Vector3( 0.3, 0.3, 0.3 )
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.4, 1, 0.298039, 1 )
-
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 0.234337, 0.259701, 0.15 )
 
 [sub_resource type="Animation" id=6]
 length = 0.5
@@ -164,12 +164,11 @@ nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( -100, -80 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5" ]
+node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3" ]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
 ]]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
 collision_layer = 17
 collision_mask = 17
 script = ExtResource( 1 )
@@ -180,23 +179,35 @@ __meta__ = {
 [node name="PlayerModel" parent="." instance=ExtResource( 8 )]
 transform = Transform( -4.88762e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -4.88762e-08, 0, -0.14, 0 )
 
+[node name="Armature" parent="PlayerModel" index="2"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
+
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000366327, 0.73271, -0.586347 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000216691, 0.754503, -0.596527 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.219659, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.196848, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
 
 [node name="AttackBox" type="Area" parent="PlayerModel"]
-transform = Transform( -4.88762e-07, 0, 3, 0, 3, 0, -3, 0, -4.88762e-07, 3.08881e-07, 0.933333, 1.8959 )
+transform = Transform( 3, 0, 5.68434e-14, 0, 3, 0, -5.68434e-14, 0, 3, -1.896, 0.933, 0 )
 collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerModel/AttackBox"]
 shape = SubResource( 2 )
 disabled = true
+
+[node name="Hurtbox" type="Area" parent="PlayerModel"]
+transform = Transform( 3.33333, 0, 0, 0, 3.33333, 0, 0, 0, 3.33333, 0, 0.466667, 0 )
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerModel/Hurtbox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120711, 0 )
+shape = SubResource( 5 )
 
 [node name="OldModel" type="MeshInstance" parent="."]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
@@ -205,15 +216,7 @@ mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120711, 0 )
-shape = SubResource( 5 )
-
-[node name="Hurtbox" type="Area" parent="."]
-collision_layer = 16
-collision_mask = 16
-
-[node name="CollisionShape" type="CollisionShape" parent="Hurtbox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120711, 0 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0.120711, 0 )
 shape = SubResource( 5 )
 
 [node name="CameraPivot" type="Position3D" parent="."]
@@ -266,7 +269,7 @@ animator_path = NodePath("../AnimationPlayer")
 [node name="NetworkAnimator2" type="Node" parent="."]
 script = ExtResource( 2 )
 animator_path = NodePath("../PlayerModel/AnimationPlayer")
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="area_entered" from="PlayerModel/Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="TimerSwipe" to="." method="_on_TimerSwipe_timeout"]
 [connection signal="timeout" from="TimerPounce" to="." method="_on_TimerPounce_timeout"]
 [connection signal="timeout" from="TimerRespawn" to="." method="_on_TimerPounce_timeout"]

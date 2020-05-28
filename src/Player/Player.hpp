@@ -92,8 +92,9 @@ namespace godot {
 		Camera* camera;
 		Position3D* camera_pivot;
 		PhysicsDirectSpaceState* camera_raycast;
-		MeshInstance* model;
+		Spatial* model;
 		CollisionShape* attack_box;
+		CollisionShape* hit_box;
 		AnimationPlayer* anim_player;
 		AnimationTree* anim_tree;
 

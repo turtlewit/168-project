@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -12,7 +12,9 @@
 [ext_resource path="res://Prefabs/Objects/Portal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/UI/GameUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Objects/Rock.tscn" type="PackedScene" id=12]
+[ext_resource path="res://tree_multimesh.tres" type="MultiMesh" id=13]
 [ext_resource path="res://Scripts/GrassMultimesh.gdns" type="Script" id=14]
+[ext_resource path="res://grass_multimesh.tres" type="MultiMesh" id=15]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.5, 0.5, 0.5 )
@@ -392,9 +394,12 @@ transform = Transform( -0.0722818, 0, 0.291162, 0, 0.3, 0, -0.291162, 0, -0.0722
 
 [node name="GrassMultimesh" type="Node" parent="."]
 script = ExtResource( 14 )
+multimesh = ExtResource( 15 )
 
 [node name="TreeMultimesh" type="Node" parent="."]
 script = ExtResource( 14 )
+multimesh = ExtResource( 13 )
+mesh_node_name = "Tree"
 
 [node name="AllGrass" type="Spatial" parent="."]
 

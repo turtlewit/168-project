@@ -48,8 +48,9 @@ void Player::_ready()
 
 	camera = GET_NODE(Camera, "CameraPivot/Camera");
 	camera_pivot = GET_NODE(Position3D, "CameraPivot");
-	model = GET_NODE(MeshInstance, "PlayerModel/Armature/Skeleton/Animal");
+	model = GET_NODE(Spatial, "PlayerModel");
 	attack_box = GET_NODE(CollisionShape, "PlayerModel/AttackBox/CollisionShape");
+	hit_box = GET_NODE(CollisionShape, "CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer");
 	anim_tree = GET_NODE(AnimationTree, "AnimationTree");
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
@@ -172,6 +173,7 @@ void Player::_physics_process(float delta)
 		target_rotation = (std::atan2(move_direction.x, move_direction.z) + Mathf::deg2rad(180));
 		rot.y = Mathf::lerp_delta(rot.y, rot.y + get_closest_angle(fmod(Mathf::abs(rot.y), 2 * Mathf::Pi), target_rotation, rot.y < 0), 0.0005f, delta);
 		model->set_rotation(rot);
+		hit_box->set_rotation(rot);
 	}
 
 	check_ground(); //Checks if you are on non-flat ground and adjusts gravity towards it
