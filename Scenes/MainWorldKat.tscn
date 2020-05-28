@@ -17,7 +17,7 @@
 [ext_resource path="res://tree_multimesh.tres" type="MultiMesh" id=15]
 [ext_resource path="res://Models/Johnny_Models/Platforms/platforms.tscn" type="PackedScene" id=16]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
 
 
@@ -37,10 +37,10 @@ func _process(delta: float) -> void:
 	rotate_y(speed * delta)
 "
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="CubeMesh" id=2]
 size = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="ConvexPolygonShape" id=2]
+[sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25 )
 
 [node name="Scene" type="Spatial"]
@@ -23319,14 +23319,16 @@ transform = Transform( -0.0968188, 0, -0.0250226, 0, 0.1, 0, 0.0250226, 0, -0.09
 "teleport location" = Vector3( 71.113, 9.367, -84.558 )
 
 [node name="Portal2" parent="Portals" instance=ExtResource( 10 )]
-transform = Transform( 0.0993396, -0.000824931, 0.0114438, 0.000189529, 0.0998456, 0.00555216, -0.011472, -0.0054938, 0.0991878, -4.699, 13.8886, 39.4576 )
+transform = Transform( 0.0993396, -0.000824931, 0.0114438, 0.000189529, 0.0998456, 0.00555216, -0.011472, -0.0054938, 0.0991878, -4.699, 13.9025, 40.1035 )
+"teleport location" = Vector3( 87.687, 2.609, -96.189 )
 
 [node name="Portal3" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0749584, 0.0120137, 0.0650915, -0.00907097, 0.0992757, -0.00787694, -0.0655664, 0, 0.0755053, 19.3487, 3.2884, 35.197 )
 "teleport location" = Vector3( 63.883, 2.397, -49.922 )
 
 [node name="Portal5" parent="Portals" instance=ExtResource( 10 )]
-transform = Transform( 0.0790294, 0, -0.0612728, 0, 0.1, 0, 0.0612728, 0, 0.0790294, 87.6866, 2.60857, -96.1895 )
+transform = Transform( 0.0790294, 0, -0.0612728, 0, 0.1, 0, 0.0612728, 0, 0.0790294, 86.1101, 2.49321, -97.1895 )
+"teleport location" = Vector3( -4.699, 13.889, 39.458 )
 
 [node name="Portal6" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( -0.0652667, 0, -0.0757645, 0, 0.1, 0, 0.0757645, 0, -0.0652667, 29.6746, -0.913, -104.372 )
@@ -23408,7 +23410,7 @@ multimesh = ExtResource( 15 )
 mesh_node_name = "Tree"
 
 [node name="CameraRotating" type="Spatial" parent="."]
-script = SubResource( 3 )
+script = SubResource( 1 )
 speed = 0.25
 
 [node name="Camera" type="Camera" parent="CameraRotating"]
@@ -23436,11 +23438,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar/Block4"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar/Block4"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block5" type="StaticBody" parent="Pillar" groups=[
 "Ground",
@@ -23451,11 +23453,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar/Block5"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar/Block5"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block6" type="StaticBody" parent="Pillar" groups=[
 "Ground",
@@ -23466,11 +23468,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar/Block6"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar/Block6"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block7" type="StaticBody" parent="Pillar" groups=[
 "Ground",
@@ -23481,11 +23483,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar/Block7"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar/Block7"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Crystal" parent="Pillar" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85705, 7.01711, -7.22366 )
@@ -23499,11 +23501,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar/Block8"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar/Block8"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Pillar2" type="Spatial" parent="."]
 transform = Transform( -0.181017, 0, -0.98348, 0, 1, 0, 0.98348, 0, -0.181017, -29.9588, 10.9086, 36.4939 )
@@ -23517,11 +23519,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar2/Block4"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar2/Block4"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block5" type="StaticBody" parent="Pillar2" groups=[
 "Ground",
@@ -23532,11 +23534,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar2/Block5"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar2/Block5"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block6" type="StaticBody" parent="Pillar2" groups=[
 "Ground",
@@ -23547,11 +23549,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar2/Block6"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar2/Block6"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block7" type="StaticBody" parent="Pillar2" groups=[
 "Ground",
@@ -23562,11 +23564,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar2/Block7"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar2/Block7"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Crystal" parent="Pillar2" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85705, 7.01711, -7.22366 )
@@ -23580,11 +23582,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar2/Block8"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar2/Block8"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Pillar3" type="Spatial" parent="."]
 transform = Transform( -0.386244, 0, -0.922397, 0, 1, 0, 0.922397, 0, -0.386244, -44.8727, 8.42, 19.7526 )
@@ -23598,11 +23600,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar3/Block4"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar3/Block4"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block5" type="StaticBody" parent="Pillar3" groups=[
 "Ground",
@@ -23613,11 +23615,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar3/Block5"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar3/Block5"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block6" type="StaticBody" parent="Pillar3" groups=[
 "Ground",
@@ -23628,11 +23630,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar3/Block6"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar3/Block6"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Block7" type="StaticBody" parent="Pillar3" groups=[
 "Ground",
@@ -23643,11 +23645,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar3/Block7"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar3/Block7"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Crystal" parent="Pillar3" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85705, 7.01711, -7.22366 )
@@ -23661,11 +23663,11 @@ __meta__ = {
 }
 
 [node name="MeshInstance" type="MeshInstance" parent="Pillar3/Block8"]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar3/Block8"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="platforms" parent="." instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.3824, 25.4452, 8.19151 )
