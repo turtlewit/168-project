@@ -61,7 +61,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=7]
 resource_name = "Jump"
 length = 0.2
 tracks/0/type = "value"
@@ -77,7 +77,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -120,51 +120,51 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Walk-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Swipe"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "JumpIn"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "JumpOut"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Idle-loop"
 
-[sub_resource type="AnimationNodeOneShot" id=13]
+[sub_resource type="AnimationNodeOneShot" id=14]
 
-[sub_resource type="AnimationNodeBlend2" id=18]
+[sub_resource type="AnimationNodeBlend2" id=15]
 
-[sub_resource type="AnimationNodeOneShot" id=15]
+[sub_resource type="AnimationNodeOneShot" id=16]
 
-[sub_resource type="AnimationNodeBlend2" id=16]
+[sub_resource type="AnimationNodeBlend2" id=17]
 
-[sub_resource type="AnimationNodeBlendTree" id=17]
+[sub_resource type="AnimationNodeBlendTree" id=18]
 graph_offset = Vector2( -516, -159.5 )
-nodes/Animation/node = SubResource( 12 )
+nodes/Animation/node = SubResource( 13 )
 nodes/Animation/position = Vector2( -380, -120 )
-"nodes/Animation 2/node" = SubResource( 8 )
+"nodes/Animation 2/node" = SubResource( 9 )
 "nodes/Animation 2/position" = Vector2( 360, 280 )
-"nodes/Animation 3/node" = SubResource( 9 )
+"nodes/Animation 3/node" = SubResource( 10 )
 "nodes/Animation 3/position" = Vector2( -460, 20 )
-"nodes/Animation 4/node" = SubResource( 10 )
+"nodes/Animation 4/node" = SubResource( 11 )
 "nodes/Animation 4/position" = Vector2( -200, 180 )
-"nodes/Animation 5/node" = SubResource( 11 )
+"nodes/Animation 5/node" = SubResource( 12 )
 "nodes/Animation 5/position" = Vector2( 80, 200 )
-nodes/jump_end/node = SubResource( 13 )
+nodes/jump_end/node = SubResource( 14 )
 nodes/jump_end/position = Vector2( 460, -20 )
-nodes/jump_start/node = SubResource( 18 )
+nodes/jump_start/node = SubResource( 15 )
 nodes/jump_start/position = Vector2( 160, -40 )
 nodes/output/position = Vector2( 940, 180 )
-nodes/swipe/node = SubResource( 15 )
+nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( -100, -80 )
-nodes/walk_blend/node = SubResource( 16 )
+nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2" ]
+node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5" ]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -180,15 +180,11 @@ __meta__ = {
 [node name="PlayerModel" parent="." instance=ExtResource( 8 )]
 transform = Transform( -4.88762e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -4.88762e-08, 0, -0.14, 0 )
 
-[node name="Skeleton" parent="PlayerModel/Armature" index="1"]
-bones/41/bound_children = [ NodePath("BoneAttachment") ]
-bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
-
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000558069, 0.704783, -0.573303 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000366327, 0.73271, -0.586347 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.753369, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.219659, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -228,11 +224,11 @@ current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 6 )
-anims/Jump = SubResource( 19 )
-anims/Pounce = SubResource( 7 )
+anims/Jump = SubResource( 7 )
+anims/Pounce = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 17 )
+tree_root = SubResource( 18 )
 anim_player = NodePath("../PlayerModel/AnimationPlayer")
 active = true
 parameters/jump_end/active = false

@@ -23,7 +23,7 @@ namespace godot {
 		Powerup powerup_type_internal;
 
 		bool collected = false;
-		float respawn_time = 10.0f;
+		float respawn_time = 20.0f;
 		AnimationPlayer* anim_player_dissolve;
 		AnimationPlayer* anim_player_respawn;
 

@@ -6,8 +6,3 @@
 background_mode = 2
 background_sky = SubResource( 1 )
 ssao_enabled = true
-dof_blur_far_enabled = true
-dof_blur_far_distance = 2.21
-dof_blur_far_transition = 19.75
-dof_blur_far_amount = 0.05
-dof_blur_far_quality = 2
