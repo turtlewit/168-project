@@ -1,8 +1,21 @@
 [gd_resource type="Environment" load_steps=2 format=2]
 
 [sub_resource type="ProceduralSky" id=1]
+ground_bottom_color = Color( 0.839216, 0.917647, 0.980392, 1 )
+ground_horizon_color = Color( 0.839216, 0.917647, 0.980392, 1 )
 sun_latitude = 147.26
 
 [resource]
 background_mode = 2
 background_sky = SubResource( 1 )
+fog_enabled = true
+fog_color = Color( 0.839216, 0.917647, 0.980392, 1 )
+fog_depth_end = 207.5
+fog_depth_curve = 6.49801
+fog_transmit_curve = 0.554785
+auto_exposure_scale = 0.65
+auto_exposure_min_luma = 0.16
+auto_exposure_speed = 4.0
+adjustment_brightness = 1.12
+adjustment_contrast = 0.72
+adjustment_saturation = 1.76
