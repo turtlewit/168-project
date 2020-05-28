@@ -11,6 +11,7 @@ void GrassMultimesh::_register_methods()
 {
     register_property("multimesh", &GrassMultimesh::multimesh, Ref<MultiMesh>());
     register_property("mesh_node_name", &GrassMultimesh::mesh_node_name, String("Grass001"));
+    register_property("cast_shadow", &GrassMultimesh::cast_shadow, false);
 
     register_method("_ready", &GrassMultimesh::_ready);
 }
@@ -25,6 +26,7 @@ void GrassMultimesh::_ready()
 {
     recurse_tree(get_tree()->get_current_scene());
     MultiMeshInstance* multi_mesh_instance = MultiMeshInstance::_new();
+    multi_mesh_instance->set_cast_shadows_setting((int64_t)cast_shadow);
     multimesh->set_instance_count(current_instance);
     //multimesh->set_as_bulk_array(transforms);
     for (int64_t i = 0; i < current_instance; ++i) {
