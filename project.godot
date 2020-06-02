@@ -75,7 +75,7 @@ window/size/height=720
 
 [editor_plugins]
 
-enabled=PoolStringArray( "CustomTypes" )
+enabled=PoolStringArray( "CustomTypes", "cpp-plugin" )
 
 [input]
 

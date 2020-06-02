@@ -11,14 +11,14 @@ using namespace godot;
 #include "Net/NetworkStarter.hpp"
 #include "Net/NetworkSync.hpp"
 #include "Net/NetworkTransform.hpp"
+#include "Net/NetworkSignalManager.hpp"
 #include "Objects/Crystal.hpp"
 #include "Objects/Portal.hpp"
 #include "System/SignalManagerPlayer.hpp"
 #include "System/GameUI.hpp"
 #include "GrassMultimesh.hpp"
-#include "Objects/DeathPlane.hpp"
 #include "Player/Player.hpp"
-#include "Net/NetworkSignalManager.hpp"
+#include "Objects/DeathPlane.hpp"
 
 
 // godot_gdnative_init
@@ -46,13 +46,13 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
     register_class<NetworkStarter>();
     register_class<NetworkSync>();
     register_class<NetworkTransform>();
+    register_class<NetworkSignalManager>();
     register_class<Crystal>();
     register_class<Portal>();
     register_class<SignalManagerPlayer>();
     register_class<GameUI>();
     register_class<GrassMultimesh>();
     register_class<Player>();
-    register_class<NetworkSignalManager>();
     register_class<DeathPlane>();
 
 }

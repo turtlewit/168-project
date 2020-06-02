@@ -1,0 +1,85 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Resource
+
+class ClassInfo:
+	extends Resource
+	export var name: String
+	export var subdir: String
+	export var header: String
+	func _init(name: String, subdir: String, header: String) -> void:
+		self.name = name
+		self.subdir = subdir
+		self.header = header
+
+export(Array, Resource) var class_header_paths: Array
+"
+
+[resource]
+script = SubResource( 1 )
+class_header_paths = [ {
+"header": "Menu/ConnectionDialogue.hpp",
+"name": "ConnectionDialogue",
+"subdir": "Menu"
+}, {
+"header": "Menu/HostDialogue.hpp",
+"name": "HostDialogue",
+"subdir": "Menu"
+}, {
+"header": "Net/NetworkAnimator.hpp",
+"name": "NetworkAnimator",
+"subdir": "Net"
+}, {
+"header": "Net/NetworkIdentity.hpp",
+"name": "NetworkIdentity",
+"subdir": "Net"
+}, {
+"header": "Net/NetworkManager.hpp",
+"name": "NetworkManager",
+"subdir": "Net"
+}, {
+"header": "Net/NetworkStarter.hpp",
+"name": "NetworkStarter",
+"subdir": "Net"
+}, {
+"header": "Net/NetworkSync.hpp",
+"name": "NetworkSync",
+"subdir": "Net"
+}, {
+"header": "Net/NetworkTransform.hpp",
+"name": "NetworkTransform",
+"subdir": "Net"
+}, {
+"header": "Net/NetworkSignalManager.hpp",
+"name": "NetworkSignalManager",
+"subdir": "Net/"
+}, {
+"header": "Objects/Crystal.hpp",
+"name": "Crystal",
+"subdir": "Objects"
+}, {
+"header": "Objects/Portal.hpp",
+"name": "Portal",
+"subdir": "Objects"
+}, {
+"header": "Objects/DeathPlane.hpp",
+"name": "DeathPlane",
+"subdir": "Objects/"
+}, {
+"header": "System/SignalManagerPlayer.hpp",
+"name": "SignalManagerPlayer",
+"subdir": "SignalManagers"
+}, {
+"header": "System/GameUI.hpp",
+"name": "GameUI",
+"subdir": "UI"
+}, {
+"header": "GrassMultimesh.hpp",
+"name": "GrassMultimesh",
+"subdir": ""
+}, {
+"header": "Player/Player.hpp",
+"name": "Player",
+"subdir": ""
+} ]

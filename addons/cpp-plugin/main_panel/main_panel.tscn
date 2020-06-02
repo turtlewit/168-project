@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/cpp-plugin/main_panel/tree.gd" type="Script" id=1]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchor_right = 1.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPanel" type="HBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 20.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainPanel"]
+margin_top = 3.0
+margin_right = 630.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "C++ Build Log:"
+
+[node name="NewClass" type="Button" parent="MainPanel"]
+margin_left = 634.0
+margin_right = 711.0
+margin_bottom = 20.0
+size_flags_vertical = 0
+text = "New Class"
+
+[node name="AddExisting" type="Button" parent="MainPanel"]
+margin_left = 715.0
+margin_right = 842.0
+margin_bottom = 20.0
+size_flags_vertical = 0
+text = "Add Existing Class"
+
+[node name="ReGenerate" type="Button" parent="MainPanel"]
+margin_left = 846.0
+margin_right = 1024.0
+margin_bottom = 20.0
+hint_tooltip = "Re-generates the entry point source file from the \"gdlibrary_template.cpp\" template. 
+This is done automatically most of the time, and only needs to be pressed if you have changed the template file."
+text = "Re-Generate gdlibrary.cpp"
+
+[node name="HBoxContainer" type="HSplitContainer" parent="."]
+margin_top = 24.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="BuildLog" type="RichTextLabel" parent="HBoxContainer"]
+margin_right = 506.0
+margin_bottom = 576.0
+rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="Tree" type="Tree" parent="HBoxContainer"]
+margin_left = 518.0
+margin_right = 1024.0
+margin_bottom = 576.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="Button" type="Button" parent="HBoxContainer/Tree"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -55.0
+margin_top = -20.0
+hint_tooltip = "Removes the selected class from the gdlibrary source file, but does not delete the associated header and source files."
+text = "Delete"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="visibility_changed" from="HBoxContainer/Tree" to="HBoxContainer/Tree" method="_on_Tree_visibility_changed"]
+[connection signal="pressed" from="HBoxContainer/Tree/Button" to="HBoxContainer/Tree" method="_on_Button_pressed"]

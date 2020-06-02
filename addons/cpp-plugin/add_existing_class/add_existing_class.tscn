@@ -1,0 +1,120 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/cpp-plugin/add_existing_class/header_file_line.gd" type="Script" id=1]
+[ext_resource path="res://addons/cpp-plugin/add_existing_class/add_existing_class.gd" type="Script" id=2]
+
+[node name="AddExistingClass" type="WindowDialog"]
+margin_right = 551.0
+margin_bottom = 117.0
+window_title = "Add Existing Class"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+margin_right = 551.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClassName" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+margin_right = 551.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/ClassName"]
+margin_top = 5.0
+margin_right = 273.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Class Name"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer2/VBoxContainer/ClassName"]
+margin_left = 277.0
+margin_right = 551.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Enter Name"
+
+[node name="Subdir" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+margin_top = 28.0
+margin_right = 551.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/Subdir"]
+margin_top = 5.0
+margin_right = 273.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Subdirectory"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer2/VBoxContainer/Subdir"]
+margin_left = 277.0
+margin_right = 551.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Enter Subdirectory"
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+margin_top = 56.0
+margin_right = 551.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/Header"]
+margin_top = 5.0
+margin_right = 273.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Header File"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/Header"]
+margin_left = 277.0
+margin_right = 551.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer2/VBoxContainer/Header/HBoxContainer"]
+margin_right = 199.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "res://src/.hpp"
+script = ExtResource( 1 )
+
+[node name="Button" type="Button" parent="VBoxContainer2/VBoxContainer/Header/HBoxContainer"]
+margin_left = 203.0
+margin_right = 274.0
+margin_bottom = 24.0
+text = "Browse..."
+
+[node name="FileDialog" type="FileDialog" parent="VBoxContainer2/VBoxContainer/Header/HBoxContainer/Button"]
+margin_right = 307.0
+margin_bottom = 300.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+filters = PoolStringArray( "*.hpp ; C++ header file", "*.h ; C/C++ Header File" )
+show_hidden_files = true
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+margin_top = 84.0
+margin_right = 551.0
+margin_bottom = 117.0
+size_flags_vertical = 3
+text = "Add"
+[connection signal="text_changed" from="VBoxContainer2/VBoxContainer/ClassName/LineEdit" to="VBoxContainer2/VBoxContainer/Header/HBoxContainer/LineEdit" method="_on_ClassName_LineEdit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer2/VBoxContainer/Subdir/LineEdit" to="VBoxContainer2/VBoxContainer/Header/HBoxContainer/LineEdit" method="_on_Subdir_LineEdit_text_changed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Header/HBoxContainer/Button" to="VBoxContainer2/VBoxContainer/Header/HBoxContainer/Button/FileDialog" method="popup_centered"]
+[connection signal="file_selected" from="VBoxContainer2/VBoxContainer/Header/HBoxContainer/Button/FileDialog" to="VBoxContainer2/VBoxContainer/Header/HBoxContainer/LineEdit" method="set_text"]
+[connection signal="pressed" from="VBoxContainer2/Button" to="." method="_on_Button_pressed"]
