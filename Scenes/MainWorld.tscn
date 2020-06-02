@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://tree_multimesh.tres" type="MultiMesh" id=13]
 [ext_resource path="res://Scripts/GrassMultimesh.gdns" type="Script" id=14]
 [ext_resource path="res://grass_multimesh.tres" type="MultiMesh" id=15]
+[ext_resource path="res://Prefabs/Objects/DeathPlane.tscn" type="PackedScene" id=16]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.5, 0.5, 0.5 )
@@ -19360,6 +19361,9 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Pillar/Block8"]
 shape = SubResource( 2 )
+
+[node name="DeathPlane" parent="." instance=ExtResource( 16 )]
+transform = Transform( 410.97, 0, 0, 0, 1, 0, 0, 0, 722.56, 6, -3, -87 )
 
 [editable path="Player"]
 

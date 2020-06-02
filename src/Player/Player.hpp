@@ -121,6 +121,7 @@ namespace godot {
 		void increase_pounce(float amount);
 		void increase_swipe_damage(int amount);
 		void increase_pounce_damage(int amount);
+		void damage(int amount);
 
 	private:
 		inline bool is_moving();
@@ -131,9 +132,8 @@ namespace godot {
 
 		void set_state(int value);
 
-		void damage(int amount);
+		
 		void respawn();
-
 		void enter_ground();
 		void exit_ground();
 		void check_ground();

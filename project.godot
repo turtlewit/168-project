@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkAnimator.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkIdentity",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkIdentity.gdns"
@@ -24,12 +24,12 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkManager.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkSync",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSync.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkTransform",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkTransform.gdns"
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="168-project"
-run/main_scene="res://Scenes/MainWorldKat.tscn"
+run/main_scene="res://Scenes/MainWorld.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -179,6 +179,5 @@ common/physics_fps=120
 
 [rendering]
 
-quality/directional_shadow/size=16384
 quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"

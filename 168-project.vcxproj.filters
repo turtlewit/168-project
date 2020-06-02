@@ -69,6 +69,18 @@
     <ClCompile Include="src\Objects\Portal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Menu\ConnectionDialogue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GrassMultimesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\HostDialogue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\DeathPlane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hello.hpp">
@@ -114,6 +126,18 @@
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\Portal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\ConnectionDialogue.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GrassMultimesh.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu\HostDialogue.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\DeathPlane.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

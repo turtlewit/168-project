@@ -264,6 +264,7 @@ void Player::increase_pounce_damage(int amount)
 void Player::damage(int amount)
 {
 	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
+	health -= amount;
 }
 
 

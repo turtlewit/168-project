@@ -15,6 +15,7 @@
 #include "Menu/ConnectionDialogue.hpp"
 #include "GrassMultimesh.hpp"
 #include "Menu/HostDialogue.hpp"
+#include "Objects/DeathPlane.hpp"
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
 {
     godot::Godot::gdnative_init(o);
@@ -44,4 +45,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
     godot::register_class<ConnectionDialogue>();
     godot::register_class<GrassMultimesh>();
     godot::register_class<HostDialogue>();
+    godot::register_class<godot::DeathPlane>();
 }
