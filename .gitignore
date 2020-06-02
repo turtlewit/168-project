@@ -2,3 +2,5 @@
 .vscode/
 .import/
 build/
+Session.vim
+tags

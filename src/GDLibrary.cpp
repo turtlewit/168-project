@@ -1,49 +1,58 @@
-﻿#include <Godot.hpp>
+#include <Godot.hpp>
 
-#include "Hello.hpp"
-#include "Player/Player.hpp"
+using namespace godot;
+
+// Project includes
+#include "Menu/ConnectionDialogue.hpp"
+#include "Menu/HostDialogue.hpp"
+#include "Net/NetworkAnimator.hpp"
+#include "Net/NetworkIdentity.hpp"
 #include "Net/NetworkManager.hpp"
 #include "Net/NetworkStarter.hpp"
 #include "Net/NetworkSync.hpp"
 #include "Net/NetworkTransform.hpp"
 #include "Objects/Crystal.hpp"
-#include "Net/NetworkIdentity.hpp"
-#include "Net/NetworkAnimator.hpp"
 #include "Objects/Portal.hpp"
-#include "System/GameUI.hpp"
 #include "System/SignalManagerPlayer.hpp"
-#include "Menu/ConnectionDialogue.hpp"
+#include "System/GameUI.hpp"
 #include "GrassMultimesh.hpp"
-#include "Menu/HostDialogue.hpp"
 #include "Objects/DeathPlane.hpp"
+#include "Player/Player.hpp"
+#include "Net/NetworkSignalManager.hpp"
+
+
+// godot_gdnative_init
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options* o) 
 {
     godot::Godot::gdnative_init(o);
 }
 
+// godot_gdnative_terminate
 extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options* o) 
 {
     godot::Godot::gdnative_terminate(o);
 }
 
+// godot_nativescript_init
 extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) 
 {
     godot::Godot::nativescript_init(handle);
 
-    godot::register_class<Hello>();
-    godot::register_class<godot::Player>();
-    godot::register_class<NetworkManager>();
-    godot::register_class<NetworkStarter>();
-    godot::register_class<NetworkSync>();
-    godot::register_class<NetworkTransform>();
-    godot::register_class<godot::Crystal>();
-    godot::register_class<NetworkIdentity>();
-    godot::register_class<NetworkAnimator>();
-    godot::register_class<godot::Portal>();
-    godot::register_class<godot::GameUI>();
-    godot::register_class<godot::SignalManagerPlayer>();
-    godot::register_class<ConnectionDialogue>();
-    godot::register_class<GrassMultimesh>();
-    godot::register_class<HostDialogue>();
-    godot::register_class<godot::DeathPlane>();
+    register_class<ConnectionDialogue>();
+    register_class<HostDialogue>();
+    register_class<NetworkAnimator>();
+    register_class<NetworkIdentity>();
+    register_class<NetworkManager>();
+    register_class<NetworkStarter>();
+    register_class<NetworkSync>();
+    register_class<NetworkTransform>();
+    register_class<Crystal>();
+    register_class<Portal>();
+    register_class<SignalManagerPlayer>();
+    register_class<GameUI>();
+    register_class<GrassMultimesh>();
+    register_class<Player>();
+    register_class<NetworkSignalManager>();
+    register_class<DeathPlane>();
+
 }

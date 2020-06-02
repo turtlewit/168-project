@@ -4,6 +4,7 @@
 #include "Utils/Defs.hpp"
 #include "Utils/Mathf.hpp"
 #include "System/SignalManagerPlayer.hpp"
+#include "Net/NetworkSignalManager.hpp"
 
 #include <Input.hpp>
 #include <InputEventMouseMotion.hpp>
@@ -30,6 +31,8 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_Hurtbox_area_entered);
 	REGISTER_METHOD(Player, _on_TimerSwipe_timeout);
 	REGISTER_METHOD(Player, _on_TimerPounce_timeout);
+
+	REGISTER_METHOD(Player, _on_player_hit);
 
 	register_property("speed", &Player::speed, 4.0f);
 	register_property("gravity", &Player::gravity, 9.8f);
@@ -61,6 +64,8 @@ void Player::_ready()
 
 	camera_distance = camera_pivot->get_global_transform().origin.distance_to(camera->get_global_transform().origin);
 	camera_exclusions.append(this);
+
+	NetworkSignalManager::get_singleton()->connect("player_hit", this, "_on_player_hit");
 }
 
 
@@ -265,6 +270,11 @@ void Player::damage(int amount)
 {
 	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
 	health -= amount;
+
+	if (health <= 0) {
+		dead = true;
+		timer_respawn->start();
+	}
 }
 
 
@@ -327,14 +337,16 @@ void Player::respawn()
 
 void Player::_on_Hurtbox_area_entered(Area* area)
 {
-	Player* other = cast_to<Player>(area->get_parent());
+	Player* other = cast_to<Player>(area->get_node("../.."));
 
 	switch (other->state) {
 		case State::Attack:
-			damage(other->swipe_damage);
+			//damage(other->swipe_damage);
+			NetworkSignalManager::get_singleton()->emit_network_signal("player_hit", Array::make(get_network_master(), other->swipe_damage));
 			break;
 		case State::Pounce:
-			damage(other->pounce_damage);
+			//damage(other->pounce_damage);
+			NetworkSignalManager::get_singleton()->emit_network_signal("player_hit", Array::make(get_network_master(), other->pounce_damage));
 			break;
 		default:
 			break;
@@ -384,6 +396,14 @@ void Player::check_water() {
 		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWater"))->hide();
 		cast_to<CanvasItem>(get_parent()->get_node("GameUI")->get_node("UnderWaterFog"))->hide();
 	}
+}
+
+void Player::_on_player_hit(int64_t net_id, int64_t damage)
+{
+	if (net_id != get_tree()->get_network_unique_id() || !is_master())
+		return;
+
+	Player::damage((int) damage);
 }
 
 void Player::_on_TimerSwipe_timeout()

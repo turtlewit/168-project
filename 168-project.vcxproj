@@ -170,6 +170,7 @@
     <ClCompile Include="src\Net\NetworkStarter.cpp" />
     <ClCompile Include="src\Net\NetworkSync.cpp" />
     <ClCompile Include="src\Net\NetworkTransform.cpp" />
+    <ClCompile Include="src\Net\NetworkSignalManager.cpp" />
     <ClCompile Include="src\Objects\Crystal.cpp" />
     <ClCompile Include="src\Objects\DeathPlane.cpp" />
     <ClCompile Include="src\Objects\Portal.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="src\Net\NetworkStarter.hpp" />
     <ClInclude Include="src\Net\NetworkSync.hpp" />
     <ClInclude Include="src\Net\NetworkTransform.hpp" />
+    <ClInclude Include="src\Net\NetworkSignalManager.hpp" />
     <ClInclude Include="src\Objects\Crystal.hpp" />
     <ClInclude Include="src\Objects\DeathPlane.hpp" />
     <ClInclude Include="src\Objects\Portal.hpp" />

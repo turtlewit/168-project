@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkAnimator.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkIdentity",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkIdentity.gdns"
@@ -24,12 +24,17 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkManager.gdns"
 }, {
-"base": "",
+"base": "Node",
+"class": "NetworkSignalManager",
+"language": "NativeScript",
+"path": "res://Scripts/Net/NetworkSignalManager.tres"
+}, {
+"base": "Node",
 "class": "NetworkSync",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSync.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkTransform",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkTransform.gdns"
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "NetworkAnimator": "res://Textures/Tools/NetworkIcon.png",
 "NetworkIdentity": "res://Textures/Tools/NetworkIcon.png",
 "NetworkManager": "",
+"NetworkSignalManager": "",
 "NetworkSync": "res://Textures/Tools/NetworkIcon.png",
 "NetworkTransform": "res://Textures/Tools/NetworkIcon.png"
 }
@@ -52,6 +58,15 @@ config/icon="res://icon.png"
 
 NetworkManager="*res://Prefabs/Net/NetworkManager.tscn"
 SignalManagerPlayer="*res://Prefabs/SignalManagers/SignalManagerPlayer.tscn"
+NetworkSignalManager="*res://Prefabs/Net/NetworkSignalManager.tscn"
+
+[c++]
+
+files/source_path="res://src/"
+files/library_path="res://Library/gdnativelibrary.tres"
+files/gdlibrary_source_file_path="res://src/GDLibrary.cpp"
+files/scripts_directory="res://Scripts/"
+plugin/plugin_set_up=true
 
 [display]
 

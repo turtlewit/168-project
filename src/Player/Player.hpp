@@ -2,6 +2,7 @@
 #pragma once
 
 #include <Godot.hpp>
+#include <SceneTree.hpp>
 #include <KinematicBody.hpp>
 #include <Camera.hpp>
 #include <World.hpp>
@@ -124,6 +125,7 @@ namespace godot {
 		void damage(int amount);
 
 	private:
+		bool is_master() { return get_tree()->get_network_unique_id() == get_network_master(); }
 		inline bool is_moving();
 		inline float get_closest_angle(float current, float target, bool flip);
 		void jump();
@@ -142,6 +144,8 @@ namespace godot {
 		void check_camera();
 		void adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento);
 		void check_water();
+
+		void _on_player_hit(int64_t net_id, int64_t damage);
 
 		void _on_TimerSwipe_timeout();
 		void _on_TimerPounce_timeout();
