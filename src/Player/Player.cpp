@@ -33,7 +33,7 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_TimerPounce_timeout);
 
 	REGISTER_METHOD(Player, _on_player_hit);
-
+	REGISTER_METHOD(Player, set_gravity_velocity);
 	register_property("speed", &Player::speed, 4.0f);
 	register_property("gravity", &Player::gravity, 9.8f);
 	register_property("jump_force", &Player::jump_force, 4.0f);
@@ -277,6 +277,10 @@ void Player::damage(int amount)
 	}
 }
 
+void Player::set_gravity_velocity(float amount)
+{
+	gravity_velocity = Vector3(0, amount, 0);
+}
 
 void Player::enter_ground()
 {

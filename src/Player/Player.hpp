@@ -122,6 +122,7 @@ namespace godot {
 		void increase_pounce(float amount);
 		void increase_swipe_damage(int amount);
 		void increase_pounce_damage(int amount);
+		void set_gravity_velocity(float amount);
 		void damage(int amount);
 
 	private:

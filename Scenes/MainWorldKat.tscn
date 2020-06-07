@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://tree_multimesh.tres" type="MultiMesh" id=15]
 [ext_resource path="res://Models/Johnny_Models/Platforms/platforms.tscn" type="PackedScene" id=16]
 [ext_resource path="res://rock_multimesh.tres" type="MultiMesh" id=17]
+[ext_resource path="res://Prefabs/Objects/DeathPlane.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Models/Johnny_Models/Arena/arena.tscn" type="PackedScene" id=19]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
@@ -81,10 +83,10 @@ directional_shadow_bias_split_scale = 0.1
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 1.89997, 2.0797 )
 
 [node name="Water" parent="." instance=ExtResource( 9 )]
-transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, -0.783661, 0 )
+transform = Transform( -3, 4.37114e-08, -2.62268e-07, 2.62268e-07, 0.5, 0, 2.62268e-07, -3.82137e-15, -3, 0, -0.783661, 0 )
 
 [node name="MeshInstance" parent="Water" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267393, 1.98998, -0.363965 )
+transform = Transform( 1, -1.11358e-22, 0, -4.0089e-21, 1, -3.38813e-21, 0, 0, 1, -0.267393, 1.98998, -0.363965 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 
@@ -228,6 +230,45 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 14.563, 13.146, 27.519 )
 
 [node name="PineTree40" parent="Environment/PineTrees" instance=ExtResource( 2 )]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 18.363, 12.646, 25.119 )
+
+[node name="PineTree50" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 19.7828, 12.8978, 23.3522 )
+
+[node name="PineTree51" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 20.7846, 12.8436, 23.3522 )
+
+[node name="PineTree52" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 20.7846, 12.6454, 24.3901 )
+
+[node name="PineTree53" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 19.2208, 12.6454, 25.4182 )
+
+[node name="PineTree54" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 19.3399, 13.6657, 37.2172 )
+
+[node name="PineTree55" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 20.3975, 13.645, 37.2172 )
+
+[node name="PineTree56" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 21.7684, 13.5694, 37.7063 )
+
+[node name="PineTree57" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 22.72, 13.5849, 37.0195 )
+
+[node name="PineTree59" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 21.8378, 13.5661, 35.8991 )
+
+[node name="PineTree60" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 23.0301, 13.5661, 36.0375 )
+
+[node name="PineTree61" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 22.637, 13.505, 35.1219 )
+
+[node name="PineTree62" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 20.8968, 13.505, 35.3943 )
+
+[node name="PineTree58" parent="Environment/PineTrees" instance=ExtResource( 2 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 20.7228, 13.4908, 37.9613 )
 
 [node name="PineTree41" parent="Environment/PineTrees" instance=ExtResource( 2 )]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 17.363, 12.646, 24.719 )
@@ -23424,6 +23465,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6395, -0.0559666, -56.4076
 [node name="Crystal15" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.4296, -0.411493, -57.0695 )
 
+[node name="Crystal11" parent="Crystals" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -176.221, 9.51274, 167.447 )
+
+[node name="Crystal16" parent="Crystals" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8055, 2.54899, -88.7691 )
+
+[node name="Crystal17" parent="Crystals" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.247, 9.51274, 166.849 )
+
+[node name="Crystal18" parent="Crystals" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.018, 13.4767, 24.186 )
+
+[node name="Crystal19" parent="Crystals" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2962, 14.1451, 36.7993 )
+
 [node name="CameraRotating" type="Spatial" parent="."]
 script = SubResource( 1 )
 speed = 0.25
@@ -23694,6 +23750,40 @@ transform = Transform( 1, 9.8953e-10, 0, 4.88944e-09, 1, 9.31323e-10, 3.72529e-0
 [node name="Platform2" parent="platforms" index="1"]
 transform = Transform( -0.569402, 0.0295063, 0.0246599, 0.0291029, 0.569871, -0.00987598, -0.0251348, -0.008596, -0.570081, 127.477, 3.0281, 55.4254 )
 
+[node name="DeathPlane" parent="." instance=ExtResource( 18 )]
+transform = Transform( 1.11272e+06, 0, 0, 0, 1, 0, 0, 0, 605091, -16.0277, -14.5182, -73.9773 )
+
+[node name="arena" parent="." instance=ExtResource( 19 )]
+transform = Transform( -1, 4.37114e-08, -1.50996e-07, 8.74228e-08, 0.5, 0, 1.50996e-07, -6.60024e-15, -1, -163.384, -7.13527, 38.7376 )
+
+[node name="Arena" parent="arena" index="0"]
+transform = Transform( 0.4, -5.69063e-22, 0, -1.59457e-21, 0.571, 0, 0, 0, 0.4, 5.73573, 30.9999, -46.6494 )
+
+[node name="CollisionShape" parent="arena/Arena/StaticBody" index="0"]
+transform = Transform( 1, -9.96608e-22, 0, 1.42109e-14, 1, -1.69407e-21, 0, 0, 1, 0, 0, 0 )
+
+[node name="APlatform2" parent="arena" index="1"]
+transform = Transform( 0.570699, -5.68764e-22, 0, -2.27505e-21, 0.570699, 0, 0, 0, 0.570699, 35.6937, 47.154, -85.2478 )
+
+[node name="APlatform" parent="arena" index="2"]
+transform = Transform( 0.15722, 1.80738e-08, 0.548616, 7.22951e-08, 0.570699, -9.5923e-08, -0.548616, 2.39808e-08, 0.15722, 9.99475, 29.3714, -91.5626 )
+
+[node name="arena2" parent="." instance=ExtResource( 19 )]
+transform = Transform( 0.3, 0, 0, 0, 0.5, 0, 0, 0, 0.3, -123.892, -11.2079, 99.8011 )
+
+[node name="Arena" parent="arena2" index="0"]
+transform = Transform( 0.570699, 0, 0, 0, 0.570699, 0, 0, 0, 0.570699, -252.344, 62.7811, 17.3251 )
+
+[node name="APlatform2" parent="arena2" index="1"]
+transform = Transform( 0.521481, 0, 0.231851, 0, 0.570699, 0, -0.231851, 0, 0.521481, -167.127, 30.9999, 8.53882 )
+
+[node name="APlatform" parent="arena2" index="2"]
+transform = Transform( 0.570699, 0, 0, 0, 0.570699, 0, 0, 0, 0.570699, -135.683, 30.9999, 46.3971 )
+
 [editable path="Water"]
 
 [editable path="platforms"]
+
+[editable path="arena"]
+
+[editable path="arena2"]

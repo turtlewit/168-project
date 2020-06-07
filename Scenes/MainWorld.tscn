@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -12,9 +12,7 @@
 [ext_resource path="res://Prefabs/Objects/Portal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/UI/GameUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Objects/Rock.tscn" type="PackedScene" id=12]
-[ext_resource path="res://tree_multimesh.tres" type="MultiMesh" id=13]
 [ext_resource path="res://Scripts/GrassMultimesh.gdns" type="Script" id=14]
-[ext_resource path="res://grass_multimesh.tres" type="MultiMesh" id=15]
 [ext_resource path="res://Prefabs/Objects/DeathPlane.tscn" type="PackedScene" id=16]
 
 [sub_resource type="CubeMesh" id=1]
@@ -27,6 +25,22 @@ points = PoolVector3Array( -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.2
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 28.0489, 3.41332, -75.8008 )
+
+[node name="NetworkSync" parent="Player" index="9"]
+delete_on_not_authority = [  ]
+
+[node name="NetworkIdentity" parent="Player" index="10"]
+is_player = false
+
+[node name="NetworkTransform" parent="Player" index="11"]
+children_to_sync = [  ]
+sync_scale = true
+
+[node name="NetworkAnimator" parent="Player" index="12"]
+animator_path = NodePath("")
+
+[node name="NetworkAnimator2" parent="Player" index="13"]
+animator_path = NodePath("")
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.875186, -0.326206, 0.357266, -0.0450997, 0.680251, 0.731591, -0.48168, -0.65639, 0.580634, 0, 1.26427, 2.88338 )
@@ -395,12 +409,9 @@ transform = Transform( -0.0722818, 0, 0.291162, 0, 0.3, 0, -0.291162, 0, -0.0722
 
 [node name="GrassMultimesh" type="Node" parent="."]
 script = ExtResource( 14 )
-multimesh = ExtResource( 15 )
 
 [node name="TreeMultimesh" type="Node" parent="."]
 script = ExtResource( 14 )
-multimesh = ExtResource( 13 )
-mesh_node_name = "Tree"
 
 [node name="AllGrass" type="Spatial" parent="."]
 

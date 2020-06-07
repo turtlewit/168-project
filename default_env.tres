@@ -8,7 +8,6 @@ sun_latitude = 147.26
 [resource]
 background_mode = 2
 background_sky = SubResource( 1 )
-fog_enabled = true
 fog_color = Color( 0.839216, 0.917647, 0.980392, 1 )
 fog_depth_end = 207.5
 fog_depth_curve = 6.49801

@@ -26,5 +26,6 @@ void DeathPlane::_on_DeathPlane_body_entered(Node* body)
 		Player* player = cast_to<Player>(body);
 		player->translate(Vector3(0, 40, 0));
 		player->damage(1);
+		player->set_gravity_velocity(0.0);
 	}
 }
