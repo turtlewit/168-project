@@ -298,8 +298,8 @@ void Player::enter_ground()
 		if (state != State::Attack && state != State::Ground) {
 			state = State::Ground;
 			//anim_tree->set("parameters/jump_start/blend_amount", 0.0f);
-			//anim_tree->set("parameters/jump_start/blend_amount", 0.0f);
-			rpc_set_anim_param("parameters/jump_end/active", true);
+			//anim_tree->set("parameters/jump_end/active", true);
+			rpc_set_anim_param("parameters/jump_start/blend_amount", 0.0f);
 			rpc_set_anim_param("parameters/jump_end/active", true);
 		}
 			
