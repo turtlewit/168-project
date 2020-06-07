@@ -146,6 +146,13 @@ namespace godot {
 		void adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento);
 		void check_water();
 
+		void rpc_set_anim_param(String name, Variant to)
+		{
+			rpc("puppet_set_anim_param", Array::make(name, to));
+		}
+
+		void puppet_set_anim_param(String name, Variant to);
+
 		void _on_player_hit(int64_t net_id, int64_t damage);
 
 		void _on_TimerSwipe_timeout();

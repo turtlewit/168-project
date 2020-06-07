@@ -32,6 +32,8 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_TimerSwipe_timeout);
 	REGISTER_METHOD(Player, _on_TimerPounce_timeout);
 
+	register_method("puppet_set_anim_param", &Player::puppet_set_anim_param, GODOT_METHOD_RPC_MODE_PUPPETSYNC);
+
 	REGISTER_METHOD(Player, _on_player_hit);
 	REGISTER_METHOD(Player, set_gravity_velocity);
 	register_property("speed", &Player::speed, 4.0f);
@@ -131,7 +133,8 @@ void Player::_process(float delta)
 		stop();
 		state = State::Attack;
 		anim_player->play("Attack");
-		anim_tree->set("parameters/swipe/active", true);
+		//anim_tree->set("parameters/swipe/active", true);
+		rpc_set_anim_param("parameters/swipe/active", true);
 
 		can_swipe = false;
 		timer_swipe->start();
@@ -159,7 +162,8 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right") / PounceTurnPenalty;
 	}
 
-	anim_tree->set("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
+	//anim_tree->set("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
+	rpc_set_anim_param("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
 	
 	if (inp->is_action_just_pressed("sys_quit"))
 		get_tree()->quit();
@@ -293,8 +297,10 @@ void Player::enter_ground()
 		snap_length = SnapLength;
 		if (state != State::Attack && state != State::Ground) {
 			state = State::Ground;
-			anim_tree->set("parameters/jump_start/blend_amount", 0.0f);
-			anim_tree->set("parameters/jump_end/active", true);
+			//anim_tree->set("parameters/jump_start/blend_amount", 0.0f);
+			//anim_tree->set("parameters/jump_start/blend_amount", 0.0f);
+			rpc_set_anim_param("parameters/jump_end/active", true);
+			rpc_set_anim_param("parameters/jump_end/active", true);
 		}
 			
 	}
@@ -402,6 +408,11 @@ void Player::check_water() {
 	}
 }
 
+void Player::puppet_set_anim_param(String name, Variant to)
+{
+	anim_tree->set(name, to);
+}
+
 void Player::_on_player_hit(int64_t net_id, int64_t damage)
 {
 	if (net_id != get_tree()->get_network_unique_id() || !is_master())
@@ -412,7 +423,8 @@ void Player::_on_player_hit(int64_t net_id, int64_t damage)
 
 void Player::_on_TimerSwipe_timeout()
 {
-	anim_tree->set("parameters/swipe/active", false);
+	//anim_tree->set("parameters/swipe/active", false);
+	rpc_set_anim_param("parameters/swipe/active", false);
 	can_swipe = true;
 }
 
