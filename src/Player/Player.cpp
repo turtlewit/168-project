@@ -290,6 +290,7 @@ void Player::damage(int amount)
 
 	if (health <= 0) {
 		dead = true;
+		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
 		timer_respawn->start();
 	}
 }
@@ -367,6 +368,7 @@ void Player::check_deathplane()
 
 void Player::respawn()
 {
+	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 	dead = false;
 }
 
