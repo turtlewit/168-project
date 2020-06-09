@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://tree_multimesh.tres" type="MultiMesh" id=15]
 [ext_resource path="res://Models/Johnny_Models/Platforms/platforms.tscn" type="PackedScene" id=16]
 [ext_resource path="res://rock_multimesh.tres" type="MultiMesh" id=17]
-[ext_resource path="res://Prefabs/Objects/DeathPlane.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Models/Johnny_Models/Arena/arena.tscn" type="PackedScene" id=19]
 
 [sub_resource type="GDScript" id=1]
@@ -23920,9 +23919,6 @@ transform = Transform( 1, 9.8953e-10, 0, 4.88944e-09, 1, 9.31323e-10, 3.72529e-0
 
 [node name="Platform2" parent="platforms" index="1"]
 transform = Transform( -0.569402, 0.0295063, 0.0246599, 0.0291029, 0.569871, -0.00987598, -0.0251348, -0.008596, -0.570081, 127.477, 3.0281, 55.4254 )
-
-[node name="DeathPlane" parent="." instance=ExtResource( 18 )]
-transform = Transform( 1.11272e+06, 0, 0, 0, 1, 0, 0, 0, 605091, -16.028, -15, -73.977 )
 
 [node name="arena" parent="." instance=ExtResource( 19 )]
 transform = Transform( -1, 4.37114e-08, -1.50996e-07, 8.74228e-08, 0.5, 0, 1.50996e-07, -6.60024e-15, -1, -163.384, -7.13527, 38.7376 )

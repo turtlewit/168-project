@@ -14,7 +14,6 @@ using namespace godot;
 #include "Net/NetworkSignalManager.hpp"
 #include "Objects/Crystal.hpp"
 #include "Objects/Portal.hpp"
-#include "Objects/DeathPlane.hpp"
 #include "System/SignalManagerPlayer.hpp"
 #include "System/GameUI.hpp"
 #include "GrassMultimesh.hpp"
@@ -51,7 +50,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<NetworkSignalManager>();
 	register_class<Crystal>();
 	register_class<Portal>();
-	register_class<DeathPlane>();
 	register_class<SignalManagerPlayer>();
 	register_class<GameUI>();
 	register_class<GrassMultimesh>();

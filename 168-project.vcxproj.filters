@@ -78,9 +78,6 @@
     <ClCompile Include="src\Menu\HostDialogue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\DeathPlane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Net\NetworkSignalManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -144,9 +141,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Menu\HostDialogue.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Objects\DeathPlane.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Net\NetworkSignalManager.hpp">
