@@ -23637,7 +23637,16 @@ far = 200.0
 ]]
 
 [node name="Spatial" type="Spatial" parent="SpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.41367, -4.49203 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40253, 2.20054, -26.988 )
+
+[node name="Spatial3" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1034, 2.20054, -25.4666 )
+
+[node name="Spatial4" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.3353, 1.50604, -61.6067 )
+
+[node name="Spatial2" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.98741, 2.77092, 5.83269 )
 
 [node name="Pillar" type="Spatial" parent="."]
 transform = Transform( 0.62674, 0, -0.779229, 0, 1, 0, 0.779229, 0, 0.62674, 22.9404, 10.1679, 39.697 )

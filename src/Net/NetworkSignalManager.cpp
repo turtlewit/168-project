@@ -57,8 +57,7 @@ void NetworkSignalManager::emit_network_signal(String name, Array args)
 	if (get_tree()->get_network_unique_id() == NetworkManager::SERVER_ID) {
 		server_emit_signal(name, args);
 	} else {
-		args.insert(0, name);
-		rpc_id(NetworkManager::SERVER_ID, "server_emit_signal", args);
+		rpc_id(NetworkManager::SERVER_ID, "server_emit_signal", Array::make(name, args));
 	}
 }
 

@@ -22,7 +22,7 @@ size = 54
 font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
+bg_color = Color( 0, 1, 0.576471, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -31,11 +31,12 @@ shadow_size = 3
 shadow_offset = Vector2( 3, 3 )
 
 [sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0, 1, 0.486275, 1 )
+bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+shadow_size = 3
 shadow_offset = Vector2( 3, 3 )
 
 [sub_resource type="StyleBoxFlat" id=6]
@@ -174,9 +175,11 @@ margin_bottom = 184.0
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
 max_value = 5.0
+value = 5.0
 percent_visible = false
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": ""
 }
 
 [node name="PounceBar" type="ProgressBar" parent="."]
