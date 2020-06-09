@@ -18,27 +18,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.539
-anchor_top = 0.5
-anchor_right = 0.539
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -49.92
-margin_right = 50.08
-margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-margin_right = 100.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 600.0
+margin_top = 338.0
+margin_right = 679.0
+margin_bottom = 382.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 79.0
 margin_bottom = 20.0
 text = "Resume"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 24.0
-margin_right = 100.0
+margin_right = 79.0
 margin_bottom = 44.0
 text = "Quit game"
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="resume"]
-[connection signal="pressed" from="VBoxContainer/Button2" to="." method="quit"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="resume"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button2" to="." method="quit"]
