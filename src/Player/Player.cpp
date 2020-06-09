@@ -11,6 +11,8 @@
 #include <InputEventJoypadMotion.hpp>
 #include <SceneTree.hpp>
 #include <CanvasItem.hpp>
+#include <Viewport.hpp>
+
 using namespace godot;
 
 namespace {
@@ -31,6 +33,7 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_Hurtbox_area_entered);
 	REGISTER_METHOD(Player, _on_TimerSwipe_timeout);
 	REGISTER_METHOD(Player, _on_TimerPounce_timeout);
+	REGISTER_METHOD(Player, _on_menu_closed);
 
 	register_method("puppet_set_anim_param", &Player::puppet_set_anim_param, GODOT_METHOD_RPC_MODE_PUPPETSYNC);
 
@@ -73,6 +76,9 @@ void Player::_ready()
 
 void Player::_input(InputEvent* event)
 {
+	if (in_menu)
+		return;
+
 	auto* ev_mouse = cast_to<InputEventMouseMotion>(event);
 	if (ev_mouse) {
 		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
@@ -166,9 +172,13 @@ void Player::_process(float delta)
 	//anim_tree->set("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
 	rpc_set_anim_param("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
 	
-	if (inp->is_action_just_pressed("sys_quit"))
-		get_tree()->quit();
-
+	if (inp->is_action_just_pressed("sys_quit") && !in_menu) {
+		inp->set_mouse_mode(Input::MOUSE_MODE_VISIBLE);
+		in_menu = true;
+		auto menu = pause_menu->instance();
+		menu->connect("menu_closed", this, "_on_menu_closed");
+		get_tree()->get_root()->add_child(menu);
+	}
 }
 
 void Player::_physics_process(float delta)
@@ -433,4 +443,11 @@ void Player::_on_TimerSwipe_timeout()
 void Player::_on_TimerPounce_timeout()
 {
 	can_pounce = true;
+}
+
+
+void Player::_on_menu_closed()
+{
+	in_menu = false;
+	inp->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
 }

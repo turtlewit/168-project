@@ -17,6 +17,8 @@
 #include <KinematicCollision.hpp>
 #include <ShaderMaterial.hpp>
 #include <Timer.hpp>
+#include <ResourceLoader.hpp>
+#include <PackedScene.hpp>
 
 namespace godot {
 
@@ -36,6 +38,8 @@ namespace godot {
 		static constexpr float PounceTurnPenalty = 20.0f;
 		static constexpr float SnapLength = 0.1f;
 		static constexpr unsigned int JumpBufferLimit = 7;
+
+		bool in_menu = false;
 
 		// Growable Stats
 		unsigned int max_health = 5;
@@ -103,6 +107,8 @@ namespace godot {
 		Ref<ShaderMaterial> water_shader;
 		float shader_time = 0;
 
+		Ref<PackedScene> pause_menu = ResourceLoader::get_singleton()->load("res://Prefabs/UI/PauseMenu.tscn");
+
 	public:
 		static void _register_methods();
 
@@ -157,6 +163,8 @@ namespace godot {
 
 		void _on_TimerSwipe_timeout();
 		void _on_TimerPounce_timeout();
+
+		void _on_menu_closed();
 	};
 
 }

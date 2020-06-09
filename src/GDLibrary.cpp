@@ -20,6 +20,7 @@ using namespace godot;
 #include "GrassMultimesh.hpp"
 #include "Player/Player.hpp"
 #include "Environment/PropArea.hpp"
+#include "UI/PauseMenu.hpp"
 
 
 // godot_gdnative_init
@@ -56,5 +57,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<GrassMultimesh>();
 	register_class<Player>();
 	register_tool_class<PropArea>();
+	register_class<PauseMenu>();
 
 }

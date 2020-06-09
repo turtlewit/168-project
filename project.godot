@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "Node",
 "class": "NetworkAnimator",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkAnimator.gdns"
@@ -24,12 +24,12 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkManager.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkSignalManager",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSignalManager.tres"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkSync",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSync.gdns"
@@ -39,7 +39,12 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkTransform.gdns"
 }, {
-"base": "Node",
+"base": "Control",
+"class": "PauseMenu",
+"language": "NativeScript",
+"path": "res://Scripts/UI/PauseMenu.gdns"
+}, {
+"base": "MultiMeshInstance",
 "class": "PropArea",
 "language": "NativeScript",
 "path": "res://Scripts/Environment/PropArea.tres"
@@ -51,6 +56,7 @@ _global_script_class_icons={
 "NetworkSignalManager": "",
 "NetworkSync": "res://Textures/Tools/NetworkIcon.png",
 "NetworkTransform": "res://Textures/Tools/NetworkIcon.png",
+"PauseMenu": "",
 "PropArea": ""
 }
 

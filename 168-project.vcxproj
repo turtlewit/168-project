@@ -176,12 +176,13 @@
     <ClCompile Include="src\Objects\Portal.cpp" />
     <ClCompile Include="src\System\GameUI.cpp" />
     <ClCompile Include="src\System\SignalManagerPlayer.cpp" />
+    <ClCompile Include="src\UI\PauseMenu.cpp" />
     <ClCompile Include="src\Utils\Mathf.cpp" />
     <ClCompile Include="src\Player\Player.cpp" />
     <ClCompile Include="src\Menu\ConnectionDialogue.cpp" />
     <ClCompile Include="src\GrassMultimesh.cpp" />
     <ClCompile Include="src\Menu\HostDialogue.cpp" />
-		<ClCompile Include="src\Environment\PropArea.cpp" />
+    <ClCompile Include="src\Environment\PropArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hello.hpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\Objects\Portal.hpp" />
     <ClInclude Include="src\System\GameUI.hpp" />
     <ClInclude Include="src\System\SignalManagerPlayer.hpp" />
+    <ClInclude Include="src\UI\PauseMenu.hpp" />
     <ClInclude Include="src\Utils\Defs.hpp" />
     <ClInclude Include="src\Utils\Mathf.hpp" />
     <ClInclude Include="src\Player\Player.hpp" />

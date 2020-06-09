@@ -73,4 +73,9 @@ class_info = [ {
 "is_tool": true,
 "name": "PropArea",
 "subdir": "Environment/"
+}, {
+"header": "UI/PauseMenu.hpp",
+"is_tool": false,
+"name": "PauseMenu",
+"subdir": "UI/"
 } ]
