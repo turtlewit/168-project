@@ -35,6 +35,8 @@ private:
 	void refresh();
 	void find_path();
 	void update_curve();
+	godot::Spatial* get_prefab_root();
+	void clear_prefabs();
 
 	godot::Ref<godot::PackedScene> prefab;
 	godot::Vector3 base_position;

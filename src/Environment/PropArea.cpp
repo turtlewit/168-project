@@ -12,6 +12,8 @@
 #include <Curve3D.hpp>
 #include <Engine.hpp>
 #include <Quat.hpp>
+#include <SceneTree.hpp>
+
 #include "PropArea.hpp"
 #include "Utils/Defs.hpp"
 #include "Utils/Mathf.hpp"
@@ -97,6 +99,13 @@ void PropArea::_ready()
 	find_path();
 	update_configuration_warning();
 	set_notify_transform(true);
+
+	if (!has_node("Prefabs")) {
+		Spatial* p = Spatial::_new();
+		add_child(p);
+		p->set_owner(get_tree()->get_edited_scene_root());
+		p->set_name("Prefabs");
+	}
 }
 
 void PropArea::_process(float delta)
@@ -137,6 +146,9 @@ void PropArea::refresh()
 
 	update_curve();
 
+	clear_prefabs();
+
+	Spatial* prefabs = get_prefab_root();
 
 	Ref<MultiMesh> multimesh = get_multimesh();
 	if (multimesh == Ref<MultiMesh>())
@@ -186,6 +198,16 @@ void PropArea::refresh()
 		t.origin = gt.xform_inv(newpos);
 
 		multimesh->set_instance_transform(i, t);
+
+		if (prefab != Ref<PackedScene>()) {
+			Node* n = prefab->instance();
+			prefabs->add_child(n);
+			n->set_owner(get_tree()->get_edited_scene_root());
+			Spatial* p = cast_to<Spatial>(n);
+			if (p) {
+				p->set_transform(t);
+			}
+		}
 	}
 }
 
@@ -219,5 +241,25 @@ void PropArea::update_curve()
 		Vector3 in3 = t.xform(curve->get_point_in(i));
 		Vector3 out3 = t.xform(curve->get_point_out(i));
 		curve2d->add_point(Vector2(pos3.x, pos3.z), Vector2(in3.x, in3.z), Vector2(out3.x, out3.z));
+	}
+}
+
+Spatial* PropArea::get_prefab_root()
+{
+	if (!has_node("Prefabs")) {
+		Spatial* p = Spatial::_new();
+		add_child(p);
+		p->set_owner(get_tree()->get_edited_scene_root());
+		p->set_name("Prefabs");
+	}
+	return cast_to<Spatial>(get_node("Prefabs"));
+}
+
+void PropArea::clear_prefabs()
+{
+	Spatial* prefabs = get_prefab_root();
+	Array children = prefabs->get_children();
+	for (int i = 0; i < children.size(); ++i) {
+		static_cast<Node*>(children[i])->queue_free();
 	}
 }
