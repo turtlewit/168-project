@@ -80,18 +80,19 @@ void Player::_input(InputEvent* event)
 			camera_rotation.y - mouse_sensitivity_x * ev_mouse->get_relative().x, camera_rotation.z + mouse_sensitivity_y * ev_mouse->get_relative().y });
 	}
 
-	auto* ev_joystick = cast_to<InputEventJoypadMotion>(event);
-	if (ev_joystick) {
-		if (ev_joystick->get_axis() == 2)
-			camera_joy_value_x = ev_joystick->get_axis_value();
-		if (ev_joystick->get_axis() == 1)
-			camera_joy_value_y = ev_joystick->get_axis_value();
-	}
+	//auto* ev_joystick = cast_to<InputEventJoypadMotion>(event);
+	//if (ev_joystick) {
+	//	if (ev_joystick->get_axis() == 2)
+	//		camera_joy_value_x = ev_joystick->get_axis_value();
+	//	if (ev_joystick->get_axis() == 1)
+	//		camera_joy_value_y = ev_joystick->get_axis_value();
 
-	if (Mathf::abs(camera_joy_value_x) > 0.1 || Mathf::abs(camera_joy_value_y) > 0.1) {
-		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
-		camera_pivot->set_rotation_degrees(Vector3{ camera_rotation.x, camera_rotation.y - camera_joy_value_x, camera_rotation.z + camera_joy_value_y });
-	}
+	//	if (Mathf::abs(camera_joy_value_x) > 0.1 || Mathf::abs(camera_joy_value_y) > 0.1) {
+	//		const Vector3 camera_rotation = camera_pivot->get_rotation_degrees();
+	//		camera_pivot->set_rotation_degrees(Vector3{ camera_rotation.x, camera_rotation.y - camera_joy_value_x, camera_rotation.z + camera_joy_value_y });
+	//	}
+	//}
+
 }
 
 
