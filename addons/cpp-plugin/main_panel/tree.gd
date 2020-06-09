@@ -1,9 +1,7 @@
 tool
 extends Tree
 
-const ClassHeaderPaths := preload("res://addons/cpp-plugin/class_header_paths/class_header_paths.tres")
-
-const util := preload("res://addons/cpp-plugin/util.gd")
+const Util := preload("res://addons/cpp-plugin/util.gd")
 
 var subdir_dict: Dictionary
 
@@ -25,8 +23,9 @@ func refresh() -> void:
 	var root := create_item()
 	root.set_text(0, "Classes")
 	root.set_selectable(0, false)
-	ClassHeaderPaths.class_header_paths.sort_custom(self, "custom_sort")
-	for info in ClassHeaderPaths.class_header_paths:
+	var class_info := Util.get_class_info()
+	class_info.class_info.sort_custom(self, "custom_sort")
+	for info in class_info.class_info:
 		if len(info["subdir"]) == 0:
 			var c := create_item(root)
 			c.set_text(0, info["name"])
@@ -49,10 +48,11 @@ func _on_Tree_visibility_changed() -> void:
 func _on_Button_pressed() -> void:
 	var s := get_selected()
 	var n := s.get_text(0)
-	for i in range(len(ClassHeaderPaths.class_header_paths)):
-		if ClassHeaderPaths.class_header_paths[i]["name"] == n:
-			ClassHeaderPaths.class_header_paths.remove(i)
+	var class_info := Util.get_class_info()
+	for i in range(len(class_info.class_info)):
+		if class_info.class_info[i]["name"] == n:
+			class_info.class_info.remove(i)
 			break
-	util.update_gdlibrary()
-	ResourceSaver.save(ClassHeaderPaths.resource_path, ClassHeaderPaths)
+	Util.update_gdlibrary()
+	ResourceSaver.save(class_info.resource_path, class_info)
 	refresh()

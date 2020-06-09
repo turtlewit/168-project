@@ -6,7 +6,9 @@ const NewClassDialog = preload("res://addons/cpp-plugin/new_class_dialog/new_cla
 const SetupDialog = preload("res://addons/cpp-plugin/initial_setup/setup_c++_dialog.tscn")
 const AddExistingDialog = preload("res://addons/cpp-plugin/add_existing_class/add_existing_class.tscn")
 
-const util := preload("res://addons/cpp-plugin/util.gd")
+const Util := preload("res://addons/cpp-plugin/util.gd")
+
+const SupportedBuildPlatforms := ['X11', 'Windows', 'OSX']
 
 var main_panel_instance: Control
 var new_class_dialog_instance: Popup
@@ -40,6 +42,31 @@ func initialize_editor_settings_property(name: String, default_value, type: int,
 
 func _enter_tree() -> void:
 	editor_settings = get_editor_interface().get_editor_settings()
+	
+	for platform in SupportedBuildPlatforms:
+		#initialize_project_settings_property("c++/build_settings/build_on_files_changed", false, TYPE_BOOL)
+		initialize_project_settings_property("c++/build_settings/%s/build_command" % platform, "", TYPE_STRING, PROPERTY_HINT_MULTILINE_TEXT)
+		#initialize_project_settings_property("c++/build_settings/build_command_working_directory", "res://", TYPE_STRING, PROPERTY_HINT_DIR)
+	initialize_project_settings_property("c++/files/source_path", "res://src/", TYPE_STRING, PROPERTY_HINT_DIR)
+	initialize_project_settings_property("c++/files/header_subdirectory", "", TYPE_STRING)
+	initialize_project_settings_property("c++/files/cpp_subdirectory", "", TYPE_STRING)
+	initialize_project_settings_property("c++/files/library_path", "res://library.gdnlib", TYPE_STRING, PROPERTY_HINT_FILE)
+	initialize_project_settings_property("c++/files/gdlibrary_source_file_path", "res://src/gdlibrary.cpp", TYPE_STRING, PROPERTY_HINT_FILE)
+	initialize_project_settings_property("c++/files/scripts_directory", "res://Scripts/", TYPE_STRING, PROPERTY_HINT_DIR)
+	initialize_project_settings_property("c++/files/c++_data_directory", "res://addons/cpp-plugin/data/", TYPE_STRING, PROPERTY_HINT_DIR)
+	initialize_project_settings_property("c++/style/use_pragma_once", true, TYPE_BOOL)
+	initialize_project_settings_property("c++/style/brace_style", 0, TYPE_INT, PROPERTY_HINT_ENUM, "K&R,1TBS,Allman")
+	initialize_project_settings_property("c++/style/header_extension", 0, TYPE_INT, PROPERTY_HINT_ENUM, ".hpp,.h,.hxx,.hh")
+	initialize_project_settings_property("c++/style/source_extension", 0, TYPE_INT, PROPERTY_HINT_ENUM, ".cpp,.cxx,.cc")
+	initialize_project_settings_property("c++/style/indentation", 0, TYPE_INT, PROPERTY_HINT_ENUM, "Spaces,Tabs")
+
+	if not ProjectSettings.has_setting("c++/plugin/plugin_set_up") or ProjectSettings.get_setting("c++/plugin/plugin_set_up") == false:
+		initialize_project_settings_property("c++/plugin/plugin_set_up", false, TYPE_BOOL)
+		setup_dialog_instance = SetupDialog.instance()
+		get_editor_interface().get_editor_viewport().add_child(setup_dialog_instance)
+		setup_dialog_instance.popup_centered()
+		yield(setup_dialog_instance, "done")
+
 	main_panel_instance = MainPanel.instance()
 	add_control_to_bottom_panel(main_panel_instance, "C++")
 	make_visible(false)
@@ -47,23 +74,6 @@ func _enter_tree() -> void:
 	new_class_dialog_instance = NewClassDialog.instance()
 	get_editor_interface().get_editor_viewport().add_child(new_class_dialog_instance)
 	new_class_dialog_instance.connect("update_class_tree", main_panel_instance.get_node("HBoxContainer/Tree"), "refresh")
-	
-	initialize_editor_settings_property("c++/build_settings/build_on_files_changed", false, TYPE_BOOL)
-	initialize_editor_settings_property("c++/build_settings/build_command", "", TYPE_STRING, PROPERTY_HINT_MULTILINE_TEXT)
-	initialize_editor_settings_property("c++/build_settings/build_command_working_directory", "res://", TYPE_STRING, PROPERTY_HINT_DIR)
-	initialize_project_settings_property("c++/files/source_path", "res://src/", TYPE_STRING, PROPERTY_HINT_DIR)
-	initialize_project_settings_property("c++/files/header_subdirectory", "", TYPE_STRING)
-	initialize_project_settings_property("c++/files/cpp_subdirectory", "", TYPE_STRING)
-	initialize_project_settings_property("c++/files/library_path", "res://library.gdnlib", TYPE_STRING, PROPERTY_HINT_FILE)
-	initialize_project_settings_property("c++/files/gdlibrary_source_file_path", "res://src/gdlibrary.cpp", TYPE_STRING, PROPERTY_HINT_FILE)
-	initialize_project_settings_property("c++/files/scripts_directory", "res://Scripts/", TYPE_STRING, PROPERTY_HINT_DIR)
-	initialize_project_settings_property("c++/style/use_pragma_once", true, TYPE_BOOL)
-	
-	if not ProjectSettings.has_setting("c++/plugin/plugin_set_up") or ProjectSettings.get_setting("c++/plugin/plugin_set_up") == false:
-		initialize_project_settings_property("c++/plugin/plugin_set_up", false, TYPE_BOOL)
-		setup_dialog_instance = SetupDialog.instance()
-		get_editor_interface().get_editor_viewport().add_child(setup_dialog_instance)
-		setup_dialog_instance.popup_centered()
 
 	main_panel_instance.get_node("MainPanel/NewClass").connect("pressed", self, "_on_new_class_button_pressed")
 	
@@ -79,9 +89,13 @@ func _enter_tree() -> void:
 
 	var regen_button: Button = main_panel_instance.get_node("MainPanel/ReGenerate")
 	regen_button.text = "Re-Generate " + ProjectSettings.get_setting("c++/files/gdlibrary_source_file_path").get_file()
-	regen_button.connect("pressed", util, "update_gdlibrary")
+	regen_button.connect("pressed", Util, "update_gdlibrary")
+	
+	add_tool_menu_item("Regenerate C++ Template Files", self, "_on_regenerate_templates_button_pressed")
+	
 
 func _exit_tree() -> void:
+	remove_tool_menu_item("Regenerate C++ Template Files")
 	if add_existing_dialog_instance:
 		add_existing_dialog_instance.queue_free()
 	if setup_dialog_instance:
@@ -112,21 +126,30 @@ func _on_new_class_button_pressed() -> void:
 	new_class_dialog_instance.popup_centered()
 
 func build_lib() -> void:
-	if len(editor_settings.get_setting("c++/build_settings/build_command")) == 0:
-		util.oneshot_error_popup(get_editor_interface().get_editor_viewport(), "Build command has not been set. Please set the build command in \"Editor->Editor Settings...->C++->Build Settings\"")
-		return
-
 	var executable := ""
 	var args: PoolStringArray
 	match OS.get_name():
 		"X11":
 			executable = "/bin/sh"
 			args.append("-c")
+		"OSX":
+			executable = "/bin/sh"
+			args.append("-c")
+		"Windows":
+			executable = "cmd.exe"
+			args.append("/c")
 		_:
-			util.oneshot_error_popup(get_editor_interface().get_editor_viewport(), "Cannot build on unsupported platform " + OS.get_name() + ".\nPlease open an issue on GitLab if you would like this platform to be supported.")
+			Util.oneshot_error_popup(get_editor_interface().get_editor_viewport(), "Cannot build on unsupported platform " + OS.get_name() + ".\nPlease open an issue on GitLab if you would like this platform to be supported.")
 	
+	if len(ProjectSettings.get_setting("c++/build_settings/%s/build_command" % OS.get_name())) == 0:
+		Util.oneshot_error_popup(get_editor_interface().get_editor_viewport(), "Build command has not been set. Please set the build command in \"Projects->Project Settings...->C++->Build Settings\"")
+		return
+
 	var output := []
-	args.append(editor_settings.get_setting("c++/build_settings/build_command"))
+	args.append(ProjectSettings.get_setting("c++/build_settings/%s/build_command" % OS.get_name()))
 	OS.execute(executable, args, true, output, true)
 	for line in output:
 		main_panel_instance.get_node("HBoxContainer/BuildLog").text += line
+
+func _on_regenerate_templates_button_pressed(userdata):
+	Util.write_templates()

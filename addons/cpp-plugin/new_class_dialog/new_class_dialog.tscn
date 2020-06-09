@@ -2,8 +2,6 @@
 
 [ext_resource path="res://addons/cpp-plugin/main_panel/new_class_dialog.gd" type="Script" id=1]
 
-
-
 [sub_resource type="GDScript" id=1]
 script/source = "tool
 extends Button
@@ -25,7 +23,7 @@ func _on_Inherits_text_changed(new_text: String) -> void:
 
 [node name="NewClassDialog" type="WindowDialog"]
 margin_right = 411.0
-margin_bottom = 124.0
+margin_bottom = 145.0
 size_flags_horizontal = 13
 size_flags_vertical = 13
 window_title = "New Class"
@@ -48,7 +46,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
 margin_right = 401.0
-margin_bottom = 90.0
+margin_bottom = 111.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -115,10 +113,28 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "Enter Subdirectory (optional)"
 
-[node name="CreateButton" type="Button" parent="VBoxContainer2"]
-margin_top = 94.0
+[node name="IsTool" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+margin_top = 84.0
 margin_right = 401.0
-margin_bottom = 114.0
+margin_bottom = 108.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/IsTool"]
+margin_top = 5.0
+margin_right = 373.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Tool"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer2/VBoxContainer/IsTool"]
+margin_left = 377.0
+margin_right = 401.0
+margin_bottom = 24.0
+
+[node name="CreateButton" type="Button" parent="VBoxContainer2"]
+margin_top = 115.0
+margin_right = 401.0
+margin_bottom = 135.0
 disabled = true
 text = "Create"
 script = SubResource( 1 )

@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/cpp-plugin/initial_setup/line_edit_setting.gd" type="Script" id=1]
 [ext_resource path="res://addons/cpp-plugin/initial_setup/setup_dialog.gd" type="Script" id=2]
 [ext_resource path="res://addons/cpp-plugin/initial_setup/set_setting_path_button.gd" type="Script" id=3]
+[ext_resource path="res://addons/cpp-plugin/initial_setup/enum_setting.gd" type="Script" id=4]
 [ext_resource path="res://addons/cpp-plugin/initial_setup/bool_setting.gd" type="Script" id=5]
 
 [node name="SetupC++Dialog" type="WindowDialog"]
 visible = true
 margin_right = 400.0
-margin_bottom = 432.0
+margin_bottom = 500.0
 popup_exclusive = true
 window_title = "Setup C++"
 resizable = true
@@ -27,15 +28,15 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 400.0
-margin_bottom = 427.0
+margin_right = 388.0
+margin_bottom = 565.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Description" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 65.0
 size_flags_vertical = 5
 text = "Looks like the C++ helper plugin hasn't been initialized yet.
@@ -44,12 +45,12 @@ autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 margin_top = 69.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 73.0
 
 [node name="Files" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 77.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 108.0
 text = "Files
 "
@@ -60,7 +61,7 @@ __meta__ = {
 
 [node name="SrcPath" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 112.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 alignment = 2
@@ -69,27 +70,27 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/SrcPath"]
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 14.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/SrcPath/HBoxContainer"]
-margin_right = 198.0
+margin_right = 192.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Path to C++ Source Code"
 
 [node name="Label2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/SrcPath/HBoxContainer"]
-margin_left = 202.0
-margin_right = 400.0
+margin_left = 196.0
+margin_right = 388.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "res://src/"
 scroll_active = false
 
 [node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/SrcPath"]
-margin_left = 329.0
+margin_left = 317.0
 margin_top = 18.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 38.0
 size_flags_horizontal = 8
 text = "Browse..."
@@ -106,25 +107,25 @@ show_hidden_files = true
 
 [node name="HeaderDir" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 154.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 178.0
 size_flags_horizontal = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/HeaderDir"]
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HeaderDir/HBoxContainer"]
 margin_top = 5.0
-margin_right = 198.0
+margin_right = 192.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Header Subdirectory"
 
 [node name="LineEdit" type="LineEdit" parent="ScrollContainer/VBoxContainer/HeaderDir/HBoxContainer"]
-margin_left = 202.0
-margin_right = 400.0
+margin_left = 196.0
+margin_right = 388.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "(optional)"
@@ -133,25 +134,25 @@ project_setting_name = "c++/files/header_subdirectory"
 
 [node name="SourceSubdir" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 182.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 206.0
 size_flags_horizontal = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/SourceSubdir"]
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/SourceSubdir/HBoxContainer"]
 margin_top = 5.0
-margin_right = 198.0
+margin_right = 192.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = ".cpp Subdirectory"
 
 [node name="LineEdit" type="LineEdit" parent="ScrollContainer/VBoxContainer/SourceSubdir/HBoxContainer"]
-margin_left = 202.0
-margin_right = 400.0
+margin_left = 196.0
+margin_right = 388.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "(optional)"
@@ -160,7 +161,7 @@ project_setting_name = "c++/files/cpp_subdirectory"
 
 [node name="LibraryPath" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 210.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 248.0
 size_flags_horizontal = 3
 alignment = 2
@@ -169,26 +170,28 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/LibraryPath"]
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 14.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/LibraryPath/HBoxContainer"]
-margin_right = 198.0
+margin_right = 192.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Library Resource"
 
 [node name="Label2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/LibraryPath/HBoxContainer"]
-margin_left = 202.0
-margin_right = 400.0
+margin_left = 196.0
+margin_right = 388.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+text = "res://library.gdnlib
+"
 scroll_active = false
 
 [node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/LibraryPath"]
-margin_left = 329.0
+margin_left = 317.0
 margin_top = 18.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 38.0
 size_flags_horizontal = 8
 text = "Browse..."
@@ -204,7 +207,7 @@ show_hidden_files = true
 
 [node name="GdlibraryCppPath" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 252.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 290.0
 size_flags_horizontal = 3
 alignment = 2
@@ -213,26 +216,27 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/GdlibraryCppPath"]
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 14.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/GdlibraryCppPath/HBoxContainer"]
-margin_right = 198.0
+margin_right = 192.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Entry Point Source File"
 
 [node name="Label2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/GdlibraryCppPath/HBoxContainer"]
-margin_left = 202.0
-margin_right = 400.0
+margin_left = 196.0
+margin_right = 388.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+text = "res://src/gdlibrary.cpp"
 scroll_active = false
 
 [node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/GdlibraryCppPath"]
-margin_left = 329.0
+margin_left = 317.0
 margin_top = 18.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 38.0
 size_flags_horizontal = 8
 text = "Browse..."
@@ -243,12 +247,12 @@ project_setting_name = "c++/files/gdlibrary_source_file_path"
 margin_right = 307.0
 margin_bottom = 370.0
 resizable = true
-filters = PoolStringArray( "*.cpp ; C++ Source File" )
+filters = PoolStringArray( "*.cpp,*.cxx,*.cc ; C++ Source File" )
 show_hidden_files = true
 
 [node name="ScriptsPath" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 294.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 332.0
 size_flags_horizontal = 3
 alignment = 2
@@ -257,27 +261,27 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/ScriptsPath"]
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 14.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/ScriptsPath/HBoxContainer"]
-margin_right = 198.0
+margin_right = 192.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Scripts Directory"
 
 [node name="Label2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/ScriptsPath/HBoxContainer"]
-margin_left = 202.0
-margin_right = 400.0
+margin_left = 196.0
+margin_right = 388.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
-text = "res://Scripts"
+text = "res://Scripts/"
 scroll_active = false
 
 [node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/ScriptsPath"]
-margin_left = 329.0
+margin_left = 317.0
 margin_top = 18.0
-margin_right = 400.0
+margin_right = 388.0
 margin_bottom = 38.0
 size_flags_horizontal = 8
 text = "Browse..."
@@ -292,49 +296,197 @@ resizable = true
 mode = 2
 show_hidden_files = true
 
-[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+[node name="Data Directory" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 336.0
-margin_right = 400.0
-margin_bottom = 340.0
+margin_right = 388.0
+margin_bottom = 374.0
+size_flags_horizontal = 3
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Data Directory"]
+margin_right = 388.0
+margin_bottom = 14.0
+hint_tooltip = "Directory used for generated data about the current project, such as template files and data to keep track of class info.
+Change this if you are using this plugin as a git submodule."
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Data Directory/HBoxContainer"]
+margin_right = 192.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Data Directory"
+
+[node name="Label2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Data Directory/HBoxContainer"]
+margin_left = 196.0
+margin_right = 388.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "res://addons/cpp-plugin/data/"
+scroll_active = false
+
+[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/Data Directory"]
+margin_left = 317.0
+margin_top = 18.0
+margin_right = 388.0
+margin_bottom = 38.0
+size_flags_horizontal = 8
+text = "Browse..."
+script = ExtResource( 3 )
+project_setting_name = "c++/files/c++_data_directory"
+
+[node name="FileDialog" type="FileDialog" parent="ScrollContainer/VBoxContainer/Data Directory/Button"]
+margin_right = 307.0
+margin_bottom = 370.0
+window_title = "Open a Directory"
+resizable = true
+mode = 2
+show_hidden_files = true
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+margin_top = 378.0
+margin_right = 388.0
+margin_bottom = 382.0
 
 [node name="Style" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 344.0
-margin_right = 400.0
-margin_bottom = 375.0
+margin_top = 386.0
+margin_right = 388.0
+margin_bottom = 417.0
 text = "Style
 "
 align = 1
 
 [node name="UsePragma" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 379.0
-margin_right = 400.0
-margin_bottom = 403.0
+margin_top = 421.0
+margin_right = 388.0
+margin_bottom = 541.0
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/UsePragma"]
-margin_right = 400.0
+[node name="pragma" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/UsePragma"]
+margin_right = 388.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/UsePragma/HBoxContainer"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/UsePragma/pragma"]
 margin_top = 5.0
-margin_right = 372.0
+margin_right = 360.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Use #pragma once"
 
-[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/UsePragma/HBoxContainer"]
-margin_left = 376.0
-margin_right = 400.0
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/UsePragma/pragma"]
+margin_left = 364.0
+margin_right = 388.0
 margin_bottom = 24.0
 pressed = true
 script = ExtResource( 5 )
 project_setting_name = "c++/style/use_pragma_once"
 
+[node name="brace-style" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/UsePragma"]
+margin_top = 28.0
+margin_right = 388.0
+margin_bottom = 48.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/UsePragma/brace-style"]
+margin_top = 3.0
+margin_right = 329.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Brace Style"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/UsePragma/brace-style"]
+margin_left = 333.0
+margin_right = 388.0
+margin_bottom = 20.0
+text = "K&R"
+items = [ "K&R", null, false, 0, null, "1TBS", null, false, 1, null, "Allman", null, false, 2, null ]
+selected = 0
+
+[node name="Node" type="Node" parent="ScrollContainer/VBoxContainer/UsePragma/brace-style/OptionButton"]
+script = ExtResource( 4 )
+options = "K&R,1TBS,Allman"
+project_settings_name = "c++/style/brace_style"
+
+[node name="header_ext" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/UsePragma"]
+margin_top = 52.0
+margin_right = 388.0
+margin_bottom = 72.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/UsePragma/header_ext"]
+margin_top = 3.0
+margin_right = 327.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Header Extension"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/UsePragma/header_ext"]
+margin_left = 331.0
+margin_right = 388.0
+margin_bottom = 20.0
+text = ".hpp"
+items = [ ".hpp", null, false, 0, null, ".h", null, false, 1, null, ".hxx", null, false, 2, null, ".hh", null, false, 3, null ]
+selected = 0
+
+[node name="Node2" type="Node" parent="ScrollContainer/VBoxContainer/UsePragma/header_ext/OptionButton"]
+script = ExtResource( 4 )
+options = ".hpp,.h,.hxx,.hh"
+project_settings_name = "c++/style/header_extension"
+
+[node name="src_ext" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/UsePragma"]
+margin_top = 76.0
+margin_right = 388.0
+margin_bottom = 96.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/UsePragma/src_ext"]
+margin_top = 3.0
+margin_right = 328.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Source Extension"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/UsePragma/src_ext"]
+margin_left = 332.0
+margin_right = 388.0
+margin_bottom = 20.0
+text = ".cpp"
+items = [ ".cpp", null, false, 0, null, ".cxx", null, false, 1, null, ".cc", null, false, 2, null ]
+selected = 0
+
+[node name="Node3" type="Node" parent="ScrollContainer/VBoxContainer/UsePragma/src_ext/OptionButton"]
+script = ExtResource( 4 )
+options = ".cpp,.cxx,.cc"
+project_settings_name = "c++/style/source_extension"
+
+[node name="indentation" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/UsePragma"]
+margin_top = 100.0
+margin_right = 388.0
+margin_bottom = 120.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/UsePragma/indentation"]
+margin_top = 3.0
+margin_right = 311.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Indentation"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/VBoxContainer/UsePragma/indentation"]
+margin_left = 315.0
+margin_right = 388.0
+margin_bottom = 20.0
+text = "Spaces"
+items = [ "Spaces", null, false, 0, null, "Tabs", null, false, 1, null ]
+selected = 0
+
+[node name="Node4" type="Node" parent="ScrollContainer/VBoxContainer/UsePragma/indentation/OptionButton"]
+script = ExtResource( 4 )
+options = "Spaces,Tabs"
+project_settings_name = "c++/style/indentation"
+
 [node name="Done" type="Button" parent="ScrollContainer/VBoxContainer"]
-margin_top = 407.0
-margin_right = 400.0
-margin_bottom = 427.0
+margin_top = 545.0
+margin_right = 388.0
+margin_bottom = 565.0
 text = "Done"
 [connection signal="popup_hide" from="." to="." method="_on_SetupCDialog_popup_hide"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/SrcPath/Button" to="ScrollContainer/VBoxContainer/SrcPath/Button/FileDialog" method="popup_centered"]
@@ -347,5 +499,7 @@ text = "Done"
 [connection signal="file_selected" from="ScrollContainer/VBoxContainer/GdlibraryCppPath/Button/FileDialog" to="ScrollContainer/VBoxContainer/GdlibraryCppPath/Button" method="_on_FileDialog_gdnlib_file_selected"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/ScriptsPath/Button" to="ScrollContainer/VBoxContainer/ScriptsPath/Button/FileDialog" method="popup_centered"]
 [connection signal="dir_selected" from="ScrollContainer/VBoxContainer/ScriptsPath/Button/FileDialog" to="ScrollContainer/VBoxContainer/ScriptsPath/Button" method="_on_FileDialog_dir_selected"]
-[connection signal="toggled" from="ScrollContainer/VBoxContainer/UsePragma/HBoxContainer/CheckBox" to="ScrollContainer/VBoxContainer/UsePragma/HBoxContainer/CheckBox" method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Data Directory/Button" to="ScrollContainer/VBoxContainer/Data Directory/Button/FileDialog" method="popup_centered"]
+[connection signal="dir_selected" from="ScrollContainer/VBoxContainer/Data Directory/Button/FileDialog" to="ScrollContainer/VBoxContainer/Data Directory/Button" method="_on_FileDialog_dir_selected"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/UsePragma/pragma/CheckBox" to="ScrollContainer/VBoxContainer/UsePragma/pragma/CheckBox" method="_on_CheckBox_toggled"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Done" to="." method="_on_Done_pressed"]

@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "NetworkTransform",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkTransform.gdns"
+}, {
+"base": "Node",
+"class": "PropArea",
+"language": "NativeScript",
+"path": "res://Scripts/Environment/PropArea.tres"
 } ]
 _global_script_class_icons={
 "NetworkAnimator": "res://Textures/Tools/NetworkIcon.png",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "NetworkManager": "",
 "NetworkSignalManager": "",
 "NetworkSync": "res://Textures/Tools/NetworkIcon.png",
-"NetworkTransform": "res://Textures/Tools/NetworkIcon.png"
+"NetworkTransform": "res://Textures/Tools/NetworkIcon.png",
+"PropArea": ""
 }
 
 [application]
@@ -67,6 +73,10 @@ files/library_path="res://Library/gdnativelibrary.tres"
 files/gdlibrary_source_file_path="res://src/GDLibrary.cpp"
 files/scripts_directory="res://Scripts/"
 plugin/plugin_set_up=true
+build_settings/X11/build_command="cd bin/linux
+cmake ../..
+make"
+style/indentation=1
 
 [display]
 

@@ -1,24 +1,10 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Resource
-
-class ClassInfo:
-	extends Resource
-	export var name: String
-	export var subdir: String
-	export var header: String
-	func _init(name: String, subdir: String, header: String) -> void:
-		self.name = name
-		self.subdir = subdir
-		self.header = header
-
-export(Array, Resource) var class_header_paths: Array
-"
+[ext_resource path="res://addons/cpp-plugin/class_info/class_info.gd" type="Script" id=1]
 
 [resource]
-script = SubResource( 1 )
-class_header_paths = [ {
+script = ExtResource( 1 )
+class_info = [ {
 "header": "Menu/ConnectionDialogue.hpp",
 "name": "ConnectionDialogue",
 "subdir": "Menu"
@@ -82,4 +68,9 @@ class_header_paths = [ {
 "header": "Player/Player.hpp",
 "name": "Player",
 "subdir": ""
+}, {
+"header": "Environment/PropArea.hpp",
+"is_tool": true,
+"name": "PropArea",
+"subdir": "Environment/"
 } ]

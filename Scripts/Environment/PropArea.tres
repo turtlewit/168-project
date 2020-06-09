@@ -3,6 +3,6 @@
 [ext_resource path="res://Library/gdnativelibrary.tres" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "DeathPlane"
-class_name = "DeathPlane"
+class_name = "PropArea"
 library = ExtResource( 1 )
+script_class_name = "PropArea"

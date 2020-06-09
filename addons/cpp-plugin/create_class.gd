@@ -1,33 +1,41 @@
-const source_template_path: String = "res://addons/cpp-plugin/template.cpp"
-const header_template_path: String = "res://addons/cpp-plugin/template.hpp"
+const Util := preload("res://addons/cpp-plugin/util.gd")
 
-const class_header_paths: Resource = preload("res://addons/cpp-plugin/class_header_paths/class_header_paths.tres")
-
-const util := preload("res://addons/cpp-plugin/util.gd")
-
-static func create_class(name: String, base_class: String, subpath: String) -> void:
-	var header_dir_path: String = util.add_slash(ProjectSettings.get_setting("c++/files/source_path")) + util.add_slash(ProjectSettings.get_setting("c++/files/header_subdirectory")) + util.add_slash(subpath)
-	var source_dir_path: String = util.add_slash(ProjectSettings.get_setting("c++/files/source_path")) + util.add_slash(ProjectSettings.get_setting("c++/files/cpp_subdirectory")) + util.add_slash(subpath)
-	var header_path: String = header_dir_path + name + ".hpp"
-	var source_path: String = source_dir_path + name + ".cpp"
+static func create_class(name: String, base_class: String, subpath: String, is_tool: bool) -> void:
+	#var header_template_path: String# = "res://addons/cpp-plugin/template.hpp"	
+	#var source_template_path: String# = "res://addons/cpp-plugin/template.cpp"
+	var header_template_path: String = Util.add_slash(ProjectSettings.get_setting("c++/files/c++_data_directory")) + "template.hpp"
+	var source_template_path: String = Util.add_slash(ProjectSettings.get_setting("c++/files/c++_data_directory")) + "template.cpp"
 	
-	util.make_dir(header_dir_path)
-	util.make_dir(source_dir_path)
+	#match ProjectSettings.get_setting("c++/style/indentation_style"):
+	#	0: # K&R
+	#		header_template_path = "res://addons/cpp-plugin/template_kr1tbs.hpp"
+	#		source_template_path = "res://addons/cpp-plugin/template_krallman.cpp"
+	#	1: # 1TBS
+	#		header_template_path = "res://addons/cpp-plugin/template_kr1tbs.hpp"
+	#		source_template_path = "res://addons/cpp-plugin/template_1tbs.cpp"
+	#	2: # Allman
+	#		header_template_path = "res://addons/cpp-plugin/template_allman.hpp"
+	#		source_template_path = "res://addons/cpp-plugin/template_krallman.cpp"
+
+	var header_dir_path: String = Util.add_slash(ProjectSettings.get_setting("c++/files/source_path")) + Util.add_slash(ProjectSettings.get_setting("c++/files/header_subdirectory")) + Util.add_slash(subpath)
+	var source_dir_path: String = Util.add_slash(ProjectSettings.get_setting("c++/files/source_path")) + Util.add_slash(ProjectSettings.get_setting("c++/files/cpp_subdirectory")) + Util.add_slash(subpath)
+	
+	var ext_h := Util.get_header_extension()
+	var ext_s := Util.get_source_extension()
+
+	var header_path: String = header_dir_path + name + ext_h
+	var source_path: String = source_dir_path + name + ext_s
+	
+	Util.make_dir(header_dir_path)
+	Util.make_dir(source_dir_path)
 	
 	# Create the source and header files based on their respective templates.
-	var source_template_file := File.new()
-	var header_template_file := File.new()
-	source_template_file.open(source_template_path, File.READ)
-	header_template_file.open(header_template_path, File.READ)
-	
-	var source_template := source_template_file.get_as_text()
-	var header_template := header_template_file.get_as_text()
-	
-	source_template_file.close()
-	header_template_file.close()
+	var source_template := Util.read_file(source_template_path)
+	var header_template := Util.read_file(header_template_path)
+
 	
 	var new_source := source_template.format({
-		"header-file": ProjectSettings.get_setting("c++/files/header_subdirectory") + name + ".hpp",
+		"header-file": Util.add_slash(ProjectSettings.get_setting("c++/files/header_subdirectory")) + name + ext_h,
 		"class-name": name,
 	})
 	
@@ -50,21 +58,12 @@ static func create_class(name: String, base_class: String, subpath: String) -> v
 	})
 	
 	# Write the new source files.
-	var new_source_file := File.new()
-	var new_header_file := File.new()
+	Util.overwrite_file(source_path, new_source)
+	Util.overwrite_file(header_path, new_header)
 	
-	new_source_file.open(source_path, File.WRITE)
-	new_header_file.open(header_path, File.WRITE)
+	var script_dir_path: String = Util.add_slash(ProjectSettings.get_setting("c++/files/scripts_directory")) + Util.add_slash(subpath)
 	
-	new_source_file.store_string(new_source)
-	new_header_file.store_string(new_header)
-	
-	new_source_file.close()
-	new_header_file.close()
-	
-	var script_dir_path: String = util.add_slash(ProjectSettings.get_setting("c++/files/scripts_directory")) + util.add_slash(subpath)
-	
-	util.make_dir(script_dir_path)
+	Util.make_dir(script_dir_path)
 	
 	# Create, fill out, and save the new script resource.
 	var script_resource := NativeScript.new()
@@ -72,13 +71,15 @@ static func create_class(name: String, base_class: String, subpath: String) -> v
 	script_resource.library = load(ProjectSettings.get_setting("c++/files/library_path"))
 	script_resource.script_class_name = name
 	
-	ResourceSaver.save(script_dir_path + name + ".tres", script_resource, ResourceSaver.FLAG_CHANGE_PATH)
+	ResourceSaver.save(script_dir_path + name + ".gdns", script_resource, ResourceSaver.FLAG_CHANGE_PATH)
 	
+	var class_info := Util.get_class_info()
 	# Append the class header path and class name to the class_header_paths dictionary.
-	class_header_paths.class_header_paths.append({
+	class_info.class_info.append({
 		"name": name,
-		"subdir": util.add_slash(subpath),
-		"header": util.add_slash(ProjectSettings.get_setting("c++/files/header_subdirectory")) + util.add_slash(subpath) + name + ".hpp"})
-	ResourceSaver.save(class_header_paths.resource_path, class_header_paths, ResourceSaver.FLAG_BUNDLE_RESOURCES)
+		"subdir": Util.add_slash(subpath),
+		"header": Util.add_slash(ProjectSettings.get_setting("c++/files/header_subdirectory")) + Util.add_slash(subpath) + name + ext_h,
+		"is_tool": is_tool})
+	ResourceSaver.save(class_info.resource_path, class_info)
 	
-	util.update_gdlibrary()
+	Util.update_gdlibrary()

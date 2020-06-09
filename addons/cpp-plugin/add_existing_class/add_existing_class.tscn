@@ -5,7 +5,7 @@
 
 [node name="AddExistingClass" type="WindowDialog"]
 margin_right = 551.0
-margin_bottom = 117.0
+margin_bottom = 138.0
 window_title = "Add Existing Class"
 script = ExtResource( 2 )
 __meta__ = {
@@ -22,7 +22,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
 margin_right = 551.0
-margin_bottom = 80.0
+margin_bottom = 108.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,15 +104,34 @@ margin_bottom = 300.0
 window_title = "Open a File"
 resizable = true
 mode = 0
-filters = PoolStringArray( "*.hpp ; C++ header file", "*.h ; C/C++ Header File" )
+filters = PoolStringArray( "*.hpp,*.h,*.hxx,*.hh ; C++ header file" )
 show_hidden_files = true
 
-[node name="Button" type="Button" parent="VBoxContainer2"]
+[node name="IsTool" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
 margin_top = 84.0
 margin_right = 551.0
-margin_bottom = 117.0
+margin_bottom = 108.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/IsTool"]
+margin_top = 5.0
+margin_right = 523.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Tool"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer2/VBoxContainer/IsTool"]
+margin_left = 527.0
+margin_right = 551.0
+margin_bottom = 24.0
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+margin_top = 112.0
+margin_right = 551.0
+margin_bottom = 138.0
 size_flags_vertical = 3
 text = "Add"
+[connection signal="visibility_changed" from="." to="." method="_on_AddExistingClass_visibility_changed"]
 [connection signal="text_changed" from="VBoxContainer2/VBoxContainer/ClassName/LineEdit" to="VBoxContainer2/VBoxContainer/Header/HBoxContainer/LineEdit" method="_on_ClassName_LineEdit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer2/VBoxContainer/Subdir/LineEdit" to="VBoxContainer2/VBoxContainer/Header/HBoxContainer/LineEdit" method="_on_Subdir_LineEdit_text_changed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/Header/HBoxContainer/Button" to="VBoxContainer2/VBoxContainer/Header/HBoxContainer/Button/FileDialog" method="popup_centered"]
