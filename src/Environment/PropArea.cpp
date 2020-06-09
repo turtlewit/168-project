@@ -1,3 +1,5 @@
+// PropArea.cpp
+#define _USE_MATH_DEFINES
 #include <BoxShape.hpp>
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
@@ -10,7 +12,6 @@
 #include <Curve3D.hpp>
 #include <Engine.hpp>
 #include <Quat.hpp>
-
 #include "PropArea.hpp"
 #include "Utils/Defs.hpp"
 #include "Utils/Mathf.hpp"
