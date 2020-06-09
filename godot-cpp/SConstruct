@@ -193,7 +193,10 @@ if env['platform'] == 'linux':
 
 elif env['platform'] == 'osx':
     # Use Clang on macOS by default
-    env['CXX'] = 'clang++'
+    env['CC'] = '/opt/osxcross/bin/x86_64-apple-darwin17-clang'
+    env['CXX'] = '/opt/osxcross/bin/x86_64-apple-darwin17-clang++'
+    env['AR'] = '/opt/osxcross/bin/x86_64-apple-darwin17-ar'
+    env['RANLIB'] = '/opt/osxcross/bin/x86_64-apple-darwin17-ranlib'
 
     if env['bits'] == '32':
         raise ValueError(

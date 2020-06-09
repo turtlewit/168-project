@@ -57,7 +57,7 @@ public:
 	template <typename F>
 	static constexpr F lerp_delta(F from, F to, F weight, F delta) noexcept
 	{
-		return lerp(from, to, static_cast<F>(1.0) - std::pow<F, F>(weight, delta));
+		return lerp(from, to, static_cast<F>(1.0) - std::pow(weight, delta));
 	}
 
 	static int rand_range(int min, int max);

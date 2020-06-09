@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.0)
 
 project(168-project)
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wno-parentheses -Wno-return-local-addr")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wno-parentheses")
 set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og -g")
 
@@ -13,8 +13,19 @@ link_directories(godot-cpp/bin)
 
 add_library(168-project SHARED ${Sources})
 
-if (CMAKE_BUILD_TYPE MATCHES Debug)
-	target_link_libraries(168-project godot-cpp.linux.debug.64)
-elseif(CMAKE_BUILD_TYPE MATCHES Release)
-	target_link_libraries(168-project godot-cpp.linux.release.64)
+if (CMAKE_SYSTEM_NAME MATCHES Linux) 
+	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-return-local-addr")
+	if (CMAKE_BUILD_TYPE MATCHES Debug)
+		target_link_libraries(168-project godot-cpp.linux.debug.64)
+	elseif(CMAKE_BUILD_TYPE MATCHES Release)
+		target_link_libraries(168-project godot-cpp.linux.release.64)
+	endif()
+endif()
+
+if (CMAKE_SYSTEM_NAME MATCHES Darwin)
+	if (CMAKE_BUILD_TYPE MATCHES Debug)
+		target_link_libraries(168-project libgodot-cpp.osx.debug.64.a)
+	elseif(CMAKE_BUILD_TYPE MATCHES Release)
+		target_link_libraries(168-project godot-cpp.osx.release.64)
+	endif()
 endif()
