@@ -5,7 +5,7 @@
 
 #include "Utils/Defs.hpp"
 #include "Net/NetworkManager.hpp"
-
+#include "Utils/Mathf.hpp"
 using namespace godot;
 
 NetworkManager* NetworkManager::singleton = nullptr;
@@ -83,7 +83,7 @@ void NetworkManager::spawn_player_with_master(int64_t master_id)
     if (spawn_points) {
         Spatial* spatial_player = cast_to<Spatial>(player);
         Transform player_transform = spatial_player->get_global_transform();
-        player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[0])->get_global_transform().origin;
+        player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[Mathf::rand_range(0, 6)])->get_global_transform().origin;
         spatial_player->set_global_transform(player_transform);
     }
 

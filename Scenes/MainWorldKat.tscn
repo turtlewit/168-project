@@ -23434,6 +23434,15 @@ transform = Transform( 0.0112625, 0.304822, -0.952343, -0.999318, 0.0369225, 0, 
 [node name="Rock17" parent="Environment/Rocks" instance=ExtResource( 12 )]
 transform = Transform( 0.166892, -0.521094, -0.576082, -0.341648, 0.750714, -0.621785, 0.792251, 0.266994, 0.0814983, 11.3909, 2.51498, 5.02466 )
 
+[node name="Rock38" parent="Environment/Rocks" instance=ExtResource( 12 )]
+transform = Transform( 0.0369225, 0.999318, 0, -0.999318, 0.0369225, 0, 0, 0, 1, 25.8607, 13.1814, 30.5336 )
+
+[node name="Rock37" parent="Environment/Rocks" instance=ExtResource( 12 )]
+transform = Transform( 0.0112625, 0.304822, -0.952343, -0.999318, 0.0369225, 0, 0.0293895, 0.795436, 0.254948, 27.8623, 13.1814, 33.292 )
+
+[node name="Rock36" parent="Environment/Rocks" instance=ExtResource( 12 )]
+transform = Transform( 0.166892, -0.521094, -0.576082, -0.341648, 0.750714, -0.621785, 0.792251, 0.266994, 0.0814983, 28.7545, 13.4952, 30.7888 )
+
 [node name="Rock29" parent="Environment/Rocks" instance=ExtResource( 12 )]
 transform = Transform( 0.0369225, 0.999318, 0, -0.999318, 0.0369225, 0, 0, 0, 1, -5.47576, 1.50275, -27.9882 )
 
@@ -23637,16 +23646,25 @@ far = 200.0
 ]]
 
 [node name="Spatial" type="Spatial" parent="SpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40253, 2.20054, -26.988 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14028, 2.05247, -26.988 )
 
 [node name="Spatial3" type="Spatial" parent="SpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1034, 2.20054, -25.4666 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1034, 2.07877, -25.4666 )
 
 [node name="Spatial4" type="Spatial" parent="SpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.3353, 1.50604, -61.6067 )
 
+[node name="Spatial5" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5961, 2.85708, -87.8044 )
+
+[node name="Spatial6" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.8108, -0.331669, -107.905 )
+
 [node name="Spatial2" type="Spatial" parent="SpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.98741, 2.77092, 5.83269 )
+
+[node name="Spatial7" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.0877, 13.712, 31.2968 )
 
 [node name="Pillar" type="Spatial" parent="."]
 transform = Transform( 0.62674, 0, -0.779229, 0, 1, 0, 0.779229, 0, 0.62674, 22.9404, 10.1679, 39.697 )
@@ -23904,7 +23922,7 @@ transform = Transform( 1, 9.8953e-10, 0, 4.88944e-09, 1, 9.31323e-10, 3.72529e-0
 transform = Transform( -0.569402, 0.0295063, 0.0246599, 0.0291029, 0.569871, -0.00987598, -0.0251348, -0.008596, -0.570081, 127.477, 3.0281, 55.4254 )
 
 [node name="DeathPlane" parent="." instance=ExtResource( 18 )]
-transform = Transform( 1.11272e+06, 0, 0, 0, 1, 0, 0, 0, 605091, -16.0277, -14.5182, -73.9773 )
+transform = Transform( 1.11272e+06, 0, 0, 0, 1, 0, 0, 0, 605091, -16.028, -15, -73.977 )
 
 [node name="arena" parent="." instance=ExtResource( 19 )]
 transform = Transform( -1, 4.37114e-08, -1.50996e-07, 8.74228e-08, 0.5, 0, 1.50996e-07, -6.60024e-15, -1, -163.384, -7.13527, 38.7376 )

@@ -151,7 +151,7 @@ namespace godot {
 		void check_camera();
 		void adjust_camera(Vector3 from, Vector3 to, float lenfrom, float lento);
 		void check_water();
-
+		void check_deathplane();
 		void rpc_set_anim_param(String name, Variant to)
 		{
 			rpc("puppet_set_anim_param", Array::make(name, to));
