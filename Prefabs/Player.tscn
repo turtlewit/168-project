@@ -121,7 +121,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Walk-loop"
+animation = "Run-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Swipe"
@@ -144,7 +144,7 @@ animation = "Idle-loop"
 [sub_resource type="AnimationNodeBlend2" id=17]
 
 [sub_resource type="AnimationNodeBlendTree" id=18]
-graph_offset = Vector2( -516, -159.5 )
+graph_offset = Vector2( -453, -16.5 )
 nodes/Animation/node = SubResource( 13 )
 nodes/Animation/position = Vector2( -380, -120 )
 "nodes/Animation 2/node" = SubResource( 9 )
@@ -164,7 +164,7 @@ nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( -100, -80 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4" ]
+node_connections = [ "output", 0, "walk_blend", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4" ]
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -183,11 +183,15 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.14, 0 )
 [node name="Armature" parent="PlayerModel" index="2"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
 
+[node name="Skeleton" parent="PlayerModel/Armature" index="1"]
+bones/41/bound_children = [ NodePath("BoneAttachment") ]
+bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
+
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000494936, 0.713978, -0.577598 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 3.07484e-07, 0.786019, -0.611247 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.577641, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.799144, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
