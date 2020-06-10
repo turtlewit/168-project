@@ -142,6 +142,7 @@ namespace godot {
 	private:
 		bool is_master() { return get_tree()->get_network_unique_id() == get_network_master(); }
 		inline bool is_moving();
+		inline bool is_dead() { return dead; }
 		inline float get_closest_angle(float current, float target, bool flip);
 		void jump();
 		void land();

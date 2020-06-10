@@ -439,6 +439,8 @@ void Player::respawn()
 void Player::_on_Hurtbox_area_entered(Area* area)
 {
 	Player* other = cast_to<Player>(area->get_node("../.."));
+	if (other->is_dead())
+		return;
 
 	switch (other->state) {
 		case State::Attack:
