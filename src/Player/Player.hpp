@@ -34,24 +34,24 @@ namespace godot {
 		};
 
 	private:
-		static constexpr float PounceHeightDivide = 3.0f;
+		static constexpr float PounceHeightDivide = 2;
 		static constexpr float PounceTurnPenalty = 20.0f;
 		static constexpr float SnapLength = 0.1f;
 		static constexpr unsigned int JumpBufferLimit = 7;
-		static constexpr unsigned int DeathPlaneDamage = 1;
+		static constexpr unsigned int DeathPlaneDamage = 25;
 
 		bool in_menu = false;
 
 		// Growable Stats
-		unsigned int max_health = 5;
+		unsigned int max_health = 100;
 		int health = max_health;
 		////////////////////////////
-		float speed = 4.0f;
-		float jump_force = 4.0f;
+		float speed = 3.5f;
+		float jump_force = 3.5f;
 		////////////////////////////
 		float pounce_strength = 2.0f;
-		int swipe_damage = 2;
-		int pounce_damage = 1;
+		int swipe_damage = 17;
+		int pounce_damage = 10;
 		int jumps = 0;
 
 		//Control Parameters
@@ -126,11 +126,11 @@ namespace godot {
 		void _process(float delta);
 		void _physics_process(float delta);
 
-		void increase_speed(float amount);
-		void increase_jump(float amount);
-		void increase_pounce(float amount);
-		void increase_swipe_damage(int amount);
-		void increase_pounce_damage(int amount);
+		void increase_speed();
+		void increase_jump();
+		void increase_pounce();
+		void increase_swipe_damage();
+		void increase_pounce_damage();
 		void set_gravity_velocity(float amount);
 		void damage(int amount);
 

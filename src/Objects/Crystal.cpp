@@ -49,17 +49,17 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 		Player* player = cast_to<Player>(body);
 		switch (powerup_type_internal) {
 			case Powerup::Speed:
-				player->increase_speed(1);
+				player->increase_speed();
 				break;
 			case Powerup::Jump:
-				player->increase_jump(0.5f);
+				player->increase_jump();
 				break;
 			case Powerup::PounceRange:
-				player->increase_pounce(0.5f);
+				player->increase_pounce();
 				break;
 			case Powerup::Damage: {
-				player->increase_swipe_damage(1);
-				player->increase_pounce_damage(1);
+				player->increase_swipe_damage();
+				player->increase_pounce_damage();
 			} break;
 		}
 

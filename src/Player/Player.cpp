@@ -167,7 +167,7 @@ void Player::_process(float delta)
 		float rot = model->get_rotation().y;
 		move_direction = -Vector3{ std::sin(rot), 0, std::cos(rot) } * pounce_strength; //Horizontal
 		snap_length = 0;
-		gravity_velocity = Vector3{ 0, jump_force / PounceHeightDivide, 0 }; //Vertical
+		gravity_velocity = Vector3{ 0, (pounce_strength + (jump_force/2) ) / PounceHeightDivide, 0 }; //Vertical
 
 		attack_box->set_disabled(false);
 
@@ -266,33 +266,33 @@ void Player::set_state(int value)
 }
 
 
-void Player::increase_speed(float amount)
+void Player::increase_speed()
 {
-	speed += amount;
+	speed += 0.45f;
 }
 
 
-void Player::increase_jump(float amount)
+void Player::increase_jump()
 {
-	jump_force += amount;
+	jump_force += 0.40f;
 }
 
 
-void Player::increase_pounce(float amount)
+void Player::increase_pounce()
 {
-	pounce_strength += amount;
+	pounce_strength += 0.35f;
 }
 
 
-void Player::increase_swipe_damage(int amount)
+void Player::increase_swipe_damage()
 {
-	swipe_damage += amount;
+	swipe_damage += 3;
 }
 
 
-void Player::increase_pounce_damage(int amount)
+void Player::increase_pounce_damage()
 {
-	pounce_damage += amount;
+	pounce_damage += 1.5f;
 }
 
 
