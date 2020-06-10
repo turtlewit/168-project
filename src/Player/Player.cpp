@@ -327,8 +327,12 @@ void Player::decrease_pounce_damage()
 
 void Player::damage(int amount)
 {
-	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
-	health -= amount;
+	if (!dead) {
+		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
+		health -= amount;
+	} else {
+		return;
+	}
 
 	if (health <= 0) {
 		kill();
