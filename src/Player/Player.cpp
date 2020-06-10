@@ -369,7 +369,6 @@ void Player::check_deathplane()
 {
 	if (get_global_transform().origin.y < -15)
 	{
-		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
 		damage(1);
 		respawn();
 	}
