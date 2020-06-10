@@ -22,6 +22,7 @@ namespace {
 void Player::_register_methods()
 {
 	REGISTER_METHOD(Player, _ready);
+	REGISTER_METHOD(Player, _exit_tree);
 	REGISTER_METHOD(Player, _process);
 	REGISTER_METHOD(Player, _physics_process);
 	REGISTER_METHOD(Player, _input);
@@ -71,6 +72,12 @@ void Player::_ready()
 	camera_exclusions.append(this);
 
 	NetworkSignalManager::get_singleton()->connect("player_hit", this, "_on_player_hit");
+}
+
+
+void Player::_exit_tree()
+{
+	inp->set_mouse_mode(Input::MOUSE_MODE_VISIBLE);
 }
 
 

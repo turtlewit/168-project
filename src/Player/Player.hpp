@@ -118,6 +118,8 @@ namespace godot {
 
 		void _ready();
 
+		void _exit_tree();
+
 		void _input(InputEvent* event);
 
 		void _process(float delta);

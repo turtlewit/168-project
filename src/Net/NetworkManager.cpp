@@ -96,7 +96,7 @@ void NetworkManager::_init()
 
 void NetworkManager::_enter_tree()
 {
-    get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected", Array(), CONNECT_REFERENCE_COUNTED);
+    get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected", Array());
 }
 
 NetworkManager::NetworkManager()

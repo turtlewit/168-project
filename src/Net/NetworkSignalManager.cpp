@@ -41,7 +41,7 @@ void NetworkSignalManager::_ready()
 	}
 
 	set_process(false);
-	NetworkManager::get_singleton()->connect("network_connected", this, "_on_network_start", godot::Array(), CONNECT_REFERENCE_COUNTED);
+	NetworkManager::get_singleton()->connect("network_connected", this, "_on_network_start", godot::Array());
 }
 
 void NetworkSignalManager::_process(float delta)

@@ -78,4 +78,9 @@ class_info = [ {
 "is_tool": false,
 "name": "PauseMenu",
 "subdir": "UI/"
+}, {
+"header": "GameManager.hpp",
+"is_tool": false,
+"name": "GameManager",
+"subdir": ""
 } ]

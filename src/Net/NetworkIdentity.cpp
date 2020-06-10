@@ -14,6 +14,7 @@ void NetworkIdentity::_register_methods()
 	register_method("_ready", &NetworkIdentity::_ready);
 	register_method("_on_network_start", &NetworkIdentity::_on_network_start);
 	register_method("_on_network_peer_connected", &NetworkIdentity::_on_network_peer_connected);
+	register_method("_on_network_peer_disconnected", &NetworkIdentity::_on_network_peer_disconnected);
 }
 
 void NetworkIdentity::_init()
@@ -31,17 +32,21 @@ void NetworkIdentity::_ready()
 
 	set_process(false);
 
-	NetworkManager::get_singleton()->connect("network_connected", this, "_on_network_start", godot::Array(), CONNECT_REFERENCE_COUNTED);
+	NetworkManager::get_singleton()->connect("network_connected", this, "_on_network_start");
+	if (get_parent()->has_method("_on_network_connected"))
+		NetworkManager::get_singleton()->connect("network_connected", get_parent(), "_on_network_connected");
 }
 
 void NetworkIdentity::_on_network_start()
 {
 	if (is_player && is_network_master()) {
-		get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected", Array(), CONNECT_REFERENCE_COUNTED);
+		get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected", Array());
 	}
 	
 	if (!is_player) {
 		get_parent()->set_network_master(NetworkManager::SERVER_ID);
+	} else {
+		get_tree()->connect("network_peer_disconnected", this, "_on_network_peer_disconnected");
 	}
 	
 	if (get_network_master() != 0 && !is_network_master()) {
@@ -62,4 +67,11 @@ void NetworkIdentity::_on_network_peer_connected(int64_t id)
 	// Whenever a new client connects, it's the master player's job to make sure
 	// a copy is spawned on the connecting client.
 	NetworkManager::get_singleton()->rpc_id(id, "spawn_player_with_master", get_tree()->get_network_unique_id());
+}
+
+void NetworkIdentity::_on_network_peer_disconnected(int64_t id)
+{
+	if (id == get_network_master()) {
+		get_parent()->queue_free();
+	}
 }

@@ -73,7 +73,7 @@ void NetworkNode<T, C>::_ready()
 		return;
 	}
 
-	identity->connect("network_node_start", this, "_on_network_node_start", godot::Array(), T::CONNECT_REFERENCE_COUNTED);
+	identity->connect("network_node_start", this, "_on_network_node_start", godot::Array());
 }
 
 template <typename T, typename C>
