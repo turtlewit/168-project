@@ -327,8 +327,12 @@ void Player::decrease_pounce_damage()
 
 void Player::damage(int amount)
 {
-	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
-	health -= amount;
+	if (!dead) {
+		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
+		health -= amount;
+	} else {
+		return;
+	}
 
 	if (health <= 0) {
 		dead = true;
@@ -439,8 +443,6 @@ void Player::respawn()
 void Player::_on_Hurtbox_area_entered(Area* area)
 {
 	Player* other = cast_to<Player>(area->get_node("../.."));
-	if (other->is_dead())
-		return;
 
 	switch (other->state) {
 		case State::Attack:
