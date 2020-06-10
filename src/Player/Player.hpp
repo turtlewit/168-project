@@ -131,6 +131,11 @@ namespace godot {
 		void increase_pounce();
 		void increase_swipe_damage();
 		void increase_pounce_damage();
+		void decrease_speed();
+		void decrease_jump();
+		void decrease_pounce();
+		void decrease_swipe_damage();
+		void decrease_pounce_damage();
 		void set_gravity_velocity(float amount);
 		void damage(int amount);
 

@@ -359,35 +359,27 @@ transform = Transform( 0.166892, -0.521094, -0.576082, -0.819608, 0.297846, -0.4
 
 [node name="Portal" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( -0.0968188, 0, -0.0250226, 0, 0.1, 0, 0.0250226, 0, -0.0968188, -25.811, 1.587, -18.7544 )
-"teleport location" = Vector3( 71.113, 9.367, -84.558 )
 
 [node name="Portal2" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0993396, -0.000824931, 0.0114438, 0.000189529, 0.0998456, 0.00555216, -0.011472, -0.0054938, 0.0991878, -4.699, 13.9025, 40.1035 )
-"teleport location" = Vector3( 87.687, 2.609, -96.189 )
 
 [node name="Portal3" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0749584, 0.0120137, 0.0650915, -0.00907097, 0.0992757, -0.00787694, -0.0655664, 0, 0.0755053, 19.3487, 3.2884, 35.197 )
-"teleport location" = Vector3( 63.883, 2.397, -49.922 )
 
 [node name="Portal5" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0790294, 0, -0.0612728, 0, 0.1, 0, 0.0612728, 0, 0.0790294, 86.1101, 2.49321, -97.1895 )
-"teleport location" = Vector3( -4.699, 13.889, 39.458 )
 
 [node name="Portal6" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( -0.0652667, 0, -0.0757645, 0, 0.1, 0, 0.0757645, 0, -0.0652667, 29.6746, -0.913, -104.372 )
-"teleport location" = Vector3( 94.5, 2.686, -0.5 )
 
 [node name="Portal7" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0516618, -0.0021937, 0.0855935, 0.00113358, 0.0999759, 0.00187812, -0.0856141, 0, 0.0516742, 93.7325, 2.70849, -2.43952 )
-"teleport location" = Vector3( 31.986, -0.913, -104.069 )
 
 [node name="Portal8" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0999718, -0.00237343, 0, 0.00236895, 0.0997835, 0.00613447, -0.000145597, -0.00613274, 0.0998117, 99.8166, 3.12023, 10.0659 )
-"teleport location" = Vector3( 14.66, 3.759, 38.054 )
 
 [node name="Portal9" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.1, 0, 0, 0, 0.0328339, -0.094456, 0, 0.094456, 0.0328339, -26.2626, -4.75806, -51.4542 )
-"teleport location" = Vector3( 106.361, 3.617, -0.822 )
 
 [node name="Portal4" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0513886, 0, -0.0857859, 0, 0.1, 0, 0.0857859, 0, 0.0513886, -205.809, 11.3438, 96.5689 )
@@ -405,68 +397,54 @@ transform = Transform( 0.0791554, 0, 0.0611099, 0, 0.1, 0, -0.0611099, 0, 0.0791
 
 [node name="Crystal2" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61526, -0.36233, 11.8134 )
-powerup_type = 2
 
 [node name="Crystal3" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35033, 4.11258, 35.447 )
-powerup_type = 1
 
 [node name="Crystal4" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4454, -0.445764, -31.2587 )
 
 [node name="Crystal5" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0111, -0.680567, -23.6024 )
-powerup_type = 2
 
 [node name="Crystal6" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 74.2264, 2.75947, -80.0711 )
-powerup_type = 3
 
 [node name="Crystal13" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63.9845, 10.3006, -81.348 )
-powerup_type = 2
 
 [node name="Crystal7" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 86.1947, 2.75947, -87.839 )
-powerup_type = 1
 
 [node name="Crystal" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.52577, 5.43281, -79.6811 )
-powerup_type = 1
 
 [node name="Crystal28" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75521, 2.11168, -76.3453 )
-powerup_type = 1
 
 [node name="Crystal8" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.26325, 9.63149, 40.8416 )
 
 [node name="Crystal9" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64568, 4.62985, -50.7877 )
-powerup_type = 3
 
 [node name="Crystal10" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.294, 3.00723, 3.83837 )
-powerup_type = 2
 
 [node name="Crystal12" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 107.742, 3.44333, -3.50337 )
-powerup_type = 1
 
 [node name="Crystal30" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110.198, 1.28449, -30.1065 )
-powerup_type = 2
 
 [node name="Crystal14" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6395, -0.0559666, -56.4076 )
 
 [node name="Crystal29" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.6941, 1.47639, -50.7703 )
-powerup_type = 1
 
 [node name="Crystal15" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.4296, -0.411493, -57.0695 )
-powerup_type = 3
 
 [node name="Crystal11" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -180.076, 8.29304, 51.4514 )
@@ -506,7 +484,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.6517, -0.637173, -107.393 )
 
 [node name="Crystal27" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.8608, 1.60829, -63.657 )
-powerup_type = 1
 
 [node name="CameraRotating" type="Spatial" parent="."]
 script = SubResource( 1 )
@@ -639,7 +616,6 @@ shape = SubResource( 3 )
 
 [node name="Crystal" parent="Pillar" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85705, 7.01711, -7.22366 )
-powerup_type = 3
 
 [node name="Block8" type="StaticBody" parent="Pillar" groups=[
 "Ground",
@@ -802,7 +778,6 @@ shape = SubResource( 3 )
 
 [node name="Crystal" parent="Pillar3" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85705, 7.01711, -7.22366 )
-powerup_type = 1
 
 [node name="Block8" type="StaticBody" parent="Pillar3" groups=[
 "Ground",
@@ -890,11 +865,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-prefab = ExtResource( 2 )
-number_of_instances = 40
-randomize_rotation = true
-base_scale = Vector3( 0.1, 0.1, 0.1 )
-min_distance = 0.5
 
 [node name="Prefabs" type="Spatial" parent="TreeArea"]
 
@@ -1030,11 +1000,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-prefab = ExtResource( 2 )
-number_of_instances = 40
-randomize_rotation = true
-base_scale = Vector3( 0.1, 0.1, 0.1 )
-min_distance = 0.5
 
 [node name="Prefabs" type="Spatial" parent="PropArea2"]
 
@@ -1171,11 +1136,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-number_of_instances = 2000
-randomize_rotation = true
-base_position = Vector3( 0, 0.1, 0 )
-base_rotation = Vector3( 90, 0, 0 )
-base_scale = Vector3( 0.1, 0.1, 0.1 )
 
 [node name="Prefabs" type="Spatial" parent="GrassArea"]
 
@@ -1192,12 +1152,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-number_of_instances = 3000
-randomize_rotation = true
-base_position = Vector3( 0, 0.1, 0 )
-base_rotation = Vector3( 90, 0, 0 )
-base_scale = Vector3( 0.1, 0.1, 0.1 )
-collision_mask = 4294967294
 
 [node name="Prefabs" type="Spatial" parent="GrassArea2"]
 
@@ -1215,12 +1169,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-number_of_instances = 2000
-randomize_rotation = true
-base_position = Vector3( 0, 0.1, 0 )
-base_rotation = Vector3( 90, 0, 0 )
-base_scale = Vector3( 0.1, 0.1, 0.1 )
-collision_mask = 4294967294
 
 [node name="Prefabs" type="Spatial" parent="GrassArea3"]
 

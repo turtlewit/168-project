@@ -124,5 +124,5 @@ margin_bottom = 367.0
 [connection signal="pressed" from="VBoxContainer/Multiplayer" to="HostOrConnect" method="set_visible" binds= [ true ]]
 [connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Host" to="HostOrConnect" method="set_visible" binds= [ false ]]
 [connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Host" to="Host" method="set_visible" binds= [ true ]]
-[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Connect" to="Connect" method="set_visible" binds= [ true ]]
 [connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Connect" to="HostOrConnect" method="set_visible" binds= [ false ]]
+[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Connect" to="Connect" method="set_visible" binds= [ true ]]

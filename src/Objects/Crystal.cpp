@@ -33,7 +33,7 @@ void Crystal::_ready()
 {
 	anim_player_dissolve = GET_NODE(AnimationPlayer, "AnimationPlayerDissolve");
 	anim_player_respawn = GET_NODE(AnimationPlayer, "AnimationPlayerRespawn");
-	powerup_type_internal = static_cast<Powerup>(powerup_type);
+	powerup_type_internal = static_cast<Powerup>(Mathf::rand_range(0,3));
 	GET_NODE(Timer, "Timer")->set_wait_time(respawn_time);
 
 	set_color();

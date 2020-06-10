@@ -295,6 +295,35 @@ void Player::increase_pounce_damage()
 	pounce_damage += 1.5f;
 }
 
+void Player::decrease_speed()
+{
+	speed -= 0.45f;
+}
+
+
+void Player::decrease_jump()
+{
+	jump_force -= 0.40f;
+}
+
+
+void Player::decrease_pounce()
+{
+	pounce_strength -= 0.35f;
+}
+
+
+void Player::decrease_swipe_damage()
+{
+	swipe_damage -= 3;
+}
+
+
+void Player::decrease_pounce_damage()
+{
+	pounce_damage -= 1.5f;
+}
+
 
 void Player::damage(int amount)
 {
@@ -304,6 +333,24 @@ void Player::damage(int amount)
 	if (health <= 0) {
 		dead = true;
 		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
+		int ptype = Mathf::rand_range(0, 3);
+		//SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", ptype, -1);
+		switch (ptype)
+		{
+		case 0:
+			decrease_speed();
+			break;
+		case 1:
+			decrease_jump();
+			break;
+		case 2:
+			decrease_pounce();
+			break;
+		case 3:
+			decrease_swipe_damage();
+			decrease_pounce_damage();
+			break;
+		}
 		timer_respawn->start();
 	}
 }
