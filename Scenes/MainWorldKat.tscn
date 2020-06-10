@@ -23640,6 +23640,48 @@ speed = 0.25
 transform = Transform( 1, 0, 0, 0, 0.904938, 0.425542, 0, -0.425542, 0.904938, 0, 20.9099, 36.5576 )
 far = 200.0
 
+[node name="ArenaSpawnPoints" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -166.686, 8.0225, 83.8785 )
+
+[node name="Spatial" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1565, 2.54886, 9.24487 )
+
+[node name="Spatial3" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1883, 1.15671, -1.22679 )
+
+[node name="Spatial4" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2254, 0.953605, -3.99829 )
+
+[node name="Spatial5" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.55853, 2.23812, -7.0879 )
+
+[node name="Spatial6" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7372, 2.69662, -6.72809 )
+
+[node name="Spatial7" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.87045, 2.69662, -3.6642 )
+
+[node name="Spatial8" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.87045, 2.69662, 1.93537 )
+
+[node name="Spatial9" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06783, 2.69662, 7.36884 )
+
+[node name="Spatial10" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.96863, 2.69662, 10.8075 )
+
+[node name="Spatial11" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23749, 2.69662, 12.3122 )
+
+[node name="Spatial12" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63777, 2.69662, 12.3122 )
+
+[node name="Spatial13" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0828, 3.01056, 9.2075 )
+
+[node name="Spatial2" type="Spatial" parent="ArenaSpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8085, 2.69962, 0.393181 )
+
 [node name="SpawnPoints" type="Spatial" parent="." groups=[
 "SpawnPoints",
 ]]
