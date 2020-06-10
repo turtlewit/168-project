@@ -10,6 +10,7 @@ void LOD::_register_methods()
 {
 	register_method("_ready", &LOD::_ready);
 	register_method("_process", &LOD::_process);
+	register_method("_on_camera_tree_exiting", &LOD::_on_camera_tree_exiting);
 
 	register_property("distance", &LOD::distance, 200.0f);
 	register_property("lod_paths", &LOD::lod_paths, Array());
@@ -52,6 +53,9 @@ void LOD::_process(float delta)
 void LOD::find_camera()
 {
 	camera = get_tree()->get_root()->get_camera();
+	if (camera) {
+		camera->connect("tree_exiting", this, "_on_camera_tree_exiting", Array(), CONNECT_REFERENCE_COUNTED);
+	}
 }
 
 int LOD::get_lod_number()
@@ -65,3 +69,8 @@ int LOD::get_lod_number()
 	return static_cast<int>((dist*nlod)/distance);
 }
 
+void LOD::_on_camera_tree_exiting()
+{
+	camera->disconnect("tree_exiting", this, "_on_camera_tree_exiting");
+	camera = nullptr;
+}

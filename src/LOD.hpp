@@ -17,6 +17,7 @@ public:
 private:
 	void find_camera();
 	int get_lod_number();
+	void _on_camera_tree_exiting();
 
 	godot::Camera* camera;
 
