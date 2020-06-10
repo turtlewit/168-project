@@ -378,6 +378,8 @@ void Player::respawn()
 {
 	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 	NetworkManager::get_singleton()->spawn_player(this);
+	health = max_health;
+	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", 0, -static_cast<int>(max_health), get_name());
 	dead = false;
 }
 
