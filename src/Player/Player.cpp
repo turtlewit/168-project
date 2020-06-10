@@ -330,11 +330,11 @@ void Player::damage(int amount)
 	if (!dead) {
 		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
 		health -= amount;
-		if (health <= 0)
-			kill();
 	} else {
 		return;
 	}
+	if (health <= 0)
+			kill();
 }
 
 void Player::set_gravity_velocity(float amount)
@@ -415,7 +415,7 @@ void Player::kill()
 
 void Player::check_deathplane()
 {
-	if (get_global_transform().origin.y < -20)
+	if (get_global_transform().origin.y < -20 && !dead)
 	{
 		kill();
 	}
@@ -423,8 +423,8 @@ void Player::check_deathplane()
 
 void Player::respawn()
 {
-	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 	NetworkManager::get_singleton()->spawn_player(this);
+	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 	health = max_health;
 	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", 0, -static_cast<int>(max_health), get_name());
 	dead = false;

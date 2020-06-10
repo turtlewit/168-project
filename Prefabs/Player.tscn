@@ -164,7 +164,7 @@ nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( -100, -80 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4" ]
+node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3" ]
 
 [sub_resource type="Animation" id=19]
 resource_name = "Dissolve"
@@ -254,10 +254,10 @@ bones/41/bound_children = [ NodePath("BoneAttachment") ]
 bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
 
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000476135, 0.716716, -0.578877 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000573104, 0.702593, -0.57228 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.525308, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.795219, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
