@@ -9,6 +9,7 @@
 #include <Timer.hpp>
 #include <OmniLight.hpp>
 #include <Animation.hpp>
+#include <SceneTree.hpp>
 
 using namespace godot;
 
@@ -43,6 +44,9 @@ void Crystal::_ready()
 void Crystal::_on_Crystal_body_entered(Node* body)
 {
 	if (!collected && body->is_in_group("Player")) {
+		if (body->get_network_master() != get_tree()->get_network_unique_id())
+			return;
+
 		anim_player_dissolve->play("Dissolve");
 		collected = true;
 		
