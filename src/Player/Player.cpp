@@ -330,12 +330,10 @@ void Player::damage(int amount)
 	if (!dead) {
 		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
 		health -= amount;
+		if (health <= 0)
+			kill();
 	} else {
 		return;
-	}
-
-	if (health <= 0) {
-		kill();
 	}
 }
 
