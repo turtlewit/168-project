@@ -25,7 +25,7 @@ void GameUI::_ready()
 		crystal_labels[i] = cast_to<Label>(get_node("Crystals")->get_child(i)->get_child(0));
 		update_crystal_amount(i, 0);
 	}
-
+	health_amount = cast_to<Label>(get_node("HealthBar")->get_child(0));
 	health_bar = GET_NODE(ProgressBar, "HealthBar");
 	pounce_bar = GET_NODE(ProgressBar, "PounceBar");
 	tween_health = GET_NODE(Tween, "TweenHealth");
@@ -61,6 +61,7 @@ void GameUI::update_health(int old_health, int damage)
 {
 	tween_health->interpolate_property(health_bar, "value", old_health, old_health - damage, 1.0f, Tween::TRANS_QUINT, Tween::EASE_OUT);
 	tween_health->start();
+	health_amount->set_text(String::num_int64(damage <= old_health ? old_health - damage : 0));
 }
 
 
