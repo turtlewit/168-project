@@ -26,6 +26,9 @@ shader_param/useColorBlend = false
 shader_param/colorBlend = null
 shader_param/rim_amount = null
 shader_param/emissionColor = null
+shader_param/metallic = 0.0
+shader_param/roughness = 0.0
+shader_param/specular = 0.0
 shader_param/baseTexture = ExtResource( 2 )
 
 [sub_resource type="ConcavePolygonShape" id=4]
@@ -69,9 +72,14 @@ shader_param/useColorBlend = true
 shader_param/colorBlend = Color( 0, 0, 0, 1 )
 shader_param/rim_amount = 1.0
 shader_param/emissionColor = Color( 0.117647, 0.866667, 0.901961, 1 )
+shader_param/metallic = 0.0
+shader_param/roughness = 0.0
+shader_param/specular = 0.0
 
 [sub_resource type="SphereMesh" id=11]
 material = SubResource( 10 )
+radial_segments = 6
+rings = 4
 
 [node name="Portal" instance=ExtResource( 4 )]
 
