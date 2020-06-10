@@ -78,7 +78,7 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.20791, 1.89997, 2.0797
 transform = Transform( -3, 4.37114e-08, -2.62268e-07, 2.62268e-07, 0.5, 0, 2.62268e-07, -3.82137e-15, -3, 0, -0.783661, 0 )
 
 [node name="MeshInstance" parent="Water" index="0"]
-transform = Transform( 1, -1.11358e-22, 7.10543e-15, 5.68434e-14, 1, -3.38813e-21, -7.10543e-15, 1.05879e-22, 1, -0.267393, 1.98998, -0.363965 )
+transform = Transform( 1, -1.11358e-22, 1.42109e-14, 2.84217e-13, 1, -6.77626e-21, -1.42109e-14, 2.11758e-22, 1, -0.267393, 1.98998, -0.363965 )
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 
@@ -23524,16 +23524,16 @@ transform = Transform( 0.1, 0, 0, 0, 0.0328339, -0.094456, 0, 0.094456, 0.032833
 "teleport location" = Vector3( 106.361, 3.617, -0.822 )
 
 [node name="Portal4" parent="Portals" instance=ExtResource( 10 )]
-transform = Transform( 0.0513886, 0, -0.0857859, 0, 0.1, 0, 0.0857859, 0, 0.0513886, -202.524, 9.07618, 96.6994 )
+transform = Transform( 0.0513886, 0, -0.0857859, 0, 0.1, 0, 0.0857859, 0, 0.0513886, -205.809, 11.3438, 96.5689 )
 
 [node name="Portal10" parent="Portals" instance=ExtResource( 10 )]
-transform = Transform( 0.0800658, 0, -0.0599121, 0, 0.1, 0, 0.0599121, 0, 0.0800658, -162.739, 11.4018, 44.9501 )
+transform = Transform( 0.0800658, 0, -0.0599121, 0, 0.1, 0, 0.0599121, 0, 0.0800658, -174.386, 7.97231, 51.0155 )
 
 [node name="Portal12" parent="Portals" instance=ExtResource( 10 )]
-transform = Transform( 0.0539462, 0, -0.084201, 0, 0.1, 0, 0.084201, 0, 0.0539462, -130.991, 11.7017, 93.9457 )
+transform = Transform( -0.0958468, 0.0027863, 0.0283835, 0.00622077, 0.0991678, 0.0112717, -0.0278332, 0.0125692, -0.0952225, -150.467, 13.13, 88.0623 )
 
 [node name="Portal11" parent="Portals" instance=ExtResource( 10 )]
-transform = Transform( 0.0791554, 0, 0.0611099, 0, 0.1, 0, -0.0611099, 0, 0.0791554, -161.615, 9.80736, 121.97 )
+transform = Transform( 0.0791554, 0, 0.0611099, 0, 0.1, 0, -0.0611099, 0, 0.0791554, -174.698, 6.09713, 118.565 )
 
 [node name="Crystals" type="Spatial" parent="."]
 
@@ -23590,16 +23590,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6395, -0.0559666, -56.4076
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.4296, -0.411493, -57.0695 )
 
 [node name="Crystal11" parent="Crystals" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.477, 11.5311, 47.9934 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -180.076, 8.29304, 51.4514 )
 
 [node name="Crystal16" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8055, 2.54899, -88.7691 )
 
 [node name="Crystal17" parent="Crystals" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -169.332, 9.77681, 121.375 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -179.951, 6.98614, 117.655 )
 
 [node name="Crystal26" parent="Crystals" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -131.396, 11.9249, 95.5438 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -144.905, 13.7982, 89.9976 )
 
 [node name="Crystal18" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.018, 13.4767, 24.186 )
@@ -23620,7 +23620,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.68605, 10.4214, 25.9661 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3864, 10.4214, 23.9547 )
 
 [node name="Crystal24" parent="Crystals" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -203.553, 9.42193, 91.3684 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -208.968, 11.6858, 94.7189 )
 
 [node name="Crystal25" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.6517, -0.637173, -107.393 )
@@ -23634,46 +23634,37 @@ transform = Transform( 1, 0, 0, 0, 0.904938, 0.425542, 0, -0.425542, 0.904938, 0
 far = 200.0
 
 [node name="ArenaSpawnPoints" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -166.686, 8.0225, 83.8785 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -166.686, 7.09557, 83.8785 )
 
 [node name="Spatial" type="Spatial" parent="ArenaSpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1565, 2.54886, 9.24487 )
 
 [node name="Spatial3" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.1883, 1.15671, -1.22679 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.4305, 1.5683, -1.45883 )
 
 [node name="Spatial4" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2254, 0.953605, -3.99829 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2254, 1.39396, -3.99829 )
 
 [node name="Spatial5" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.55853, 2.23812, -7.0879 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1848, 1.97796, -5.51603 )
 
 [node name="Spatial6" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7372, 2.69662, -6.72809 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.83327, 2.40225, -4.60385 )
 
 [node name="Spatial7" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.87045, 2.69662, -3.6642 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.48198, 1.59619, 0.499428 )
 
 [node name="Spatial8" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.87045, 2.69662, 1.93537 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.42677, 2.69662, 6.29369 )
 
 [node name="Spatial9" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06783, 2.69662, 7.36884 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0303, 2.69662, 11.2612 )
 
 [node name="Spatial10" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.96863, 2.69662, 10.8075 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4624, 2.69662, 10.3836 )
 
 [node name="Spatial11" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23749, 2.69662, 12.3122 )
-
-[node name="Spatial12" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63777, 2.69662, 12.3122 )
-
-[node name="Spatial13" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9169, 3.01056, 9.02501 )
-
-[node name="Spatial2" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8085, 2.69962, 0.393181 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.0959, 2.55599, 7.5377 )
 
 [node name="SpawnPoints" type="Spatial" parent="." groups=[
 "SpawnPoints",
@@ -23955,77 +23946,64 @@ transform = Transform( 1, 9.8953e-10, 0, 4.88944e-09, 1, 9.31323e-10, 3.72529e-0
 [node name="Platform2" parent="platforms" index="1"]
 transform = Transform( -0.569402, 0.0295063, 0.0246599, 0.0291029, 0.569871, -0.00987598, -0.0251348, -0.008596, -0.570081, 127.477, 3.0281, 55.4254 )
 
-[node name="arena" parent="." instance=ExtResource( 19 )]
+[node name="Arena" type="Spatial" parent="."]
+
+[node name="arena" parent="Arena" instance=ExtResource( 19 )]
 transform = Transform( -1, 4.37114e-08, -1.50996e-07, 8.74228e-08, 0.5, 0, 1.50996e-07, -6.60024e-15, -1, -163.384, -7.13527, 38.7376 )
 
-[node name="Arena" parent="arena" index="0"]
-transform = Transform( 0.4, -5.69063e-22, 0, -1.59457e-21, 0.571, 0, 0, 0, 0.4, 5.73573, 30.9999, -46.6494 )
+[node name="Arena" parent="Arena/arena" index="0"]
+transform = Transform( 0.339793, -3.38641e-22, 3.55271e-15, -1.35456e-21, 0.339793, -6.77626e-21, -3.55271e-15, 0, 0.339793, 19.4998, 29.0526, -46.8257 )
 
-[node name="CollisionShape" parent="arena/Arena/StaticBody" index="0"]
-transform = Transform( 1, -9.96608e-22, 0, 1.42109e-14, 1, -1.69407e-21, 0, 0, 1, 0, 0, 0 )
+[node name="APlatform2" parent="Arena/arena" index="1"]
+transform = Transform( 0.291551, 2.46099e-09, 0.189734, 9.84395e-09, 0.347852, -3.31741e-08, -0.189734, 8.29353e-09, 0.291551, 29.5407, 35.4595, -68.8508 )
 
-[node name="APlatform2" parent="arena" index="1"]
-transform = Transform( 0.570699, -5.68764e-22, 0, -2.27506e-21, 0.570699, 0, 0, 0, 0.570699, 25.4501, 28.7317, -75.9265 )
+[node name="APlatform" parent="Arena/arena" index="2"]
+transform = Transform( 0.0509889, 1.41812e-08, 0.371939, 5.67249e-08, 0.375417, -6.50318e-08, -0.371939, 1.6258e-08, 0.0509889, 31.7941, 32.4006, -26.112 )
 
-[node name="APlatform" parent="arena" index="2"]
-transform = Transform( 0.15722, 1.80738e-08, 0.548616, 7.22951e-08, 0.570699, -9.59229e-08, -0.548616, 2.39808e-08, 0.15722, -4.50002, 30.9837, -46.8293 )
-
-[node name="arena2" parent="." instance=ExtResource( 19 )]
+[node name="arena2" parent="Arena" instance=ExtResource( 19 )]
 transform = Transform( 0.3, 0, 0, 0, 0.5, 0, 0, 0, 0.3, -123.892, -11.2079, 99.8011 )
 
-[node name="Arena" parent="arena2" index="0"]
-transform = Transform( 0.570699, 0, 0, 0, 0.570699, 0, 0, 0, 0.570699, -252.344, 39.1368, -16.0849 )
+[node name="Arena" parent="Arena/arena2" index="0"]
+transform = Transform( 0.570699, 0, 0, 0, 0.570699, 0, 0, 0, 0.570699, -175.24, 36.879, -151.662 )
 
-[node name="APlatform2" parent="arena2" index="1"]
-transform = Transform( 0.521481, 0, 0.231851, 0, 0.570699, 0, -0.231851, 0, 0.521481, -167.127, 40.5657, -23.6026 )
+[node name="APlatform2" parent="Arena/arena2" index="1"]
+transform = Transform( 0.33036, 0, 0.46536, 0, 0.570699, 0, -0.46536, 0, 0.33036, -206.908, 35.726, -112.434 )
 
-[node name="APlatform" parent="arena2" index="2"]
-transform = Transform( 0.570699, 0, 0, 0, 0.570699, 0, 0, 0, 0.570699, -200.147, 39.664, 15.9066 )
+[node name="APlatform" parent="Arena/arena2" index="2"]
+transform = Transform( 0.530564, 0, -0.210237, 0, 0.570699, 0, 0.210237, 0, 0.530564, -220.672, 36.4474, -135.818 )
 
-[node name="arena3" parent="." instance=ExtResource( 19 )]
+[node name="arena3" parent="Arena" instance=ExtResource( 19 )]
 transform = Transform( -0.280072, 0, 0.107515, 0, 0.5, 0, -0.107515, 0, -0.280072, -195.702, -10.1154, 72.9178 )
 
-[node name="Arena" parent="arena3" index="0"]
-transform = Transform( 0.570699, 0, 0, 0, 0.570699, 0, 0, 0, 0.570699, -215.471, 42.1856, 4.68158 )
+[node name="APlatform2" parent="Arena/arena3" index="1"]
+transform = Transform( 0.238169, 0, 0.518626, 0, 0.570699, 0, -0.518626, 0, 0.238169, -102.827, 32.5632, -81.2935 )
 
-[node name="StaticBody" parent="arena3/Arena" index="0"]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
+[node name="APlatform" parent="Arena/arena3" index="2"]
+transform = Transform( 0.570699, 0, -4.47035e-08, 0, 0.570699, 0, 4.47035e-08, 0, 0.570699, -115.883, 30.9999, -96.0763 )
 
-[node name="CollisionShape" parent="arena3/Arena/StaticBody" index="0"]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
-
-[node name="APlatform2" parent="arena3" index="1"]
-transform = Transform( 0.521481, 0, 0.231851, 0, 0.570699, 0, -0.231851, 0, 0.521481, -167.127, 40.5657, -23.6026 )
-
-[node name="APlatform" parent="arena3" index="2"]
-transform = Transform( 0.483663, 0, -0.302931, 0, 0.570699, 0, 0.302931, 0, 0.483663, -206.465, 39.664, -3.12842 )
-
-[node name="arena4" parent="." instance=ExtResource( 19 )]
+[node name="arena4" parent="Arena" instance=ExtResource( 19 )]
 transform = Transform( 0.00302116, 0, -0.299985, 0, 0.5, 0, 0.299985, 0, 0.00302116, -162.599, -10.4138, 114.309 )
 
-[node name="Arena" parent="arena4" index="0"]
-transform = Transform( 0.444886, 0, -0.357455, 0, 0.570699, 0, 0.357455, 0, 0.444886, -221.537, 42.1856, 2.40509 )
+[node name="Arena" parent="Arena/arena4" index="0"]
+transform = Transform( 0.191296, 0, 3.49246e-10, 0, 0.191296, 0, -3.49246e-10, 0, 0.191296, -146.088, 34.0624, 12.1394 )
 
-[node name="StaticBody" parent="arena4/Arena" index="0"]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
+[node name="CollisionShape" parent="Arena/arena4/Arena/StaticBody" index="0"]
+transform = Transform( 1, 0, -9.31323e-10, 0, 1, 0, 9.31323e-10, 0, 1, 0, 0, 0 )
 
-[node name="CollisionShape" parent="arena4/Arena/StaticBody" index="0"]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
+[node name="APlatform2" parent="Arena/arena4" index="1"]
+transform = Transform( 0.447761, 0, 0.701412, 0, 0.832147, 0, -0.701412, 0, 0.447761, -112.776, 39.199, -7.66406 )
 
-[node name="APlatform2" parent="arena4" index="1"]
-transform = Transform( 0.200646, 0, -0.534265, 0, 0.570699, 0, 0.534265, 0, 0.200646, -127.073, 39.1733, -23.832 )
-
-[node name="APlatform" parent="arena4" index="2"]
-transform = Transform( 0.483663, 0, -0.302931, 0, 0.570699, 0, 0.302931, 0, 0.483663, -206.465, 39.664, -3.12842 )
+[node name="APlatform" parent="Arena/arena4" index="2"]
+transform = Transform( 0.942408, 0, 0.951233, 0, 1.33902, 0, -0.951233, 0, 0.942408, -132.194, 40.4831, 7.42584 )
 
 [editable path="Water"]
 
 [editable path="platforms"]
 
-[editable path="arena"]
+[editable path="Arena/arena"]
 
-[editable path="arena2"]
+[editable path="Arena/arena2"]
 
-[editable path="arena3"]
+[editable path="Arena/arena3"]
 
-[editable path="arena4"]
+[editable path="Arena/arena4"]
