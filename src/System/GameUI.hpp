@@ -15,6 +15,7 @@ namespace godot {
 	private:
 		unsigned int crystal_amounts[4] = {0};
 		Label* crystal_labels[4];
+		Label* health_amount;
 
 		ProgressBar* health_bar;
 		ProgressBar* pounce_bar;
