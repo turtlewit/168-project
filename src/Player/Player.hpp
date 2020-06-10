@@ -150,7 +150,7 @@ namespace godot {
 
 		void set_state(int value);
 
-		
+		void kill();
 		void respawn();
 		void enter_ground();
 		void exit_ground();
