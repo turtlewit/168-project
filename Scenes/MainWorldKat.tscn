@@ -23677,7 +23677,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23749, 2.69662, 12.3122 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63777, 2.69662, 12.3122 )
 
 [node name="Spatial13" type="Spatial" parent="ArenaSpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0828, 3.01056, 9.2075 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9169, 3.01056, 9.02501 )
 
 [node name="Spatial2" type="Spatial" parent="ArenaSpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8085, 2.69962, 0.393181 )
