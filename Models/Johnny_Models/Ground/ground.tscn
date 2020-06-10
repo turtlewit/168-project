@@ -15,6 +15,7 @@ visible = false
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="Ground" index="0"]
+collision_layer = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="Ground/StaticBody" index="0"]
 shape = SubResource( 1 )

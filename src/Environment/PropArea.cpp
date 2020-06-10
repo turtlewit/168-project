@@ -1,5 +1,7 @@
 // PropArea.cpp
 #define _USE_MATH_DEFINES
+#include <vector>
+
 #include <BoxShape.hpp>
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
@@ -77,11 +79,14 @@ void PropArea::_register_methods()
 	register_property("base_position", &PropArea::base_position, Vector3());
 	register_property("base_rotation", &PropArea::base_rotation, Vector3());
 	register_property("base_scale", &PropArea::base_scale, Vector3(1, 1, 1));
+	register_property("min_distance", &PropArea::min_distance, 0.0f);
+	REGISTER_PROPERTY_HINT(PropArea, int64_t, collision_mask, -1, GODOT_PROPERTY_HINT_LAYERS_3D_PHYSICS, String());
 }
 
 void PropArea::_init()
 {
 	base_scale = Vector3(1, 1, 1);
+	collision_mask = -1;
 }
 
 void PropArea::_notification(int what)
@@ -96,6 +101,7 @@ void PropArea::_notification(int what)
 void PropArea::_ready()
 {
 	curve2d = Ref(Curve2D::_new());
+	curve2d->set_bake_interval(1.0f);
 	find_path();
 	update_configuration_warning();
 	set_notify_transform(true);
@@ -106,6 +112,8 @@ void PropArea::_ready()
 		p->set_owner(get_tree()->get_edited_scene_root());
 		p->set_name("Prefabs");
 	}
+
+	get_tree()->connect("tree_changed", this, "update_configuration_warning");
 }
 
 void PropArea::_process(float delta)
@@ -143,6 +151,8 @@ void PropArea::refresh()
 		return;
 	if (path->get_curve()->get_point_count() == 0)
 		return;
+	if (has_meta("_edit_lock_"))
+		return;
 
 	update_curve();
 
@@ -159,6 +169,10 @@ void PropArea::refresh()
 	auto space_state = get_world()->get_direct_space_state();
 	Rect2 curve_box = get_curve_bounding_box(curve2d);
 
+	bool use_min_dist = min_distance > 0;
+
+	std::vector<Vector2> positions{};
+
 	for (int64_t i = 0; i < number_of_instances; ++i) {
 		Transform gt = get_global_transform();
 		Transform t = Transform();
@@ -168,26 +182,44 @@ void PropArea::refresh()
 		t.rotate(Vector3(1, 0, 0), Mathf::deg2rad(base_rotation.x));
 		t.translate(base_position);
 
-		Vector2 offset = Vector2(Mathf::rand_range(curve_box.position.x, curve_box.position.x + curve_box.size.x), Mathf::rand_range(curve_box.position.y, curve_box.position.y + curve_box.size.y));
+		Vector2 offset;
 		int j;
-		for (j = 0; j < 100; ++j) {
+		for (j = 0; j < 1000; ++j) {
+			offset = Vector2(Mathf::rand_range(curve_box.position.x, curve_box.position.x + curve_box.size.x), Mathf::rand_range(curve_box.position.y, curve_box.position.y + curve_box.size.y));
+
+			if (use_min_dist) {
+				bool good = true;
+				for (const auto& p : positions) {
+					if (offset.distance_to(p) < min_distance) {
+						good = false;
+						break;
+					}
+				}
+				if (!good)
+					continue;
+			}
+
 			if (is_point_in_curve(offset, curve2d))
 				break;
-			offset = Vector2(Mathf::rand_range(curve_box.position.x, curve_box.position.x + curve_box.size.x), Mathf::rand_range(curve_box.position.y, curve_box.position.y + curve_box.size.y));
 		}
 
-		if (j == 100) {
+		if (j == 1000) {
 			continue;
 		}
+
+		if (use_min_dist)
+			positions.push_back(offset);
 
 		Vector3 offset3 = Vector3(offset.x, 0, offset.y);
 
-		auto result = space_state->intersect_ray(gt.origin + offset3, gt.origin + offset3 + Vector3(0, -1000.0f, 0));
-		if (result.empty()) {
-			continue;
+		auto result = space_state->intersect_ray(gt.origin + offset3, gt.origin + offset3 + Vector3(0, -1000.0f, 0), Array(), collision_mask);
+		Vector3 newpos;
+		if (!result.empty()) {
+			newpos = result["position"];
+		} else {
+			newpos = offset3;
+			newpos.y = gt.origin.y;
 		}
-
-		Vector3 newpos = result["position"];
 
 		t.origin = Vector3(0, 0, 0);
 
@@ -195,7 +227,7 @@ void PropArea::refresh()
 			t.rotate(Vector3(0, 1, 0), Mathf::rand_range(0, 2*M_PI));
 		}
 
-		t.origin = gt.xform_inv(newpos);
+		t.origin = gt.xform_inv(newpos + base_position);
 
 		multimesh->set_instance_transform(i, t);
 
@@ -220,6 +252,7 @@ void PropArea::find_path()
 		if (cast_to<Node>(children[i])->get_class() == String("Path")) {
 			path = cast_to<Path>(children[i]);
 			path->connect("curve_changed", this, "_on_path_curve_changed");
+			path->connect("curve_changed", this, "update_configuration_warning");
 			path->set_notify_transform(true);
 			return;
 		}

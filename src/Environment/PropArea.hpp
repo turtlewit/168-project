@@ -44,6 +44,8 @@ private:
 	godot::Vector3 base_scale;
 	int64_t number_of_instances;
 	bool randomize_rotation;
+	float min_distance;
+	int64_t collision_mask;
 
 	godot::Path* path;
 	godot::Ref<godot::Curve2D> curve2d;
