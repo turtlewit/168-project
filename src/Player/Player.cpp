@@ -369,13 +369,8 @@ void Player::check_deathplane()
 {
 	if (get_global_transform().origin.y < -15)
 	{
-		Node* spawn_points = get_tree()->get_current_scene()->find_node(String("SpawnPoints"), true, false);
-		if (spawn_points) {
-			Spatial* spatial_player = cast_to<Spatial>(this);
-			Transform player_transform = spatial_player->get_global_transform();
-			player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[Mathf::rand_range(0, 6)])->get_global_transform().origin;
-			spatial_player->set_global_transform(player_transform);
-		}
+		damage(1);
+		respawn();
 	}
 }
 
