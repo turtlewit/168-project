@@ -183,6 +183,7 @@
     <ClCompile Include="src\GrassMultimesh.cpp" />
     <ClCompile Include="src\Menu\HostDialogue.cpp" />
     <ClCompile Include="src\Environment\PropArea.cpp" />
+    <ClCompile Include="src\LOD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameManager.hpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="src\GrassMultimesh.hpp" />
     <ClInclude Include="src\Menu\HostDialogue.hpp" />
     <ClInclude Include="src\Environment\PropArea.hpp" />
+    <ClInclude Include="src\LOD.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

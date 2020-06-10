@@ -80,8 +80,8 @@ class_info = [ {
 "name": "GameManager",
 "subdir": ""
 }, {
-"header": "DistanceCull.hpp",
+"header": "LOD.hpp",
 "is_tool": false,
-"name": "DistanceCull",
+"name": "LOD",
 "subdir": ""
 } ]

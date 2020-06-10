@@ -21,6 +21,7 @@ using namespace godot;
 #include "Environment/PropArea.hpp"
 #include "UI/PauseMenu.hpp"
 #include "GameManager.hpp"
+#include "LOD.hpp"
 
 
 // godot_gdnative_init
@@ -58,5 +59,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_tool_class<PropArea>();
 	register_class<PauseMenu>();
 	register_class<GameManager>();
+	register_class<LOD>();
 
 }
