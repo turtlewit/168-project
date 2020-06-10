@@ -321,7 +321,7 @@ void Player::decrease_swipe_damage()
 
 void Player::decrease_pounce_damage()
 {
-	pounce_damage += 1.5f;
+	pounce_damage -= 1.5f;
 }
 
 
@@ -333,8 +333,30 @@ void Player::damage(int amount)
 	} else {
 		return;
 	}
-	if (health <= 0)
-			kill();
+
+	if (health <= 0) {
+		dead = true;
+		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
+		int ptype = Mathf::rand_range(0, 3);
+		//SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", ptype, -1);
+		switch (ptype)
+		{
+		case 0:
+			decrease_speed();
+			break;
+		case 1:
+			decrease_jump();
+			break;
+		case 2:
+			decrease_pounce();
+			break;
+		case 3:
+			decrease_swipe_damage();
+			decrease_pounce_damage();
+			break;
+		}
+		timer_respawn->start();
+	}
 }
 
 void Player::set_gravity_velocity(float amount)
@@ -393,38 +415,25 @@ void Player::check_ground()
 		}
 	}
 }
-void Player::kill()
-{
-	dead = true;
-	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
-	int ptype = Mathf::rand_range(0, 3);
-	//SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", ptype, -1);
-	switch (ptype)
-	{
-	case 0:
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
-	timer_respawn->start();
-}
 
 void Player::check_deathplane()
 {
-	if (get_global_transform().origin.y < -20 && !dead)
+	if (get_global_transform().origin.y < -20)
 	{
-		kill();
+		if (health <= DeathPlaneDamage)
+			damage(DeathPlaneDamage);
+		else
+		{
+			damage(DeathPlaneDamage);
+			NetworkManager::get_singleton()->spawn_player(this);
+		}
 	}
 }
 
 void Player::respawn()
 {
-	NetworkManager::get_singleton()->spawn_player(this);
 	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
+	NetworkManager::get_singleton()->spawn_player(this);
 	health = max_health;
 	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", 0, -static_cast<int>(max_health), get_name());
 	dead = false;
