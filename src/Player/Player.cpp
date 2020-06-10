@@ -5,6 +5,7 @@
 #include "Utils/Mathf.hpp"
 #include "System/SignalManagerPlayer.hpp"
 #include "Net/NetworkSignalManager.hpp"
+#include "Net/NetworkManager.hpp"
 
 #include <Input.hpp>
 #include <InputEventMouseMotion.hpp>
@@ -65,6 +66,11 @@ void Player::_ready()
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
 	timer_respawn = GET_NODE(Timer, "TimerRespawn");
+
+	MeshInstance* mesh = GET_NODE(MeshInstance, "PlayerModel/Armature/Skeleton/Animal");
+	Ref<Material> mat = mesh->get_material_override()->duplicate();
+	mesh->set_material_override(mat);
+
 
 	water_shader = cast_to<MeshInstance>(get_parent()->get_node("Water/MeshInstance"))->get_surface_material(0);
 
@@ -376,6 +382,7 @@ void Player::check_deathplane()
 void Player::respawn()
 {
 	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
+	NetworkManager::get_singleton()->spawn_player(this);
 	dead = false;
 }
 

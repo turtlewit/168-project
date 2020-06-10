@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Models/Teo_Models/PineTree/PineTree.tscn" type="PackedScene" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://Scripts/GrassMultimesh.gdns" type="Script" id=14]
 [ext_resource path="res://tree_multimesh.tres" type="MultiMesh" id=15]
 [ext_resource path="res://Models/Johnny_Models/Platforms/platforms.tscn" type="PackedScene" id=16]
-[ext_resource path="res://rock_multimesh.tres" type="MultiMesh" id=17]
 [ext_resource path="res://Models/Johnny_Models/Arena/arena.tscn" type="PackedScene" id=19]
 
 [sub_resource type="GDScript" id=1]
@@ -60,12 +59,6 @@ multimesh = ExtResource( 13 )
 script = ExtResource( 14 )
 multimesh = ExtResource( 15 )
 mesh_node_name = "Tree"
-cast_shadow = true
-
-[node name="RockMultimesh" type="Node" parent="."]
-script = ExtResource( 14 )
-multimesh = ExtResource( 17 )
-mesh_node_name = "RockModel"
 cast_shadow = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]

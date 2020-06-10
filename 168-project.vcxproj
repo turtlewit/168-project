@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\GDLibrary.cpp" />
     <ClCompile Include="src\Hello.cpp" />
     <ClCompile Include="src\Net\NetworkAnimator.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="src\GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameManager.hpp" />
     <ClInclude Include="src\Hello.hpp" />
     <ClInclude Include="src\Net\NetworkAnimator.hpp" />
     <ClInclude Include="src\Net\NetworkIdentity.hpp" />
