@@ -367,13 +367,13 @@ void Player::check_ground()
 
 void Player::check_deathplane()
 {
-	if (get_global_transform().origin.y < -15)
+	if (get_global_transform().origin.y < -20)
 	{
-		if (health == 1)
-			damage(1);
-		else if(health > 1)
+		if (health <= DeathPlaneDamage)
+			damage(DeathPlaneDamage);
+		else
 		{
-			damage(1);
+			damage(DeathPlaneDamage);
 			NetworkManager::get_singleton()->spawn_player(this);
 		}
 	}

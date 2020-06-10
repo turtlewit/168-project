@@ -38,6 +38,7 @@ namespace godot {
 		static constexpr float PounceTurnPenalty = 20.0f;
 		static constexpr float SnapLength = 0.1f;
 		static constexpr unsigned int JumpBufferLimit = 7;
+		static constexpr unsigned int DeathPlaneDamage = 1;
 
 		bool in_menu = false;
 
