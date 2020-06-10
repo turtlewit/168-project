@@ -49,10 +49,6 @@ class_info = [ {
 "name": "Portal",
 "subdir": "Objects"
 }, {
-"header": "Objects/DeathPlane.hpp",
-"name": "DeathPlane",
-"subdir": "Objects/"
-}, {
 "header": "System/SignalManagerPlayer.hpp",
 "name": "SignalManagerPlayer",
 "subdir": "SignalManagers"
@@ -78,4 +74,14 @@ class_info = [ {
 "is_tool": false,
 "name": "PauseMenu",
 "subdir": "UI/"
+}, {
+"header": "GameManager.hpp",
+"is_tool": false,
+"name": "GameManager",
+"subdir": ""
+}, {
+"header": "DistanceCull.hpp",
+"is_tool": false,
+"name": "DistanceCull",
+"subdir": ""
 } ]

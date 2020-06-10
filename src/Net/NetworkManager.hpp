@@ -35,6 +35,7 @@ public:
     void start_client();
 
     void spawn_player_with_master(int64_t master_id);
+    void spawn_player(Node* player);
 
     void _init();
     void _enter_tree();

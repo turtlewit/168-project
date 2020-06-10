@@ -16,6 +16,7 @@ public:
 	void _ready();
 	void _on_network_start();
 	void _on_network_peer_connected(int64_t id);
+	void _on_network_peer_disconnected(int64_t id);
 
 	void _init();
 

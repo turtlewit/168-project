@@ -20,6 +20,7 @@ using namespace godot;
 #include "Player/Player.hpp"
 #include "Environment/PropArea.hpp"
 #include "UI/PauseMenu.hpp"
+#include "GameManager.hpp"
 
 
 // godot_gdnative_init
@@ -56,5 +57,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Player>();
 	register_tool_class<PropArea>();
 	register_class<PauseMenu>();
+	register_class<GameManager>();
 
 }

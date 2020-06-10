@@ -9,12 +9,17 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "Node",
+"class": "GameManager",
+"language": "NativeScript",
+"path": "res://Scripts/GameManager.gdns"
+}, {
+"base": "Node",
 "class": "NetworkAnimator",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkAnimator.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkIdentity",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkIdentity.gdns"
@@ -34,7 +39,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSync.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkTransform",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkTransform.gdns"
@@ -44,12 +49,13 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/UI/PauseMenu.gdns"
 }, {
-"base": "",
+"base": "MultiMeshInstance",
 "class": "PropArea",
 "language": "NativeScript",
 "path": "res://Scripts/Environment/PropArea.tres"
 } ]
 _global_script_class_icons={
+"GameManager": "",
 "NetworkAnimator": "res://Textures/Tools/NetworkIcon.png",
 "NetworkIdentity": "res://Textures/Tools/NetworkIcon.png",
 "NetworkManager": "",
@@ -71,6 +77,7 @@ config/icon="res://icon.png"
 NetworkManager="*res://Prefabs/Net/NetworkManager.tscn"
 SignalManagerPlayer="*res://Prefabs/SignalManagers/SignalManagerPlayer.tscn"
 NetworkSignalManager="*res://Prefabs/Net/NetworkSignalManager.tscn"
+GameManager="*res://Prefabs/GameManager.tscn"
 
 [c++]
 

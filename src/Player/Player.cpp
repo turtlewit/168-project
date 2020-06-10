@@ -5,6 +5,7 @@
 #include "Utils/Mathf.hpp"
 #include "System/SignalManagerPlayer.hpp"
 #include "Net/NetworkSignalManager.hpp"
+#include "Net/NetworkManager.hpp"
 
 #include <Input.hpp>
 #include <InputEventMouseMotion.hpp>
@@ -22,6 +23,7 @@ namespace {
 void Player::_register_methods()
 {
 	REGISTER_METHOD(Player, _ready);
+	REGISTER_METHOD(Player, _exit_tree);
 	REGISTER_METHOD(Player, _process);
 	REGISTER_METHOD(Player, _physics_process);
 	REGISTER_METHOD(Player, _input);
@@ -65,12 +67,23 @@ void Player::_ready()
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
 	timer_respawn = GET_NODE(Timer, "TimerRespawn");
 
+	MeshInstance* mesh = GET_NODE(MeshInstance, "PlayerModel/Armature/Skeleton/Animal");
+	Ref<Material> mat = mesh->get_material_override()->duplicate();
+	mesh->set_material_override(mat);
+
+
 	water_shader = cast_to<MeshInstance>(get_parent()->get_node("Water/MeshInstance"))->get_surface_material(0);
 
 	camera_distance = camera_pivot->get_global_transform().origin.distance_to(camera->get_global_transform().origin);
 	camera_exclusions.append(this);
 
 	NetworkSignalManager::get_singleton()->connect("player_hit", this, "_on_player_hit");
+}
+
+
+void Player::_exit_tree()
+{
+	inp->set_mouse_mode(Input::MOUSE_MODE_VISIBLE);
 }
 
 
@@ -369,6 +382,7 @@ void Player::check_deathplane()
 void Player::respawn()
 {
 	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
+	NetworkManager::get_singleton()->spawn_player(this);
 	dead = false;
 }
 

@@ -78,15 +78,7 @@ void NetworkManager::spawn_player_with_master(int64_t master_id)
     player->set_name(String("{0}{1}").format(Array::make(player->get_name(), master_id)));
 
     get_tree()->get_current_scene()->add_child(player);
-
-    Node* spawn_points = get_tree()->get_current_scene()->find_node(String("SpawnPoints"), true, false);
-    if (spawn_points) {
-        Spatial* spatial_player = cast_to<Spatial>(player);
-        Transform player_transform = spatial_player->get_global_transform();
-        player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[Mathf::rand_range(0, 6)])->get_global_transform().origin;
-        spatial_player->set_global_transform(player_transform);
-    }
-
+    spawn_player(player);
     player->set_network_master(master_id);
 }
 
@@ -96,7 +88,7 @@ void NetworkManager::_init()
 
 void NetworkManager::_enter_tree()
 {
-    get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected", Array(), CONNECT_REFERENCE_COUNTED);
+    get_tree()->connect("network_peer_connected", this, "_on_network_peer_connected", Array());
 }
 
 NetworkManager::NetworkManager()
@@ -129,6 +121,19 @@ void NetworkManager::check_connection_info()
 
     PRINT_ERROR(String("Invalid connection information! address: {0} port: {1}").format(Array::make(address, port)), "NetworkManager::check_connection_info");
 }
+
+
+void NetworkManager::spawn_player(Node* player)
+{
+    Node* spawn_points = get_tree()->get_current_scene()->find_node(String("SpawnPoints"), true, false);
+    if (spawn_points) {
+        Spatial* spatial_player = cast_to<Spatial>(player);
+        Transform player_transform = spatial_player->get_global_transform();
+        player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[Mathf::rand_range(0, 6)])->get_global_transform().origin;
+        spatial_player->set_global_transform(player_transform);
+    }
+}
+
 
 void NetworkManager::_on_network_peer_connected(int64_t master_id)
 {
