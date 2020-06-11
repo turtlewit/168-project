@@ -27,6 +27,8 @@ void NetworkIdentity::_ready()
 	if (get_tree()->has_network_peer()) {
 		// Give time for the rest of the network nodes to connect to the signal.
 		call_deferred("_on_network_start");
+		if (get_parent()->has_method("_on_network_connected"))
+			get_parent()->call_deferred("_on_network_connected");
 		return;
 	}
 

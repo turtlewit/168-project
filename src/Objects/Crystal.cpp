@@ -5,6 +5,7 @@
 #include "Utils/Mathf.hpp"
 #include "Player/Player.hpp"
 #include "System/SignalManagerPlayer.hpp"
+#include "GameManager.hpp"
 
 #include <Timer.hpp>
 #include <OmniLight.hpp>
@@ -20,6 +21,8 @@ void Crystal::_register_methods()
 	REGISTER_METHOD(Crystal, respawn);
 
 	REGISTER_METHOD(Crystal, _on_Crystal_body_entered);
+
+	REGISTER_METHOD(Crystal, _on_game_manager_state_changed);
 
 	REGISTER_PROPERTY_HINT(Crystal, int, powerup_type, 0, GODOT_PROPERTY_HINT_ENUM, "Speed,Jump,Pounce Range,Damage");
 
@@ -38,6 +41,8 @@ void Crystal::_ready()
 	GET_NODE(Timer, "Timer")->set_wait_time(respawn_time);
 
 	set_color();
+	
+	GameManager::get_singleton()->connect("state_changed", this, "_on_game_manager_state_changed");
 }
 
 
@@ -108,3 +113,8 @@ void Crystal::set_color()
 	GET_NODE(MeshInstance, "Model/Cube")->set_surface_material(0, mat->duplicate());
 	GET_NODE(OmniLight, "Model/OmniLight")->set_color(Color::hex(color));
 }
+
+void Crystal::_on_game_manager_state_changed(int state) {
+	respawn();
+}
+

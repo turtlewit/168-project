@@ -24,12 +24,20 @@ public:
 	void _on_server_disconnected();
 
 	State get_state() { return state; }
+	godot::String get_winner() { return winner; }
 
 private:
 	void change_state(State to);
 	void _on_collection_phase_timer_timout();
+	void _on_win_timer_timout();
+	void arena_start();
+	void decrement_player_count();
+	void win();
 
 	static GameManager* singleton;
 
 	State state = State::disconnected;
+	int players_left;
+
+	godot::String winner;
 };

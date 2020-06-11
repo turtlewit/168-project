@@ -13,6 +13,7 @@ void ConnectionDialogue::_register_methods()
         String("port"), Variant::Type::INT));
     
     register_method("_on_connect_button_pressed", &ConnectionDialogue::_on_connect_button_pressed);
+    register_method("_input", &ConnectionDialogue::_input);
 }
 
 void ConnectionDialogue::_enter_tree()
@@ -25,6 +26,13 @@ void ConnectionDialogue::_exit_tree()
 
 void ConnectionDialogue::_init()
 {
+}
+
+void ConnectionDialogue::_input(InputEvent* e)
+{
+	if (e->is_action_pressed("ui_cancel")) {
+		get_parent()->set("visible", false);
+	}
 }
 
 void ConnectionDialogue::_on_connect_button_pressed()

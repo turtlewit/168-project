@@ -123,6 +123,8 @@ namespace godot {
 
 		void _ready();
 
+		void _on_network_connected();
+
 		void _exit_tree();
 
 		void _input(InputEvent* event);
@@ -142,11 +144,11 @@ namespace godot {
 		void decrease_pounce_damage();
 		void set_gravity_velocity(float amount);
 		void damage(int amount);
+		bool is_dead() { return dead; }
 
 	private:
 		bool is_master() { return get_tree()->get_network_unique_id() == get_network_master(); }
 		inline bool is_moving();
-		inline bool is_dead() { return dead; }
 		inline float get_closest_angle(float current, float target, bool flip);
 		void jump();
 		void land();
@@ -179,7 +181,10 @@ namespace godot {
 
 		void _on_menu_closed();
 		
-		void _on_game_manager_state_changed();
+		void _on_game_manager_state_changed(int state);
+
+		void spawn_at_arena();
+		void server_arena_died();
 	};
 
 }

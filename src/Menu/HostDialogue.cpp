@@ -12,6 +12,7 @@ void HostDialogue::_register_methods()
         String("port"), Variant::Type::INT));
     
     register_method("_on_host_button_pressed", &HostDialogue::_on_host_button_pressed);
+    register_method("_input", &HostDialogue::_input);
 }
 
 void HostDialogue::_enter_tree()
@@ -24,6 +25,13 @@ void HostDialogue::_exit_tree()
 
 void HostDialogue::_init()
 {
+}
+
+void HostDialogue::_input(InputEvent* e) 
+{
+	if (e->is_action_pressed("ui_cancel")) {
+		get_parent()->set("visible", false);
+	}
 }
 
 void HostDialogue::_on_host_button_pressed()

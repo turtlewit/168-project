@@ -40,6 +40,7 @@ namespace godot {
 		void respawn();
 		void set_color();
 		void _on_Crystal_body_entered(Node* body);
+		void _on_game_manager_state_changed(int state);
 	};
 
 }

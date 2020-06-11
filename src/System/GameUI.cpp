@@ -76,10 +76,27 @@ void GameUI::_exit_tree()
 
 void GameUI::_on_game_controller_state_changed(int state)
 {
+	GameManager::State s = static_cast<GameManager::State>(state);
+
+	if (s == GameManager::State::end) {
+		String winner = GameManager::get_singleton()->get_winner();
+		int64_t id = winner.right(6).to_int();
+		if (get_tree()->get_network_unique_id() == id) {
+			Label* win = cast_to<Label>(get_node("YouWin"));
+			win->set_visible(true);
+		} else {
+			Label* lose = cast_to<Label>(get_node("YouLose"));
+			lose->set_visible(true);
+		}
+	} else {
+		Label* win = cast_to<Label>(get_node("YouWin"));
+		Label* lose = cast_to<Label>(get_node("YouLose"));
+		win->set_visible(false);
+		lose->set_visible(false);
+	}
+
 	if (!IS_SERVER)
 		return;
-
-	GameManager::State s = static_cast<GameManager::State>(state);
 
 	if (s == GameManager::State::lobby) {
 		Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));

@@ -2,6 +2,7 @@
 
 #include <Godot.hpp>
 #include <Control.hpp>
+#include <InputEvent.hpp>
 
 // Host Dialogue
 //
@@ -18,6 +19,8 @@ public:
 
     void _enter_tree();
     void _exit_tree();
+
+    void _input(godot::InputEvent* e);
 
     void _on_host_button_pressed();
 

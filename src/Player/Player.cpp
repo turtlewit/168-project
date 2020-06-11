@@ -25,7 +25,10 @@ namespace {
 
 void Player::_register_methods()
 {
+	register_signal<Player>("player_arena_died");
+
 	REGISTER_METHOD(Player, _ready);
+	REGISTER_METHOD(Player, _on_network_connected);
 	REGISTER_METHOD(Player, _exit_tree);
 	REGISTER_METHOD(Player, _process);
 	REGISTER_METHOD(Player, _physics_process);
@@ -39,8 +42,10 @@ void Player::_register_methods()
 	REGISTER_METHOD(Player, _on_TimerSwipe_timeout);
 	REGISTER_METHOD(Player, _on_TimerPounce_timeout);
 	REGISTER_METHOD(Player, _on_menu_closed);
+	REGISTER_METHOD(Player, _on_game_manager_state_changed);
 
 	register_method("puppet_set_anim_param", &Player::puppet_set_anim_param, GODOT_METHOD_RPC_MODE_PUPPETSYNC);
+	register_method("server_arena_died", &Player::server_arena_died, GODOT_METHOD_RPC_MODE_REMOTE);
 
 	REGISTER_METHOD(Player, _on_player_hit);
 	REGISTER_METHOD(Player, set_gravity_velocity);
@@ -82,6 +87,14 @@ void Player::_ready()
 	camera_exclusions.append(this);
 
 	NetworkSignalManager::get_singleton()->connect("player_hit", this, "_on_player_hit");
+}
+
+
+void Player::_on_network_connected()
+{
+	if (IS_MASTER) {
+		GameManager::get_singleton()->connect("state_changed", this, "_on_game_manager_state_changed");
+	}
 }
 
 
@@ -377,7 +390,14 @@ void Player::damage(int amount)
 			decrease_pounce_damage();
 			break;
 		}
-		timer_respawn->start();
+		if (GameManager::get_singleton()->get_state() != GameManager::State::arena)
+			timer_respawn->start();
+		else {
+			if (IS_SERVER)
+				server_arena_died();
+			else
+				rpc_id(NetworkManager::SERVER_ID, "server_arena_died");
+		}
 	}
 }
 
@@ -556,4 +576,43 @@ void Player::_on_menu_closed()
 {
 	in_menu = false;
 	inp->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
+}
+
+void Player::_on_game_manager_state_changed(int state)
+{
+	GameManager::State s = static_cast<GameManager::State>(state);
+	if (s == GameManager::State::lobby || s == GameManager::State::collection) {
+		NetworkManager::get_singleton()->spawn_player(this);
+		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, -static_cast<int>(max_health - health), get_name());
+		health = max_health;
+		if (dead) {
+			GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
+			dead = false;
+		}
+		timer_respawn->stop();
+	} else if (s == GameManager::State::arena) {
+		spawn_at_arena();
+		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, -static_cast<int>(max_health - health), get_name());
+		health = max_health;
+		if (dead) {
+			GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
+			dead = false;
+		}
+		timer_respawn->stop();
+	}
+}
+
+void Player::spawn_at_arena()
+{
+	Node* spawn_points = get_tree()->get_current_scene()->find_node(String("ArenaSpawnPoints"), true, false);
+	if (spawn_points) {
+		Transform player_transform = get_global_transform();
+		player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[Mathf::rand_range(0, 6)])->get_global_transform().origin;
+		set_global_transform(player_transform);
+	}
+}
+
+void Player::server_arena_died()
+{
+	emit_signal("player_arena_died");
 }
