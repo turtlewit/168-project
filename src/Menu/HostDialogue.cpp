@@ -9,7 +9,8 @@ using namespace godot;
 void HostDialogue::_register_methods()
 {
     register_signal<HostDialogue>("host", Dictionary::make(
-        String("port"), Variant::Type::INT));
+        String("port"), Variant::Type::INT,
+	String("name"), Variant::Type::STRING));
     
     register_method("_on_host_button_pressed", &HostDialogue::_on_host_button_pressed);
     register_method("_input", &HostDialogue::_input);
@@ -37,10 +38,14 @@ void HostDialogue::_input(InputEvent* e)
 void HostDialogue::_on_host_button_pressed()
 {
     LineEdit* port_line = cast_to<LineEdit>(get_node(NodePath(port_line_path)));
+    LineEdit* name_line = cast_to<LineEdit>(get_node(NodePath("VBoxContainer/Username/LineEdit")));
 
     int64_t port = port_line->get_text().to_int();
+    String username = name_line->get_text();
 
-    emit_signal(String("host"), Array::make(port));
+    emit_signal(String("host"), Array::make(port, username));
+
+    get_node("/root/LocalPlayerName")->set("username", username);
 
     //get_tree()->change_scene(String("res://Scenes/NetworkTest.tscn"));
 

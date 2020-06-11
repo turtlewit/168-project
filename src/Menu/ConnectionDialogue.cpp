@@ -10,7 +10,8 @@ void ConnectionDialogue::_register_methods()
 {
     register_signal<ConnectionDialogue>("connect", Dictionary::make(
         String("ip"), Variant::Type::STRING, 
-        String("port"), Variant::Type::INT));
+        String("port"), Variant::Type::INT,
+	String("name"), Variant::Type::STRING));
     
     register_method("_on_connect_button_pressed", &ConnectionDialogue::_on_connect_button_pressed);
     register_method("_input", &ConnectionDialogue::_input);
@@ -39,11 +40,15 @@ void ConnectionDialogue::_on_connect_button_pressed()
 {
     LineEdit* ip_line = cast_to<LineEdit>(get_node(NodePath(ip_line_path)));
     LineEdit* port_line = cast_to<LineEdit>(get_node(NodePath(port_line_path)));
+    LineEdit* name_line = cast_to<LineEdit>(get_node(NodePath("VBoxContainer/Username/LineEdit")));
 
     String ip = ip_line->get_text();
     int64_t port = port_line->get_text().to_int();
+    String username = name_line->get_text();
 
-    emit_signal(String("connect"), Array::make(ip, port));
+    emit_signal(String("connect"), Array::make(ip, port, username));
+
+    get_node("/root/LocalPlayerName")->set("username", username);
 
     //get_tree()->change_scene(String("res://Scenes/NetworkTest.tscn"));
 

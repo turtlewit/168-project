@@ -84,6 +84,7 @@ NetworkManager="*res://Prefabs/Net/NetworkManager.tscn"
 SignalManagerPlayer="*res://Prefabs/SignalManagers/SignalManagerPlayer.tscn"
 NetworkSignalManager="*res://Prefabs/Net/NetworkSignalManager.tscn"
 GameManager="*res://Prefabs/GameManager.tscn"
+LocalPlayerName="*res://Scripts/LocalPlayerName.gd"
 
 [c++]
 

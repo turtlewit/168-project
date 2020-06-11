@@ -119,6 +119,8 @@ namespace godot {
 
 		Ref<PackedScene> pause_menu = ResourceLoader::get_singleton()->load("res://Prefabs/UI/PauseMenu.tscn");
 
+		String username = "";
+
 	public:
 		static void _register_methods();
 
@@ -150,6 +152,8 @@ namespace godot {
 		void set_gravity_velocity(float amount);
 		void damage(int amount);
 		bool is_dead() { return dead; }
+		String get_username() { return username; }
+		void set_username(String to) { username = to; get_node("Viewport/Label")->set("text", username); }
 
 	private:
 		bool is_master() { return get_tree()->get_network_unique_id() == get_network_master(); }
@@ -190,6 +194,7 @@ namespace godot {
 
 		void spawn_at_arena();
 		void server_arena_died();
+		void set_collider_disabled(bool to) { get_node("CollisionShape")->set("disabled", to); }
 	};
 
 }

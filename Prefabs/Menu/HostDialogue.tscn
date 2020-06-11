@@ -14,7 +14,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 172.0
-margin_bottom = 73.0
+margin_bottom = 119.0
 
 [node name="Port Input" type="VBoxContainer" parent="VBoxContainer"]
 margin_right = 165.0
@@ -43,10 +43,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HostButton" type="Button" parent="VBoxContainer"]
+[node name="Username" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 46.0
 margin_right = 165.0
-margin_bottom = 66.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/Username"]
+margin_right = 165.0
+margin_bottom = 14.0
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Username"]
+margin_top = 18.0
+margin_right = 165.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 165, 24 )
+text = "UwU"
+placeholder_text = "Enter Port"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostButton" type="Button" parent="VBoxContainer"]
+margin_top = 92.0
+margin_right = 165.0
+margin_bottom = 112.0
 text = "Host!"
 __meta__ = {
 "_edit_use_anchors_": false

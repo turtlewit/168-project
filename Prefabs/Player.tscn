@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Shaders/noisetexture.tres" type="Texture" id=9]
 [ext_resource path="res://Audio/Jump.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Audio/Swipe.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Fonts/Quenda-Medium.otf" type="DynamicFontData" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -166,7 +167,7 @@ nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( -100, -80 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2" ]
+node_connections = [ "output", 0, "walk_blend", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2" ]
 
 [sub_resource type="Animation" id=19]
 resource_name = "Dissolve"
@@ -234,6 +235,17 @@ color_ramp = SubResource( 23 )
 radius = 0.025
 height = 0.05
 
+[sub_resource type="DynamicFont" id=26]
+size = 84
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="ViewportTexture" id=27]
+flags = 25
+viewport_path = NodePath("Viewport")
+
 [node name="Player" type="KinematicBody" groups=[
 "Player",
 ]]
@@ -256,10 +268,10 @@ bones/41/bound_children = [ NodePath("BoneAttachment") ]
 bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
 
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000320727, 0.739351, -0.589449 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000186678, 0.758875, -0.598568 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.092733, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.280388, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -347,6 +359,7 @@ one_shot = true
 
 [node name="NetworkSync" type="Node" parent="."]
 script = ExtResource( 5 )
+sync_properties = [ "username" ]
 delete_on_not_authority = [ NodePath("../CameraPivot") ]
 
 [node name="NetworkIdentity" type="Node" parent="."]
@@ -369,6 +382,28 @@ animator_path = NodePath("../PlayerModel/AnimationPlayer")
 [node name="NetworkAnimator3" type="Node" parent="."]
 script = ExtResource( 2 )
 animator_path = NodePath("../AnimationPlayerDissolve")
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1000, 1000 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Label" type="Label" parent="Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 26 )
+text = "Name :)"
+align = 1
+valign = 1
+
+[node name="NameSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.578392, 0 )
+visible = false
+pixel_size = 0.005
+billboard = 1
+transparent = false
+alpha_cut = 1
+texture = SubResource( 27 )
 [connection signal="area_entered" from="PlayerModel/Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="TimerSwipe" to="." method="_on_TimerSwipe_timeout"]
 [connection signal="timeout" from="TimerPounce" to="." method="_on_TimerPounce_timeout"]

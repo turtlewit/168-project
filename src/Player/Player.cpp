@@ -46,6 +46,7 @@ void Player::_register_methods()
 
 	register_method("puppet_set_anim_param", &Player::puppet_set_anim_param, GODOT_METHOD_RPC_MODE_PUPPETSYNC);
 	register_method("server_arena_died", &Player::server_arena_died, GODOT_METHOD_RPC_MODE_REMOTE);
+	register_method("set_collider_disabled", &Player::set_collider_disabled, GODOT_METHOD_RPC_MODE_REMOTESYNC);
 
 	REGISTER_METHOD(Player, _on_player_hit);
 	REGISTER_METHOD(Player, set_gravity_velocity);
@@ -54,6 +55,7 @@ void Player::_register_methods()
 	register_property("jump_force", &Player::jump_force, 4.0f);
 	register_property("mouse_sensitivity_x", &Player::mouse_sensitivity_x, 0.25f);
 	register_property("mouse_sensitivity_y", &Player::mouse_sensitivity_y, 0.25f);
+	register_property("username", &Player::set_username, &Player::get_username, String(), GODOT_METHOD_RPC_MODE_REMOTESYNC);
 }
 
 CLASS_INITS(Player)
@@ -94,6 +96,9 @@ void Player::_on_network_connected()
 {
 	if (IS_MASTER) {
 		GameManager::get_singleton()->connect("state_changed", this, "_on_game_manager_state_changed");
+		set_username(get_node("/root/LocalPlayerName")->get("username"));
+	} else {
+		get_node("NameSprite")->set("visible", true);
 	}
 }
 
@@ -235,9 +240,11 @@ void Player::_physics_process(float delta)
 		hit_box->set_rotation(rot);
 	}
 
-	check_ground(); //Checks if you are on non-flat ground and adjusts gravity towards it
-	move_output = Vector3(move_direction.x + gravity_velocity.x, gravity_velocity.y, move_direction.z + gravity_velocity.z);
-	move_output = move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
+	if (!dead) {
+		check_ground(); //Checks if you are on non-flat ground and adjusts gravity towards it
+		move_output = Vector3(move_direction.x + gravity_velocity.x, gravity_velocity.y, move_direction.z + gravity_velocity.z);
+		move_output = move_and_slide_with_snap(move_output, -ground_normal * snap_length, Vector3{ 0, 1, 0 }, true); //Final result
+	}
 
 	check_camera();
 
@@ -364,6 +371,7 @@ void Player::damage(int amount)
 	}
 
 	if (health <= 0) {
+		rpc("set_collider_disabled", true);
 		dead = true;
 		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
 		std::vector<int> crystals;
@@ -474,6 +482,7 @@ void Player::check_deathplane()
 
 void Player::respawn()
 {
+	rpc("set_collider_disabled", false);
 	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 	NetworkManager::get_singleton()->spawn_player(this);
 	health = max_health;
@@ -590,6 +599,7 @@ void Player::_on_game_manager_state_changed(int state)
 		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, -static_cast<int>(max_health - health), get_name());
 		health = max_health;
 		if (dead) {
+			rpc("set_collider_disabled", false);
 			GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 			dead = false;
 		}

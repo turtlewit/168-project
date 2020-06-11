@@ -2,12 +2,14 @@
 #include <ProjectSettings.hpp>
 #include <OS.hpp>
 #include <InputEventKey.hpp>
+#include <SceneTree.hpp>
 
 #include "GameUI.hpp"
 #include "System/SignalManagerPlayer.hpp"
 #include "Utils/Defs.hpp"
 #include "Net/Utils.hpp"
 #include "GameManager.hpp"
+#include "Player/Player.hpp"
 
 
 using namespace godot;
@@ -88,16 +90,28 @@ void GameUI::_on_game_controller_state_changed(int state)
 	if (s == GameManager::State::end) {
 		String winner = GameManager::get_singleton()->get_winner();
 		int64_t id = winner.right(6).to_int();
+		Control* labels = cast_to<Control>(get_node("WinLabels"));
+		Label* namewon = cast_to<Label>(get_node("WinLabels/VBoxContainer/NameWon"));
+		namewon->set_text("Nobody Won");
+		if (winner != "Nobody") {
+			Player* player = cast_to<Player>(get_tree()->get_current_scene()->find_node(winner, true, false));
+			if (player) {
+				namewon->set_text(String("{0} Won").format(Array::make(player->get_username())));
+			}
+		}
+		labels->set_visible(true);
 		if (get_tree()->get_network_unique_id() == id) {
-			Label* win = cast_to<Label>(get_node("YouWin"));
+			Label* win = cast_to<Label>(get_node("WinLabels/VBoxContainer/YouWin"));
 			win->set_visible(true);
 		} else {
-			Label* lose = cast_to<Label>(get_node("YouLose"));
+			Label* lose = cast_to<Label>(get_node("WinLabels/VBoxContainer/YouLose"));
 			lose->set_visible(true);
 		}
 	} else {
-		Label* win = cast_to<Label>(get_node("YouWin"));
-		Label* lose = cast_to<Label>(get_node("YouLose"));
+		Control* labels = cast_to<Control>(get_node("WinLabels"));
+		Label* win = cast_to<Label>(get_node("WinLabels/VBoxContainer/YouWin"));
+		Label* lose = cast_to<Label>(get_node("WinLabels/VBoxContainer/YouLose"));
+		labels->set_visible(false);
 		win->set_visible(false);
 		lose->set_visible(false);
 	}
