@@ -624,7 +624,7 @@ void Player::spawn_at_arena()
 	Node* spawn_points = get_tree()->get_current_scene()->find_node(String("ArenaSpawnPoints"), true, false);
 	if (spawn_points) {
 		Transform player_transform = get_global_transform();
-		player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[Mathf::rand_range(0, 6)])->get_global_transform().origin;
+		player_transform.origin = cast_to<Spatial>(spawn_points->get_children()[Mathf::rand_range(0, 9)])->get_global_transform().origin;
 		set_global_transform(player_transform);
 	}
 }
