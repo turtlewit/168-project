@@ -25,6 +25,6 @@ void Portal::_on_Portal_body_entered(Node* body) {
 	if (body->is_in_group("Player"))
 	{
 		Player* p = cast_to<Player>(body);
-		p->set_translation(translation);
+		p->set_translation(cast_to<Position3D>(get_child(0))->get_global_transform().origin);
 	}
 }

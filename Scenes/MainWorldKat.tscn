@@ -360,38 +360,74 @@ transform = Transform( 0.166892, -0.521094, -0.576082, -0.819608, 0.297846, -0.4
 [node name="Portal" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( -0.0968188, 0, -0.0250226, 0, 0.1, 0, 0.0250226, 0, -0.0968188, -25.811, 1.587, -18.7544 )
 
+[node name="TeleportLocation" parent="Portals/Portal" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 1, -499.062, 9.92329, 531.23 )
+
 [node name="Portal2" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0993396, -0.000824931, 0.0114438, 0.000189529, 0.0998456, 0.00555216, -0.011472, -0.0054938, 0.0991878, -4.699, 13.9025, 40.1035 )
+
+[node name="TeleportLocation" parent="Portals/Portal2" index="0"]
+transform = Transform( 0.999998, 5.58794e-09, 2.98023e-08, -6.0536e-09, 0.999997, -2.98023e-07, 5.21541e-07, 1.56462e-07, 0.999997, 793.663, -62.4302, -1425.17 )
 
 [node name="Portal3" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0749584, 0.0120137, 0.0650915, -0.00907097, 0.0992757, -0.00787694, -0.0655664, 0, 0.0755053, 19.3487, 3.2884, 35.197 )
 
+[node name="TeleportLocation" parent="Portals/Portal3" index="0"]
+transform = Transform( 1, 1.65954e-07, 2.98023e-08, 3.64714e-10, 1, -1.5169e-07, 0, -1.89981e-07, 1, 779.54, 96.3942, 317.182 )
+
 [node name="Portal5" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0790294, 0, -0.0612728, 0, 0.1, 0, 0.0612728, 0, 0.0790294, 86.1101, 2.49321, -97.1895 )
+
+[node name="TeleportLocation" parent="Portals/Portal5" index="0"]
+transform = Transform( 1, 0, -5.96046e-08, 0, 0.999999, 0, 5.96046e-08, 0, 1, -137.682, 3.89932, 1252.58 )
 
 [node name="Portal6" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( -0.0652667, 0, -0.0757645, 0, 0.1, 0, 0.0757645, 0, -0.0652667, 29.6746, -0.913, -104.372 )
 
+[node name="TeleportLocation" parent="Portals/Portal6" index="0"]
+transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 341.753, 47.5383, -1179.82 )
+
 [node name="Portal7" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0516618, -0.0021937, 0.0855935, 0.00113358, 0.0999759, 0.00187812, -0.0856141, 0, 0.0516742, 93.7325, 2.70849, -2.43952 )
+
+[node name="TeleportLocation" parent="Portals/Portal7" index="0"]
+transform = Transform( 1, 1.30922e-08, 0, 3.50757e-08, 1, 4.17302e-08, 4.47035e-07, 2.71689e-08, 1, -678.782, 94.2521, -1157.24 )
 
 [node name="Portal8" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0999718, -0.00237343, 0, 0.00236895, 0.0997835, 0.00613447, -0.000145597, -0.00613274, 0.0998117, 99.8166, 3.12023, 10.0659 )
 
+[node name="TeleportLocation" parent="Portals/Portal8" index="0"]
+transform = Transform( 1, -3.85626e-10, 1.16415e-10, 3.11411e-09, 1, 2.57045e-07, 3.49246e-10, 0, 1, -1012.63, 26.0826, 269.909 )
+
 [node name="Portal9" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.1, 0, 0, 0, 0.0328339, -0.094456, 0, 0.094456, 0.0328339, -26.2626, -4.75806, -51.4542 )
+
+[node name="TeleportLocation" parent="Portals/Portal9" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 955.808, -207.263, -170.344 )
 
 [node name="Portal4" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0513886, 0, -0.0857859, 0, 0.1, 0, 0.0857859, 0, 0.0513886, -205.809, 11.3438, 96.5689 )
 
+[node name="TeleportLocation" parent="Portals/Portal4" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1973, 21.615, -258.895 )
+
 [node name="Portal10" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0800658, 0, -0.0599121, 0, 0.1, 0, 0.0599121, 0, 0.0800658, -174.386, 7.97231, 51.0155 )
+
+[node name="TeleportLocation" parent="Portals/Portal10" index="0"]
+transform = Transform( 1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 178.016, -2.27918, 107.174 )
 
 [node name="Portal12" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( -0.0958468, 0.0027863, 0.0283835, 0.00622077, 0.0991678, 0.0112717, -0.0278332, 0.0125692, -0.0952225, -150.467, 13.13, 88.0623 )
 
+[node name="TeleportLocation" parent="Portals/Portal12" index="0"]
+transform = Transform( 0.999999, -1.15484e-07, 1.19209e-07, -6.33299e-08, 0.999997, 0, 2.98023e-08, -4.17233e-07, 1, 385.022, -51.4266, -15.1176 )
+
 [node name="Portal11" parent="Portals" instance=ExtResource( 10 )]
 transform = Transform( 0.0791554, 0, 0.0611099, 0, 0.1, 0, -0.0611099, 0, 0.0791554, -174.698, 6.09713, 118.565 )
+
+[node name="TeleportLocation" parent="Portals/Portal11" index="0"]
+transform = Transform( 0.999999, 0, 7.7486e-07, 0, 0.999997, 0, -7.7486e-07, 0, 0.999999, 340.905, 32.1298, -533.671 )
 
 [node name="Crystals" type="Spatial" parent="."]
 
@@ -435,7 +471,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.294, 3.00723, 3.83837 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 107.742, 3.44333, -3.50337 )
 
 [node name="Crystal30" parent="Crystals" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110.198, 1.28449, -30.1065 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 107.995, 3.96653, 0.18647 )
 
 [node name="Crystal14" parent="Crystals" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6395, -0.0559666, -56.4076 )
@@ -1177,6 +1213,30 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63037, 0 )
 curve = SubResource( 17 )
 
 [editable path="Water"]
+
+[editable path="Portals/Portal"]
+
+[editable path="Portals/Portal2"]
+
+[editable path="Portals/Portal3"]
+
+[editable path="Portals/Portal5"]
+
+[editable path="Portals/Portal6"]
+
+[editable path="Portals/Portal7"]
+
+[editable path="Portals/Portal8"]
+
+[editable path="Portals/Portal9"]
+
+[editable path="Portals/Portal4"]
+
+[editable path="Portals/Portal10"]
+
+[editable path="Portals/Portal12"]
+
+[editable path="Portals/Portal11"]
 
 [editable path="platforms"]
 

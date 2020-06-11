@@ -54,7 +54,7 @@ namespace godot {
 		int swipe_damage = 17;
 		int pounce_damage = 10;
 		int jumps = 0;
-
+		int crystal_count[4] = {0, 0, 0, 0};
 		//Control Parameters
 		float mouse_sensitivity_x = 0.25f;
 		float mouse_sensitivity_y = 0.15f;

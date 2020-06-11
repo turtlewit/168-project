@@ -16,7 +16,7 @@
 #include <SceneTree.hpp>
 #include <CanvasItem.hpp>
 #include <Viewport.hpp>
-
+#include <vector>
 using namespace godot;
 
 namespace {
@@ -75,7 +75,6 @@ void Player::_ready()
 	MeshInstance* mesh = GET_NODE(MeshInstance, "PlayerModel/Armature/Skeleton/Animal");
 	Ref<Material> mat = mesh->get_material_override()->duplicate();
 	mesh->set_material_override(mat);
-
 
 	water_shader = cast_to<MeshInstance>(get_parent()->get_node("Water/MeshInstance"))->get_surface_material(0);
 
@@ -282,24 +281,28 @@ void Player::set_state(int value)
 void Player::increase_speed()
 {
 	speed += 0.45f;
+	crystal_count[0]++;
 }
 
 
 void Player::increase_jump()
 {
 	jump_force += 0.40f;
+	crystal_count[1]++;
 }
 
 
 void Player::increase_pounce()
 {
 	pounce_strength += 0.35f;
+	crystal_count[2]++;
 }
 
 
 void Player::increase_swipe_damage()
 {
 	swipe_damage += 3;
+	crystal_count[3]++;
 }
 
 
@@ -350,9 +353,15 @@ void Player::damage(int amount)
 	if (health <= 0) {
 		dead = true;
 		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
-		int ptype = Mathf::rand_range(0, 3);
-		//SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", ptype, -1);
-		switch (ptype)
+		std::vector<int> crystals;
+		for (int i = 0; i < 4; i++)
+		{
+			if (crystal_count[i] > 0)
+				crystals.push_back(i);
+		}
+		int ptype = Mathf::rand_range(0, crystals.size());
+
+		switch (crystal_count[ptype])
 		{
 		case 0:
 			decrease_speed();
