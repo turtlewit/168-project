@@ -307,35 +307,29 @@ void Player::set_state(int value)
 
 void Player::increase_speed()
 {
-	speed += 0.45f;
+	speed += .30f;
+	//speed += (.25 / log10f(speed));
 	crystal_count[0]++;
 }
 
 
 void Player::increase_jump()
 {
-	jump_force += 0.40f;
+	jump_force += 0.5f;
 	crystal_count[1]++;
 }
 
-
-void Player::increase_pounce()
+void Player::increase_swipe()
 {
-	pounce_strength += 0.35f;
+	swipe_damage += 1.5;
 	crystal_count[2]++;
 }
 
-
-void Player::increase_swipe_damage()
+void Player::increase_pounce()
 {
-	swipe_damage += 3;
+	pounce_damage += 3;
+	pounce_strength += 0.35f;
 	crystal_count[3]++;
-}
-
-
-void Player::increase_pounce_damage()
-{
-	pounce_damage += 1.5f;
 }
 
 void Player::decrease_speed()
@@ -346,25 +340,18 @@ void Player::decrease_speed()
 
 void Player::decrease_jump()
 {
-	jump_force -= 0.40f;
+	jump_force -= 0.50f;
 }
 
-
-void Player::decrease_pounce()
-{
-	pounce_strength -= 0.35f;
-}
-
-
-void Player::decrease_swipe_damage()
+void Player::decrease_swipe()
 {
 	swipe_damage -= 3;
 }
 
-
-void Player::decrease_pounce_damage()
+void Player::decrease_pounce()
 {
 	pounce_damage -= 1.5f;
+	pounce_strength -= 0.35f;
 }
 
 
@@ -403,11 +390,10 @@ void Player::damage(int amount)
 			decrease_jump();
 			break;
 		case 2:
-			decrease_pounce();
+			decrease_swipe();
 			break;
 		case 3:
-			decrease_swipe_damage();
-			decrease_pounce_damage();
+			decrease_pounce();
 			break;
 		}
 		if (GameManager::get_singleton()->get_state() != GameManager::State::arena)

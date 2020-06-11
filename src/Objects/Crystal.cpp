@@ -63,12 +63,11 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 			case Powerup::Jump:
 				player->increase_jump();
 				break;
-			case Powerup::PounceRange:
-				player->increase_pounce();
+			case Powerup::Swipe:
+				player->increase_swipe();
 				break;
-			case Powerup::Damage: {
-				player->increase_swipe_damage();
-				player->increase_pounce_damage();
+			case Powerup::Pounce: {
+				player->increase_pounce();
 			} break;
 		}
 
@@ -100,10 +99,10 @@ void Crystal::set_color()
 	case Powerup::Jump:
 		color = 0xc000ffff;
 		break;
-	case Powerup::PounceRange:
+	case Powerup::Swipe:
 		color = 0xfffc00ff;
 		break;
-	case Powerup::Damage:
+	case Powerup::Pounce:
 		color = 0xff6c00ff;
 		break;
 	}

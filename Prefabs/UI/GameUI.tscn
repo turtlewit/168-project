@@ -203,7 +203,8 @@ margin_top = -25.0
 margin_right = 50.0
 margin_bottom = -5.0
 custom_fonts/font = SubResource( 4 )
-text = "Pounce"
+text = "Swipe"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -233,7 +234,9 @@ margin_top = -25.0
 margin_right = 55.0
 margin_bottom = 18.0
 custom_fonts/font = SubResource( 4 )
-text = "Damage"
+text = "Pounce
+"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
