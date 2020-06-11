@@ -49,8 +49,8 @@ namespace godot {
 		float initial_speed = 3.5f;
 		float initial_jump_force = 3.5f;
 		float initial_pounce_strength = 2.0f;
-		int initial_swipe_damage = 17;
-		int initial_pounce_damage = 10;
+		int initial_swipe_damage = 10;
+		int initial_pounce_damage = 20;
 		////////////////////////////
 		float speed = initial_speed;
 		float jump_force = initial_jump_force;
@@ -197,6 +197,8 @@ namespace godot {
 		void spawn_at_arena();
 		void server_arena_died();
 		void set_collider_disabled(bool to) { get_node("CollisionShape")->set("disabled", to); }
+
+		void set_namesprite_visible(bool to) { get_node("NameSprite")->set("visible", to); }
 	};
 
 }

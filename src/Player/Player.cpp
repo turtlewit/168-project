@@ -47,6 +47,7 @@ void Player::_register_methods()
 	register_method("puppet_set_anim_param", &Player::puppet_set_anim_param, GODOT_METHOD_RPC_MODE_PUPPETSYNC);
 	register_method("server_arena_died", &Player::server_arena_died, GODOT_METHOD_RPC_MODE_REMOTE);
 	register_method("set_collider_disabled", &Player::set_collider_disabled, GODOT_METHOD_RPC_MODE_REMOTESYNC);
+	register_method("set_namesprite_visible", &Player::set_namesprite_visible, GODOT_METHOD_RPC_MODE_REMOTE);
 
 	REGISTER_METHOD(Player, _on_player_hit);
 	REGISTER_METHOD(Player, set_gravity_velocity);
@@ -56,6 +57,7 @@ void Player::_register_methods()
 	register_property("mouse_sensitivity_x", &Player::mouse_sensitivity_x, 0.25f);
 	register_property("mouse_sensitivity_y", &Player::mouse_sensitivity_y, 0.25f);
 	register_property("username", &Player::set_username, &Player::get_username, String(), GODOT_METHOD_RPC_MODE_REMOTESYNC);
+	register_property("dead", &Player::dead, false, GODOT_METHOD_RPC_MODE_REMOTE, static_cast<godot_property_usage_flags>(0));
 }
 
 CLASS_INITS(Player)
@@ -150,7 +152,7 @@ void Player::_process(float delta)
 	water_shader->set_shader_param("deltaTime", shader_time);
 	shader_time += delta;
 
-	if (state != State::Attack && state != State::Pounce && !dead) {
+	if (state != State::Pounce && !dead) {
 		move_direction = Vector3{ 0, 0, 0 };
 		const Transform camera_xform = camera->get_global_transform();
 		move_check_rotation = fmod(Mathf::abs(camera_pivot->get_rotation_degrees().z), 360);
@@ -378,6 +380,8 @@ void Player::damage(int amount)
 		dead = true;
 		sound_dissolve->play();
 		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
+		if (IS_MASTER)
+			rpc("set_namesprite_visible", false);
 		std::vector<int> crystals;
 		for (int i = 0; i < 4; i++)
 		{
@@ -488,6 +492,8 @@ void Player::respawn()
 {
 	rpc("set_collider_disabled", false);
 	GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
+	if (IS_MASTER)
+		rpc("set_namesprite_visible", true);
 	NetworkManager::get_singleton()->spawn_player(this);
 	health = max_health;
 	SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", 0, -static_cast<int>(max_health), get_name());
@@ -498,17 +504,24 @@ void Player::respawn()
 void Player::_on_Hurtbox_area_entered(Area* area)
 {
 	Player* other = cast_to<Player>(area->get_node("../.."));
+	
+	if (other->attack_box->is_disabled() == true)
+		return;
 
 	switch (other->state) {
 		case State::Attack:
 			//damage(other->swipe_damage);
 			NetworkSignalManager::get_singleton()->emit_network_signal("player_hit", Array::make(get_network_master(), other->swipe_damage));
-			sound_damage->play();
+			other->attack_box->set_disabled(true);
+			if (!dead)
+				sound_damage->play();
 			break;
 		case State::Pounce:
 			//damage(other->pounce_damage);
 			NetworkSignalManager::get_singleton()->emit_network_signal("player_hit", Array::make(get_network_master(), other->pounce_damage));
-			sound_damage->play();
+			other->attack_box->set_disabled(true);
+			if (!dead)
+				sound_damage->play();
 			break;
 		default:
 			break;
@@ -606,6 +619,7 @@ void Player::_on_game_manager_state_changed(int state)
 		health = max_health;
 		if (dead) {
 			rpc("set_collider_disabled", false);
+			rpc("set_namesprite_visible", true);
 			GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 			dead = false;
 		}
