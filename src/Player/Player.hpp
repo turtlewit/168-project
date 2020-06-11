@@ -97,6 +97,7 @@ namespace godot {
 
 		AudioStreamPlayer3D* sound_jump;
 		AudioStreamPlayer3D* sound_swipe;
+		AudioStreamPlayer3D* sound_damage;
 
 		Timer* timer_swipe;
 		Timer* timer_pounce;

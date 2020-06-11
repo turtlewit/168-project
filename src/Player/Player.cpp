@@ -75,6 +75,7 @@ void Player::_ready()
 	anim_tree = GET_NODE(AnimationTree, "AnimationTree");
 	sound_jump = GET_NODE(AudioStreamPlayer3D, "SoundJump");
 	sound_swipe = GET_NODE(AudioStreamPlayer3D, "SoundSwipe");
+	sound_damage = GET_NODE(AudioStreamPlayer3D, "SoundDamage");
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
 	timer_respawn = GET_NODE(Timer, "TimerRespawn");
@@ -364,6 +365,7 @@ void Player::decrease_pounce_damage()
 void Player::damage(int amount)
 {
 	if (!dead) {
+		sound_damage->play();
 		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, amount, get_name());
 		health -= amount;
 	} else {
@@ -499,10 +501,12 @@ void Player::_on_Hurtbox_area_entered(Area* area)
 		case State::Attack:
 			//damage(other->swipe_damage);
 			NetworkSignalManager::get_singleton()->emit_network_signal("player_hit", Array::make(get_network_master(), other->swipe_damage));
+			sound_damage->play();
 			break;
 		case State::Pounce:
 			//damage(other->pounce_damage);
 			NetworkSignalManager::get_singleton()->emit_network_signal("player_hit", Array::make(get_network_master(), other->pounce_damage));
+			sound_damage->play();
 			break;
 		default:
 			break;

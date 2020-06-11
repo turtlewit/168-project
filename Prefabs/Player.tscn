@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Audio/Jump.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Audio/Swipe.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Fonts/Quenda-Medium.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://Audio/Hit.ogg" type="AudioStream" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -167,7 +168,7 @@ nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( -100, -80 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4" ]
+node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2" ]
 
 [sub_resource type="Animation" id=19]
 resource_name = "Dissolve"
@@ -268,10 +269,10 @@ bones/41/bound_children = [ NodePath("BoneAttachment") ]
 bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
 
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000461133, 0.718901, -0.579897 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 5.55703e-05, 0.77797, -0.607487 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.483551, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.645322, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -345,6 +346,9 @@ unit_db = -8.0
 
 [node name="SoundSwipe" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 11 )
+
+[node name="SoundDamage" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 13 )
 
 [node name="TimerSwipe" type="Timer" parent="."]
 one_shot = true
