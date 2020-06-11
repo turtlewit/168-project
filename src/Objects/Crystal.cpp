@@ -72,6 +72,8 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 			} break;
 		}
 
+		GET_NODE(AudioStreamPlayer3D, "SoundPickup")->play();
+
 		GET_NODE(Timer, "Timer")->start();
 		SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", static_cast<int>(powerup_type_internal), 1);
 	}

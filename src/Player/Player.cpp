@@ -76,6 +76,7 @@ void Player::_ready()
 	sound_jump = GET_NODE(AudioStreamPlayer3D, "SoundJump");
 	sound_swipe = GET_NODE(AudioStreamPlayer3D, "SoundSwipe");
 	sound_damage = GET_NODE(AudioStreamPlayer3D, "SoundDamage");
+	sound_dissolve = GET_NODE(AudioStreamPlayer3D, "SoundDissolve");
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
 	timer_respawn = GET_NODE(Timer, "TimerRespawn");
@@ -375,6 +376,7 @@ void Player::damage(int amount)
 	if (health <= 0) {
 		rpc("set_collider_disabled", true);
 		dead = true;
+		sound_dissolve->play();
 		GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Dissolve");
 		std::vector<int> crystals;
 		for (int i = 0; i < 4; i++)
