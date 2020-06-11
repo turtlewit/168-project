@@ -75,9 +75,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var time: float = GameManager.get_node(\"CollectionPhaseTimer\").time_left
-	var mins: int = int(time/60)
-	text = \"%d:%2d\" % [mins, int(time - (mins * 60))]
-"
+	text = \"%d:%s\" % [floor(time / 60), str(int(floor(time)) % 60).pad_zeros(2)]"
 
 [node name="GameUI" type="Control"]
 anchor_right = 1.0
