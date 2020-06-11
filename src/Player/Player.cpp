@@ -25,7 +25,7 @@ namespace {
 
 void Player::_register_methods()
 {
-	register_signal<Player>("player_arena_died");
+	register_signal<Player>("player_arena_died", Dictionary());
 
 	REGISTER_METHOD(Player, _ready);
 	REGISTER_METHOD(Player, _on_network_connected);

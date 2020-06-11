@@ -9,17 +9,17 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "Node",
 "class": "GameManager",
 "language": "NativeScript",
 "path": "res://Scripts/GameManager.gdns"
 }, {
-"base": "",
+"base": "Spatial",
 "class": "LOD",
 "language": "NativeScript",
 "path": "res://Scripts/LOD.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkAnimator",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkAnimator.gdns"
@@ -29,12 +29,12 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkIdentity.gdns"
 }, {
-"base": "Node",
+"base": "",
 "class": "NetworkManager",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkManager.gdns"
 }, {
-"base": "",
+"base": "Node",
 "class": "NetworkSignalManager",
 "language": "NativeScript",
 "path": "res://Scripts/Net/NetworkSignalManager.tres"
@@ -54,7 +54,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://Scripts/UI/PauseMenu.gdns"
 }, {
-"base": "MultiMeshInstance",
+"base": "Node",
 "class": "PropArea",
 "language": "NativeScript",
 "path": "res://Scripts/Environment/PropArea.tres"
