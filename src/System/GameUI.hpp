@@ -13,7 +13,7 @@ namespace godot {
 		GODOT_CLASS(GameUI, Control)
 
 	private:
-		unsigned int crystal_amounts[4] = {0};
+		int crystal_amounts[4] = {0};
 		Label* crystal_labels[4];
 		Label* health_amount;
 

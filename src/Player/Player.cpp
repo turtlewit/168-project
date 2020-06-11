@@ -389,7 +389,8 @@ void Player::damage(int amount)
 				crystals.push_back(i);
 		}
 		int ptype = Mathf::rand_range(0, crystals.size());
-
+		if(crystals.size() > 0)
+			SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed",crystal_count[ptype], -1);
 		switch (crystal_count[ptype])
 		{
 		case 0:
