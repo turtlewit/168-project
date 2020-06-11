@@ -199,6 +199,8 @@ namespace godot {
 		void set_collider_disabled(bool to) { get_node("CollisionShape")->set("disabled", to); }
 
 		void set_namesprite_visible(bool to) { get_node("NameSprite")->set("visible", to); }
+
+		void set_my_username() { rset_id(get_tree()->get_rpc_sender_id(), "username", username); }
 	};
 
 }
