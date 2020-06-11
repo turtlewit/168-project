@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/UI/GameUI.gdns" type="Script" id=1]
 [ext_resource path="res://Fonts/Quenda-Medium.otf" type="DynamicFontData" id=2]
@@ -66,6 +66,18 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_size = 3
 shadow_offset = Vector2( 3, 3 )
+
+[sub_resource type="GDScript" id=10]
+script/source = "extends Label
+
+func _ready() -> void:
+	set_process(false)
+
+func _process(delta: float) -> void:
+	var time: float = GameManager.get_node(\"CollectionPhaseTimer\").time_left
+	var mins: int = int(time/60)
+	text = \"%d:%2d\" % [mins, int(time - (mins * 60))]
+"
 
 [node name="GameUI" type="Control"]
 anchor_right = 1.0
@@ -285,3 +297,16 @@ __meta__ = {
 
 [node name="NetworkIdentity" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="CollectionTime" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 14.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 7 )
+text = "0:00"
+align = 1
+script = SubResource( 10 )

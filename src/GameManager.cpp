@@ -1,3 +1,5 @@
+#include <Timer.hpp>
+
 #include "GameManager.hpp"
 #include "Net/Utils.hpp"
 #include "Utils/Defs.hpp"
@@ -63,6 +65,16 @@ void GameManager::change_state(State to)
 	state = to;
 	Godot::print("Changing State: {0}", state_name(to));
 	emit_signal("state_changed", static_cast<int>(to));
+
+	switch (state) {
+		case State::collection:
+			if (IS_MASTER) {
+				Timer* timer = cast_to<Timer>(get_node("CollectionPhaseTimer"));
+				timer->start();
+			}
+			break;
+		default: break;
+	}
 }
 
 void GameManager::_on_collection_phase_timer_timout()

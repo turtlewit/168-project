@@ -79,16 +79,25 @@ void GameUI::_on_game_controller_state_changed(int state)
 	if (!IS_SERVER)
 		return;
 
-	switch(static_cast<GameManager::State>(state)) {
-		case GameManager::State::lobby: {
-			Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));
-			start_round_label->set_text(start_round_label->get_text().format(Dictionary::make("button", get_button_name())));
-			start_round_label->set_visible(true);
-		} break;
-		default: {
-			Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));
-			start_round_label->set_visible(false);
-		} break;
+	GameManager::State s = static_cast<GameManager::State>(state);
+
+	if (s == GameManager::State::lobby) {
+		Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));
+		start_round_label->set_text(start_round_label->get_text().format(Dictionary::make("button", get_button_name())));
+		start_round_label->set_visible(true);
+	} else {
+		Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));
+		start_round_label->set_visible(false);
+	}
+
+	if (s == GameManager::State::collection) {
+		Label* collection_time = cast_to<Label>(get_node("CollectionTime"));
+		collection_time->set_process(true);
+		collection_time->set_visible(true);
+	} else {
+		Label* collection_time = cast_to<Label>(get_node("CollectionTime"));
+		collection_time->set_process(false);
+		collection_time->set_visible(false);
 	}
 }
 
