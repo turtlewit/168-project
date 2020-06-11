@@ -39,6 +39,7 @@ void GameUI::_register_methods()
 	REGISTER_METHOD(GameUI, update_health);
 	REGISTER_METHOD(GameUI, reset_pounce_bar);
 	REGISTER_METHOD(GameUI, _on_game_controller_state_changed);
+	REGISTER_METHOD(GameUI, player_connected);
 }
 
 CLASS_INITS(GameUI)
@@ -56,6 +57,7 @@ void GameUI::_ready()
 	tween_health = GET_NODE(Tween, "TweenHealth");
 	tween_pounce = GET_NODE(Tween, "TweenPounce");
 	GameManager::get_singleton()->connect("state_changed", this, "_on_game_controller_state_changed");
+	SignalManagerPlayer::get_singleton()->connect("player_connected", this, "player_connected");
 }
 
 
@@ -73,6 +75,14 @@ void GameUI::_exit_tree()
 	manager->disconnect("player_crystal_amount_changed", this, NAMEOF(update_crystal_amount));
 	manager->disconnect("player_damaged", this, NAMEOF(update_health));
 	manager->disconnect("player_pounced", this, NAMEOF(reset_pounce_bar));
+}
+
+
+void GameUI::player_connected(String username)
+{
+	GET_NODE(Label, "PlayerJoined")->set_text(String("{0} joined the game.").format(Array::make(username)));
+	GET_NODE(Label, "PlayerJoined")->show();
+	GET_NODE(Timer, "TimerPlayerJoined")->start();
 }
 
 
