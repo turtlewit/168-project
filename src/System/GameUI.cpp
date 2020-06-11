@@ -1,10 +1,32 @@
 // GameUI.cpp
-#include "GameUI.hpp"
+#include <ProjectSettings.hpp>
+#include <OS.hpp>
+#include <InputEventKey.hpp>
 
+#include "GameUI.hpp"
 #include "System/SignalManagerPlayer.hpp"
 #include "Utils/Defs.hpp"
+#include "Net/Utils.hpp"
+#include "GameManager.hpp"
+
 
 using namespace godot;
+
+namespace {
+	String get_button_name() {
+		if (!ProjectSettings::get_singleton()->has_setting("input/start_round"))
+			return "Enter";
+		
+		Array mappings = static_cast<Dictionary>(ProjectSettings::get_singleton()->get_setting("input/start_round"))["events"];
+		for (int i = 0; i < mappings.size(); ++i) {
+			Ref<InputEventKey> key = mappings[i];
+			if (key == Ref<InputEventKey>() || !IS_CLASS(key, InputEventKey))
+				continue;
+			return OS::get_singleton()->get_scancode_string(key->get_scancode());
+		}
+		return "Enter";
+	}
+}
 
 void GameUI::_register_methods()
 {
@@ -14,6 +36,7 @@ void GameUI::_register_methods()
 	REGISTER_METHOD(GameUI, update_crystal_amount);
 	REGISTER_METHOD(GameUI, update_health);
 	REGISTER_METHOD(GameUI, reset_pounce_bar);
+	REGISTER_METHOD(GameUI, _on_game_controller_state_changed);
 }
 
 CLASS_INITS(GameUI)
@@ -30,6 +53,7 @@ void GameUI::_ready()
 	pounce_bar = GET_NODE(ProgressBar, "PounceBar");
 	tween_health = GET_NODE(Tween, "TweenHealth");
 	tween_pounce = GET_NODE(Tween, "TweenPounce");
+	GameManager::get_singleton()->connect("state_changed", this, "_on_game_controller_state_changed");
 }
 
 
@@ -47,6 +71,25 @@ void GameUI::_exit_tree()
 	manager->disconnect("player_crystal_amount_changed", this, NAMEOF(update_crystal_amount));
 	manager->disconnect("player_damaged", this, NAMEOF(update_health));
 	manager->disconnect("player_pounced", this, NAMEOF(reset_pounce_bar));
+}
+
+
+void GameUI::_on_game_controller_state_changed(int state)
+{
+	if (!IS_SERVER)
+		return;
+
+	switch(static_cast<GameManager::State>(state)) {
+		case GameManager::State::lobby: {
+			Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));
+			start_round_label->set_text(start_round_label->get_text().format(Dictionary::make("button", get_button_name())));
+			start_round_label->set_visible(true);
+		} break;
+		default: {
+			Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));
+			start_round_label->set_visible(false);
+		} break;
+	}
 }
 
 

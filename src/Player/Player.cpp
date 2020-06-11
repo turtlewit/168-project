@@ -6,10 +6,13 @@
 #include "System/SignalManagerPlayer.hpp"
 #include "Net/NetworkSignalManager.hpp"
 #include "Net/NetworkManager.hpp"
+#include "Net/Utils.hpp"
+#include "GameManager.hpp"
 
 #include <Input.hpp>
 #include <InputEventMouseMotion.hpp>
 #include <InputEventJoypadMotion.hpp>
+#include <InputEventAction.hpp>
 #include <SceneTree.hpp>
 #include <CanvasItem.hpp>
 #include <Viewport.hpp>
@@ -91,6 +94,12 @@ void Player::_input(InputEvent* event)
 {
 	if (in_menu)
 		return;
+
+	if (GameManager::get_singleton()->get_state() == GameManager::State::lobby && IS_SERVER) {
+		if (event->is_action_pressed("start_round")) {
+			GameManager::get_singleton()->rpc("change_state", static_cast<int>(GameManager::State::collection));
+		}
+	}
 
 	auto* ev_mouse = cast_to<InputEventMouseMotion>(event);
 	if (ev_mouse) {

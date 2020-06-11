@@ -2,6 +2,7 @@
 #pragma once
 
 #include <Godot.hpp>
+#include <ClassDB.hpp>
 
 #define NAMEOF(Object) #Object
 
@@ -19,6 +20,7 @@
 		GODOT_PROPERTY_USAGE_GROUP,                               \
 		GODOT_PROPERTY_HINT_NONE,                                 \
 		group_prefix);
+#define IS_CLASS(object, classname) ClassDB::get_singleton()->is_parent_class(object->get_class(), #classname)
 
 #define GODOT_HINT_STRING_ARRAY_OF_STRINGS godot::String("4:")
 #define GODOT_HINT_STRING_ARRAY_OF_NODE_PATHS godot::String("15:")

@@ -27,6 +27,7 @@ public:
 
 private:
 	void change_state(State to);
+	void _on_collection_phase_timer_timout();
 
 	static GameManager* singleton;
 

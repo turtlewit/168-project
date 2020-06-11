@@ -27,6 +27,7 @@ void GameManager::_register_methods()
 	register_method("_on_network_connected", &GameManager::_on_network_connected);
 	register_method("_on_server_disconnected", &GameManager::_on_server_disconnected);
 	register_method("change_state", reinterpret_cast<void(GameManager::*)(int)>(&GameManager::change_state), GODOT_METHOD_RPC_MODE_PUPPETSYNC);
+	register_method("_on_collection_phase_timer_timout", &GameManager::_on_collection_phase_timer_timout);
 
 	register_property("state", reinterpret_cast<int(GameManager::*)>(&GameManager::state), static_cast<int>(State::disconnected), GODOT_METHOD_RPC_MODE_DISABLED, static_cast<godot_property_usage_flags>(0) /* don't store and don't show in inspector */);
 }
@@ -46,6 +47,10 @@ void GameManager::_on_network_connected()
 	set_network_master(NetworkManager::SERVER_ID);
 
 	change_state(State::lobby);
+
+	if (IS_MASTER) {
+		get_node("CollectionPhaseTimer")->connect("timeout", this, "_on_collection_phase_timer_timout");
+	}
 }
 
 void GameManager::_on_server_disconnected()
@@ -58,4 +63,9 @@ void GameManager::change_state(State to)
 	state = to;
 	Godot::print("Changing State: {0}", state_name(to));
 	emit_signal("state_changed", static_cast<int>(to));
+}
+
+void GameManager::_on_collection_phase_timer_timout()
+{
+	rpc("change_state", static_cast<int>(State::arena));
 }

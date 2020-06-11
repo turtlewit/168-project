@@ -32,6 +32,7 @@ namespace godot {
 		void _ready();
 		void _enter_tree();
 		void _exit_tree();
+		void _on_game_controller_state_changed(int state);
 
 		void update_crystal_amount(int index, int amount);
 		void update_health(int old_health, int amount);

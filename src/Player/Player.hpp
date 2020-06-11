@@ -174,6 +174,8 @@ namespace godot {
 		void _on_TimerPounce_timeout();
 
 		void _on_menu_closed();
+		
+		void _on_game_manager_state_changed();
 	};
 
 }
