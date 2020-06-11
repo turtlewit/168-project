@@ -48,6 +48,7 @@ void Player::_register_methods()
 	register_method("server_arena_died", &Player::server_arena_died, GODOT_METHOD_RPC_MODE_REMOTE);
 	register_method("set_collider_disabled", &Player::set_collider_disabled, GODOT_METHOD_RPC_MODE_REMOTESYNC);
 	register_method("set_namesprite_visible", &Player::set_namesprite_visible, GODOT_METHOD_RPC_MODE_REMOTE);
+	register_method("set_my_username", &Player::set_my_username, GODOT_METHOD_RPC_MODE_REMOTE);
 
 	REGISTER_METHOD(Player, _on_player_hit);
 	REGISTER_METHOD(Player, set_gravity_velocity);
@@ -56,7 +57,7 @@ void Player::_register_methods()
 	register_property("jump_force", &Player::jump_force, 4.0f);
 	register_property("mouse_sensitivity_x", &Player::mouse_sensitivity_x, 0.25f);
 	register_property("mouse_sensitivity_y", &Player::mouse_sensitivity_y, 0.25f);
-	register_property("username", &Player::set_username, &Player::get_username, String(), GODOT_METHOD_RPC_MODE_REMOTESYNC);
+	register_property("username", &Player::set_username, &Player::get_username, String(), GODOT_METHOD_RPC_MODE_PUPPET);
 	register_property("dead", &Player::dead, false, GODOT_METHOD_RPC_MODE_REMOTE, static_cast<godot_property_usage_flags>(0));
 }
 
@@ -103,6 +104,7 @@ void Player::_on_network_connected()
 		set_username(get_node("/root/LocalPlayerName")->get("username"));
 	} else {
 		get_node("NameSprite")->set("visible", true);
+		rpc_id(get_network_master(), "set_my_username");
 	}
 }
 
