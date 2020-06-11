@@ -334,23 +334,23 @@ void Player::increase_pounce()
 
 void Player::decrease_speed()
 {
-	speed -= 0.45f;
+	speed -= 0.30f;
 }
 
 
 void Player::decrease_jump()
 {
-	jump_force -= 0.50f;
+	jump_force -= 0.5f;
 }
 
 void Player::decrease_swipe()
 {
-	swipe_damage -= 3;
+	swipe_damage -= 1.5f;
 }
 
 void Player::decrease_pounce()
 {
-	pounce_damage -= 1.5f;
+	pounce_damage -= 3;
 	pounce_strength -= 0.35f;
 }
 
