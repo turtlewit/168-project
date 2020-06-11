@@ -19,6 +19,7 @@
 #include <Timer.hpp>
 #include <ResourceLoader.hpp>
 #include <PackedScene.hpp>
+#include <AudioStreamPlayer3D.hpp>
 
 namespace godot {
 
@@ -88,6 +89,9 @@ namespace godot {
 		Ref<KinematicCollision> current_collision;
 
 		bool dead = false;
+
+		AudioStreamPlayer3D* sound_jump;
+		AudioStreamPlayer3D* sound_swipe;
 
 		Timer* timer_swipe;
 		Timer* timer_pounce;

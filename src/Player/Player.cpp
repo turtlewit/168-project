@@ -66,6 +66,8 @@ void Player::_ready()
 	hit_box = GET_NODE(CollisionShape, "CollisionShape");
 	anim_player = GET_NODE(AnimationPlayer, "AnimationPlayer");
 	anim_tree = GET_NODE(AnimationTree, "AnimationTree");
+	sound_jump = GET_NODE(AudioStreamPlayer3D, "SoundJump");
+	sound_swipe = GET_NODE(AudioStreamPlayer3D, "SoundSwipe");
 	timer_swipe = GET_NODE(Timer, "TimerSwipe");
 	timer_pounce = GET_NODE(Timer, "TimerPounce");
 	timer_respawn = GET_NODE(Timer, "TimerRespawn");
@@ -160,6 +162,7 @@ void Player::_process(float delta)
 	
 	if (inp->is_action_just_pressed("attack_claw") && !dead && can_swipe && state == State::Ground) {
 		stop();
+		sound_swipe->play();
 		state = State::Attack;
 		anim_player->play("Attack");
 		//anim_tree->set("parameters/swipe/active", true);
@@ -256,6 +259,7 @@ inline float Player::get_closest_angle(float current, float target, bool flip) {
 
 void Player::jump()
 {
+	sound_jump->play();
 	gravity_velocity = Vector3{ 0, jump_force, 0 };
 	jumps++;
 	state = State::Air;
