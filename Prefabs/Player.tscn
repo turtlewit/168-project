@@ -169,7 +169,7 @@ nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( -100, -80 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4" ]
+node_connections = [ "output", 0, "walk_blend", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2" ]
 
 [sub_resource type="Animation" id=19]
 resource_name = "Dissolve"
@@ -270,10 +270,10 @@ bones/41/bound_children = [ NodePath("BoneAttachment") ]
 bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
 
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000135499, 0.766329, -0.60205 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000551727, 0.705707, -0.573734 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.422841, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.735715, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -351,6 +351,7 @@ stream = ExtResource( 11 )
 
 [node name="SoundDamage" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 13 )
+unit_db = -6.0
 
 [node name="SoundDissolve" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 14 )
