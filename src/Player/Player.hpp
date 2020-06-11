@@ -46,13 +46,18 @@ namespace godot {
 		// Growable Stats
 		unsigned int max_health = 100;
 		int health = max_health;
+		float initial_speed = 3.5f;
+		float initial_jump_force = 3.5f;
+		float initial_pounce_strength = 2.0f;
+		int initial_swipe_damage = 17;
+		int initial_pounce_damage = 10;
 		////////////////////////////
-		float speed = 3.5f;
-		float jump_force = 3.5f;
+		float speed = initial_speed;
+		float jump_force = initial_jump_force;
 		////////////////////////////
-		float pounce_strength = 2.0f;
-		int swipe_damage = 17;
-		int pounce_damage = 10;
+		float pounce_strength = initial_pounce_strength;
+		int swipe_damage = initial_swipe_damage;
+		int pounce_damage = initial_pounce_damage;
 		int jumps = 0;
 		int crystal_count[4] = {0, 0, 0, 0};
 		//Control Parameters

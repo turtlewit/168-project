@@ -72,12 +72,10 @@ void GameManager::change_state(State to)
 	emit_signal("state_changed", static_cast<int>(to));
 
 	switch (state) {
-		case State::collection:
-			if (IS_MASTER) {
+		case State::collection: {
 				Timer* timer = cast_to<Timer>(get_node("CollectionPhaseTimer"));
 				timer->start();
-			}
-			break;
+			} break;
 		case State::arena:
 			arena_start();
 			break;

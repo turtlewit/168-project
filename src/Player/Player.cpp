@@ -581,23 +581,30 @@ void Player::_on_menu_closed()
 void Player::_on_game_manager_state_changed(int state)
 {
 	GameManager::State s = static_cast<GameManager::State>(state);
-	if (s == GameManager::State::lobby || s == GameManager::State::collection) {
-		NetworkManager::get_singleton()->spawn_player(this);
+	if (s == GameManager::State::lobby || s == GameManager::State::collection || s == GameManager::State::arena) {
+		if (s == GameManager::State::lobby || s == GameManager::State::collection)
+			NetworkManager::get_singleton()->spawn_player(this);
+		else
+			spawn_at_arena();
+
 		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, -static_cast<int>(max_health - health), get_name());
 		health = max_health;
 		if (dead) {
 			GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
 			dead = false;
 		}
-		timer_respawn->stop();
-	} else if (s == GameManager::State::arena) {
-		spawn_at_arena();
-		SignalManagerPlayer::get_singleton()->emit_signal("player_damaged", health, -static_cast<int>(max_health - health), get_name());
-		health = max_health;
-		if (dead) {
-			GET_NODE(AnimationPlayer, "AnimationPlayerDissolve")->play("Undissolve");
-			dead = false;
-		}
+
+		crystal_count[0] = 0;
+		crystal_count[1] = 0;
+		crystal_count[2] = 0;
+		crystal_count[3] = 0;
+
+		speed = initial_speed;
+		jump_force = initial_jump_force;
+		pounce_strength = initial_pounce_strength;
+		swipe_damage = initial_swipe_damage;
+		pounce_damage = initial_pounce_damage;
+
 		timer_respawn->stop();
 	}
 }

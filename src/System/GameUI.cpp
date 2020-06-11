@@ -78,6 +78,13 @@ void GameUI::_on_game_controller_state_changed(int state)
 {
 	GameManager::State s = static_cast<GameManager::State>(state);
 
+	if (s != GameManager::State::end && s != GameManager::State::arena) {
+		for (int i = 0; i < 4; ++i) {
+			crystal_amounts[i] = 0;
+			update_crystal_amount(i, 0);
+		}
+	}
+
 	if (s == GameManager::State::end) {
 		String winner = GameManager::get_singleton()->get_winner();
 		int64_t id = winner.right(6).to_int();
@@ -95,6 +102,16 @@ void GameUI::_on_game_controller_state_changed(int state)
 		lose->set_visible(false);
 	}
 
+	if (s == GameManager::State::collection) {
+		Label* collection_time = cast_to<Label>(get_node("CollectionTime"));
+		collection_time->set_process(true);
+		collection_time->set_visible(true);
+	} else {
+		Label* collection_time = cast_to<Label>(get_node("CollectionTime"));
+		collection_time->set_process(false);
+		collection_time->set_visible(false);
+	}
+
 	if (!IS_SERVER)
 		return;
 
@@ -105,16 +122,6 @@ void GameUI::_on_game_controller_state_changed(int state)
 	} else {
 		Label* start_round_label = cast_to<Label>(get_node("HostStartRound"));
 		start_round_label->set_visible(false);
-	}
-
-	if (s == GameManager::State::collection) {
-		Label* collection_time = cast_to<Label>(get_node("CollectionTime"));
-		collection_time->set_process(true);
-		collection_time->set_visible(true);
-	} else {
-		Label* collection_time = cast_to<Label>(get_node("CollectionTime"));
-		collection_time->set_process(false);
-		collection_time->set_visible(false);
 	}
 }
 
