@@ -37,6 +37,9 @@ namespace godot {
 		void update_crystal_amount(int index, int amount);
 		void update_health(int old_health, int amount);
 		void reset_pounce_bar();
+
+	private:
+		void player_connected(String username);
 	};
 
 }

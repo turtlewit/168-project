@@ -1,6 +1,8 @@
 // Player.hpp
 #pragma once
 
+#include "System/SignalManagerPlayer.hpp"
+
 #include <Godot.hpp>
 #include <SceneTree.hpp>
 #include <KinematicBody.hpp>
@@ -155,7 +157,7 @@ namespace godot {
 		void damage(int amount);
 		bool is_dead() { return dead; }
 		String get_username() { return username; }
-		void set_username(String to) { username = to; get_node("Viewport/Label")->set("text", username); }
+		void set_username(String to) { username = to; get_node("Viewport/Label")->set("text", username); SignalManagerPlayer::get_singleton()->emit_signal("player_connected", username); }
 
 	private:
 		bool is_master() { return get_tree()->get_network_unique_id() == get_network_master(); }

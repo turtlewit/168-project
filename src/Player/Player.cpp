@@ -94,6 +94,7 @@ void Player::_ready()
 	camera_exclusions.append(this);
 
 	NetworkSignalManager::get_singleton()->connect("player_hit", this, "_on_player_hit");
+	
 }
 
 
