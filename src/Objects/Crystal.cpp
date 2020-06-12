@@ -24,7 +24,7 @@ void Crystal::_register_methods()
 
 	REGISTER_METHOD(Crystal, _on_game_manager_state_changed);
 
-	REGISTER_PROPERTY_HINT(Crystal, int, powerup_type, 0, GODOT_PROPERTY_HINT_ENUM, "Speed,Jump,Pounce Range,Damage");
+	REGISTER_PROPERTY_HINT(Crystal, int, powerup_type, 0, GODOT_PROPERTY_HINT_ENUM, "Speed,Jump,Swipe,Pounce");
 
 	register_property("respawn_time", &Crystal::respawn_time, 10.0f);
 	register_signal<Crystal>("picked_up", Dictionary{});

@@ -321,56 +321,52 @@ void Player::set_state(int value)
 	state = static_cast<State>(value);
 }
 
-
 void Player::increase_speed()
 {
-	speed += .30f;
-	//speed += (.25 / log10f(speed));
+	speed += (.25f / log10f(speed));
 	crystal_count[0]++;
 }
 
-
 void Player::increase_jump()
 {
-	jump_force += 0.5f;
+	jump_force += (.28f / log10f(jump_force));
 	crystal_count[1]++;
 }
 
 void Player::increase_swipe()
 {
-	swipe_damage += 1.5;
+	swipe_damage += (1.5f / log10f(swipe_damage));
 	crystal_count[2]++;
 }
 
 void Player::increase_pounce()
 {
-	pounce_damage += 3;
+	pounce_damage += (4.0f / log10f(pounce_damage));
 	pounce_strength += 0.35f;
 	crystal_count[3]++;
 }
 
 void Player::decrease_speed()
 {
-	speed -= 0.30f;
+	speed -= (.25f / log10f(speed));
 }
 
 
 void Player::decrease_jump()
 {
-	jump_force -= 0.5f;
+	jump_force -= (.28f / log10f(jump_force));
 }
 
 void Player::decrease_swipe()
 {
-	swipe_damage -= 1.5f;
+	swipe_damage -= (1.5f / log10f(swipe_damage));
 }
 
 void Player::decrease_pounce()
 {
-	pounce_damage -= 3;
+	pounce_damage -= (4.0f / log10f(pounce_damage));
 	pounce_strength -= 0.35f;
 }
-
 
 void Player::damage(int amount)
 {
