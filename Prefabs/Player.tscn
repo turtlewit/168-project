@@ -26,19 +26,19 @@ shader_param/rim_amount = 0.0
 shader_param/dissolveTexture = ExtResource( 9 )
 shader_param/baseTexture = ExtResource( 6 )
 
-[sub_resource type="BoxShape" id=39]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
-[sub_resource type="BoxShape" id=40]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.234337, 0.259701, 0.15 )
 
-[sub_resource type="PrismMesh" id=41]
+[sub_resource type="PrismMesh" id=4]
 size = Vector3( 0.3, 0.3, 0.3 )
 
-[sub_resource type="SpatialMaterial" id=42]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.4, 1, 0.298039, 1 )
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -67,7 +67,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=7]
 resource_name = "Jump"
 length = 0.2
 tracks/0/type = "value"
@@ -83,7 +83,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -126,13 +126,10 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Run-loop2"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
-animation = "Swipe"
-
-[sub_resource type="AnimationNodeAnimation" id=38]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "JumpIn"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
@@ -141,36 +138,39 @@ animation = "JumpOut"
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Idle-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "Swipe"
+
 [sub_resource type="AnimationNodeOneShot" id=14]
 
 [sub_resource type="AnimationNodeBlend2" id=15]
 
-[sub_resource type="AnimationNodeOneShot" id=16]
+[sub_resource type="AnimationNodeOneShot" id=29]
 
 [sub_resource type="AnimationNodeBlend2" id=17]
 
 [sub_resource type="AnimationNodeBlendTree" id=18]
-graph_offset = Vector2( -248, 180.5 )
+graph_offset = Vector2( -434, 26.5 )
 nodes/Animation/node = SubResource( 13 )
 nodes/Animation/position = Vector2( -380, -120 )
-"nodes/Animation 2/node" = SubResource( 36 )
+"nodes/Animation 2/node" = SubResource( 9 )
 "nodes/Animation 2/position" = Vector2( 360, 280 )
-"nodes/Animation 3/node" = SubResource( 37 )
-"nodes/Animation 3/position" = Vector2( -460, 20 )
-"nodes/Animation 4/node" = SubResource( 38 )
+"nodes/Animation 4/node" = SubResource( 11 )
 "nodes/Animation 4/position" = Vector2( -200, 180 )
 "nodes/Animation 5/node" = SubResource( 12 )
 "nodes/Animation 5/position" = Vector2( 80, 200 )
+nodes/Animation3/node = SubResource( 28 )
+nodes/Animation3/position = Vector2( 740, 360 )
 nodes/jump_end/node = SubResource( 14 )
 nodes/jump_end/position = Vector2( 460, -20 )
 nodes/jump_start/node = SubResource( 15 )
 nodes/jump_start/position = Vector2( 160, -40 )
-nodes/output/position = Vector2( 940, 180 )
-nodes/swipe/node = SubResource( 16 )
-nodes/swipe/position = Vector2( -100, -80 )
+nodes/output/position = Vector2( 1300, 220 )
+nodes/swipe/node = SubResource( 29 )
+nodes/swipe/position = Vector2( 1100, 160 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "walk_blend", "swipe", 0, "Animation", "swipe", 1, "Animation 3", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "jump_start", 0, "swipe", "jump_start", 1, "Animation 4" ]
+node_connections = [ "output", 0, "swipe", "swipe", 0, "walk_blend", "swipe", 1, "Animation3", "jump_start", 0, "Animation", "jump_start", 1, "Animation 4", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5" ]
 
 [sub_resource type="Animation" id=19]
 resource_name = "Dissolve"
@@ -266,11 +266,15 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.14, 0 )
 [node name="Armature" parent="PlayerModel" index="2"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
 
+[node name="Skeleton" parent="PlayerModel/Armature" index="1"]
+bones/41/bound_children = [ NodePath("BoneAttachment") ]
+bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
+
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000174034, 0.760716, -0.599428 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000566287, 0.703586, -0.572744 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.315582, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.776242, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
@@ -284,7 +288,7 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerModel/AttackBox"]
-shape = SubResource( 39 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="Hurtbox" type="Area" parent="PlayerModel"]
@@ -294,17 +298,17 @@ collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerModel/Hurtbox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120711, 0 )
-shape = SubResource( 40 )
+shape = SubResource( 3 )
 
 [node name="OldModel" type="MeshInstance" parent="."]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
 visible = false
-mesh = SubResource( 41 )
-material/0 = SubResource( 42 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0.120711, 0 )
-shape = SubResource( 40 )
+shape = SubResource( 3 )
 
 [node name="CameraPivot" type="Position3D" parent="."]
 
@@ -314,9 +318,9 @@ current = true
 far = 500.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 43 )
-anims/Jump = SubResource( 44 )
-anims/Pounce = SubResource( 45 )
+anims/Attack = SubResource( 6 )
+anims/Jump = SubResource( 7 )
+anims/Pounce = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 18 )
