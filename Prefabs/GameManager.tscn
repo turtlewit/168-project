@@ -11,11 +11,11 @@ script = ExtResource( 1 )
 script = ExtResource( 3 )
 
 [node name="CollectionPhaseTimer" type="Timer" parent="."]
-wait_time = 35.0
+wait_time = 300.0
 one_shot = true
 
 [node name="CollectionPhaseTimer2" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 269.0
 one_shot = true
 
 [node name="WinTimer" type="Timer" parent="."]
