@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.0)
 project(168-project)
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wno-parentheses")
-set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -g0")
+set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -g0 -fno-exceptions")
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og -g")
 
 FILE (GLOB_RECURSE Sources src/*.cpp)
@@ -12,6 +12,8 @@ include_directories(src godot-cpp/include godot-cpp/include/core godot-cpp/inclu
 link_directories(godot-cpp/bin)
 
 add_library(168-project SHARED ${Sources})
+
+target_link_libraries(168-project -s)
 
 if (CMAKE_SYSTEM_NAME MATCHES Linux) 
 	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-return-local-addr")
