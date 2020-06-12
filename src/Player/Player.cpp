@@ -217,7 +217,20 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right") / PounceTurnPenalty;
 	}
 
-	walk_amount = Mathf::lerp_delta(walk_amount, is_moving() ? 1.0f : 0.0f, 0.05f, delta);
+	float transition_speed = 4;
+	if (is_moving() && walk_amount < 1.0f) {
+		walk_amount += delta * transition_speed;
+		if (walk_amount > 1.0f) {
+			walk_amount = 1.0f;
+		}
+	} else if (walk_amount > 0.0f) {
+		walk_amount -= delta * transition_speed;
+		if (walk_amount < 0.0f) {
+			walk_amount = 0.0f;
+		}
+	}
+
+	//walk_amount = Mathf::lerp_delta(walk_amount, is_moving() ? 1.0f : 0.0f, 1, delta);
 	rpc_set_anim_param("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? walk_amount : 0.0f);
 
 	//anim_tree->set("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
