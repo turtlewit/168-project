@@ -74,7 +74,9 @@ void GameManager::change_state(State to)
 	switch (state) {
 		case State::collection: {
 				Timer* timer = cast_to<Timer>(get_node("CollectionPhaseTimer"));
+				Timer* timer2 = cast_to<Timer>(get_node("CollectionPhaseTimer2"));
 				timer->start();
+				timer2->start();
 			} break;
 		case State::arena:
 			arena_start();
