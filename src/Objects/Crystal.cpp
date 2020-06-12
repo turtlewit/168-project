@@ -6,7 +6,6 @@
 #include "Player/Player.hpp"
 #include "System/SignalManagerPlayer.hpp"
 #include "GameManager.hpp"
-#include "Net/Utils.hpp"
 
 #include <Timer.hpp>
 #include <OmniLight.hpp>
@@ -25,12 +24,9 @@ void Crystal::_register_methods()
 
 	REGISTER_METHOD(Crystal, _on_game_manager_state_changed);
 
-	register_method("fade", &Crystal::fade, GODOT_METHOD_RPC_MODE_REMOTESYNC);
-
 	REGISTER_PROPERTY_HINT(Crystal, int, powerup_type, 0, GODOT_PROPERTY_HINT_ENUM, "Speed,Jump,Swipe,Pounce");
 
 	register_property("respawn_time", &Crystal::respawn_time, 10.0f);
-	register_property("collected", &Crystal::collected, false, GODOT_METHOD_RPC_MODE_REMOTESYNC);
 	register_signal<Crystal>("picked_up", Dictionary{});
 }
 
@@ -56,9 +52,8 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 		if (body->get_network_master() != get_tree()->get_network_unique_id())
 			return;
 
-		//collected = true;
-		rset("collected", true);
-		rpc("fade");
+		anim_player_dissolve->play("Dissolve");
+		collected = true;
 		
 		Player* player = cast_to<Player>(body);
 		switch (powerup_type_internal) {
@@ -76,6 +71,9 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 			} break;
 		}
 
+		GET_NODE(AudioStreamPlayer3D, "SoundPickup")->play();
+
+		GET_NODE(Timer, "Timer")->start();
 		SignalManagerPlayer::get_singleton()->emit_signal("player_crystal_amount_changed", static_cast<int>(powerup_type_internal), 1);
 	}
 }
@@ -83,7 +81,6 @@ void Crystal::_on_Crystal_body_entered(Node* body)
 void Crystal::respawn()
 {
 	collected = false;
-	rset("collected", false);
 	powerup_type_internal = static_cast<Powerup>(Mathf::rand_range(0, 3));
 	set_color();
 
@@ -122,10 +119,3 @@ void Crystal::_on_game_manager_state_changed(int state) {
 	respawn();
 }
 
-
-void Crystal::fade()
-{
-		anim_player_dissolve->play("Dissolve");
-		GET_NODE(AudioStreamPlayer3D, "SoundPickup")->play();
-		GET_NODE(Timer, "Timer")->start();
-}

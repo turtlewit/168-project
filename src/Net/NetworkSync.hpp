@@ -25,7 +25,6 @@ private:
 	void set_property_sync_mode(godot_method_rpc_mode mode);
 
 	godot::Array sync_properties;
-	godot::Dictionary property_cache;
 	float sync_interval;
 	godot::Array delete_on_not_authority;
 	float current_time;

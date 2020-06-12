@@ -52,16 +52,7 @@ void NetworkSync::sync()
 {
 	for (int i = 0; i < sync_properties.size(); ++i) {
 		const String property = sync_properties[i];
-		Variant prop = get_parent()->get(property);
-		if (!property_cache.has(property)) {
-			property_cache[property] = prop;
-			get_parent()->rset(property, prop);
-			continue;
-		}
-		if (property_cache[property] != prop) {
-			property_cache[property] = prop;
-			get_parent()->rset(property, prop);
-		}
+		get_parent()->rset_unreliable(property, get_parent()->get(property));
 	}
 }
 
