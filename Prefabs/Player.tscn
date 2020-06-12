@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Net/NetworkAnimator.gdns" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Fonts/Quenda-Medium.otf" type="DynamicFontData" id=12]
 [ext_resource path="res://Audio/Hit.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Audio/Dissolve.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Models/Player/Run-loop2.anim" type="Animation" id=15]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -25,19 +26,19 @@ shader_param/rim_amount = 0.0
 shader_param/dissolveTexture = ExtResource( 9 )
 shader_param/baseTexture = ExtResource( 6 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=39]
 extents = Vector3( 0.2, 0.2, 0.2 )
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=40]
 extents = Vector3( 0.234337, 0.259701, 0.15 )
 
-[sub_resource type="PrismMesh" id=4]
+[sub_resource type="PrismMesh" id=41]
 size = Vector3( 0.3, 0.3, 0.3 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=42]
 albedo_color = Color( 0.4, 1, 0.298039, 1 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=43]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -66,7 +67,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=44]
 resource_name = "Jump"
 length = 0.2
 tracks/0/type = "value"
@@ -82,7 +83,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=45]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -125,13 +126,13 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Run-loop"
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "Run-loop2"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "Swipe"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "JumpIn"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
@@ -149,14 +150,14 @@ animation = "Idle-loop"
 [sub_resource type="AnimationNodeBlend2" id=17]
 
 [sub_resource type="AnimationNodeBlendTree" id=18]
-graph_offset = Vector2( -453, -16.5 )
+graph_offset = Vector2( -248, 180.5 )
 nodes/Animation/node = SubResource( 13 )
 nodes/Animation/position = Vector2( -380, -120 )
-"nodes/Animation 2/node" = SubResource( 9 )
+"nodes/Animation 2/node" = SubResource( 36 )
 "nodes/Animation 2/position" = Vector2( 360, 280 )
-"nodes/Animation 3/node" = SubResource( 10 )
+"nodes/Animation 3/node" = SubResource( 37 )
 "nodes/Animation 3/position" = Vector2( -460, 20 )
-"nodes/Animation 4/node" = SubResource( 11 )
+"nodes/Animation 4/node" = SubResource( 38 )
 "nodes/Animation 4/position" = Vector2( -200, 180 )
 "nodes/Animation 5/node" = SubResource( 12 )
 "nodes/Animation 5/position" = Vector2( 80, 200 )
@@ -265,18 +266,17 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.14, 0 )
 [node name="Armature" parent="PlayerModel" index="2"]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0 )
 
-[node name="Skeleton" parent="PlayerModel/Armature" index="1"]
-bones/41/bound_children = [ NodePath("BoneAttachment") ]
-bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
-
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000167194, 0.761712, -0.599894 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000174034, 0.760716, -0.599428 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.33462, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.315582, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="PlayerModel" index="6"]
+anims/Run-loop2 = ExtResource( 15 )
 
 [node name="AttackBox" type="Area" parent="PlayerModel"]
 transform = Transform( 3, 0, 5.68434e-14, 0, 3, 0, -5.68434e-14, 0, 3, -1.896, 0.933, 0 )
@@ -284,7 +284,7 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerModel/AttackBox"]
-shape = SubResource( 2 )
+shape = SubResource( 39 )
 disabled = true
 
 [node name="Hurtbox" type="Area" parent="PlayerModel"]
@@ -294,17 +294,17 @@ collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerModel/Hurtbox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120711, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 40 )
 
 [node name="OldModel" type="MeshInstance" parent="."]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
 visible = false
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 41 )
+material/0 = SubResource( 42 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0.120711, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 40 )
 
 [node name="CameraPivot" type="Position3D" parent="."]
 
@@ -314,9 +314,9 @@ current = true
 far = 500.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 6 )
-anims/Jump = SubResource( 7 )
-anims/Pounce = SubResource( 8 )
+anims/Attack = SubResource( 43 )
+anims/Jump = SubResource( 44 )
+anims/Pounce = SubResource( 45 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 18 )
