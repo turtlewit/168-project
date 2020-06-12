@@ -129,48 +129,48 @@ tracks/2/keys = {
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Run-loop2"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "JumpIn"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "JumpOut"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Idle-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Swipe"
 
 [sub_resource type="AnimationNodeOneShot" id=14]
 
 [sub_resource type="AnimationNodeBlend2" id=15]
 
-[sub_resource type="AnimationNodeOneShot" id=29]
+[sub_resource type="AnimationNodeOneShot" id=16]
 
 [sub_resource type="AnimationNodeBlend2" id=17]
 
 [sub_resource type="AnimationNodeBlendTree" id=18]
 graph_offset = Vector2( -434, 26.5 )
-nodes/Animation/node = SubResource( 13 )
+nodes/Animation/node = SubResource( 12 )
 nodes/Animation/position = Vector2( -380, -120 )
 "nodes/Animation 2/node" = SubResource( 9 )
 "nodes/Animation 2/position" = Vector2( 360, 280 )
-"nodes/Animation 4/node" = SubResource( 11 )
+"nodes/Animation 4/node" = SubResource( 10 )
 "nodes/Animation 4/position" = Vector2( -200, 180 )
-"nodes/Animation 5/node" = SubResource( 12 )
+"nodes/Animation 5/node" = SubResource( 11 )
 "nodes/Animation 5/position" = Vector2( 80, 200 )
-nodes/Animation3/node = SubResource( 28 )
+nodes/Animation3/node = SubResource( 13 )
 nodes/Animation3/position = Vector2( 740, 360 )
 nodes/jump_end/node = SubResource( 14 )
 nodes/jump_end/position = Vector2( 460, -20 )
 nodes/jump_start/node = SubResource( 15 )
 nodes/jump_start/position = Vector2( 160, -40 )
 nodes/output/position = Vector2( 1300, 220 )
-nodes/swipe/node = SubResource( 29 )
+nodes/swipe/node = SubResource( 16 )
 nodes/swipe/position = Vector2( 1100, 160 )
 nodes/walk_blend/node = SubResource( 17 )
 nodes/walk_blend/position = Vector2( 720, 120 )
-node_connections = [ "output", 0, "swipe", "swipe", 0, "walk_blend", "swipe", 1, "Animation3", "jump_start", 0, "Animation", "jump_start", 1, "Animation 4", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5" ]
+node_connections = [ "output", 0, "swipe", "walk_blend", 0, "jump_end", "walk_blend", 1, "Animation 2", "swipe", 0, "walk_blend", "swipe", 1, "Animation3", "jump_end", 0, "jump_start", "jump_end", 1, "Animation 5", "jump_start", 0, "Animation", "jump_start", 1, "Animation 4" ]
 
 [sub_resource type="Animation" id=19]
 resource_name = "Dissolve"
@@ -271,10 +271,10 @@ bones/41/bound_children = [ NodePath("BoneAttachment") ]
 bones/50/bound_children = [ NodePath("BoneAttachment 2") ]
 
 [node name="BoneAttachment" parent="PlayerModel/Armature/Skeleton" index="0"]
-transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 0.000566287, 0.703586, -0.572744 )
+transform = Transform( 1, 0, 2.38419e-07, 1.42109e-14, 1, 0, -2.38419e-07, 0, 1, 6.13218e-06, 0.78517, -0.610851 )
 
 [node name="BoneAttachment 2" parent="PlayerModel/Armature/Skeleton" index="1"]
-transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, -0.776242, 0.137355, -1.822 )
+transform = Transform( 1, 0, -6.36577e-05, 0, 1, 0, 6.36577e-05, 0, 1, 0.782931, 0.137355, -1.822 )
 
 [node name="Animal" parent="PlayerModel/Armature/Skeleton" index="2"]
 material_override = SubResource( 1 )
