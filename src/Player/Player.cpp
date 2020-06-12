@@ -197,6 +197,7 @@ void Player::_process(float delta)
 
 	if (inp->is_action_just_pressed("attack_pounce") && !dead && can_pounce && state == State::Ground) {
 		stop();
+		sound_swipe->play();
 		state = State::Pounce;
 
 		float rot = model->get_rotation().y;
