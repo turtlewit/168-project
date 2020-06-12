@@ -1,7 +1,9 @@
 [gd_resource type="GDNativeLibrary" format=2]
 
 [resource]
+entry/OSX.64 = "res://bin/osx/lib168-project.dylib"
 entry/Windows.64 = "res://bin/x64/Debug/168-project.dll"
 entry/X11.64 = "res://bin/linux/lib168-project.so"
+dependency/OSX.64 = [  ]
 dependency/Windows.64 = [  ]
 dependency/X11.64 = [  ]
