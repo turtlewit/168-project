@@ -94,7 +94,6 @@ void Player::_ready()
 	camera_exclusions.append(this);
 
 	NetworkSignalManager::get_singleton()->connect("player_hit", this, "_on_player_hit");
-	
 }
 
 
@@ -218,8 +217,11 @@ void Player::_process(float delta)
 		move_direction += camera_xform.basis.x * inp->get_action_strength("move_right") / PounceTurnPenalty;
 	}
 
+	walk_amount = Mathf::lerp_delta(walk_amount, is_moving() ? 1.0f : 0.0f, 0.05f, delta);
+	rpc_set_anim_param("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? walk_amount : 0.0f);
+
 	//anim_tree->set("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
-	rpc_set_anim_param("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
+	//rpc_set_anim_param("parameters/walk_blend/blend_amount", state != State::Air && !anim_tree->get("parameters/jump_end/active") ? move_direction.length() : 0.0f);
 	
 	if (inp->is_action_just_pressed("sys_quit") && !in_menu) {
 		inp->set_mouse_mode(Input::MOUSE_MODE_VISIBLE);
@@ -228,6 +230,8 @@ void Player::_process(float delta)
 		menu->connect("menu_closed", this, "_on_menu_closed");
 		get_tree()->get_root()->add_child(menu);
 	}
+
+	
 
 	check_deathplane();
 }

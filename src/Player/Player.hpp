@@ -106,6 +106,8 @@ namespace godot {
 		Timer* timer_pounce;
 		Timer* timer_respawn;
 
+		float walk_amount = 0.0f;
+
 		State state = State::Air;
 
 		Camera* camera;
