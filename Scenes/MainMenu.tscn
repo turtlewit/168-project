@@ -15,6 +15,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
+stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -108,7 +109,7 @@ margin_top = 353.0
 margin_right = 647.0
 margin_bottom = 367.0
 [connection signal="pressed" from="VBoxContainer/Multiplayer" to="HostOrConnect" method="set_visible" binds= [ true ]]
-[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Host" to="HostOrConnect" method="set_visible" binds= [ false ]]
 [connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Host" to="Host" method="set_visible" binds= [ true ]]
+[connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Host" to="HostOrConnect" method="set_visible" binds= [ false ]]
 [connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Connect" to="HostOrConnect" method="set_visible" binds= [ false ]]
 [connection signal="pressed" from="HostOrConnect/PanelContainer/VBoxContainer2/Connect" to="Connect" method="set_visible" binds= [ true ]]
